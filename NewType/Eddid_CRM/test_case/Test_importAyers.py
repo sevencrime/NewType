@@ -1,25 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Date    : 2019-01-03 13:56:31
-# @Author  : Onedi (Onedi@qq.com)
-# @Link    : ${link}
+# @Date    : 2019-02-16 16:36:44
+# @Author  : onedi (onedi@qq.com)
+# @Link    : localhost
 # @Version : $Id$
 
 import unittest
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import time
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 from PageElement.LoginPage import *
 from PageElement.ApplyListPage import *
-from PageElement.MainPage import *
 from Commons import Logging
 
-class addApply(unittest.TestCase):
+#交易账户列表导入Ayers数据
+class importAyers(unittest.TestCase):
 
     def setUp(self):
         # self.log.info("正在执行Test_Login")
@@ -42,27 +39,15 @@ class addApply(unittest.TestCase):
         print("结束driver")
         self.driver.quit()
 
-    def test_addApply(self):
+    def test_importAyers(self):
         applylistpage = ApplyListPage(self.driver, self.url, "Eddid")
-        mainpage = MainPage(self.driver, self.url, "Eddid")
-
-        #点击开户管理，判断
-        applylistpage.click_apply_manager()
-        #点击开户列表，判断
-        applylistpage.click_applylist()
-
-        mainpage.wait_LoadingModal()
-
-        #点击新增
-        mainpage.click_add()
-        # self.driver.execute_script("arguments[0].scrollIntoView()", self.driver.find_element_by_xpath("//button/span[contains(text(),'新增')]"))
-
+        #点击账户管理
+        applylistpage.click_account_manager()
+        # 点击交易账户
+        applylistpage.click_accountlist()
 
 
 
 
 if __name__ == '__main__':
     unittest.main()
-
-
-

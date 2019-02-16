@@ -5,6 +5,8 @@
 # @Link    : ${link}
 # @Version : $Id$
 
+# main/apply-list页面
+
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
@@ -13,8 +15,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-
-
 
 class MainPage(BasePage.BasePage):
     log = Logging.Logs()

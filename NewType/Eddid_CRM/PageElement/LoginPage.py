@@ -5,7 +5,7 @@
 # @Link    : ${link}
 # @Version : $Id$
 
-# login页面元素
+# login 登录页面元素
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))

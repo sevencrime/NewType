@@ -51,9 +51,9 @@ class searchInfo(unittest.TestCase):
         mainpage = MainPage(self.driver, self.url, "Eddid")
 
         #点击开户管理，判断
-        applylistpage.click_open_account_manager()
+        applylistpage.click_apply_manager()
         #点击开户列表，判断
-        applylistpage.click_open_account_list()
+        applylistpage.click_applylist()
 
         #等待CSS.Loading-Modal加载完成
         mainpage.wait_LoadingModal()
