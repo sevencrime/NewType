@@ -15,6 +15,7 @@ from PageElement.LoginPage import *
 from PageElement.ApplyListPage import *
 from PageElement.AccountlistPage import *
 from Commons import Logging
+from Commons import Modify_xls
 
 #交易账户列表导入Ayers数据
 class importAyers(unittest.TestCase):
@@ -42,24 +43,23 @@ class importAyers(unittest.TestCase):
 
     def test_importAyers(self):
         applylistpage = ApplyListPage(self.driver, self.url, "Eddid")
-        #点击账户管理
         applylistpage.click_account_manager()
-        # 点击交易账户
         applylistpage.click_accountlist()
 
-        # 实例化AccountlistPage
         accountpage = AccountlistPage(self.driver, self.url, "Eddid")
-        # 等待CSS加载完成
         accountpage.wait_LoadingModal()
-        # 点击导入Ayers按钮
         accountpage.click_importAyers()
-        # 点击导入主要信息
-        # accountpage.click_importmain()
-        
         accountpage.uploadAyers()
-        print(accountpage.uploadAyers.get_attribute__('value'))
+        self.assertEqual(accountpage.uploadfilename(),'Ayers1.xls','上传文件不一致')
 
-        
+        accountpage.click_importserver()
+        alert_text = accountpage.alerttext()
+        self.assertEqual(accountpage.alerttext(), '操作成功', '上传到服务器失败')
+
+        accountpage.dialog_close()
+
+
+
 
 if __name__ == '__main__':
     # print(os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xls')

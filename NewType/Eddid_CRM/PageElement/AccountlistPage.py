@@ -21,8 +21,11 @@ class AccountlistPage(BasePage.BasePage):
     importAyers_loc = (By.XPATH, "//button/span[contains(text(),'导入Ayers')]")
     importeSunny_loc = (By.XPATH, "//button/span[contains(text(),'导入eSunny')]")
     importmain_loc = (By.XPATH, "//button/span[contains(text(),'导入主要信息')]")
+    importserver_loc = (By.XPATH, "//button/span[contains(text(),'上传到服务器')]")
     uploadAyers_loc = (By.NAME, "file")
-
+    uploadfilename_loc = (By.CSS_SELECTOR, ".el-upload-list__item-name")
+    alerttext_loc = (By.CSS_SELECTOR,".el-message")
+    dialog_close_loc = (By.CSS_SELECTOR, ".el-dialog__close")
 
     #等待CSS.Loading-modal加载完成,防止报错:"Element is not clickable at point (347, 104). 
     #   Other element would receive the click: <div class="Loading-modal"></div>"
@@ -36,12 +39,23 @@ class AccountlistPage(BasePage.BasePage):
     def click_importeSunny(self):
         return self.find_element(*self.importeSunny_loc).click()
 
-    def click_importmain(self):
-        return self.find_element(*self.importmain_loc).click()
+    def click_importserver(self):
+        return self.find_element(*self.importserver_loc).click()
 
     def uploadAyers(self):
-        # js = "document.getElementsByName('file').style.display='block';"
-        js = "document.getElementsByName('file').style.display='none';"
+        # 设置元素display属性
+        js = "document.querySelector('.el-upload__input').style.display = 'block';"
         self.script(js)
         return self.find_element(*self.uploadAyers_loc).send_keys(os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xls')
 
+    def uploadfilename(self):
+        return self.find_element(*self.uploadfilename_loc).text
+
+    def alerttext(self):
+        return self.find_element(*self.alerttext_loc).text
+
+    def dialog_close(self):
+        return self.find_element(*self.dialog_close_loc).click()
+
+
+        

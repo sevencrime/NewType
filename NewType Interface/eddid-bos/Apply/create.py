@@ -12,7 +12,7 @@ import random
 url = 'https://eddid-api.ntdev.be/eddid-api-uat/apply/create'
 headers = {
     'Content-Type' : 'application/json' ,
-    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoiYWRtaW4iLCJjb2duaXRvOnJvbGVzIjpbImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSJdLCJhdWQiOiI1MTNqZmNrdHIxbTZldm9nZnF1N29zazdwYSIsImV2ZW50X2lkIjoiNjFiMDU2MDItMzEwMy0xMWU5LWI3YTQtMGIwOTIyZDhhYWZhIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NTAyMjI2MjAsImV4cCI6MTU1MDIyNjIyMCwiaWF0IjoxNTUwMjIyNjIwLCJmYW1pbHlfbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbjEyM0BxcS5jb20ifQ.L8zfNjWnI4rJA2TpR-9XcdkdaEz7c0ypIaRYh45KyD_ix1FqMK9RO9OolUf6kiwjmSf0VKgdnu4ZfLyD9W8RsinAW4WuaApNfHx1wUxmN_e1g6JYyRaUWpzIruRjR2VRtuZzoI16OyKxojBkWNNXePST9akTXnG7BHbmsqErHs4aEaYc0uU5Gh9apcTgyDmJQR680KCnoRv8USkrM3HOshzhwLC817XYByTV9E77Dz-YEe1aoMeapArR_IBdiQ_X8NHMR9wIw338gZQ0bW-l1Fwih9nOHeMS-5-2PYdUFBfh_TPgBPb8MEZ-NIKZRAFmEX1xbb8lvxXh2t-lAg34RA'
+    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJlODRjNDM1YS01OTFiLTQzMTktOWVhMC1lZDAyY2NkZTRjM2UiLCJjb2duaXRvOmdyb3VwcyI6WyJjcyIsImNzMSJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiY3NfdDEiLCJnaXZlbl9uYW1lIjoiQWltZWUiLCJjb2duaXRvOnJvbGVzIjpbImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSJdLCJhdWQiOiI1MTNqZmNrdHIxbTZldm9nZnF1N29zazdwYSIsImV2ZW50X2lkIjoiYTRlMDc2Y2YtMzM2OC0xMWU5LTk3MGQtY2I3YmY2Y2NlOGRlIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NTA0ODYwMTQsImV4cCI6MTU1MDU1ODM4OCwiaWF0IjoxNTUwNTU0Nzg4LCJmYW1pbHlfbmFtZSI6IumfpiIsImVtYWlsIjoiYWltZWU4d2VpQGRpbmd0YWxrLmNvbSJ9.VQ3SfLjbRYhbA2R9YY3p645ugwBua6LHi7GDaKiomwGZ2Z6MPEblCM2wilXaA6LFcUj4VmBiqFhJDS_jcJLm19AmXf9j12RxkHyabfK58v5O1CpE9789V5gVlOoc_im0Tsex-50XnhrSGmpJSUR_s35OKmaBraAj62SFSD03RJIVpf9c7y8K1MkxxqGcoZS7ZIxDLi-8Tzvd17jVl8wjcAyk8ix2DqOg5dSWoX2k3N9xiO2HyzxK96LhFZyh6jKxrk_S1EP1nsiKygmNQXMHMA68PGrV_00QA3ip0gash7jj3xexNWcduwR6N_HRV-M97hV2-Br0fbulekXflgADEw'
 }
 
 
@@ -20,6 +20,7 @@ data = {
     "applicationFor": "individual",
     # "applicationFor": "joint",    
     "accountType": ["securitiesCash", "leveragedForeignExchangeAccountMargin","futuresMargin","securitiesDayTradeMargin"],
+    # "accountType": ["securitiesCash"],
     "accountOpeningWay": "visitingAccount",
     "personalInfoDeclartion": "Y",
     # "customerSource": "ballFives",    
@@ -121,15 +122,15 @@ data = {
         "pastEnglishName": "",
         "pastChineseName": "",
         "idType": "2",
-        "idNumber": "2352224423523%s" %(random.randint(0,100001)),
-        "countryIssue": "AFG",
-        "nationality": "AFG",
-        "birthPlace": "AGO",
+        "idNumber": "%s423523%s" %(random.randint(0,100001),random.randint(0,106000)),
+        "countryIssue": "CHN",
+        "nationality": "CHN",
+        "birthPlace": "CHN",
         "birthday": 894384000000,
-        "email": "onedi2s%s@qq.com" %(random.randint(0,100000)),
+        "email": "%sonedi2s%s@qq.com" %(random.randint(0,100000),random.randint(0,103000)),
         # "email": "onedi@qq.com" ,
         "phoneAreaCode": "HKG",
-        "phone": "43564253%s" %(random.randint(0,100002)),
+        "phone": "%s6253%s" %(random.randint(0,100002),random.randint(0,100502)),
         # "phone": "15089514626" ,
         "address": "3466324364",
         "addressMail": "34632646345",
