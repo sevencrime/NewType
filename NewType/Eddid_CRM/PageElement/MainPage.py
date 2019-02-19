@@ -42,7 +42,7 @@ class MainPage(BasePage.BasePage):
         return self.find_element(*self.StatusSelect_loc).click()
 
     def click_StatusOption(self):
-        return self.find_element(*self.StatusOption_loc)
+        return self.find_element(*self.StatusOption_loc).click()
 
     def click_submit(self):
         return self.find_element(*self.submit_loc).click()

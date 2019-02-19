@@ -13,6 +13,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 from PageElement.LoginPage import *
 from PageElement.ApplyListPage import *
+from PageElement.AccountlistPage import *
 from Commons import Logging
 
 #交易账户列表导入Ayers数据
@@ -46,8 +47,20 @@ class importAyers(unittest.TestCase):
         # 点击交易账户
         applylistpage.click_accountlist()
 
+        # 实例化AccountlistPage
+        accountpage = AccountlistPage(self.driver, self.url, "Eddid")
+        # 等待CSS加载完成
+        accountpage.wait_LoadingModal()
+        # 点击导入Ayers按钮
+        accountpage.click_importAyers()
+        # 点击导入主要信息
+        # accountpage.click_importmain()
+        
+        accountpage.uploadAyers()
+        print(accountpage.uploadAyers.get_attribute__('value'))
 
-
+        
 
 if __name__ == '__main__':
+    # print(os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xls')
     unittest.main()
