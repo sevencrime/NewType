@@ -41,7 +41,16 @@ class importAyers(unittest.TestCase):
         print("结束driver")
         self.driver.quit()
 
+    def getNumber(self):
+        file_url = '/config/Ayers1.xls'
+        data = Modify_xls.Modifyxls().readxls(file_url)
+        print(data)
+
+
     def test_importAyers(self):
+
+        self.getNumber()
+
         applylistpage = ApplyListPage(self.driver, self.url, "Eddid")
         applylistpage.click_account_manager()
         applylistpage.click_accountlist()
