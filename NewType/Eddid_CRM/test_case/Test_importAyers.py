@@ -8,6 +8,7 @@
 import unittest
 from selenium import webdriver
 import time
+import pymongo
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
@@ -44,12 +45,13 @@ class importAyers(unittest.TestCase):
     def getNumber(self):
         file_url = '/config/Ayers1.xls'
         data = Modify_xls.Modifyxls().readxls(file_url)
-        print(data)
+        # print(data)
+        return data
 
 
     def test_importAyers(self):
 
-        self.getNumber()
+        data = self.getNumber()
 
         applylistpage = ApplyListPage(self.driver, self.url, "Eddid")
         applylistpage.click_account_manager()
@@ -64,8 +66,15 @@ class importAyers(unittest.TestCase):
         accountpage.click_importserver()
         alert_text = accountpage.alerttext()
         self.assertEqual(accountpage.alerttext(), '操作成功', '上传到服务器失败')
-
         accountpage.dialog_close()
+
+        #查询数据库
+        client = pymongo.MongoClient("mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net")
+        db = client['uat']
+        collection = db['client_info']
+        result = collection.find({'idNumber': "3705342352375412"})
+        print(result)
+
 
 
 
