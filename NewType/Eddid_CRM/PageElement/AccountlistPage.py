@@ -58,4 +58,3 @@ class AccountlistPage(BasePage.BasePage):
         return self.find_element(*self.dialog_close_loc).click()
 
 
-        

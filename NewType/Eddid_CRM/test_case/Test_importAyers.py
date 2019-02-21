@@ -17,6 +17,7 @@ from PageElement.ApplyListPage import *
 from PageElement.AccountlistPage import *
 from Commons import Logging
 from Commons import Modify_xls
+from Commons import PyMongo
 
 #交易账户列表导入Ayers数据
 class importAyers(unittest.TestCase):
@@ -45,6 +46,8 @@ class importAyers(unittest.TestCase):
     def getNumber(self):
         file_url = '/config/Ayers1.xls'
         data = Modify_xls.Modifyxls().readxls(file_url)
+        #导入数据库前先查询数据库,保证数据库没有该记录
+        PyMongo.Pymongo('uat', 'client_info').Client(data['id_code'])
         # print(data)
         return data
 
@@ -68,13 +71,9 @@ class importAyers(unittest.TestCase):
         self.assertEqual(accountpage.alerttext(), '操作成功', '上传到服务器失败')
         accountpage.dialog_close()
 
-        #查询数据库
-        client = pymongo.MongoClient("mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net")
-        db = client['uat']
-        collection = db['client_info']
-        result = collection.find({'idNumber': "3705342352375412"})
-        print(result)
-
+        # 断言
+        result = PyMongo.Pymongo('uat', 'client_info').Client(data['id_code'])
+        self.assertIsNotNone(result, "数据已存入数据库")
 
 
 
