@@ -6,19 +6,22 @@
 # @Version : $Id$
 
 
-import xlrd 
+import xlrd,xlwt
+from xlutils.copy import copy
 import os
+import random
 
 class Modifyxls():
 
-    def readxls(self,file_url):
+    def __init__(self, file_url):
+        self.path = file_url
+        self.workbook = xlrd.open_workbook(self.path)
 
-        path = os.path.abspath(os.path.dirname(os.getcwd()))+file_url
-        # print(path)
+    def readxls(self):
+
         # 打开excel文件,open_workbook(path),path为excel所在的路径
-        workbook = xlrd.open_workbook(path)
         # 打开excel表,这里表示打开第一张表
-        table = workbook.sheets()[0]
+        table = self.workbook.sheets()[0]
 
         nrows = table.nrows     # 获取excel的行数
         # print(nrows)
@@ -43,10 +46,26 @@ class Modifyxls():
 
         return Data
 
+    def writexls(self):
+
+        wb = copy(self.workbook)
+        sheet = wb.get_sheet(0)
+        id_code = random.randint(100000,135483216542154)
+        email = 'onedi2%s' %(random.randint(4541545))
+        sheet.write(1, 12, id_code)
+        sheet.write(1, 14, email)
+        wb.save(path)
+        return id_code
+
+
 
 if __name__ == "__main__":
 
-    modify = Modifyxls()
-    file_url = '/config/Ayers1.xls'
-    data = modify.readxls(file_url)
-    print(data)
+    file_url = os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xls'
+
+    modify = Modifyxls(file_url)
+    data = modify.readxls()
+    # print(data)
+    for res in data:
+        print(int(res['id_code']))
+    # modify.Writexls(file_url)

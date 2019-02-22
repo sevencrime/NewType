@@ -12,7 +12,7 @@ import random
 url = 'https://eddid-api.ntdev.be/eddid-api-uat/apply/create'
 headers = {
     'Content-Type' : 'application/json' ,
-    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoiYWRtaW4iLCJjb2duaXRvOnJvbGVzIjpbImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSJdLCJhdWQiOiI1MTNqZmNrdHIxbTZldm9nZnF1N29zazdwYSIsImV2ZW50X2lkIjoiMzQ2MDFiYTAtMzViZi0xMWU5LTk2YjctMjllYzk3NzVlMzZjIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NTA3NDMwOTQsImV4cCI6MTU1MDc0NjY5NCwiaWF0IjoxNTUwNzQzMDk0LCJmYW1pbHlfbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbjEyM0BxcS5jb20ifQ.USf1hMEeCj5Yh7facHUjwiX0s4VljwxPfgE2cDE4o-aNpwhKlu8fm4ZmraHPpY-_A9jzYd7PToauz_lCbrS8XMHFFjAwXWRLkiq7YRob-3nveEhUABT8GbAUpDyHxa0f962qBBoyBrt3LF5g-JC0zWNYPVuKHCvuR68bqa_lv_32NfooCU7mPYXMqtxc2TGcYY-tykQmIG8ChQdhgmmI6MlStOqTuJqCwjykOLw37do9NVjvOnw2KN9w2lvgtDKBb_fD8NJCbLWVufeO2EtU4_7gKasn2YF4w8tg9kP5fnCDqeIsND-d9NihCGI4kq1wGHMf8ItOVPRm_wmLwcdFhw'
+    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoiYWRtaW4iLCJjb2duaXRvOnJvbGVzIjpbImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSJdLCJhdWQiOiI1MTNqZmNrdHIxbTZldm9nZnF1N29zazdwYSIsImV2ZW50X2lkIjoiMDYxODhkMTAtMzY3MC0xMWU5LTk2YjctMjllYzk3NzVlMzZjIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NTA4MTkwMzcsImV4cCI6MTU1MDgzOTQwOCwiaWF0IjoxNTUwODM1ODA4LCJmYW1pbHlfbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbjEyM0BxcS5jb20ifQ.ZMug77Ap8PP6EuOt3YEbOmX0nlvTUEYrQZwh3ay8bu__B8zJdVBJP9Hvm_0P7HHRKORJcmuSCIa9qKDIYT3u299g8poHZXf3yjklVAM0xkiDCWuEQqjGAeUof3V-dqwVOMYBhb8NtEpikTdWk0Gl6T_Ci0yGQ6ta_F47LwlxDQUIKj0-JayiUEzWAnmcKs7huiUGfYrIBdmHYrq0EomCPHvOmGpE8rxI6S_pD1cIlAQIwKhjSthhKCqxn60FXcl4aeXbHqo0HyXnYQaC0ctZvM20xFuNfpnvqLzK6glbeleA2hslN4UnJfmRH944TzzmNiYRfkGLdqDpFFexrBbx-Q'
 }
 
 
@@ -24,9 +24,9 @@ data = {
     #mobile:手机;visitingAccount:亲临开户;postal:邮递;onlineApplication:网上开户申请
     "accountOpeningWay": "visitingAccount",  #开户方式,
     "personalInfoDeclartion": "Y",
-    # "customerSource": "ballFives",    
+    "customerSource": "ballFives",    
     # "customerSource": "app",    
-    "customerSource": "crm",    
+    # "customerSource": "crm",    
     "mailLanguage": "en",
     "appBankName": "",
     "appBankAccount": "",
@@ -129,7 +129,7 @@ data = {
         "birthPlace": "CHN",
         "birthday": 894384000000,
         "email": "%sonedi2s%s@qq.com" %(random.randint(0,100000),random.randint(0,103000)),
-        # "email": "onedi@qq.com" ,
+        # "email": "307051066@qq.com" ,
         "phoneAreaCode": "HKG",
         "phone": "%s6253%s" %(random.randint(0,100002),random.randint(0,100502)),
         # "phone": "15089514626" ,
