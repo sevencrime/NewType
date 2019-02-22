@@ -61,11 +61,12 @@ class Modifyxls():
 
 if __name__ == "__main__":
 
-    file_url = os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xls'
+    file_url = os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xlsx'
 
     modify = Modifyxls(file_url)
     data = modify.readxls()
     # print(data)
     for res in data:
-        print(int(res['id_code']))
+        # print(int(res['id_code']))
+        print(res)
     # modify.Writexls(file_url)

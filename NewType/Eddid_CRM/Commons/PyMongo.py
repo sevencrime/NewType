@@ -11,7 +11,7 @@ sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 import pymongo
 from Commons import Modify_xls
 
-class Pymongo():
+class Pymongo:
 
     def __init__(self, database, table, data):
         client = pymongo.MongoClient("mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net")
@@ -27,7 +27,8 @@ class Pymongo():
         result = self.collection.find({'idNumber': self.data['id_code'], 'email': self.data['email']})
 
         if result != None:
-            return self.collection.find({'idNumber': self.data['id_code'], 'email': self.data['email']})
+            for res in result:
+                return res
 
         else:
             print("查询数据库数据为空")
@@ -37,8 +38,13 @@ class Pymongo():
 
 
 if __name__ == '__main__':
-    file_url = os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xls'
+    file_url = os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xlsx'
     data = Modify_xls.Modifyxls(file_url).readxls()
-
-    Pymongo('uat','client_info', data).Client()
+    if len(data) == 1:
+        for d in data:
+            #导入数据库前先查询数据库,保证数据库没有该记录
+            # PyMongo.Pymongo('uat', 'client_info').Client(data['id_code'])
+            res = Pymongo('uat', 'client_info', d).Client()
+            print(res)
+            print(type(res))
 

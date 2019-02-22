@@ -44,7 +44,7 @@ class importAyers(unittest.TestCase):
         self.driver.quit()
 
     def getNumber(self):
-        file_url = os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xls'
+        file_url = os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xlsx'
         Data = Modify_xls.Modifyxls(file_url).readxls()
         # 判断data,遍历
         if len(Data) == 1:
@@ -81,6 +81,12 @@ class importAyers(unittest.TestCase):
         # 断言
         result = PyMongo.Pymongo('uat', 'client_info', data).Client()
         self.assertIsNotNone(result, "数据已存入数据库")
+        self.assertEqual(result['chineseName'], data['big5_name'])
+        self.assertEqual(result['idNumber'], data['id_code'])
+        self.assertEqual(result['email'], data['email'])
+        self.assertEqual(result['phone'], data['phone'])
+        self.assertEqual(result['address'], data['addr'])
+        self.assertEqual(result['nationality'], data['nationality'])
 
 
 
