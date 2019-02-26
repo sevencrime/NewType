@@ -45,18 +45,15 @@ class importAyers(unittest.TestCase):
 
     def getNumber(self):
         file_url = os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xlsx'
-        Data = Modify_xls.Modifyxls(file_url).readxls()
-        # 判断data,遍历
-        if len(Data) == 1:
-            for data in Data:
-                #导入数据库前先查询数据库,保证数据库没有该记录
-                # PyMongo.Pymongo('uat', 'client_info').Client(data['id_code'])
-                PyMongo.Pymongo('uat', 'client_info', data).Client()
-                # print(data)
-                return data
+        data = Modify_xls.Modifyxls(file_url).readxls()
+        # print(Data[0])
+        #导入数据库前先查询数据库,保证数据库没有该记录
+        result = PyMongo.Pymongo().Find({'idNumber': data[0]['id_code'], 'email': data[0]['email']})
+        res = [r for r in result]
 
-        else:
-            pass
+        return res[0]
+
+
 
 
     def test_importAyers(self):
@@ -79,7 +76,7 @@ class importAyers(unittest.TestCase):
         accountpage.dialog_close()
 
         # 断言
-        result = PyMongo.Pymongo('uat', 'client_info', data).Client()
+        result = PyMongo.Pymongo().Find({'idNumber': data[0]['id_code'], 'email': data[0]['email']})
         self.assertIsNotNone(result, "数据已存入数据库")
         self.assertEqual(result['chineseName'], data['big5_name'])
         self.assertEqual(result['idNumber'], data['id_code'])

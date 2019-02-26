@@ -13,38 +13,28 @@ from Commons import Modify_xls
 
 class Pymongo:
 
-    def __init__(self, database, table, data):
+    def __init__(self):
         client = pymongo.MongoClient("mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net")
-        # db = client['uat']
-        # self.collection = db['client_info']
-        db = client[database]
-        self.collection = db[table]        
-        self.data = data
+        db = client['uat']
+        self.collection = db['client_info']        
 
-    def Client(self):
+    def Find(self, options):
 
         # result_sum = collection.find({'idNumber': "3705342352375412"}).count()
-        result = self.collection.find({'idNumber': self.data['id_code'], 'email': self.data['email']})
+        # result = self.collection.find({'idNumber': self.data['id_code'], 'email': self.data['email']})
+        result = self.collection.find(options)
+        return result
 
-        if result != None:
-            for res in result:
-                return res
 
-        else:
-            print("查询数据库数据为空")
-            id_code = Modify_xls.Modifyxls().writexls()
-            Client(id_code)
-            # 失败,或者修改id_code
+
 
 
 if __name__ == '__main__':
     file_url = os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xlsx'
     data = Modify_xls.Modifyxls(file_url).readxls()
-    if len(data) == 1:
-        for d in data:
-            #导入数据库前先查询数据库,保证数据库没有该记录
-            # PyMongo.Pymongo('uat', 'client_info').Client(data['id_code'])
-            res = Pymongo('uat', 'client_info', d).Client()
-            print(res)
-            print(type(res))
 
+    res = Pymongo().Find({'idNumber': data[0]['id_code'], 'email': data[0]['email']})
+    # print(res)
+    a = [r for r in res]
+    print(a)
+    print(a[0])

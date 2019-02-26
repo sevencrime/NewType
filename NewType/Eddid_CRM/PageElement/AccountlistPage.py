@@ -46,7 +46,7 @@ class AccountlistPage(BasePage.BasePage):
         # 设置元素display属性
         js = "document.querySelector('.el-upload__input').style.display = 'block';"
         self.script(js)
-        return self.find_element(*self.uploadAyers_loc).send_keys(os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xls')
+        return self.find_element(*self.uploadAyers_loc).send_keys(os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xlsx')
 
     def uploadfilename(self):
         return self.find_element(*self.uploadfilename_loc).text
