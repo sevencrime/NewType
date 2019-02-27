@@ -28,7 +28,7 @@ class importAyers(unittest.TestCase):
         self.driver = webdriver.Chrome(executable_path = 'chromedriver')
         # self.driver = webdriver.Firefox(executable_path = 'geckodriver')
         self.driver.implicitly_wait(30)
-        self.url = 'http://eddid-bos-feature.ntdev.be'
+        self.url = 'http://eddid-bos-uat.ntdev.be'
 
         #在这里先登录
         login_page = LoginPage(self.driver, self.url, "Eddid")
@@ -46,15 +46,18 @@ class importAyers(unittest.TestCase):
     def getNumber(self):
         file_url = os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xlsx'
         data = Modify_xls.Modifyxls(file_url).readxls()
-        # print(Data[0])
+        print(data[0]['id_code'], data[0]['email'])
         #导入数据库前先查询数据库,保证数据库没有该记录
-        result = PyMongo.Pymongo().Find({'idNumber': data[0]['id_code'], 'email': data[0]['email']})
-        res = [r for r in result]
-
-        return res[0]
-
-
-
+        result = PyMongo.Pymongo().Find({'idNumber': str(data[0]['id_code']), 'email': str(data[0]['email'])})
+        # res = [r for r in result]
+        # print(res)
+        if [r for r in result] != []:
+            print("数据已存在,修改id_code和email数据")
+            id_code = Modify_xls.Modifyxls(file_url).writexls()
+            print("修改后的id_code为:" ,id_code)
+            # 需要重新读取excel数据
+            self.getNumber()
+        return data
 
     def test_importAyers(self):
 
@@ -68,7 +71,7 @@ class importAyers(unittest.TestCase):
         accountpage.wait_LoadingModal()
         accountpage.click_importAyers()
         accountpage.uploadAyers()
-        self.assertEqual(accountpage.uploadfilename(),'Ayers1.xls','上传文件不一致')
+        self.assertEqual(accountpage.uploadfilename(),'Ayers1.xlsx','上传文件不一致')
 
         accountpage.click_importserver()
         alert_text = accountpage.alerttext()
@@ -76,14 +79,17 @@ class importAyers(unittest.TestCase):
         accountpage.dialog_close()
 
         # 断言
-        result = PyMongo.Pymongo().Find({'idNumber': data[0]['id_code'], 'email': data[0]['email']})
-        self.assertIsNotNone(result, "数据已存入数据库")
-        self.assertEqual(result['chineseName'], data['big5_name'])
-        self.assertEqual(result['idNumber'], data['id_code'])
-        self.assertEqual(result['email'], data['email'])
-        self.assertEqual(result['phone'], data['phone'])
-        self.assertEqual(result['address'], data['addr'])
-        self.assertEqual(result['nationality'], data['nationality'])
+        result = PyMongo.Pymongo().Find({'idNumber': str(data[0]['id_code']), 'email': str(data[0]['email'])})
+        res = [r for r in result]
+        print(res[0])
+
+        self.assertIsNotNone(res[0], "数据已存入数据库")
+        self.assertEqual(res[0]['chineseName'], data['big5_name'], "数据不一致")
+        self.assertEqual(res[0]['idNumber'], data['id_code'], "数据不一致")
+        self.assertEqual(res[0]['email'], data['email'], "数据不一致")
+        self.assertEqual(res[0]['phone'], data['phone'], "数据不一致")
+        self.assertEqual(res[0]['address'], data['addr'], "数据不一致")
+        self.assertEqual(res[0]['nationality'], data['nationality'], "数据不一致")
 
 
 
