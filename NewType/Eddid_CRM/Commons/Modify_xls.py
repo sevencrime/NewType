@@ -53,11 +53,25 @@ class Modifyxls():
 
     def writexls(self):
 
+        # sheet = self.workbook.active
+        # nrows = sheet.max_row
+        # for row in range(nrows):
+        #     print(row)
+        #     id_code = random.randint(100000,13556542154)
+        #     email = 'onedi2%s@qq.com' %(random.randint(0,4541545))
+        #     phone = '6666-11%s' %(random.randint(0,1000))
+        #     # sheet.cell(row=row+2, column=13).value = id_code
+        #     sheet.cell(row=row+2, column=15).value = email
+        #     sheet.cell(row=row+2, column=16).value = phone
+        #     self.workbook.save(self.path)
+
         sheet = self.workbook.active
-        id_code = random.randint(100000,135483216542154)
+        id_code = random.randint(100000,13556542154)
         email = 'onedi2%s@qq.com' %(random.randint(0,4541545))
+        phone = '6666-11%s' %(random.randint(0,1000))
         sheet.cell(row=2, column=13).value = id_code
         sheet.cell(row=2, column=15).value = email
+        # sheet.cell(row=2, column=16).value = phone
         self.workbook.save(self.path)
         return id_code
 
@@ -74,13 +88,14 @@ class Modifyxls():
 
 if __name__ == "__main__":
 
-    file_url = os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xlsx'
+    # file_url = os.path.abspath(os.path.dirname(os.getcwd()))+'/config/Ayers1.xlsx'
+    file_url = os.path.abspath(os.path.dirname(os.getcwd()))+'/config/1233.xlsx'
 
     modify = Modifyxls(file_url)
-    data = modify.readxls()
-    print(data)
-    for res in data:
-        print(int(res['id_code']))
-    #     print(res)
-    # code = modify.writexls(file_url)
+    # data = modify.readxls()
+    # print(data)
+    # for res in data:
+    #     print(int(res['id_code']))
+    # #     print(res)
+    code = modify.writexls()
     # print(code)

@@ -24,7 +24,10 @@ class Pymongo:
         result = self.collection.find(options)
         return result
 
+    def Del(self, options):
 
+        result = self.collection.remove(options)
+        print(result)
 
 
 

@@ -53,16 +53,16 @@ class importAyers(unittest.TestCase):
         # print(res)
         if [r for r in result] != []:
             print("数据已存在,修改id_code和email数据")
-            id_code = Modify_xls.Modifyxls(file_url).writexls()
-            print("修改后的id_code为:" ,id_code)
-            # 需要重新读取excel数据
-            self.getNumber()
+            # id_code = Modify_xls.Modifyxls(file_url).writexls()
+            # print("修改后的id_code为:" ,id_code)
+            PyMongo.Pymongo().Del({'idNumber': str(data[0]['id_code']), 'email': str(data[0]['email'])})
+
         return data
 
     def test_importAyers(self):
 
         data = self.getNumber()
-
+        print(data)
         applylistpage = ApplyListPage(self.driver, self.url, "Eddid")
         applylistpage.click_account_manager()
         applylistpage.click_accountlist()
