@@ -48,14 +48,14 @@ class importAyers(unittest.TestCase):
         data = Modify_xls.Modifyxls(file_url).readxls()
         print(data[0]['id_code'], data[0]['email'])
         #导入数据库前先查询数据库,保证数据库没有该记录
-        result = PyMongo.Pymongo().Find({'idNumber': str(data[0]['id_code']), 'email': str(data[0]['email'])})
+        result = PyMongo.Pymongo().find({'idNumber': str(data[0]['id_code']), 'email': str(data[0]['email'])})
         # res = [r for r in result]
         # print(res)
         if [r for r in result] != []:
             print("数据已存在,修改id_code和email数据")
             # id_code = Modify_xls.Modifyxls(file_url).writexls()
             # print("修改后的id_code为:" ,id_code)
-            PyMongo.Pymongo().Del({'idNumber': str(data[0]['id_code']), 'email': str(data[0]['email'])})
+            PyMongo.Pymongo().delete({'idNumber': str(data[0]['id_code']), 'email': str(data[0]['email'])})
 
         return data
 
@@ -79,7 +79,7 @@ class importAyers(unittest.TestCase):
         accountpage.dialog_close()
 
         # 断言
-        result = PyMongo.Pymongo().Find({'idNumber': str(data[0]['id_code']), 'email': str(data[0]['email'])})
+        result = PyMongo.Pymongo().find({'idNumber': str(data[0]['id_code']), 'email': str(data[0]['email'])})
         res = [r for r in result]
         print(res[0])
 
