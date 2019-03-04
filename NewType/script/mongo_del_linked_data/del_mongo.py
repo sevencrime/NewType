@@ -8,8 +8,10 @@
 
 import pymongo
 from bson.objectid import ObjectId
+import Logging
 
 class Database:
+	log = Logging.logs()
 
 	collections = set()
 	table = {
@@ -20,19 +22,23 @@ class Database:
 	}
 
 	def __init__(self, database):
+		self.log.info("连接数据库%s" %database)
 		self.client = pymongo.MongoClient("mongodb://localhost:27017/")
 		self.db = self.client[database]
 
 	def __del__(self):
+		self.log.info("close Client")
 		self.client.close()
 
 
 	def del_linked(self, collection, query):
 		self.collections.add(collection)
 		result = self.db[collection].find(query)
+		self.log.info("%s 表符合查询条件%s 的数据有%s 条" %(collection, query, result.count()))
 		print("%s 表符合查询条件%s 的数据有%s 条" %(collection, query, result.count()))
 		for r in result:
-			print(r)
+			# print(r)
+			self.log.info(r)
 			# continue
 			index = 0	#用于记录查询数据的字段个数
 			for key in r.keys():
@@ -42,11 +48,14 @@ class Database:
 					if isinstance(r[key], ObjectId):
 						try:
 							if self.table[key] not in self.collections:
+								self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
+								self.log.info("正在查询关联表 %s 的数据" %self.table[key])
 								print(collection,"表关联的字段为 ",key,":",r[key])
 								print("正在查询关联表 %s 的数据" %self.table[key])
 								self.del_linked(self.table[key], {'_id':r[key]})
 
 						except Exception as e:
+							self.log.info(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
 							print(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
 
 					elif isinstance(r[key], list):
@@ -57,23 +66,29 @@ class Database:
 								# continue
 								try:
 									if self.table[key] not in self.collections:
+										self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
+										self.log.info("正在查询关联表 %s 的数据" %self.table[key])
 										print(collection,"表关联的字段为 ",key,":",r[key][n])
 										print("正在查询关联表 %s 的数据" %self.table[key])
 										self.del_linked(self.table[key], {'_id':r[key][n]})
 
 								except Exception as e:
+									self.log.info(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
 									print(e," table[%s]没有与之对应的数据库表" %key)
 
 					else:
 						# print("index", index)
 						if index >= len(r) :
+							self.log.info("***********************************\n")
+							self.log.info('没有关联数据,直接删除%s 表' %collection)
 							print('没有关联数据,直接删除%s 表' %collection)
-							result = self.db[collection].remove(query)
-							print(result)
+							# result = self.db[collection].remove(query)
+							# print(result)
+							self.log.info("***********************************\n")
 
 if __name__ == '__main__':
-	client = pymongo.MongoClient("mongodb://localhost:27017/")
-	Database('test7').del_linked("client_info", {'idNumber':"4311211838"})
+	# client = pymongo.MongoClient("mongodb://localhost:27017/")
+	Database('test7').del_linked("client_info", {'idNumber':"43113115"})
 
 
 
