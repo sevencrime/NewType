@@ -13,26 +13,28 @@ from Commons import Modify_xls
 
 class Pymongo:
 
-    def __init__(self, collection):
+    def __init__(self, database):
         # client = pymongo.MongoClient("mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net")
         # db = client.uat
-        client = pymongo.MongoClient('mongodb://localhost:27017/')
-        db = client.test
-        self.collection = db.orders       
+        self.client = pymongo.MongoClient('mongodb://localhost:27017/')
+        self.db = client[database]
 
-    def find(self, options):
+    def __del__(self):
+        self.client.close()
+
+    def find(self, collection, options):
         # result_sum = collection.find({'idNumber': "3705342352375412"}).count()
         # result = self.collection.find({'idNumber': self.data['id_code'], 'email': self.data['email']})
-        return self.collection.find(options)
+        return self.db[collection].find(options)
 
-    def delete(self, options):
+    def delete(self, collection, options):
 
-        result = self.collection.remove(options)
+        result = self.db[collection].remove(options)
         print(result)
 
-    def insert(self, options):
+    def insert(self, collection, options):
         # 返回_id
-        return self.collection.insert(options)
+        return self.db[collection].insert(options)
 
 if __name__ == '__main__':
     r = Pymongo('orders').find({})

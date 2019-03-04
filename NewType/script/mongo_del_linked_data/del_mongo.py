@@ -13,6 +13,7 @@ import Logging
 class Database:
 	log = Logging.logs()
 
+	link_data = []
 	collections = set()
 	table = {
 		'applyId' : 'apply' ,
@@ -21,9 +22,9 @@ class Database:
 		'clientId' : 'client_info'
 	}
 
-	def __init__(self, database):
+	def __init__(self, host, database):
 		self.log.info("连接数据库%s" %database)
-		self.client = pymongo.MongoClient("mongodb://localhost:27017/")
+		self.client = pymongo.MongoClient(host)
 		self.db = self.client[database]
 
 	def __del__(self):
@@ -83,12 +84,15 @@ class Database:
 							self.log.info('没有关联数据,直接删除%s 表' %collection)
 							print('没有关联数据,直接删除%s 表' %collection)
 							# result = self.db[collection].remove(query)
+							# self.log.info(result)
 							# print(result)
 							self.log.info("***********************************\n")
 
 if __name__ == '__main__':
-	# client = pymongo.MongoClient("mongodb://localhost:27017/")
-	Database('test7').del_linked("client_info", {'idNumber':"43113115"})
+	# host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
+	host = 'localhost:27017'
+	database = 'test7'
+	Database(host, database).del_linked("client_info", {'email':"7949422392@qq.com"})
 
 
 
