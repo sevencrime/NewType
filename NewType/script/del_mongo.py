@@ -44,7 +44,7 @@ class Database:
 							if self.table[key] not in self.collections:
 								print(collection,"表关联的字段为 ",key,":",r[key])
 								print("正在查询关联表 %s 的数据" %self.table[key])
-								res_two = self.del_linked(self.table[key], {'_id':r[key]})
+								self.del_linked(self.table[key], {'_id':r[key]})
 
 						except Exception as e:
 							print(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
@@ -52,14 +52,14 @@ class Database:
 					elif isinstance(r[key], list):
 
 						for n in range(len(r[key])):
-							# 判断是否是object类型
+							# 判断数组中的字段是否是object类型
 							if isinstance(r[key][n], ObjectId):
 								# continue
 								try:
 									if self.table[key] not in self.collections:
 										print(collection,"表关联的字段为 ",key,":",r[key][n])
 										print("正在查询关联表 %s 的数据" %self.table[key])
-										res_two = self.del_linked(self.table[key], {'_id':r[key][n]})
+										self.del_linked(self.table[key], {'_id':r[key][n]})
 
 								except Exception as e:
 									print(e," table[%s]没有与之对应的数据库表" %key)
@@ -68,9 +68,8 @@ class Database:
 						# print("index", index)
 						if index >= len(r) :
 							print('没有关联数据,直接删除%s 表' %collection)
-						# result = self.db[collection].remove()
-						# print(result)
-		return result
+							result = self.db[collection].remove(query)
+							print(result)
 
 if __name__ == '__main__':
 	client = pymongo.MongoClient("mongodb://localhost:27017/")
