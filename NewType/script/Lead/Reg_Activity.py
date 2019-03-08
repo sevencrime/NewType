@@ -6,10 +6,9 @@
 # @Version : $Id$
 
 import requests
-import datetime
+import datetime , time
 import json
 from selenium import webdriver
-import 
 
 class Reg_Activity():
 
@@ -22,7 +21,8 @@ class Reg_Activity():
 
         self.driver = webdriver.Chrome(executable_path = 'chromedriver')
         self.driver.implicitly_wait(30)
-        self.driver.get('http://mail.163.com/')
+        self.driver.get('http://mail.tom.com/')
+        self.driver.maximize_window()
 
 
     def get_List(self):
@@ -54,10 +54,10 @@ class Reg_Activity():
             "phoneArr": [],
             "totalPeople": 1,
             "email": "onedi@qq.com",
-            "lastName": "last",
-            "firstName": "first",
+            "lastName": "Test",
+            "firstName": "Test",
             "phoneNumber": 15088886666,
-            "activityId": ["5c808d499683f8309d18b972"],
+            "activityId": [_id],
             "writtenApplicationMaterials": [],
             "otherInformation": []
         }
@@ -68,23 +68,25 @@ class Reg_Activity():
         # 等待页面完全加载
         self.driver.implicitly_wait(30)
 
-        # 因为163登录入口在iframe里面，所以先要切换到iframe
-        frame = self.driver.find_element_by_id('x-URS-iframe')
-        self.driver.switch_to.frame(frame)
-
         # 使用driver将账号密码填进表单并提交
-        email = self.driver.find_element_by_xpath("//input[@name='email']").send_keys(username)
-        pwd = self.driver.find_element_by_xpath("//input[@name='password']").send_keys(password)
-        login = self.driver.find_element_by_id('dologin').click()
+        user = self.driver.find_element_by_id("username").send_keys(username)
+        # js = "document.getElementById('password').style.display='block';"
+        # self.driver.execute_script(js)
+        psw = self.driver.find_element_by_id("password").click()
+        psw = self.driver.find_element_by_id("password").send_keys(password)
+
+
+        # login = self.driver.find_element_by_class_name('.mail_login_btn4').click()
 
 
 
 if __name__ == '__main__':
-    reg = Reg_Activity()
-    _id = reg.get_List()
-    reg.findSimilarLead(_id)
 
-    username = "17620446727@163.com"
-    password = ""
-    reg.login(" ", " ")
+    reg = Reg_Activity()
+    # _id = reg.get_List()
+    # reg.findSimilarLead(_id)
+
+    username = "sevencrime77"
+    password = "abcd1234"
+    reg.login(username, password)
 
