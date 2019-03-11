@@ -83,16 +83,18 @@ class Database:
 							self.log.info("***********************************\n")
 							self.log.info('没有关联数据,直接删除%s 表' %collection)
 							print('没有关联数据,直接删除%s 表' %collection)
+
 							# result = self.db[collection].remove(query)
 							# self.log.info(result)
 							# print(result)
+
 							self.log.info("***********************************\n")
 
 if __name__ == '__main__':
-	# host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
-	host = 'localhost:27017'
-	database = 'test7'
-	Database(host, database).del_linked("client_info", {'email':"7949422392@qq.com"})
+	host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
+	# host = 'localhost:27017'
+	database = 'uat'
+	Database(host, database).del_linked("client_info", {'idNumber':"441502199602120215"})
 
 
 
