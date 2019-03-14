@@ -8,6 +8,7 @@
 import requests
 import datetime , time
 import json
+from threading import Timer
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -55,7 +56,7 @@ class Reg_Activity():
             "clientPhoneNumber": [],
             "phoneArr": [],
             "totalPeople": 1,
-            "email": "sevencrime777@tom.com",
+            "email": "sevencrime77@tom.com",
             "lastName": "Test",
             "firstName": "Test",
             "phoneNumber": 15088886666,
@@ -70,62 +71,75 @@ class Reg_Activity():
 
     def login(self, username, password, lead):
         driver = webdriver.Chrome(executable_path = 'chromedriver')
-        driver.implicitly_wait(30)
         driver.get('http://mail.tom.com/')
         driver.maximize_window()
-        # µÈ´ıÒ³ÃæÍêÈ«¼ÓÔØ
+        # ç­‰å¾…é¡µé¢å®Œå…¨åŠ è½½
         driver.implicitly_wait(30)
 
-        # µÇÂ¼ÓÊÏä
+        # ç™»å½•é‚®ç®±
         user = driver.find_element_by_id("username").send_keys(username)
         WebDriverWait(driver,20).until(EC.visibility_of_element_located((By.ID, "pw"))).click()
         psw = driver.find_element_by_id("password").send_keys(password)
         login = driver.find_element_by_class_name('mail_login_btn4').click()
         assert driver.find_element_by_class_name('top-account').text == username+'@tom.com'
 
-        # ½øÈëÊÕ¼şÏä
+        self.Inbox(driver)
+
+
+    def Inbox(self, driver):
+
+        # è¿›å…¥æ”¶ä»¶ç®±
         driver.find_element_by_id('webmail_sys_readmail').click()
 
-
-        # ÅÀ³æ,×¥È¡ÊÕ¼şÏäÁĞ±í
+        # çˆ¬è™«,æŠ“å–æ”¶ä»¶ç®±åˆ—è¡¨
         soup = BeautifulSoup(driver.page_source.replace(u'\xa0', u''), 'lxml')
         maillist = soup.select('#main_tmpl_INBOX > .m-maillist > table > tbody > tr')
 
-        # Ñ­»·±éÀúÁĞ±í,ÕÒµ½ÓÊ¼ş
-        for i in range(len(maillist)):
-            # print(maillist[i])
+        print("maillist sssssss")
+        if maillist == [] or maillist == None :
+            print("å®šæ—¶å™¨å®šæ—¶å™¨")
+            t = Timer(30, self.Inbox(driver)).start()
+            t.cancel()
 
-            # print(lead['name'])
-            # Í¨¹ıtitle³õ²½ÅĞ¶Ï
-            if lead['name'] in maillist[i]['title'].replace(' ', ''):
-                print('title')
-                # »ñÈ¡·¢¼şÈËºÍÊÕ¼şÊ±¼ä
-                td_list = maillist[i].find_all('td')
-                for n in range(len(td_list)):
-                    if n == 2:
-                        assert td_list[n].get_text() == 'noreply'
-                    if n == 4:
-                        print(td_list[n].get_text())
-                        # ¸ù¾İÊ±¼äÅĞ¶ÏÊ±ºòÊÇ¸ÕÊÕµ½µÄÓÊ¼ş,ÕÒ²»µ½ÖØĞÂË¢ĞÂ
-                        if (datetime.datetime.now()-datetime.timedelta(minutes=5)).strftime("%Y-%m-%d %H:%M:%S") <= td_list[n].get_text():
-                            print('date')
+            # åˆ·æ–°
 
-                            print("ssssssssssssssss")
-                            print(maillist[i]['uid'])
-                            print("ssssssssssssssss")
-                            # ½øÈëÓÊ¼ş
-                            driver.find_element_by_xpath(
-                                '//tr[@uid=%s]' %(maillist[i]['uid'])).click()
+        # # å¾ªç¯éå†åˆ—è¡¨,æ‰¾åˆ°é‚®ä»¶
+        # for i in range(len(maillist)):
+        #     # print(maillist[i])
+        #     # print(lead['name'])
+        #     print(maillist[i]['title'].replace(' ', ''))
+        #     # é€šè¿‡titleåˆæ­¥åˆ¤æ–­
+        #     if lead['name'] in maillist[i]['title'].replace(' ', ''):
+        #         print("title")
+        #         # è·å–å‘ä»¶äººå’Œæ”¶ä»¶æ—¶é—´
+        #         td_list = maillist[i].find_all('td')
+        #         for n in range(len(td_list)):
+        #             if n == 2:
+        #                 assert td_list[n].get_text() == 'noreply'
+        #             if n == 4:
+        #                 # # æ ¹æ®æ—¶é—´åˆ¤æ–­æ—¶å€™æ˜¯åˆšæ”¶åˆ°çš„é‚®ä»¶,æ‰¾ä¸åˆ°é‡æ–°åˆ·æ–°
+        #                 if td_list[n].get_text() <= (datetime.datetime.now()-datetime.timedelta(minutes=3)).strftime("%Y-%m-%d %H:%M:%S"):
+        #                     print("sssssss")
+        #                     print("uid:", maillist[i]['uid'])
+        #                     # è¿›å…¥é‚®ä»¶
 
-                            # Ö÷Ìâ,½²Õß,ÈÕÆÚ,Ê±¼ä,Ô¤ÁôÃû¶î,µØÖ·¶ÏÑÔ
-                            # ½ØÍ¼,¶Ô±ÈĞÅÏ¢
-                            # É¨Âë
+        #                     WebDriverWait(driver,10).until(EC.visibility_of_element_located(
+        #                         (By.XPATH, '//tr[@uid="%s"]' %(maillist[i]['uid'])))).click()
+        #                     # ä¸»é¢˜,è®²è€…,æ—¥æœŸ,æ—¶é—´,é¢„ç•™åé¢,åœ°å€æ–­è¨€
+        #                     # æˆªå›¾,å¯¹æ¯”ä¿¡æ¯
+        #                     # æ‰«ç 
+        #                     # break
+        #     else:
+        #         pass
 
 
 
         time.sleep(5)
+
         print("quit driver")
         driver.quit()
+
+
 
 
 if __name__ == '__main__':
@@ -133,7 +147,7 @@ if __name__ == '__main__':
     reg = Reg_Activity()
     lead = reg.get_List()
     print(lead)
-    totalPeople = reg.findSimilarLead(lead['_id'])
+    # totalPeople = reg.findSimilarLead(lead['_id'])
     # print(totalPeople)
 
 
