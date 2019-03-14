@@ -17,6 +17,7 @@ sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 from PageElement.LoginPage import *
 from PageElement.ApplyListPage import *
 from PageElement.MainPage import *
+from PageElement.ApplyPage import *
 from Commons import Logging
 
 class addApply(unittest.TestCase):
@@ -45,19 +46,18 @@ class addApply(unittest.TestCase):
     def test_addApply(self):
         applylistpage = ApplyListPage(self.driver, self.url, "Eddid")
         mainpage = MainPage(self.driver, self.url, "Eddid")
+        applypage = ApplyPage(self.driver, self.url, "Eddid")
 
         #点击开户管理，判断
         applylistpage.click_apply_manager()
         #点击开户列表，判断
         applylistpage.click_applylist()
-
+        #等待
         mainpage.wait_LoadingModal()
-
-        #点击新增
+        #点击新增按钮
         mainpage.click_add()
-        # self.driver.execute_script("arguments[0].scrollIntoView()", self.driver.find_element_by_xpath("//button/span[contains(text(),'新增')]"))
 
-
+        applypage.click_applicationFor()
 
 
 
