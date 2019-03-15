@@ -1,0 +1,19 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Date    : 2019-03-15 17:28:41
+# @Author  : Onedi (Onedi@qq.com)
+# @Link    : ${link}
+# @Version : $Id$
+
+import requests
+
+
+url = 'https://eddid-api.ntdev.be/eddid-api-uat/client/clientPortalNotification'
+headers = {
+    'Content-Type' : 'application/json' ,
+    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoiYWRtaW4iLCJjb2duaXRvOnJvbGVzIjpbImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSJdLCJhdWQiOiI1MTNqZmNrdHIxbTZldm9nZnF1N29zazdwYSIsImV2ZW50X2lkIjoiNGY1NDk1ZTItNDcwNi0xMWU5LWJkMDctMjE1OWU5NmFhODVjIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NTI2NDI4MDMsImV4cCI6MTU1MjY0NjQwMywiaWF0IjoxNTUyNjQyODAzLCJmYW1pbHlfbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbjEyM0BxcS5jb20ifQ.M6ruPtPCfm9eQ-NrF2xI0Yu87N1D8KNIfysMQu2h-8nP_N6Jqb1wD7nS9EibhQrQVxn8Y0LK1hte2YXHt_w3jdPLY90k48AJCB8e4uNTj4kcBQqG0QNywCIwDEMZPCMJJYFlWKW-GMM74ALOqvMmkTGJQgFTxH0UC7ZsdrjcRDMsoyPXBwz-iSifdT6pVJldZoNlMqVj6vUYsRS018dvVee-933eKc-9qMEhbRpoPVN1LWYZV7bJQYz5AaCFfLLFgP00zyYnbrHDJe_w1tMnoyVE2kFDx2R8V66msFEdml-tgd1v2cmnSZdZD3pWpMn92CJ6LMPmI-krFz_N9HQohg'
+}
+
+
+resp = requests.post(url, headers = headers, verify=False)
+print(resp)

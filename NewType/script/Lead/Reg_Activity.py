@@ -8,7 +8,7 @@
 import requests
 import datetime , time
 import json
-from threading import Timer
+import threading
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -98,8 +98,10 @@ class Reg_Activity():
         print("maillist sssssss")
         if maillist == [] or maillist == None :
             print("定时器定时器")
-            t = Timer(30, self.Inbox(driver)).start()
-            t.cancel()
+            global timer 
+            timer = threading.Timer(30, self.Inbox)
+            timer.start()
+            timer.cancel()
 
             # 刷新
 

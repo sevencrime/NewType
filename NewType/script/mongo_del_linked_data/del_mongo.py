@@ -94,7 +94,7 @@ if __name__ == '__main__':
 	host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
 	# host = 'localhost:27017'
 	database = 'uat'
-	Database(host, database).del_linked("client_info", {'idNumber':"441502199602120215"})
+	Database(host, database).del_linked("apply_info", {'idNumber':"441502199602120215"})
 
 
 
