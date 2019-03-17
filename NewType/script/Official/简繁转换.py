@@ -13,6 +13,7 @@ from requests.packages import urllib3
 from multiprocessing import Pool
 import requests
 import re
+from zhconv import convert
 
 
 class Contrast:
@@ -37,7 +38,7 @@ class Contrast:
 
             soup = BeautifulSoup(self.resp.content.decode('UTF-8', 'ignore'), 'lxml')
             print(soup.title.string)
-            # self.comparison(soup, url)
+            self.comparison(soup, url)
 
             # 获取所有<a>标签
             tag_a = soup.find_all('a')
@@ -69,13 +70,13 @@ class Contrast:
 
         print(len(self.url_list), "  url_list ")
 
-        # for link in self.url_list:
-        #     # print(link)
-        #     if link not in self.existed_url:
-        #         self.existed_url.add(link)  
-        #         print(len(self.existed_url), "ssss")
-        #         self.request(link)
-        return self.url_list
+        for link in self.url_list:
+            # print(link)
+            if link not in self.existed_url:
+                self.existed_url.add(link)  
+                print(len(self.existed_url), "ssss")
+                self.request(link)
+        # return self.url_list
 
     # 对比
     def comparison(self, soup, url):
@@ -89,11 +90,17 @@ class Contrast:
 
         # 判断是否简体繁体
         if 'zh-hans' in url:
+            print("简体链接转简体")
             # 转简体
-            Conversion = HanziConv.toSimplified(str_text)
+            # Conversion = HanziConv.toSimplified(str_text)
+            Conversion = convert(str_text, 'zh-hans')
+
         elif 'zh-hant' in url:
+            print("繁体链接转繁体")
             # 转繁体
-            Conversion = HanziConv.toTraditional(str_text)
+            # Conversion = HanziConv.toTraditional(str_text)
+            Conversion = convert(str_text, 'zh-hant')
+            
         else:
             print("该链接没有简繁之分")
 
@@ -109,22 +116,17 @@ if __name__ == '__main__':
     contrast = Contrast(path)
     url_list = contrast.request(url)
 
-    p = Pool(6)
-    for link in url_list:
-        # print(link)
-        if link not in existed_url:
-            existed_url.add(link)  
-            print(len(existed_url), "ssss")
-            # request(link)
-            p.apply_async(contrast.request,args=(link,))
+    # p = Pool(6)
+    # for link in url_list:
+    #     # print(link)
+    #     if link not in existed_url:
+    #         existed_url.add(link)  
+    #         print(len(existed_url), "ssss")
+    #         # request(link)
+    #         p.apply_async(contrast.request,args=(link,))
 
-    p.close()
-    p.join()
-
-
-
-
-
+    # p.close()
+    # p.join()
 
 
 
