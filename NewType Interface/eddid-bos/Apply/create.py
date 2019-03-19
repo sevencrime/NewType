@@ -8,24 +8,26 @@
 import requests 
 import json
 import random
+from requests.packages import urllib3
 
 url = 'https://eddid-api.ntdev.be/eddid-api-uat/apply/create'
 headers = {
     'Content-Type' : 'application/json' ,
-    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoiYWRtaW4iLCJjb2duaXRvOnJvbGVzIjpbImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSJdLCJhdWQiOiI1MTNqZmNrdHIxbTZldm9nZnF1N29zazdwYSIsImV2ZW50X2lkIjoiNGY1NDk1ZTItNDcwNi0xMWU5LWJkMDctMjE1OWU5NmFhODVjIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NTI2NDI4MDMsImV4cCI6MTU1MjY0NjQwMywiaWF0IjoxNTUyNjQyODAzLCJmYW1pbHlfbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbjEyM0BxcS5jb20ifQ.M6ruPtPCfm9eQ-NrF2xI0Yu87N1D8KNIfysMQu2h-8nP_N6Jqb1wD7nS9EibhQrQVxn8Y0LK1hte2YXHt_w3jdPLY90k48AJCB8e4uNTj4kcBQqG0QNywCIwDEMZPCMJJYFlWKW-GMM74ALOqvMmkTGJQgFTxH0UC7ZsdrjcRDMsoyPXBwz-iSifdT6pVJldZoNlMqVj6vUYsRS018dvVee-933eKc-9qMEhbRpoPVN1LWYZV7bJQYz5AaCFfLLFgP00zyYnbrHDJe_w1tMnoyVE2kFDx2R8V66msFEdml-tgd1v2cmnSZdZD3pWpMn92CJ6LMPmI-krFz_N9HQohg'
+    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoiYWRtaW4iLCJjb2duaXRvOnJvbGVzIjpbImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSJdLCJhdWQiOiI1MTNqZmNrdHIxbTZldm9nZnF1N29zazdwYSIsImV2ZW50X2lkIjoiMGUwNDcxZTMtNGExZC0xMWU5LWE0NjAtYzM3N2M5MzRlYWU0IiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NTI5ODI0MjYsImV4cCI6MTU1Mjk4NjAyNiwiaWF0IjoxNTUyOTgyNDI2LCJmYW1pbHlfbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbjEyM0BxcS5jb20ifQ.ZJV2EvOUOXuinMvDaSPMxLL7v0RX4Kv9dsysMvtNxeEqhnx_3ZrHN2_BSN2uao4Fp7k90Q3_4fYqux2hqcTXDRSj97uGXLOHQDQgtmDlvPpDPcMpvJNGgsw9BtDiBii3hahQFTtWfgVwbyz3YuAaeMAiqDzzXT7uhp8uJaQdVFHLSuszTfVzw1ZcdhQatX9XECSELyjh46JBSWwghZHbtiIjt4-Deml8ls7uWCEaV0XIaaDlf22UEJ3VpN43AcQBxAryWqPMNiwq3HWPfGqnMlpCDydZk1tyhmu4WWq0VaNRWnc4n8EdF2qieLu8b9gYHku6yCWpk-_Hsdf6rkx3Cw'
 }
 
 
 data = {
     "applicationFor": "individual",
     # "applicationFor": "joint",    
-    "accountType": ["securitiesCash", "leveragedForeignExchangeAccountMargin","futuresMargin","securitiesDayTradeMargin"],
-    # "accountType": ["leveragedForeignExchangeAccountMargin"],
+    # goldSpot 黄金
+    # "accountType": ["securitiesCash", "leveragedForeignExchangeAccountMargin","futuresMargin","securitiesDayTradeMargin"],
+    "accountType": ["goldSpot"],
     #mobile:手机;visitingAccount:亲临开户;postal:邮递;onlineApplication:网上开户申请
     "accountOpeningWay": "visitingAccount",  #开户方式,
     "personalInfoDeclartion": "Y",
-    # "customerSource": "ballFives",    
-    "customerSource": "app",    
+    "customerSource": "ballFives",    
+    # "customerSource": "app",    
     # "customerSource": "crm",    
     "mailLanguage": "en",
     "appBankName": "",
@@ -111,6 +113,7 @@ data = {
             "riskTolerance": "low"
         },
         "title": "mrs",
+        "parentId": "kwokwah.wong" ,
         "lastName": "32455432",
         "firstName": "3245532523",
         "chineseName": "5235234",
@@ -130,7 +133,7 @@ data = {
         "address": "3466324364",
         "addressMail": "34632646345",
         # "mailLanguage": "zh-hans",
-        "mailLanguage": "",
+        "mailLanguage": "zh-hans",
         "employment": "retired",
         "employmentOther": "",
         "occupation": "",
@@ -143,7 +146,7 @@ data = {
 }
 
 # print(data)
-
+urllib3.disable_warnings()
 resp = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
 print(resp.json())
 

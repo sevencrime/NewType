@@ -57,7 +57,11 @@ class addApply(unittest.TestCase):
         #点击新增按钮
         mainpage.click_add()
 
-        applypage.click_applicationFor()
+        applypage.send_applicationFor()
+        applypage.send_accountOpeningWay()
+        applypage.send_parentId()
+        applypage.send_mailLanguage()
+        applypage.send_accountType()
 
 
 

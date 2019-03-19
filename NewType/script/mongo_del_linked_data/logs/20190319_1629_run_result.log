@@ -1,0 +1,3 @@
+2019-03-19 16:29:33,741 del_mongo.py INFO [line:26] 连接数据库uat
+2019-03-19 16:29:35,172 del_mongo.py INFO [line:38] apply_info 表符合查询条件{'email': 'onedi'} 的数据有0 条
+2019-03-19 16:29:35,278 del_mongo.py INFO [line:31] close Client

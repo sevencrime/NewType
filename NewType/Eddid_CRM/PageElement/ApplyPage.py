@@ -32,11 +32,29 @@ class ApplyPage(BasePage.BasePage):
     	select_loc = (By.XPATH, "//span[contains(text(), '%s')]" %text)
     	return select_loc
 
-    def click_applicationFor(self):
-    	self.find_element(*self.get_input).click()
-    	time.sleep(6)
+    # 账户类型
+    def send_applicationFor(self):
+    	self.find_element(*self.get_input('账户类型')).click()
     	self.find_element(*self.get_select('个人账户')).click()
 
+    # 开户方法
+    def send_accountOpeningWay(self):
+        self.find_element(*self.get_input('开户方法')).click()
+        self.find_element(*self.get_select('亲临开户')).click()
+
+    # 负责人
+    def send_parentId(self):
+        self.find_element(*self.get_input('负责人')).click()
+        self.find_element(*self.get_select('sales_t1')).click()
+
+    # 邮件语言
+    def send_mailLanguage(self):
+        self.find_element(*self.get_input('邮件语言')).click()
+        self.find_element(*self.get_select('中文(简体)')).click()
+
+
+    def send_accountType(self):
+        self.find_element(*self.get_checkbox('香港及环球证券账户(现金)')).click()
 
 
 
