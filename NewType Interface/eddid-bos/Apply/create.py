@@ -13,7 +13,7 @@ from requests.packages import urllib3
 url = 'https://eddid-api.ntdev.be/eddid-api-uat/apply/create'
 headers = {
     'Content-Type' : 'application/json' ,
-    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoiYWRtaW4iLCJjb2duaXRvOnJvbGVzIjpbImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSJdLCJhdWQiOiI1MTNqZmNrdHIxbTZldm9nZnF1N29zazdwYSIsImV2ZW50X2lkIjoiMGUwNDcxZTMtNGExZC0xMWU5LWE0NjAtYzM3N2M5MzRlYWU0IiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NTI5ODI0MjYsImV4cCI6MTU1Mjk4NjAyNiwiaWF0IjoxNTUyOTgyNDI2LCJmYW1pbHlfbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbjEyM0BxcS5jb20ifQ.ZJV2EvOUOXuinMvDaSPMxLL7v0RX4Kv9dsysMvtNxeEqhnx_3ZrHN2_BSN2uao4Fp7k90Q3_4fYqux2hqcTXDRSj97uGXLOHQDQgtmDlvPpDPcMpvJNGgsw9BtDiBii3hahQFTtWfgVwbyz3YuAaeMAiqDzzXT7uhp8uJaQdVFHLSuszTfVzw1ZcdhQatX9XECSELyjh46JBSWwghZHbtiIjt4-Deml8ls7uWCEaV0XIaaDlf22UEJ3VpN43AcQBxAryWqPMNiwq3HWPfGqnMlpCDydZk1tyhmu4WWq0VaNRWnc4n8EdF2qieLu8b9gYHku6yCWpk-_Hsdf6rkx3Cw'
+    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoiYWRtaW4iLCJjb2duaXRvOnJvbGVzIjpbImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSJdLCJhdWQiOiI1MTNqZmNrdHIxbTZldm9nZnF1N29zazdwYSIsImV2ZW50X2lkIjoiYmM1ODgxMTEtNGJhMy0xMWU5LWE3ZjctMzE3MjBmYmFlZGJiIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NTMxNTAyMjIsImV4cCI6MTU1MzE1MzgyMiwiaWF0IjoxNTUzMTUwMjIyLCJmYW1pbHlfbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbjEyM0BxcS5jb20ifQ.IdWr9vlJq8WkK4giK-TDfx4XwexKY8eyNn-CTHTKWHQY7b3VTlUMwePZhZlEk_YX69c1A6dKNfzZeQ1QUxV17B459x-n6sDMtjjqpn890LvfRiYYoNZwbl7j-220yFpkiaIbUL-3Kls4Uap4uG1Rz4flP4LVwtTBcgFY4wqQCW1z2IaZ2g9Xf9lMT6Ba2n5pKkTcawSOowBkGIR0NDZAK5TEiwXD00p-jk2VOCVgZEbAY-1DdzQmfj88aXkV5lnaIIc3wWNOqyLz_bxxF870dkFYUlotckWdyY2wI-PDFIEom6ZoUSNDwdshps61Ya59F4OyhiGpncZcK28rWNIkqQ'
 }
 
 
@@ -21,13 +21,13 @@ data = {
     "applicationFor": "individual",
     # "applicationFor": "joint",    
     # goldSpot 黄金
-    # "accountType": ["securitiesCash", "leveragedForeignExchangeAccountMargin","futuresMargin","securitiesDayTradeMargin"],
-    "accountType": ["goldSpot"],
+    "accountType": ["goldSpot", "securitiesCash", "leveragedForeignExchangeAccountMargin","futuresMargin","securitiesDayTradeMargin"],
+    # "accountType": ["futuresMargin"],
     #mobile:手机;visitingAccount:亲临开户;postal:邮递;onlineApplication:网上开户申请
     "accountOpeningWay": "visitingAccount",  #开户方式,
     "personalInfoDeclartion": "Y",
-    "customerSource": "ballFives",    
-    # "customerSource": "app",    
+    # "customerSource": "ballFives",    
+    "customerSource": "app",    
     # "customerSource": "crm",    
     "mailLanguage": "en",
     "appBankName": "",
@@ -142,7 +142,85 @@ data = {
         "businessType": "",
         "businessAddress": "",
         "businessPhone": ""
-    }]
+    },
+    {
+        "riskInfo": {
+            "passportMaterial": ["publicDropbox/BcPJde9SCkFdFssQaJz9KYRNMbfyYm2t.jpeg"],
+            "addressVerificationMaterials": ["publicDropbox/8pRBJ8ssFtibKGdF4kw1r6irkijMe9G2.jpeg"],
+            "bankCardMaterials": ["publicDropbox/NRccBw9hbN2ZXXbfajmrZw4TR17HNS3F.jpeg"],
+            "referralCode": "",
+            "isErr": False,
+            "errText": "",
+            "otherInformation": [],
+            "proofOfIncome": [],
+            "totalAnnualCustomerRevenueHK": "lt200000",
+            "customerNetAssetValueHK": "lt1000000",
+            "sourceOfWealth": ["savings"],
+            "sourceOfWealthOther": "",
+            "securities": "lt1Year",
+            "CBBC": "lt1Year",
+            "warrants": "lt1Year",
+            "futures": "lt1Year",
+            "options": "lt1Year",
+            "otherInvestment": "",
+            "otherInvestmentText": "",
+            "foreignExchange": "lt1Year",
+            "isLearnAboutProducts": "Y",
+            "isIndustryExperience": "Y",
+            "isStocks": "Y",
+            "isTradingStructureAggree": "N",
+            "isApplyToOpenTradingStructure": "Y",
+            "isBankruptcy": "N",
+            "bankruptcyDate": "",
+            "bankruptcyProve": [],
+            "isInAgtJobs": "N",
+            "agtPosition": "",
+            "isBondFuturesClientsConnected": "N",
+            "agtName": "",
+            "isAcquaintHighLevel": "N",
+            "acquaintHighLevelInstructions": "",
+            "acquaintHighLevelInstructionsProve": [],
+            "isAmericanResidents": "N",
+            "americanResidentsTaxId": "",
+            "isAmericanResidentsb": "N",
+            "americanResidentsTaxIdb": "",
+            "isPoliticalFigure": "N",
+            "politicalFigureName": "",
+            "purposeOfInvestment": "hedging",
+            "riskTolerance": "low"
+        },
+        "title": "mrs",
+        "parentId": "kwokwah.wong" ,
+        "lastName": "32455432",
+        "firstName": "3245532523",
+        "chineseName": "5235234",
+        "pastEnglishName": "",
+        "pastChineseName": "",
+        "idType": "2",
+        "idNumber": "%s423523%s" %(random.randint(0,100001),random.randint(0,106000)),
+        "countryIssue": "CHN",
+        "nationality": "CHN",
+        "birthPlace": "CHN",
+        "birthday": 894384000000,
+        "email": "%sonedi2s%s@qq.com" %(random.randint(0,1000),random.randint(0,10300)),
+        # "email": "onedi@qq.com" ,
+        "phoneAreaCode": "HKG",
+        "phone": "%s6253%s" %(random.randint(0,100002),random.randint(0,100502)),
+        # "phone": "15089514626" ,
+        "address": "3466324364",
+        "addressMail": "34632646345",
+        # "mailLanguage": "zh-hans",
+        "mailLanguage": "zh-hans",
+        "employment": "retired",
+        "employmentOther": "",
+        "occupation": "",
+        "employedPeriod": "",
+        "employer": "",
+        "businessType": "",
+        "businessAddress": "",
+        "businessPhone": ""
+    }
+    ]
 }
 
 # print(data)

@@ -62,7 +62,23 @@ class addApply(unittest.TestCase):
         applypage.send_parentId()
         applypage.send_mailLanguage()
         applypage.send_accountType()
+        applypage.send_title()
+        applypage.send_firstName()
+        applypage.send_lastName()
+        
+        mainpage.wait_LoadingModal()
 
+        applypage.send_chineseName()
+        applypage.send_emali()
+        applypage.send_phoneAreaCode()
+        applypage.send_phone()
+        applypage.send_address()
+        applypage.send_addressMail()
+        # applypage.send_nationality()
+        applypage.send_idType()
+        applypage.send_idNumber()
+        # applypage.send_countryIssue()
+        applypage.send_birthday()
 
 
 if __name__ == '__main__':

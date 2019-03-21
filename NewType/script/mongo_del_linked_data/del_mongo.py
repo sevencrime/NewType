@@ -51,8 +51,10 @@ class Database:
 							if self.table[key] not in self.collections:
 								self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
 								self.log.info("正在查询关联表 %s 的数据" %self.table[key])
+
 								print(collection,"表关联的字段为 ",key,":",r[key])
 								print("正在查询关联表 %s 的数据" %self.table[key])
+
 								self.del_linked(self.table[key], {'_id':r[key]})
 
 						except Exception as e:
@@ -69,8 +71,10 @@ class Database:
 									if self.table[key] not in self.collections:
 										self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
 										self.log.info("正在查询关联表 %s 的数据" %self.table[key])
+
 										print(collection,"表关联的字段为 ",key,":",r[key][n])
 										print("正在查询关联表 %s 的数据" %self.table[key])
+
 										self.del_linked(self.table[key], {'_id':r[key][n]})
 
 								except Exception as e:
@@ -94,7 +98,8 @@ if __name__ == '__main__':
 	host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
 	# host = 'localhost:27017'
 	database = 'uat'
-	Database(host, database).del_linked("apply_info", {'email':'onedi@qq.com'})
+	# Database(host, database).del_linked("apply_info", {'email':'onedi@qq.com'})
+	Database(host, database).del_linked("apply", {'_id':ObjectId('5c77532330df87594879a4f8')})
 
 
 
