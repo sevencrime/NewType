@@ -86,8 +86,11 @@ class BasePage(object):
         return self.driver.switch_to_frame(loc)
 
     # 定义script方法，用于执行js脚本，范围执行结果
-    def script(self, src):
-        self.driver.execute_script(src)
+    def script(self, src, loc=None):
+        if loc == None:
+            self.driver.execute_script(src)
+        else:
+            self.driver.execute_script(src, loc)
 
     # 重写定义send_keys方法
     def send_keys(self, loc, vaule, clear_first=True, click_first=True):
