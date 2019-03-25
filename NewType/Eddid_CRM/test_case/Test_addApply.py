@@ -74,10 +74,10 @@ class addApply(unittest.TestCase):
         applypage.send_phone()
         applypage.send_address()
         applypage.send_addressMail()
-        # applypage.send_nationality()
+        applypage.send_nationality()
         applypage.send_idType()
         applypage.send_idNumber()
-        # applypage.send_countryIssue()
+        applypage.send_countryIssue()
         applypage.send_birthday()
 
 

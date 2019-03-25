@@ -29,9 +29,20 @@ class ApplyPage(BasePage.BasePage):
     	checkbox_loc = (By.XPATH, "//span[contains(text(), '%s')]/preceding-sibling::span" %text)
     	return checkbox_loc
 
-    def get_select(self, text):
-    	select_loc = (By.XPATH, "//span[contains(text(), '%s')]" %text)
-    	return select_loc
+    # def get_select(self, text):
+    # 	select_loc = (By.XPATH, "//span[contains(text(), '%s')]" %text)
+    # 	return select_loc
+
+    def get_select(self, text=False):
+        if not text:
+            select_loc = (By.XPATH, "//div[@x-placement = 'bottom-start']//li[1]")
+            if self.find_element(select_loc) == None:
+                # print("Nonessssss")
+                select_loc = (By.XPATH, "//div[@x-placement = 'top-start']//li[1]")
+        else:
+            select_loc = (By.XPATH, "//span[contains(text(), '%s')]" %text) 
+
+        return select_loc
 
     def del_readonly(self, loc):
         self.script('arguments[0].removeAttribute(\"readonly\")', loc);
@@ -39,8 +50,9 @@ class ApplyPage(BasePage.BasePage):
 
     # 账户类型
     def send_applicationFor(self):
-    	self.find_element(*self.get_input('账户类型')).click()
-    	self.find_element(*self.get_select('联名账户')).click()
+        self.find_element(*self.get_input('账户类型')).click()
+        time.sleep(5)
+        self.find_element(*self.get_select('个人账户')).click()
 
     # 开户方法
     def send_accountOpeningWay(self):
@@ -63,7 +75,7 @@ class ApplyPage(BasePage.BasePage):
 
     def send_title(self):
         self.find_element(*self.get_input('称谓')).click()
-        self.find_element(*self.get_select("先生")).click()
+        self.find_element(*self.get_select('先生')).click()
 
     def send_firstName(self):
         self.find_element(*self.get_input('名字')).send_keys("firstName")
@@ -80,10 +92,9 @@ class ApplyPage(BasePage.BasePage):
         self.find_element(*self.get_input('电邮')).send_keys("oneditest@gmail.com")
 
     def send_phoneAreaCode(self):
-        phoneAreaCode = self.find_element(*self.get_input('电话号码区号'))
-        self.del_readonly(phoneAreaCode)
-        phoneAreaCode.send_keys("中华人民共和国 +86")
-        phoneAreaCode.send_keys(Keys.ENTER)
+        self.find_element(*self.get_input('电话号码区号')).click()
+        # self.find_element(*self.bottom_select()).click()
+        self.find_element(*self.get_select()).click()
 
     def send_phone(self):
         self.find_element(*self.get_input("电话号码(用于通讯)")).send_keys("15089510001")
@@ -95,40 +106,31 @@ class ApplyPage(BasePage.BasePage):
         self.find_element(*self.get_input("邮寄地址(如与住宅地址不同)")).send_keys("桑达科技大厦802")
 
     def send_nationality(self):
-        nationality = self.find_element(*self.get_input("国籍"))
-        # self.find_element(*self.get_select("中华人民共和国")).click()
-        # self.find_elements((By.XPATH, "//span[contains(text(), '中华人民共和国')]"))
-        self.del_readonly(nationality)
-        nationality.send_keys("中华人民共和国")
-        nationality.send_keys(Keys.ENTER)
+        print("国籍")
+        nationality = self.find_element(*self.get_input("国籍")).click()
+        # self.del_readonly(nationality)
+        # nationality.send_keys("中华人民共和国")
+        # nationality.send_keys(Keys.ENTER)
+        self.find_element(*self.get_select()).click()
 
     def send_idType(self):
         self.find_element(*self.get_input("身份证件类型")).click()
-        self.find_element(*self.get_select("内地身份证")).click()
+        self.find_element(*self.get_select()).click()
 
     def send_idNumber(self):
         self.find_element(*self.get_input("身份证或护照号码")).send_keys("44150266621212")
 
     def send_countryIssue(self):
         countryIssue = self.find_element(*self.get_input("签发国家"))
+        self.find_element(*self.get_select()).click()
 
     def send_birthday(self):
         self.find_element(*self.get_input("出生日期(日/月/年)")).send_keys("21/01/2000")
         self.find_element(*self.get_input("出生日期(日/月/年)")).send_keys(Keys.ENTER)
 
     def send_birthPlace(self):
-        birthPlace = self.find_element(*self.get_input('出生地方'))
-        self.del_readonly(birthPlace)
-        birthPlace.send_keys("中华人民共和国")
-        birthPlace.send_keys(Keys.ENTER)
-
-
-
-
-
-
-
-
+        self.find_element(*self.get_input('出生地点')).click()
+        self.find_element(*self.get_select()).click()
 
 
 

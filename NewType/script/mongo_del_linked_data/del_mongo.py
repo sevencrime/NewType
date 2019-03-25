@@ -99,7 +99,7 @@ if __name__ == '__main__':
 	# host = 'localhost:27017'
 	database = 'uat'
 	# Database(host, database).del_linked("apply_info", {'email':'onedi@qq.com'})
-	Database(host, database).del_linked("apply", {'_id':ObjectId('5c77532330df87594879a4f8')})
+	Database(host, database).del_linked("apply_info", {'email':'onedi@qq.com'})
 
 
 
