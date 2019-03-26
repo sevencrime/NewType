@@ -33,13 +33,16 @@ class ApplyPage(BasePage.BasePage):
     # 	select_loc = (By.XPATH, "//span[contains(text(), '%s')]" %text)
     # 	return select_loc
 
-    def get_select(self, text=False):
+    def get_select(self, text=False, top=False):
         if not text:
-            select_loc = (By.XPATH, "//div[@x-placement = 'bottom-start']//li[1]")
-            if self.find_element(select_loc) == None:
-                # print("Nonessssss")
-                select_loc = (By.XPATH, "//div[@x-placement = 'top-start']//li[1]")
+            # print("if not", text)
+            if top:
+                select_loc = (By.XPATH, "//div[@x-placement = 'top-start']//li[2]")
+            else:
+                select_loc = (By.XPATH, "//div[@x-placement = 'bottom-start']//li[2]")
+
         else:
+            # print("进入这里", text)
             select_loc = (By.XPATH, "//span[contains(text(), '%s')]" %text) 
 
         return select_loc
@@ -47,27 +50,31 @@ class ApplyPage(BasePage.BasePage):
     def del_readonly(self, loc):
         self.script('arguments[0].removeAttribute(\"readonly\")', loc);
 
+    def get_radio(self, text):
+        radio_loc = (By.XPATH, "//div[contains(text(), '%s')]/following-sibling::span//label[1]" %text)
+        return radio_loc
+
 
     # 账户类型
     def send_applicationFor(self):
         self.find_element(*self.get_input('账户类型')).click()
         time.sleep(5)
-        self.find_element(*self.get_select('个人账户')).click()
+        self.find_element(*self.get_select(text='个人账户')).click()
 
     # 开户方法
     def send_accountOpeningWay(self):
         self.find_element(*self.get_input('开户方法')).click()
-        self.find_element(*self.get_select('亲临开户')).click()
+        self.find_element(*self.get_select(text='亲临开户')).click()
 
     # 负责人
     def send_parentId(self):
         self.find_element(*self.get_input('负责人')).click()
-        self.find_element(*self.get_select('sales_t1')).click()
+        self.find_element(*self.get_select(text='sales_t1')).click()
 
     # 邮件语言
     def send_mailLanguage(self):
         self.find_element(*self.get_input('邮件语言')).click()
-        self.find_element(*self.get_select('中文(简体)')).click()
+        self.find_element(*self.get_select(text='中文(简体)')).click()
 
 
     def send_accountType(self):
@@ -75,7 +82,7 @@ class ApplyPage(BasePage.BasePage):
 
     def send_title(self):
         self.find_element(*self.get_input('称谓')).click()
-        self.find_element(*self.get_select('先生')).click()
+        self.find_element(*self.get_select(text='先生')).click()
 
     def send_firstName(self):
         self.find_element(*self.get_input('名字')).send_keys("firstName")
@@ -93,8 +100,7 @@ class ApplyPage(BasePage.BasePage):
 
     def send_phoneAreaCode(self):
         self.find_element(*self.get_input('电话号码区号')).click()
-        # self.find_element(*self.bottom_select()).click()
-        self.find_element(*self.get_select()).click()
+        self.find_element(*self.get_select(top=True)).click()
 
     def send_phone(self):
         self.find_element(*self.get_input("电话号码(用于通讯)")).send_keys("15089510001")
@@ -106,23 +112,20 @@ class ApplyPage(BasePage.BasePage):
         self.find_element(*self.get_input("邮寄地址(如与住宅地址不同)")).send_keys("桑达科技大厦802")
 
     def send_nationality(self):
-        print("国籍")
-        nationality = self.find_element(*self.get_input("国籍")).click()
-        # self.del_readonly(nationality)
-        # nationality.send_keys("中华人民共和国")
-        # nationality.send_keys(Keys.ENTER)
+        # print("send_nationality")
+        self.find_element(*self.get_input("国籍")).click()
         self.find_element(*self.get_select()).click()
 
     def send_idType(self):
         self.find_element(*self.get_input("身份证件类型")).click()
-        self.find_element(*self.get_select()).click()
+        self.find_element(*self.get_select(text="内地身份证")).click()
 
     def send_idNumber(self):
         self.find_element(*self.get_input("身份证或护照号码")).send_keys("44150266621212")
 
     def send_countryIssue(self):
-        countryIssue = self.find_element(*self.get_input("签发国家"))
-        self.find_element(*self.get_select()).click()
+        self.find_element(*self.get_input("签发国家")).click()
+        self.find_element(*self.get_select(top=True)).click()
 
     def send_birthday(self):
         self.find_element(*self.get_input("出生日期(日/月/年)")).send_keys("21/01/2000")
@@ -130,11 +133,36 @@ class ApplyPage(BasePage.BasePage):
 
     def send_birthPlace(self):
         self.find_element(*self.get_input('出生地点')).click()
-        self.find_element(*self.get_select()).click()
+        self.find_element(*self.get_select(top=True)).click()
 
+    def employment(self):
+        self.find_element(*self.get_input("就业情况")).click()
+        time.sleep(1)
+        self.find_element(*self.get_select(top=True)).click()
 
+    def occupation(self):
+        self.find_element(*self.get_input("职位")).send_keys("销售")
 
+    def employedPeriod(self):
+        self.find_element(*self.get_input("受雇年期")).send_keys("十年以上")
 
+    def employer(self):
+        self.find_element(*self.get_input("目前雇主名称")).send_keys("newtype")
+
+    def businessType(self):
+        self.find_element(*self.get_input("业务性质")).send_keys("互联网")
+
+    def businessAddress(self):
+        self.find_element(*self.get_input("办公室地址")).send_keys("广东省深圳市南山区桑达科技大厦802")
+
+    def businessPhone(self):
+        self.find_element(*self.get_input("办公室电话")).send_keys("15089500015")
+
+    def totalRevenue(self):
+        self.find_element(*self.get_radio("客户全年总收入为(港元)")).click()
+
+    def netEstate(self):
+        self.find_element(*self.get_radio("客户资产净值(港元)")).click()
 
 
 

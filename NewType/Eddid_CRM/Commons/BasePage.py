@@ -49,7 +49,6 @@ class BasePage(object):
 
     # 重写元素定位方法
     def find_element(self, *loc):
-        #        return self.driver.find_element(*loc)
         try:
             # 确保元素是可见的。
             # 注意：以下入参为元组的元素，需要加*。Python存在这种特性，就是将入参放在元组里。
