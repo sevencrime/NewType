@@ -34,11 +34,11 @@ class Database:
 		self.client.close()
 
 
-	def del_linked(self, collection, query, database=False):
-		# if database:
-		# 	self.db = self.client[database]
-		# else:
-		# 	self.db = self.client[self.database]
+	def del_linked(self, collection, query, database=None):
+		if database == None:
+			self.db = self.client[self.database]
+		else:
+			self.db = self.client[database]
 
 		self.collections.add(collection)
 		result = self.db[collection].find(query)
@@ -89,7 +89,6 @@ class Database:
 									print(e," table[%s]没有与之对应的数据库表" %key)
 
 					elif key == 'idpUserId':
-						continue
 						try:
 							if self.table[key] not in self.collections:
 								self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
@@ -98,7 +97,7 @@ class Database:
 								print(collection,"表关联的字段为 ",key,":",r[key])
 								print("正在查询关联表 %s 的数据" %self.table[key])
 
-								self.del_linked(self.table[key], {'subject':r[key]}, database=True)
+								self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpool%s' %self.database)
 
 						except Exception as e:
 							self.log.info(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)

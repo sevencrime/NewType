@@ -1,2 +1,0 @@
-2019-03-28 18:04:28,424 del_mongo.py INFO [line:27] 连接数据库uat
-2019-03-28 18:04:30,798 del_mongo.py INFO [line:33] close Client

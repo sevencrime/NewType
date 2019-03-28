@@ -1,3 +1,0 @@
-2019-03-28 17:00:26,725 del_mongo.py INFO [line:27] 连接数据库uat
-2019-03-28 17:00:29,341 del_mongo.py INFO [line:45] apply_info 表符合查询条件{'idNumber': '441502199602120215'} 的数据有0 条
-2019-03-28 17:00:29,646 del_mongo.py INFO [line:33] close Client
