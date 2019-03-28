@@ -7,6 +7,7 @@
 
 import os
 import sys
+import random
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 from Commons import BasePage, Logging
 from selenium.webdriver.common.by import By
@@ -39,15 +40,22 @@ class ApplyPage(BasePage.BasePage):
         if not text:
             # print("if not", text)
             if top:
-                select_loc = (By.XPATH, "//div[@x-placement = 'top-start']//li[2]")
+                select_loc = (By.XPATH, "//div[@x-placement = 'top-start']//li")
             else:
-                select_loc = (By.XPATH, "//div[@x-placement = 'bottom-start']//li[2]")
+                select_loc = (By.XPATH, "//div[@x-placement = 'bottom-start']//li")
+
+            selectlist = self.find_elements(*select_loc)
+            randox = random.randint(0,len(selectlist))
+            for i in range(len(selectlist)):
+                if i == randox:
+                    selectlist[i].click()
+                    return selectlist[i]
 
         else:
             # print("进入这里", text)
             select_loc = (By.XPATH, "//span[contains(text(), '%s')]" %text) 
 
-        return select_loc
+            return select_loc
 
     def del_readonly(self, loc):
         self.script('arguments[0].removeAttribute(\"readonly\")', loc);
@@ -112,9 +120,9 @@ class ApplyPage(BasePage.BasePage):
     def send_phoneAreaCode(self):
         phoneAreaCode = self.find_element(*self.get_input('电话号码区号'))
         self.scrollinto(phoneAreaCode)
-        # self.find_element(*self.get_select()).click()
-        select_loc = (By.XPATH, "//div[@x-placement = 'bottom-start']//li")
-        code_select = self.find_elements(*select_loc)
+        time.sleep(1)
+        element = self.get_select()
+        print(element.text)
 
     def send_phone(self):
         self.find_element(*self.get_input("电话号码(用于通讯)")).send_keys("15089510001")
