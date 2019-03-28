@@ -1,5 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: GBK -*-
+ï»¿#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # @Date    : 2019-03-03 19:43:34
 # @Author  : onedi (onedi@qq.com)
 # @Link    : localhost
@@ -19,74 +19,97 @@ class Database:
 		'applyId' : 'apply' ,
 		'accountId' : 'account',
 		'applyInfoIds' : 'apply_info',
-		'clientId' : 'client_info'
+		'clientId' : 'client_info',
+		'idpUserId' : 'users'
 	}
 
 	def __init__(self, host, database):
-		self.log.info("Á¬½ÓÊı¾İ¿â%s" %database)
+		self.log.info("è¿æ¥æ•°æ®åº“%s" %database)
 		self.client = pymongo.MongoClient(host)
 		self.db = self.client[database]
+		self.database = database
 
 	def __del__(self):
 		self.log.info("close Client")
 		self.client.close()
 
 
-	def del_linked(self, collection, query):
+	def del_linked(self, collection, query, database=False):
+		# if database:
+		# 	self.db = self.client[database]
+		# else:
+		# 	self.db = self.client[self.database]
+
 		self.collections.add(collection)
 		result = self.db[collection].find(query)
-		self.log.info("%s ±í·ûºÏ²éÑ¯Ìõ¼ş%s µÄÊı¾İÓĞ%s Ìõ" %(collection, query, result.count()))
-		print("%s ±í·ûºÏ²éÑ¯Ìõ¼ş%s µÄÊı¾İÓĞ%s Ìõ" %(collection, query, result.count()))
+		self.log.info("%s è¡¨ç¬¦åˆæŸ¥è¯¢æ¡ä»¶%s çš„æ•°æ®æœ‰%s æ¡" %(collection, query, result.count()))
+		print("%s è¡¨ç¬¦åˆæŸ¥è¯¢æ¡ä»¶%s çš„æ•°æ®æœ‰%s æ¡" %(collection, query, result.count()))
 		for r in result:
 			# print(r)
 			self.log.info(r)
 			# continue
-			index = 0	#ÓÃÓÚ¼ÇÂ¼²éÑ¯Êı¾İµÄ×Ö¶Î¸öÊı
+			index = 0	#ç”¨äºè®°å½•æŸ¥è¯¢æ•°æ®çš„å­—æ®µä¸ªæ•°
 			for key in r.keys():
 				index += 1
 				if key != '_id':
-					# ÅĞ¶ÏÊÇ·ñÔÚ±íÖĞÓĞObjectID
+					# åˆ¤æ–­æ˜¯å¦åœ¨è¡¨ä¸­æœ‰ObjectID
 					if isinstance(r[key], ObjectId):
 						try:
 							if self.table[key] not in self.collections:
-								self.log.info("%s ±í¹ØÁªµÄ×Ö¶ÎÎª %s : %s" %(collection,key,r[key]))
-								self.log.info("ÕıÔÚ²éÑ¯¹ØÁª±í %s µÄÊı¾İ" %self.table[key])
+								self.log.info("%s è¡¨å…³è”çš„å­—æ®µä¸º %s : %s" %(collection,key,r[key]))
+								self.log.info("æ­£åœ¨æŸ¥è¯¢å…³è”è¡¨ %s çš„æ•°æ®" %self.table[key])
 
-								print(collection,"±í¹ØÁªµÄ×Ö¶ÎÎª ",key,":",r[key])
-								print("ÕıÔÚ²éÑ¯¹ØÁª±í %s µÄÊı¾İ" %self.table[key])
+								print(collection,"è¡¨å…³è”çš„å­—æ®µä¸º ",key,":",r[key])
+								print("æ­£åœ¨æŸ¥è¯¢å…³è”è¡¨ %s çš„æ•°æ®" %self.table[key])
 
 								self.del_linked(self.table[key], {'_id':r[key]})
 
 						except Exception as e:
-							self.log.info(e," table[%s]Ã»ÓĞÓëÖ®¶ÔÓ¦µÄÊı¾İ¿â±í,Çë²é¿´×Ö¶ÎËù¹ØÁªµÄ±ítable" %key)
-							print(e," table[%s]Ã»ÓĞÓëÖ®¶ÔÓ¦µÄÊı¾İ¿â±í,Çë²é¿´×Ö¶ÎËù¹ØÁªµÄ±ítable" %key)
+							self.log.info(e," table[%s]æ²¡æœ‰ä¸ä¹‹å¯¹åº”çš„æ•°æ®åº“è¡¨,è¯·æŸ¥çœ‹å­—æ®µæ‰€å…³è”çš„è¡¨table" %key)
+							print(e," table[%s]æ²¡æœ‰ä¸ä¹‹å¯¹åº”çš„æ•°æ®åº“è¡¨,è¯·æŸ¥çœ‹å­—æ®µæ‰€å…³è”çš„è¡¨table" %key)
 
 					elif isinstance(r[key], list):
 
 						for n in range(len(r[key])):
-							# ÅĞ¶ÏÊı×éÖĞµÄ×Ö¶ÎÊÇ·ñÊÇobjectÀàĞÍ
+							# åˆ¤æ–­æ•°ç»„ä¸­çš„å­—æ®µæ˜¯å¦æ˜¯objectç±»å‹
 							if isinstance(r[key][n], ObjectId):
 								# continue
 								try:
 									if self.table[key] not in self.collections:
-										self.log.info("%s ±í¹ØÁªµÄ×Ö¶ÎÎª %s : %s" %(collection,key,r[key]))
-										self.log.info("ÕıÔÚ²éÑ¯¹ØÁª±í %s µÄÊı¾İ" %self.table[key])
+										self.log.info("%s è¡¨å…³è”çš„å­—æ®µä¸º %s : %s" %(collection,key,r[key]))
+										self.log.info("æ­£åœ¨æŸ¥è¯¢å…³è”è¡¨ %s çš„æ•°æ®" %self.table[key])
 
-										print(collection,"±í¹ØÁªµÄ×Ö¶ÎÎª ",key,":",r[key][n])
-										print("ÕıÔÚ²éÑ¯¹ØÁª±í %s µÄÊı¾İ" %self.table[key])
+										print(collection,"è¡¨å…³è”çš„å­—æ®µä¸º ",key,":",r[key][n])
+										print("æ­£åœ¨æŸ¥è¯¢å…³è”è¡¨ %s çš„æ•°æ®" %self.table[key])
 
 										self.del_linked(self.table[key], {'_id':r[key][n]})
 
 								except Exception as e:
-									self.log.info(e," table[%s]Ã»ÓĞÓëÖ®¶ÔÓ¦µÄÊı¾İ¿â±í,Çë²é¿´×Ö¶ÎËù¹ØÁªµÄ±ítable" %key)
-									print(e," table[%s]Ã»ÓĞÓëÖ®¶ÔÓ¦µÄÊı¾İ¿â±í" %key)
+									self.log.info(e," table[%s]æ²¡æœ‰ä¸ä¹‹å¯¹åº”çš„æ•°æ®åº“è¡¨,è¯·æŸ¥çœ‹å­—æ®µæ‰€å…³è”çš„è¡¨table" %key)
+									print(e," table[%s]æ²¡æœ‰ä¸ä¹‹å¯¹åº”çš„æ•°æ®åº“è¡¨" %key)
+
+					elif key == 'idpUserId':
+						continue
+						try:
+							if self.table[key] not in self.collections:
+								self.log.info("%s è¡¨å…³è”çš„å­—æ®µä¸º %s : %s" %(collection,key,r[key]))
+								self.log.info("æ­£åœ¨æŸ¥è¯¢å…³è”è¡¨ %s çš„æ•°æ®" %self.table[key])
+
+								print(collection,"è¡¨å…³è”çš„å­—æ®µä¸º ",key,":",r[key])
+								print("æ­£åœ¨æŸ¥è¯¢å…³è”è¡¨ %s çš„æ•°æ®" %self.table[key])
+
+								self.del_linked(self.table[key], {'subject':r[key]}, database=True)
+
+						except Exception as e:
+							self.log.info(e," table[%s]æ²¡æœ‰ä¸ä¹‹å¯¹åº”çš„æ•°æ®åº“è¡¨,è¯·æŸ¥çœ‹å­—æ®µæ‰€å…³è”çš„è¡¨table" %key)
+							print(e," table[%s]æ²¡æœ‰ä¸ä¹‹å¯¹åº”çš„æ•°æ®åº“è¡¨,è¯·æŸ¥çœ‹å­—æ®µæ‰€å…³è”çš„è¡¨table" %key)
 
 					else:
 						# print("index", index)
 						if index >= len(r) :
 							self.log.info("***********************************\n")
-							self.log.info('Ã»ÓĞ¹ØÁªÊı¾İ,Ö±½ÓÉ¾³ı%s ±í' %collection)
-							print('Ã»ÓĞ¹ØÁªÊı¾İ,Ö±½ÓÉ¾³ı%s ±í' %collection)
+							self.log.info('æ²¡æœ‰å…³è”æ•°æ®,ç›´æ¥åˆ é™¤%s è¡¨' %collection)
+							print('æ²¡æœ‰å…³è”æ•°æ®,ç›´æ¥åˆ é™¤%s è¡¨' %collection)
 
 							# result = self.db[collection].remove(query)
 							# self.log.info(result)
@@ -99,7 +122,7 @@ if __name__ == '__main__':
 	# host = 'localhost:27017'
 	database = 'uat'
 	# Database(host, database).del_linked("apply_info", {'email':'onedi@qq.com'})
-	Database(host, database).del_linked("client_info", {'email':'onedi@qq.com'})
+	Database(host, database).del_linked("apply_info", {'idNumber':'441502199602120215'})
 
 
 

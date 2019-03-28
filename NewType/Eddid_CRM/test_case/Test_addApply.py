@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Date    : 2019-01-03 13:56:31
 # @Author  : Onedi (Onedi@qq.com)
@@ -81,16 +81,42 @@ class addApply(unittest.TestCase):
         # applypage.send_birthday()
         # applypage.send_birthPlace()
 
-        applypage.employment()
-        applypage.occupation()
-        applypage.employedPeriod()
-        applypage.employer()
-        applypage.businessType()
-        applypage.businessAddress()
-        applypage.businessPhone()
+        # applypage.employment()
+        # applypage.occupation()
+        # applypage.employedPeriod()
+        # applypage.employer()
+        # applypage.businessType()
+        # applypage.businessAddress()
+        # applypage.businessPhone()
 
-        applypage.totalRevenue()
-        applypage.netEstate()
+        # applypage.totalRevenue()
+        # applypage.netEstate()
+        # applypage.source_of_wealth()
+        # applypage.securities()
+        # applypage.CBBCcertificate()
+        # applypage.derivativewarrant()
+        # applypage.futures()
+        # applypage.Option()
+        # applypage.foreignexchange()
+        # applypage.otherInvest()
+        # applypage.derivativeCourse()
+        # applypage.derivativeJobs()
+        # applypage.tradingFund()
+        applypage.buyProduct()
+        applypage.bankrupt()
+        applypage.customerRelatives()
+        applypage.associatedcustomer()
+        applypage.director()
+        applypage.citizenOfUSA()
+        applypage.americanResident()
+        applypage.PEP_People()
+        applypage.investmentTarget()
+        applypage.riskTolerance()
+
+
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
