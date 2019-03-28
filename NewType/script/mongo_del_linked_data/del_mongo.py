@@ -35,10 +35,10 @@ class Database:
 
 
 	def del_linked(self, collection, query, database=None):
-		if database == None:
-			self.db = self.client[self.database]
-		else:
-			self.db = self.client[database]
+		# if database == None:
+		# 	self.db = self.client[self.database]
+		# else:
+		# 	self.db = self.client[database]
 
 		self.collections.add(collection)
 		result = self.db[collection].find(query)
@@ -89,6 +89,7 @@ class Database:
 									print(e," table[%s]没有与之对应的数据库表" %key)
 
 					elif key == 'idpUserId':
+						continue
 						try:
 							if self.table[key] not in self.collections:
 								self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
@@ -121,7 +122,7 @@ if __name__ == '__main__':
 	# host = 'localhost:27017'
 	database = 'uat'
 	# Database(host, database).del_linked("apply_info", {'email':'onedi@qq.com'})
-	Database(host, database).del_linked("apply_info", {'idNumber':'441502199602120215'})
+	Database(host, database).del_linked("apply_info", {'idNumber':"441502199602120215"})
 
 
 

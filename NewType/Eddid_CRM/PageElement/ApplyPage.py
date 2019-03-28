@@ -19,9 +19,6 @@ from selenium.webdriver.common.keys import Keys
 class ApplyPage(BasePage.BasePage):
     # log = Logging.Logs()
 
-    # applicationFor_loc = (By.XPATH, "//div[contains(text(), '账户类型')]/following-sibling::span/div")
-    # checkbox_loc = (By.XPATH, "//span[contains(text(), '香港及环球证券账户(现金)')]/preceding-sibling::span")
-
     def get_input(self, text, other=False):
         if not other:
             input_loc = (By.XPATH, "//div[contains(text(), '%s')]/following-sibling::span//input" %text)
@@ -73,7 +70,6 @@ class ApplyPage(BasePage.BasePage):
     # 账户类型
     def send_applicationFor(self):
         self.find_element(*self.get_input('账户类型')).click()
-        time.sleep(5)
         self.find_element(*self.get_select(text='个人账户')).click()
 
     # 开户方法
@@ -116,7 +112,9 @@ class ApplyPage(BasePage.BasePage):
     def send_phoneAreaCode(self):
         phoneAreaCode = self.find_element(*self.get_input('电话号码区号'))
         self.scrollinto(phoneAreaCode)
-        self.find_element(*self.get_select()).click()
+        # self.find_element(*self.get_select()).click()
+        select_loc = (By.XPATH, "//div[@x-placement = 'bottom-start']//li")
+        code_select = self.find_elements(*select_loc)
 
     def send_phone(self):
         self.find_element(*self.get_input("电话号码(用于通讯)")).send_keys("15089510001")
@@ -237,77 +235,146 @@ class ApplyPage(BasePage.BasePage):
 
     def derivativeJobs(self):
         derivativeJobs = self.find_element(*self.get_derivativeInput("工作经验"))
-        # time.sleep(0.3)
+        time.sleep(0.3)
         self.scrollinto(derivativeJobs)
         self.find_element(*self.get_select()).click()
 
     def tradingFund(self):
         tradingFund = self.find_element(*self.get_derivativeInput("买卖基金"))
-        # time.sleep(0.3)
+        time.sleep(0.3)
         self.scrollinto(tradingFund)
         self.find_element(*self.get_select()).click()
 
     def buyProduct(self):
         buyProduct = self.find_element(*self.get_derivativeInput("买卖衍生"))
-        # time.sleep(0.3)
+        time.sleep(0.3)
         self.scrollinto(buyProduct)
         self.find_element(*self.get_select()).click()
 
     def bankrupt(self):
         bankrupt = self.find_element(*self.get_input("申请破产"))
-        # time.sleep(0.5)
+        time.sleep(0.3)
         self.scrollinto(bankrupt)
         self.find_element(*self.get_select()).click()
 
     def customerRelatives(self):
         customerRelatives = self.find_element(*self.get_input("艾德证券的雇员", other=True))
-        time.sleep(0.5)
+        time.sleep(0.3)
         self.scrollinto(customerRelatives)
         self.find_element(*self.get_select()).click()
 
     def associatedcustomer(self):
         associatedcustomer = self.find_element(*self.get_input("艾德证券客户有关连", other=True))
-        time.sleep(0.5)
+        time.sleep(0.3)
         self.scrollinto(associatedcustomer)
         self.find_element(*self.get_select()).click()
 
     def director(self):
         director = self.find_element(*self.get_input("认可人士?", other=True))
-        time.sleep(0.5)
+        time.sleep(0.3)
         self.scrollinto(director)
         self.find_element(*self.get_select()).click()
 
     def citizenOfUSA(self):
         citizenOfUSA = self.find_element(*self.get_input("美国公民", other=True))
-        time.sleep(0.5)
+        time.sleep(0.3)
         self.scrollinto(citizenOfUSA)
         self.find_element(*self.get_select()).click()
 
     def americanResident(self):
         americanResident = self.find_element(*self.get_input("美国居民", other=True))
-        time.sleep(0.5)
+        time.sleep(0.3)
         self.scrollinto(americanResident)
         self.find_element(*self.get_select()).click()
 
     def PEP_People(self):
         PEP_People = self.find_element(*self.get_input("政治公众人物（PEP）", other=True))
-        time.sleep(0.5)
+        time.sleep(0.3)
         self.scrollinto(PEP_People)
         self.find_element(*self.get_select()).click()
 
     def investmentTarget(self):
         investmentTarget = self.find_element(*self.get_input("投资目标", other=True))
         self.scrollinto(investmentTarget)
-        time.sleep(0.5)
+        time.sleep(0.3)
         self.find_element(*self.get_select()).click()
 
     def riskTolerance(self):
         riskTolerance = self.find_element(*self.get_input("风险承受能力", other=True))
-        time.sleep(0.5)
+        time.sleep(0.3)
         self.scrollinto(riskTolerance)
         self.find_element(*self.get_select()).click()
 
+    def currency(self):
+        currency = self.find_element(*self.get_input("货币", other=True))
+        time.sleep(0.3)
+        self.scrollinto(currency)
+        self.find_element(*self.get_select()).click()
 
+    def bankAccount(self):
+        bankAccount_loc = (By.XPATH, "//span[contains(text(), '删除')]/parent::*/parent::*/preceding-sibling::div//input")
+        bankAccount = self.find_elements(*bankAccount_loc)
+        for bankInput in bankAccount:
+            bankInput.send_keys("bankAccount")
+
+
+    def marginAccount(self):
+        marginAccount = self.find_element(*self.get_input("客户的配偶", other=True))
+        time.sleep(0.3)
+        self.scrollinto(marginAccount)
+        self.find_element(*self.get_select()).click()
+
+    def discretion(self):
+        discretion = self.find_element(*self.get_input("客户及/或其配偶", other=True))
+        time.sleep(0.3)
+        self.scrollinto(discretion)
+        self.find_element(*self.get_select()).click()
+
+    def companyAccounts(self):
+        companyAccounts = self.find_element(*self.get_input("同一集团公司旗下", other=True))
+        time.sleep(0.3)
+        self.scrollinto(companyAccounts)
+        self.find_element(*self.get_select()).click()
+
+
+    def channel(self):
+        channel_loc = (By.XPATH, "//div[contains(text(), '您透过哪些渠道认识艾德证券')]/parent::div/following-sibling::div//label")
+        channel = self.find_elements(*channel_loc)
+        for i in range(len(channel)):
+            if i != len(channel)-1:
+                channel[i].click()
+
+    def beneficial(self):
+        beneficial = self.find_element(*self.get_input("是否账户的最终实益拥有人", other=True))
+        time.sleep(0.3)
+        self.scrollinto(beneficial)
+        self.find_element(*self.get_select()).click()
+
+        self.find_element(*self.get_input("最终实益拥有人名称为", other=True)).send_keys("beneficial")
+
+    def Othed_People(self):
+        othedPeople = self.find_element(*self.get_input("负责下单", other=True))
+        time.sleep(0.3)
+        self.scrollinto(othedPeople)
+        self.find_element(*self.get_select()).click()
+
+
+    def jurisdiction(self):
+        self.find_element(*self.get_checkbox("香港身份证号码")).click()
+
+
+    def acceptStatement(self):
+        self.find_element(*self.get_input("本人接受上述声明")).click()
+        self.find_element(*self.get_select()).click()
+
+    def useStatement(self):
+        self.find_element(*self.get_input("个人资料之使用声明")).click()
+        self.find_element(*self.get_select(top=True)).click()
+
+
+    def click_sublime(self):
+        sublime_loc = (By.CLASS_NAME, "button-1")
+        sublime = self.find_element(*sublime_loc).click()
 
 
 
