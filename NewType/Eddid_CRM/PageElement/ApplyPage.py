@@ -162,7 +162,7 @@ class ApplyPage(BasePage.BasePage):
 
     def send_birthPlace(self):
         birthPlace = self.find_element(*self.get_input('出生地点'))
-        time.sleep(0.3)
+        time.sleep(0.5)
         self.scrollinto(birthPlace)
         # self.find_element(*self.get_select()).click()
         element = self.get_select()
@@ -170,30 +170,28 @@ class ApplyPage(BasePage.BasePage):
 
     def employment(self):
         employment = self.find_element(*self.get_input("就业情况"))
-        time.sleep(0.3)
+        time.sleep(0.5)
         self.scrollinto(employment)
         # self.find_element(*self.get_select()).click()
         element = self.get_select()
         print(element.text)        
         
+        if element.text == "就业" and element.text == "自雇":        
+            occupation = self.find_element(*self.get_input("职位")).send_keys("销售")
+            employedPeriod = self.find_element(*self.get_input("受雇年期")).send_keys("十年以上")
+            employer = self.find_element(*self.get_input("目前雇主名称")).send_keys("newtype")
+            businessType = self.find_element(*self.get_input("业务性质")).send_keys("互联网")
+            businessAddress = self.find_element(*self.get_input("办公室地址")).send_keys("广东省深圳市南山区桑达科技大厦802")
+            businessPhone = self.find_element(*self.get_input("办公室电话")).send_keys("15089500015")
 
-        # def occupation(self):
-        #     self.find_element(*self.get_input("职位")).send_keys("销售")
+        elif element.text == "其他":
+            Hidden_loc = (By.XPATH, "//div[contains(text(), '就业情况')]/parent::div/parent::span/following-sibling::span//input")
+            Hidden = self.find_element(*Hidden_loc)
+            Hidden.send_keys("Hidden")
 
-        # def employedPeriod(self):
-        #     self.find_element(*self.get_input("受雇年期")).send_keys("十年以上")
+        elif element.text == "退休" and element.text == "无业":
+            pass
 
-        # def employer(self):
-        #     self.find_element(*self.get_input("目前雇主名称")).send_keys("newtype")
-
-        # def businessType(self):
-        #     self.find_element(*self.get_input("业务性质")).send_keys("互联网")
-
-        # def businessAddress(self):
-        #     self.find_element(*self.get_input("办公室地址")).send_keys("广东省深圳市南山区桑达科技大厦802")
-
-        # def businessPhone(self):
-        #     self.find_element(*self.get_input("办公室电话")).send_keys("15089500015")
 
     def totalRevenue(self):
         self.find_element(*self.get_radio("客户全年总收入为(港元)")).click()
