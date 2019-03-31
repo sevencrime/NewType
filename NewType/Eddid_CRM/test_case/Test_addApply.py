@@ -70,7 +70,6 @@ class addApply(unittest.TestCase):
         applypage.send_addressMail()
         applypage.send_nationality()
         applypage.send_idType()
-        applypage.send_idNumber()
         applypage.send_countryIssue()
         applypage.send_birthday()
         applypage.send_birthPlace()

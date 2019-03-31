@@ -36,7 +36,6 @@ class ApplyPage(BasePage.BasePage):
 
     def get_select(self, text=False, top=False):
         if not text:
-            # print("if not", text)
             if top:
                 select_loc = (By.XPATH, "//div[@x-placement = 'top-start']//li")
             else:
@@ -46,7 +45,11 @@ class ApplyPage(BasePage.BasePage):
             randox = random.randint(0,len(selectlist))
             for i in range(len(selectlist)):
                 if i == randox:
-                    selectlist[i].click()
+                    # selectlist[i].click()
+                    # js.executeScript("var evt = document.createEvent('MouseEvents');" + "evt.initMouseEvent('click',true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0,null);" + "arguments[0].dispatchEvent(evt);", findElement(element));
+
+                    # time.sleep(0.1)
+                    self.scrollinto(selectlist[i])
                     return selectlist[i]
 
         else:
@@ -65,7 +68,7 @@ class ApplyPage(BasePage.BasePage):
     def get_action(self, text):
         print("action")
         others_loc = (By.XPATH, "//div[contains(text(), '%s')]" %text)
-        time.sleep(5)
+        # time.sleep(5)
         ActionChains(self.driver).click(self.find_element(*others_loc)).perform()
 
     def scrollinto(self, loc):
@@ -118,9 +121,10 @@ class ApplyPage(BasePage.BasePage):
     def send_phoneAreaCode(self):
         phoneAreaCode = self.find_element(*self.get_input('电话号码区号'))
         self.scrollinto(phoneAreaCode)
-        time.sleep(1)
-        element = self.get_select()
-        print(element.text)
+        # time.sleep(1)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def send_phone(self):
         self.find_element(*self.get_input("电话号码(用于通讯)")).send_keys("15089510001")
@@ -135,24 +139,31 @@ class ApplyPage(BasePage.BasePage):
         # print("send_nationality")
         nationality = self.find_element(*self.get_input("国籍"))
         self.scrollinto(nationality)
-        # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        # time.sleep(0.5)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def send_idType(self):
-        self.find_element(*self.get_input("身份证件类型")).click()
-        self.find_element(*self.get_select(text="内地身份证")).click()
+        idType = self.find_element(*self.get_input("身份证件类型"))
+        # time.sleep(0.5)
+        self.scrollinto(idType)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        if selectelement.get_attribute("textContent") == "其他":
+            self.find_element(*self.get_input("其他证件类型")).send_keys("idType")
+            self.find_element(*self.get_input("其他证件号码")).send_keys("43110120215251")
+        else:
+            self.find_element(*self.get_input("身份证或护照号码")).send_keys("44150266621212")
 
-    def send_idNumber(self):
-        self.find_element(*self.get_input("身份证或护照号码")).send_keys("44150266621212")
 
     def send_countryIssue(self):
         countryIssue = self.find_element(*self.get_input("签发国家"))
-        time.sleep(0.5)
+        # time.sleep(0.5)
         self.scrollinto(countryIssue)
-        # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def send_birthday(self):
         self.find_element(*self.get_input("出生日期(日/月/年)")).send_keys("21/01/2000")
@@ -160,21 +171,20 @@ class ApplyPage(BasePage.BasePage):
 
     def send_birthPlace(self):
         birthPlace = self.find_element(*self.get_input('出生地点'))
-        time.sleep(0.5)
+        # time.sleep(0.5)
         self.scrollinto(birthPlace)
-        # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def employment(self):
         employment = self.find_element(*self.get_input("就业情况"))
-        time.sleep(0.5)
+        # time.sleep(0.5)
         self.scrollinto(employment)
-        # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.get_attribute("textContent"),"************getAttribute")        
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))        
 
-        if element.get_attribute("textContent") == "就业" or element.get_attribute("textContent") == "自雇":        
+        if selectelement.get_attribute("textContent") == "就业" or selectelement.get_attribute("textContent") == "自雇":        
             occupation = self.find_element(*self.get_input("职位")).send_keys("销售")
             employedPeriod = self.find_element(*self.get_input("受雇年期")).send_keys("十年以上")
             employer = self.find_element(*self.get_input("目前雇主名称")).send_keys("newtype")
@@ -182,73 +192,83 @@ class ApplyPage(BasePage.BasePage):
             businessAddress = self.find_element(*self.get_input("办公室地址")).send_keys("广东省深圳市南山区桑达科技大厦802")
             businessPhone = self.find_element(*self.get_input("办公室电话")).send_keys("15089500015")
 
-        elif element.get_attribute("textContent") == "其他":
+        elif selectelement.get_attribute("textContent") == "其他":
             Hidden_loc = (By.XPATH, "//div[contains(text(), '就业情况')]/parent::div/parent::span/following-sibling::span//input")
             Hidden = self.find_element(*Hidden_loc)
             Hidden.send_keys("Hidden")
 
-        elif element.get_attribute("textContent") == "退休" or element.get_attribute("textContent") == "无业":
+        elif selectelement.get_attribute("textContent") == "退休" or selectelement.get_attribute("textContent") == "无业":
             pass
-
 
     def totalRevenue(self):
         self.find_element(*self.get_radio("客户全年总收入为(港元)")).click()
+        self.find_element(*self.get_input("请注明资金来源", other=True)).send_keys("资金来源")
 
     def netEstate(self):
         self.find_element(*self.get_radio("客户资产净值(港元)")).click()
+        self.find_element(*self.get_input("请注明资产净值", other=True)).send_keys("请注明资产净值")
 
     def source_of_wealth(self):
         self.find_element(*self.get_checkbox("就业薪金")).click()
 
     def securities(self):
+        # 客户投资经验及曾买卖产品>证券
         securities = self.find_element(*self.get_input("证券"))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(securities)
-        # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def CBBCcertificate(self):
+        # 客户投资经验及曾买卖产品>牛熊证
         CBBCcertificate = self.find_element(*self.get_input("牛熊证"))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(CBBCcertificate)
-        # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def derivativewarrant(self):
+        # 客户投资经验及曾买卖产品>衍生权证
         derivativewarrant = self.find_element(*self.get_input("衍生权证(窝轮)"))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(derivativewarrant)
-        # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def futures(self):
+        # 客户投资经验及曾买卖产品>期货
         futures = self.find_element(*self.get_input("期货"))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(futures)
-        # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def Option(self):
+        # 客户投资经验及曾买卖产品>期权
         Option = self.find_element(*self.get_input("期权"))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(Option)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def foreignexchange(self):
+        # 客户投资经验及曾买卖产品>外汇
         foreignexchange = self.find_element(*self.get_input("外汇"))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(foreignexchange)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def otherInvest(self):
+        # 客户投资经验及曾买卖产品>其他投资
         self.find_element(*self.get_input("其他投资")).send_keys("otherInvest")
         # self.get_action("其他投资")
         # time.sleep(5)
@@ -257,116 +277,132 @@ class ApplyPage(BasePage.BasePage):
         # self.find_element(*self.get_select()).click()
 
     def derivativeCourse(self):
+        # 客户是否曾接受有关衍生产品性质和风险的一般知识培训或修读相关课程
         derivativeCourse = self.find_element(*self.get_derivativeInput("相关课程"))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(derivativeCourse)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def derivativeJobs(self):
+        # 客户是否从现时或过去拥有与衍生产品有关的工作经验?
         derivativeJobs = self.find_element(*self.get_derivativeInput("工作经验"))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(derivativeJobs)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def tradingFund(self):
+        # 客户是否于过去3年曾执行 5次或以上有关衍生产品的交易
         tradingFund = self.find_element(*self.get_derivativeInput("买卖基金"))
-        time.sleep(0.3)
         self.scrollinto(tradingFund)
-        # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        # time.sleep(0.5)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def buyProduct(self):
+        # 客户是否申请开通买卖衍生权证、牛熊证及结构性等产品
         buyProduct = self.find_element(*self.get_derivativeInput("买卖衍生"))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(buyProduct)
-        # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def bankrupt(self):
         bankrupt = self.find_element(*self.get_input("申请破产"))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(bankrupt)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def customerRelatives(self):
         customerRelatives = self.find_element(*self.get_input("艾德证券的雇员", other=True))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(customerRelatives)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def associatedcustomer(self):
         associatedcustomer = self.find_element(*self.get_input("艾德证券客户有关连", other=True))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(associatedcustomer)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def director(self):
         director = self.find_element(*self.get_input("认可人士?", other=True))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(director)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def citizenOfUSA(self):
         citizenOfUSA = self.find_element(*self.get_input("美国公民", other=True))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(citizenOfUSA)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def americanResident(self):
         americanResident = self.find_element(*self.get_input("美国居民", other=True))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(americanResident)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def PEP_People(self):
         PEP_People = self.find_element(*self.get_input("政治公众人物（PEP）", other=True))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(PEP_People)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def investmentTarget(self):
         investmentTarget = self.find_element(*self.get_input("投资目标", other=True))
         self.scrollinto(investmentTarget)
-        time.sleep(0.3)
+        # time.sleep(0.3)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def riskTolerance(self):
         riskTolerance = self.find_element(*self.get_input("风险承受能力", other=True))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(riskTolerance)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def currency(self):
         currency = self.find_element(*self.get_input("货币", other=True))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(currency)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def bankAccount(self):
         bankAccount_loc = (By.XPATH, "//span[contains(text(), '删除')]/parent::*/parent::*/preceding-sibling::div//input")
@@ -377,27 +413,30 @@ class ApplyPage(BasePage.BasePage):
 
     def marginAccount(self):
         marginAccount = self.find_element(*self.get_input("客户的配偶", other=True))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(marginAccount)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def discretion(self):
         discretion = self.find_element(*self.get_input("客户及/或其配偶", other=True))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(discretion)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def companyAccounts(self):
         companyAccounts = self.find_element(*self.get_input("同一集团公司旗下", other=True))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(companyAccounts)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
 
     def channel(self):
@@ -409,21 +448,23 @@ class ApplyPage(BasePage.BasePage):
 
     def beneficial(self):
         beneficial = self.find_element(*self.get_input("是否账户的最终实益拥有人", other=True))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(beneficial)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
         # self.find_element(*self.get_input("最终实益拥有人名称为", other=True)).send_keys("beneficial")
 
     def Othed_People(self):
         othedPeople = self.find_element(*self.get_input("负责下单", other=True))
-        time.sleep(0.3)
+        # time.sleep(0.3)
         self.scrollinto(othedPeople)
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
 
     def jurisdiction(self):
@@ -433,14 +474,16 @@ class ApplyPage(BasePage.BasePage):
     def acceptStatement(self):
         self.find_element(*self.get_input("本人接受上述声明")).click()
         # self.find_element(*self.get_select()).click()
-        element = self.get_select()
-        print(element.text)
+        selectelement = self.get_select()
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
     def useStatement(self):
         self.find_element(*self.get_input("个人资料之使用声明")).click()
         # self.find_element(*self.get_select(top=True)).click()
-        element = self.get_select(top=True)
-        print(element.text)
+        selectelement = self.get_select(top=True)
+        print(selectelement.get_attribute("textContent"))
+        return selectelement.get_attribute("textContent")
 
 
     def click_sublime(self):
