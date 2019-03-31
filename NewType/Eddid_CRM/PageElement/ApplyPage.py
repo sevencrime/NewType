@@ -172,9 +172,9 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(employment)
         # self.find_element(*self.get_select()).click()
         element = self.get_select()
-        print(element.text)        
-        
-        if element.text == "就业" and element.text == "自雇":        
+        print(element.get_attribute("textContent"),"************getAttribute")        
+
+        if element.get_attribute("textContent") == "就业" or element.get_attribute("textContent") == "自雇":        
             occupation = self.find_element(*self.get_input("职位")).send_keys("销售")
             employedPeriod = self.find_element(*self.get_input("受雇年期")).send_keys("十年以上")
             employer = self.find_element(*self.get_input("目前雇主名称")).send_keys("newtype")
@@ -182,12 +182,12 @@ class ApplyPage(BasePage.BasePage):
             businessAddress = self.find_element(*self.get_input("办公室地址")).send_keys("广东省深圳市南山区桑达科技大厦802")
             businessPhone = self.find_element(*self.get_input("办公室电话")).send_keys("15089500015")
 
-        elif element.text == "其他":
+        elif element.get_attribute("textContent") == "其他":
             Hidden_loc = (By.XPATH, "//div[contains(text(), '就业情况')]/parent::div/parent::span/following-sibling::span//input")
             Hidden = self.find_element(*Hidden_loc)
             Hidden.send_keys("Hidden")
 
-        elif element.text == "退休" and element.text == "无业":
+        elif element.get_attribute("textContent") == "退休" or element.get_attribute("textContent") == "无业":
             pass
 
 

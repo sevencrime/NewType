@@ -51,16 +51,16 @@ class addApply(unittest.TestCase):
         #点击新增按钮
         mainpage.click_add()
 
-        # applypage.send_applicationFor()
-        # applypage.send_accountOpeningWay()
-        # applypage.send_parentId()
-        # applypage.send_mailLanguage()
-        # applypage.send_accountType()
-        # applypage.send_title()
-        # applypage.send_firstName()
-        # applypage.send_lastName()
+        applypage.send_applicationFor()
+        applypage.send_accountOpeningWay()
+        applypage.send_parentId()
+        applypage.send_mailLanguage()
+        applypage.send_accountType()
+        applypage.send_title()
+        applypage.send_firstName()
+        applypage.send_lastName()
         
-        # mainpage.wait_LoadingModal()
+        mainpage.wait_LoadingModal()
 
         applypage.send_chineseName()
         applypage.send_emali()
@@ -76,6 +76,7 @@ class addApply(unittest.TestCase):
         applypage.send_birthPlace()
 
         applypage.employment()
+
 
         applypage.totalRevenue()
         applypage.netEstate()
