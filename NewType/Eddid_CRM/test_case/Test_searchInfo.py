@@ -6,24 +6,19 @@
 # @Version : $Id$
 
 
-
+import os,sys,time
+sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
-import os
-import sys
-sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
-from PageElement.LoginPage import *
-from PageElement.ApplyListPage import *
-from PageElement.MainPage import *
-from Commons import Logging
+from PageElement import *
+from Commons import *
 
 class searchInfo(unittest.TestCase):
 
-    log = Logging.Logs()
+    # log = Logging.Logs()
 
     def setUp(self):
         # self.log.info("正在执行Test_Login")
@@ -34,7 +29,7 @@ class searchInfo(unittest.TestCase):
         self.url = 'http://eddid-bos-feature.ntdev.be'
 
         #在这里先登录
-        login_page = LoginPage(self.driver, self.url, "Eddid")
+        login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
         login_page.open()
         login_page.input_username("admin")
         login_page.input_password("abcd1234")
@@ -47,8 +42,8 @@ class searchInfo(unittest.TestCase):
         self.driver.quit()
 
     def test_searchInfo(self):
-        applylistpage = ApplyListPage(self.driver, self.url, "Eddid")
-        mainpage = MainPage(self.driver, self.url, "Eddid")
+        applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
+        mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
 
         #点击开户管理，判断
         applylistpage.click_apply_manager()

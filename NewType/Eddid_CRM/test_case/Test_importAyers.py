@@ -7,17 +7,11 @@
 
 import unittest
 from selenium import webdriver
-import time
-import pymongo
-import os
-import sys
+import time,os,sys
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
-from PageElement.LoginPage import *
-from PageElement.ApplyListPage import *
-from PageElement.AccountlistPage import *
-from Commons import Logging
-from Commons import Modify_xls
-from Commons import PyMongo
+import pymongo
+from PageElement import *
+from Commons import *
 
 #交易账户列表导入Ayers数据
 class importAyers(unittest.TestCase):
@@ -31,7 +25,7 @@ class importAyers(unittest.TestCase):
         self.url = 'http://eddid-bos-uat.ntdev.be'
 
         #在这里先登录
-        login_page = LoginPage(self.driver, self.url, "Eddid")
+        login_page = LoginPage,LoginPage(self.driver, self.url, "Eddid")
         login_page.open()
         login_page.input_username("admin")
         login_page.input_password("abcd1234")
@@ -63,11 +57,11 @@ class importAyers(unittest.TestCase):
 
         data = self.getNumber()
         print(data)
-        applylistpage = ApplyListPage(self.driver, self.url, "Eddid")
+        applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
         applylistpage.click_account_manager()
         applylistpage.click_accountlist()
 
-        accountpage = AccountlistPage(self.driver, self.url, "Eddid")
+        accountpage = AccountlistPage.AccountlistPage(self.driver, self.url, "Eddid")
         accountpage.wait_LoadingModal()
         accountpage.click_importAyers()
         accountpage.uploadAyers()

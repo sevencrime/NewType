@@ -7,10 +7,9 @@
 
 #CRM侧边栏
 
-import os
-import sys
+import os,sys
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
-from Commons import BasePage, Logging
+from Commons import *
 from selenium.webdriver.common.by import By
 
 class ApplyListPage(BasePage.BasePage):

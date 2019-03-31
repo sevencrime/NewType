@@ -5,8 +5,7 @@
 # @Link    : ${link}
 # @Version : $Id$
 
-import os
-import sys
+import os,sys
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 import pymongo
 from Commons import Modify_xls

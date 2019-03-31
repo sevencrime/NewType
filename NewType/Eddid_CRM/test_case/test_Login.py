@@ -5,18 +5,15 @@
 # @Link    : ${link}
 # @Version : $Id$
 
+import time,os,sys
+sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
-import os
-import sys
-sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
-from PageElement.LoginPage import *
-from Commons import Logging
-
+from PageElement import *
+from Commons import *
 
 class Test_Login(unittest.TestCase):
 
@@ -36,7 +33,7 @@ class Test_Login(unittest.TestCase):
 
     def test_login(self):
         # self.log.info("实例化LoginPage")
-        login_page = LoginPage(self.driver, self.url, "Eddid")
+        login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
         # 打开浏览器
         # self.log.info("打开浏览器")
         login_page.open()
