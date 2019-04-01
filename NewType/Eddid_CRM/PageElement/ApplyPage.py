@@ -35,21 +35,29 @@ class ApplyPage(BasePage.BasePage):
     	return checkbox_loc
 
     def get_select(self, text=False, top=False):
+        
         if not text:
             if top:
                 select_loc = (By.XPATH, "//div[@x-placement = 'top-start']//li")
             else:
                 select_loc = (By.XPATH, "//div[@x-placement = 'bottom-start']//li")
+            # select_loc = (By.XPATH, "//div[contains(@style,'position: absolute;')]")
 
             selectlist = self.find_elements(*select_loc)
             randox = random.randint(0,len(selectlist))
             for i in range(len(selectlist)):
                 if i == randox:
-                    # selectlist[i].click()
+                    # selectlist[i].click()  
                     # js.executeScript("var evt = document.createEvent('MouseEvents');" + "evt.initMouseEvent('click',true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0,null);" + "arguments[0].dispatchEvent(evt);", findElement(element));
+                    while selectlist[i].is_displayed():
+                        print("进入while")
+                        self.scrollinto(selectlist[i])
 
-                    # time.sleep(0.1)
-                    self.scrollinto(selectlist[i])
+                        try:
+                            print(selectlist[i].get_attribute("textContent"))
+                        except AttributeError:
+                            continue
+
                     return selectlist[i]
 
         else:
@@ -73,13 +81,17 @@ class ApplyPage(BasePage.BasePage):
 
     def scrollinto(self, loc):
         self.script("arguments[0].scrollIntoView();", loc)
-        loc.click()
+        self.script("arguments[0].click();", loc)
+
+        # loc.click()
 
 
     # 账户类型
     def send_applicationFor(self):
-        self.find_element(*self.get_input('账户类型')).click()
+        applicationFor = self.find_element(*self.get_input('账户类型'))
+        applicationFor.click()
         self.find_element(*self.get_select(text='个人账户')).click()
+        print(applicationFor.get_attribute("value"))
 
     # 开户方法
     def send_accountOpeningWay(self):
