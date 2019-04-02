@@ -35,7 +35,6 @@ class ApplyPage(BasePage.BasePage):
     	return checkbox_loc
 
     def get_select(self, text=False, top=False):
-        
         if not text:
             if top:
                 select_loc = (By.XPATH, "//div[@x-placement = 'top-start']//li")
@@ -44,24 +43,23 @@ class ApplyPage(BasePage.BasePage):
             # select_loc = (By.XPATH, "//div[contains(@style,'position: absolute;')]")
 
             selectlist = self.find_elements(*select_loc)
-            randox = random.randint(0,len(selectlist))
+            randox = random.randint(0,len(selectlist)-1)
             for i in range(len(selectlist)):
                 if i == randox:
-                    # selectlist[i].click()  
-                    # js.executeScript("var evt = document.createEvent('MouseEvents');" + "evt.initMouseEvent('click',true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0,null);" + "arguments[0].dispatchEvent(evt);", findElement(element));
                     while selectlist[i].is_displayed():
-                        print("进入while")
                         self.scrollinto(selectlist[i])
 
                         try:
-                            print(selectlist[i].get_attribute("textContent"))
+                            tag_text = selectlist[i].get_attribute("textContent")
+                            # print(tag_text)
                         except AttributeError:
+                            # print("报错报错")
                             continue
 
                     return selectlist[i]
 
         else:
-            # print("进入这里", text)
+            # print("进入这里else")
             select_loc = (By.XPATH, "//span[contains(text(), '%s')]" %text) 
 
             return select_loc
@@ -135,7 +133,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(phoneAreaCode)
         # time.sleep(1)
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def send_phone(self):
@@ -153,7 +151,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(nationality)
         # time.sleep(0.5)
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def send_idType(self):
@@ -161,7 +159,7 @@ class ApplyPage(BasePage.BasePage):
         # time.sleep(0.5)
         self.scrollinto(idType)
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         if selectelement.get_attribute("textContent") == "其他":
             self.find_element(*self.get_input("其他证件类型")).send_keys("idType")
             self.find_element(*self.get_input("其他证件号码")).send_keys("43110120215251")
@@ -174,7 +172,7 @@ class ApplyPage(BasePage.BasePage):
         # time.sleep(0.5)
         self.scrollinto(countryIssue)
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def send_birthday(self):
@@ -194,7 +192,7 @@ class ApplyPage(BasePage.BasePage):
         # time.sleep(0.5)
         self.scrollinto(employment)
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))        
+        # print(selectelement.get_attribute("textContent"))        
 
         if selectelement.get_attribute("textContent") == "就业" or selectelement.get_attribute("textContent") == "自雇":        
             occupation = self.find_element(*self.get_input("职位")).send_keys("销售")
@@ -229,7 +227,7 @@ class ApplyPage(BasePage.BasePage):
         # time.sleep(0.3)
         self.scrollinto(securities)
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def CBBCcertificate(self):
@@ -238,7 +236,7 @@ class ApplyPage(BasePage.BasePage):
         # time.sleep(0.3)
         self.scrollinto(CBBCcertificate)
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def derivativewarrant(self):
@@ -247,7 +245,7 @@ class ApplyPage(BasePage.BasePage):
         # time.sleep(0.3)
         self.scrollinto(derivativewarrant)
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def futures(self):
@@ -256,7 +254,7 @@ class ApplyPage(BasePage.BasePage):
         # time.sleep(0.3)
         self.scrollinto(futures)
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def Option(self):
@@ -266,7 +264,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(Option)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def foreignexchange(self):
@@ -276,7 +274,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(foreignexchange)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def otherInvest(self):
@@ -295,7 +293,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(derivativeCourse)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def derivativeJobs(self):
@@ -305,7 +303,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(derivativeJobs)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def tradingFund(self):
@@ -314,7 +312,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(tradingFund)
         # time.sleep(0.5)
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def buyProduct(self):
@@ -323,7 +321,7 @@ class ApplyPage(BasePage.BasePage):
         # time.sleep(0.3)
         self.scrollinto(buyProduct)
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def bankrupt(self):
@@ -332,7 +330,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(bankrupt)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def customerRelatives(self):
@@ -341,7 +339,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(customerRelatives)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def associatedcustomer(self):
@@ -350,7 +348,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(associatedcustomer)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def director(self):
@@ -359,7 +357,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(director)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def citizenOfUSA(self):
@@ -368,7 +366,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(citizenOfUSA)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def americanResident(self):
@@ -377,7 +375,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(americanResident)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def PEP_People(self):
@@ -386,7 +384,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(PEP_People)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def investmentTarget(self):
@@ -395,7 +393,7 @@ class ApplyPage(BasePage.BasePage):
         # time.sleep(0.3)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def riskTolerance(self):
@@ -404,7 +402,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(riskTolerance)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def currency(self):
@@ -413,7 +411,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(currency)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def bankAccount(self):
@@ -429,7 +427,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(marginAccount)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def discretion(self):
@@ -447,7 +445,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(companyAccounts)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
 
@@ -464,7 +462,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(beneficial)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
         # self.find_element(*self.get_input("最终实益拥有人名称为", other=True)).send_keys("beneficial")
@@ -475,7 +473,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(othedPeople)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
 
@@ -487,14 +485,14 @@ class ApplyPage(BasePage.BasePage):
         self.find_element(*self.get_input("本人接受上述声明")).click()
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
     def useStatement(self):
         self.find_element(*self.get_input("个人资料之使用声明")).click()
         # self.find_element(*self.get_select(top=True)).click()
         selectelement = self.get_select(top=True)
-        print(selectelement.get_attribute("textContent"))
+        # print(selectelement.get_attribute("textContent"))
         return selectelement.get_attribute("textContent")
 
 
