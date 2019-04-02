@@ -18,6 +18,7 @@ from selenium.webdriver.common.keys import Keys
 class ApplyPage(BasePage.BasePage):
     # log = Logging.Logs()
 
+
     def get_input(self, text, other=False):
         if not other:
             input_loc = (By.XPATH, "//div[contains(text(), '%s')]/following-sibling::span//input" %text)
@@ -81,54 +82,60 @@ class ApplyPage(BasePage.BasePage):
         self.script("arguments[0].scrollIntoView();", loc)
         self.script("arguments[0].click();", loc)
 
-        # loc.click()
-
-
-    # 账户类型
     def send_applicationFor(self):
+        # 账户类型
         applicationFor = self.find_element(*self.get_input('账户类型'))
         applicationFor.click()
         self.find_element(*self.get_select(text='个人账户')).click()
         print(applicationFor.get_attribute("value"))
 
-    # 开户方法
+    
     def send_accountOpeningWay(self):
+        # 开户方法
         self.find_element(*self.get_input('开户方法')).click()
         self.find_element(*self.get_select(text='亲临开户')).click()
 
-    # 负责人
+    
     def send_parentId(self):
+        # 负责人
         self.find_element(*self.get_input('负责人')).click()
         self.find_element(*self.get_select(text='sales_t1')).click()
 
-    # 邮件语言
+    
     def send_mailLanguage(self):
+        # 邮件语言
         self.find_element(*self.get_input('邮件语言')).click()
         self.find_element(*self.get_select(text='中文(简体)')).click()
 
 
     def send_accountType(self):
+        # 账户类别
         self.find_element(*self.get_checkbox('香港及环球证券账户(现金)')).click()
 
     def send_title(self):
+        # 称谓
         self.find_element(*self.get_input('称谓')).click()
         self.find_element(*self.get_select(text='先生')).click()
 
     def send_firstName(self):
+        # 名字
         self.find_element(*self.get_input('名字')).send_keys("firstName")
 
     def send_lastName(self):
+        # 姓氏
         self.find_element(*self.get_input('姓氏')).send_keys("lastName")
         self.find_element(*self.get_input('姓氏')).send_keys(Keys.ENTER)
-        # time.sleep(5)
 
     def send_chineseName(self):
+        # 中文姓名
         self.find_element(*self.get_input('中文姓名')).send_keys("郑某人")
 
     def send_emali(self):
+        # 电邮
         self.find_element(*self.get_input('电邮')).send_keys("oneditest@gmail.com")
 
     def send_phoneAreaCode(self):
+        # 电话号码区号
         phoneAreaCode = self.find_element(*self.get_input('电话号码区号'))
         self.scrollinto(phoneAreaCode)
         # time.sleep(1)
@@ -137,16 +144,19 @@ class ApplyPage(BasePage.BasePage):
         return selectelement.get_attribute("textContent")
 
     def send_phone(self):
+        # 电话号码
         self.find_element(*self.get_input("电话号码(用于通讯)")).send_keys("15089510001")
 
     def send_address(self):
+        # 住宅地址
         self.find_element(*self.get_input("住宅地址(不接受邮政信箱)")).send_keys("桑达科技大厦802")
 
     def send_addressMail(self):
+        # 邮寄地址
         self.find_element(*self.get_input("邮寄地址(如与住宅地址不同)")).send_keys("桑达科技大厦802")
 
     def send_nationality(self):
-        # print("send_nationality")
+        # 国籍
         nationality = self.find_element(*self.get_input("国籍"))
         self.scrollinto(nationality)
         # time.sleep(0.5)
@@ -155,6 +165,7 @@ class ApplyPage(BasePage.BasePage):
         return selectelement.get_attribute("textContent")
 
     def send_idType(self):
+        # 身份证件类型
         idType = self.find_element(*self.get_input("身份证件类型"))
         # time.sleep(0.5)
         self.scrollinto(idType)
@@ -168,6 +179,7 @@ class ApplyPage(BasePage.BasePage):
 
 
     def send_countryIssue(self):
+        # 签发国籍
         countryIssue = self.find_element(*self.get_input("签发国家"))
         # time.sleep(0.5)
         self.scrollinto(countryIssue)
@@ -176,10 +188,12 @@ class ApplyPage(BasePage.BasePage):
         return selectelement.get_attribute("textContent")
 
     def send_birthday(self):
+        # 出生日期
         self.find_element(*self.get_input("出生日期(日/月/年)")).send_keys("21/01/2000")
         self.find_element(*self.get_input("出生日期(日/月/年)")).send_keys(Keys.ENTER)
 
     def send_birthPlace(self):
+        # 出生地点
         birthPlace = self.find_element(*self.get_input('出生地点'))
         # time.sleep(0.5)
         self.scrollinto(birthPlace)
@@ -188,6 +202,7 @@ class ApplyPage(BasePage.BasePage):
         return selectelement.get_attribute("textContent")
 
     def employment(self):
+        # 就业情况
         employment = self.find_element(*self.get_input("就业情况"))
         # time.sleep(0.5)
         self.scrollinto(employment)
@@ -211,14 +226,17 @@ class ApplyPage(BasePage.BasePage):
             pass
 
     def totalRevenue(self):
+        # 客户全年总收入为(港元)
         self.find_element(*self.get_radio("客户全年总收入为(港元)")).click()
         self.find_element(*self.get_input("请注明资金来源", other=True)).send_keys("资金来源")
 
     def netEstate(self):
+        # 客户资产净值(港元)
         self.find_element(*self.get_radio("客户资产净值(港元)")).click()
         self.find_element(*self.get_input("请注明资产净值", other=True)).send_keys("请注明资产净值")
 
     def source_of_wealth(self):
+        # 客户交易的资金/财富来源（选择所有适用）
         self.find_element(*self.get_checkbox("就业薪金")).click()
 
     def securities(self):
@@ -325,6 +343,7 @@ class ApplyPage(BasePage.BasePage):
         return selectelement.get_attribute("textContent")
 
     def bankrupt(self):
+        # 客户是否曾经宣告破产或被申请破产
         bankrupt = self.find_element(*self.get_input("申请破产"))
         # time.sleep(0.3)
         self.scrollinto(bankrupt)
@@ -334,8 +353,13 @@ class ApplyPage(BasePage.BasePage):
         return selectelement.get_attribute("textContent")
 
     def customerRelatives(self):
-        customerRelatives = self.find_element(*self.get_input("艾德证券的雇员", other=True))
-        # time.sleep(0.3)
+        # 客户是否艾德证券及/或艾德金业的雇员或任何其客户的亲属?
+        page = self.driver.page_source
+        if page.find("艾德证券及/或艾德金业的雇员") == -1:
+            customerRelatives = self.find_element(*self.get_input("艾德证券及/或艾德金业的雇员", other=True))
+        else:
+            customerRelatives = self.find_element(*self.get_input("艾德证券的雇员", other=True))
+
         self.scrollinto(customerRelatives)
         # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
@@ -343,6 +367,7 @@ class ApplyPage(BasePage.BasePage):
         return selectelement.get_attribute("textContent")
 
     def associatedcustomer(self):
+        # 3.客户是否与任何艾德证券及/或艾德金业客户有关连?
         associatedcustomer = self.find_element(*self.get_input("艾德证券客户有关连", other=True))
         # time.sleep(0.3)
         self.scrollinto(associatedcustomer)
@@ -352,6 +377,7 @@ class ApplyPage(BasePage.BasePage):
         return selectelement.get_attribute("textContent")
 
     def director(self):
+        # 4.客户是否香港交易所之交易所参与者或证监会之持牌人或注册人之董事、雇员或认可人士?
         director = self.find_element(*self.get_input("认可人士?", other=True))
         # time.sleep(0.3)
         self.scrollinto(director)
@@ -361,6 +387,7 @@ class ApplyPage(BasePage.BasePage):
         return selectelement.get_attribute("textContent")
 
     def citizenOfUSA(self):
+        # 5.客户是否拥有美国公民或美国合法永久居民身份?
         citizenOfUSA = self.find_element(*self.get_input("美国公民", other=True))
         # time.sleep(0.3)
         self.scrollinto(citizenOfUSA)
@@ -370,6 +397,7 @@ class ApplyPage(BasePage.BasePage):
         return selectelement.get_attribute("textContent")
 
     def americanResident(self):
+        # 6.就税务而言，您是否美国居民?
         americanResident = self.find_element(*self.get_input("美国居民", other=True))
         # time.sleep(0.3)
         self.scrollinto(americanResident)
@@ -379,6 +407,7 @@ class ApplyPage(BasePage.BasePage):
         return selectelement.get_attribute("textContent")
 
     def PEP_People(self):
+        # 7.客户是否香港法律定义下的“政治公众人物（PEP）”或与政治公众人物有密切联系？
         PEP_People = self.find_element(*self.get_input("政治公众人物（PEP）", other=True))
         # time.sleep(0.3)
         self.scrollinto(PEP_People)
@@ -388,6 +417,7 @@ class ApplyPage(BasePage.BasePage):
         return selectelement.get_attribute("textContent")
 
     def investmentTarget(self):
+        # 8.客户的投资目标是:
         investmentTarget = self.find_element(*self.get_input("投资目标", other=True))
         self.scrollinto(investmentTarget)
         # time.sleep(0.3)
@@ -397,6 +427,7 @@ class ApplyPage(BasePage.BasePage):
         return selectelement.get_attribute("textContent")
 
     def riskTolerance(self):
+        # 9.客户的风险承受能力是:
         riskTolerance = self.find_element(*self.get_input("风险承受能力", other=True))
         # time.sleep(0.3)
         self.scrollinto(riskTolerance)
@@ -409,16 +440,14 @@ class ApplyPage(BasePage.BasePage):
         currency = self.find_element(*self.get_input("货币", other=True))
         # time.sleep(0.3)
         self.scrollinto(currency)
-        # self.find_element(*self.get_select()).click()
         selectelement = self.get_select()
         # print(selectelement.get_attribute("textContent"))
-        return selectelement.get_attribute("textContent")
-
-    def bankAccount(self):
-        bankAccount_loc = (By.XPATH, "//span[contains(text(), '删除')]/parent::*/parent::*/preceding-sibling::div//input")
-        bankAccount = self.find_elements(*bankAccount_loc)
-        for bankInput in bankAccount:
-            bankInput.send_keys("bankAccount")
+        if not selectelement.get_attribute("textContent") == "不适用":
+            print("if not 不适用")
+            bankAccount_loc = (By.XPATH, "//span[contains(text(), '删除')]/parent::*/parent::*/preceding-sibling::div//input")
+            bankAccount = self.find_elements(*bankAccount_loc)
+            for bankInput in bankAccount:
+                bankInput.send_keys("bankAccount")
 
 
     def marginAccount(self):

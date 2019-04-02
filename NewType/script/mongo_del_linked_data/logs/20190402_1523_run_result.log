@@ -1,0 +1,53 @@
+2019-04-02 15:23:32,642 del_mongo.py INFO [line:27] 连接数据库uat
+2019-04-02 15:23:34,312 del_mongo.py INFO [line:45] apply_info 表符合查询条件{'email': '947152623@qq.com'} 的数据有1 条
+2019-04-02 15:23:34,421 del_mongo.py INFO [line:49] {'_id': ObjectId('5bea2ef841aa207b5c7272b1'), 'relationWithMaster': '', 'isMaster': '1', 'applyId': ObjectId('5bea2ef841aa2070977272ab'), 'title': 'mr', 'email': '947152623@qq.com', 'phoneAreaCode': 'ABW', 'phone': '15000000000', 'birthday': 1542038400000, 'riskInfo': {}, 'firstName': '', 'lastName': '', 'chineseName': '', 'pastEnglishName': '', 'pastChineseName': '', 'address': '', 'addressMail': '', 'nationality': '', 'idType': '', 'idNumber': '', 'idTypeOther': '', 'countryIssue': '', 'birthPlace': '', 'employment': '', 'employedPeriod': '', 'employmentOther': '', 'employer': '', 'occupation': '', 'businessType': '', 'career': '', 'businessAddress': '', 'businessPhone': '', 'attachment': {}, 'relationWithMasterImmediateFamily': '', 'relationWithMasterOthers': '', 'referralCode': '', 'createdTime': 1542074104763, 'updatedTime': 1542074104763}
+2019-04-02 15:23:34,429 del_mongo.py INFO [line:59] apply_info 表关联的字段为 applyId : 5bea2ef841aa2070977272ab
+2019-04-02 15:23:34,429 del_mongo.py INFO [line:60] 正在查询关联表 apply 的数据
+2019-04-02 15:23:34,483 del_mongo.py INFO [line:45] apply 表符合查询条件{'_id': ObjectId('5bea2ef841aa2070977272ab')} 的数据有1 条
+2019-04-02 15:23:34,592 del_mongo.py INFO [line:49] {'_id': ObjectId('5bea2ef841aa2070977272ab'), 'accountType': ['securitiesCash', 'stockOptionsCash'], 'applyInfoIds': [ObjectId('5bea2ef841aa207b5c7272b1')], 'learnHow': [''], 'tradingAuthorization': [''], 'isRelatedAccounts': [''], 'applicationFor': 'individual', 'parentId': 'sales_t1', 'IBparentId': '', 'mailLanguage': 'zh-hans', 'accountOpeningWay': '', 'accountNumber': '123www', 'accountPwd': '', 'personalInfoDeclartion': '', 'agreeToTheTerms': '', 'status': 'success', 'applySeqId': 154, 'roApprovalList': [{'isApproval': True, '_id': ObjectId('5bea2ef841aa20de7d7272af'), 'username': 'don_test'}, {'isApproval': True, '_id': ObjectId('5bea2ef841aa2031b97272ae'), 'username': 'cliff_test'}], 'leadId': '', 'parentPath': '/100000/ceo_t1/ro_t1/sales_t1', 'currency': 'HKD', 'bankAccount': [], 'isMarginAccount': '', 'marginAccountName': '', 'marginAccountNumber': '', 'isDiscretion': '', 'discretionName': '', 'discretionNumber': '', 'isCompanyAccounts': '', 'companyAccountsName': '', 'companyAccountsNumber': '', 'learnHowCode': '', 'learnHowOther': '', 'isBeneficiary': '', 'beneficiaryName': '', 'isOrders': '', 'ordersName': '', 'relatedAccountsOpt': [], 'referralCode': '', 'remark': '', 'principal': '', 'createdTime': 1542074104466, 'updatedTime': 1542074104466}
+2019-04-02 15:23:34,592 del_mongo.py INFO [line:110] ***********************************
+
+2019-04-02 15:23:34,592 del_mongo.py INFO [line:111] 没有关联数据,直接删除apply 表
+2019-04-02 15:23:34,592 del_mongo.py INFO [line:118] ***********************************
+
+2019-04-02 15:23:34,592 del_mongo.py INFO [line:110] ***********************************
+
+2019-04-02 15:23:34,592 del_mongo.py INFO [line:111] 没有关联数据,直接删除apply_info 表
+2019-04-02 15:23:34,592 del_mongo.py INFO [line:118] ***********************************
+
+2019-04-02 15:23:34,592 del_mongo.py INFO [line:33] close Client
+2019-04-02 15:23:37,001 del_mongo.py INFO [line:27] 连接数据库uat
+2019-04-02 15:23:38,153 del_mongo.py INFO [line:45] apply_info 表符合查询条件{'email': '947152623@qq.com'} 的数据有1 条
+2019-04-02 15:23:38,263 del_mongo.py INFO [line:49] {'_id': ObjectId('5bea2ef841aa207b5c7272b1'), 'relationWithMaster': '', 'isMaster': '1', 'applyId': ObjectId('5bea2ef841aa2070977272ab'), 'title': 'mr', 'email': '947152623@qq.com', 'phoneAreaCode': 'ABW', 'phone': '15000000000', 'birthday': 1542038400000, 'riskInfo': {}, 'firstName': '', 'lastName': '', 'chineseName': '', 'pastEnglishName': '', 'pastChineseName': '', 'address': '', 'addressMail': '', 'nationality': '', 'idType': '', 'idNumber': '', 'idTypeOther': '', 'countryIssue': '', 'birthPlace': '', 'employment': '', 'employedPeriod': '', 'employmentOther': '', 'employer': '', 'occupation': '', 'businessType': '', 'career': '', 'businessAddress': '', 'businessPhone': '', 'attachment': {}, 'relationWithMasterImmediateFamily': '', 'relationWithMasterOthers': '', 'referralCode': '', 'createdTime': 1542074104763, 'updatedTime': 1542074104763}
+2019-04-02 15:23:38,263 del_mongo.py INFO [line:59] apply_info 表关联的字段为 applyId : 5bea2ef841aa2070977272ab
+2019-04-02 15:23:38,263 del_mongo.py INFO [line:60] 正在查询关联表 apply 的数据
+2019-04-02 15:23:38,317 del_mongo.py INFO [line:45] apply 表符合查询条件{'_id': ObjectId('5bea2ef841aa2070977272ab')} 的数据有1 条
+2019-04-02 15:23:38,428 del_mongo.py INFO [line:49] {'_id': ObjectId('5bea2ef841aa2070977272ab'), 'accountType': ['securitiesCash', 'stockOptionsCash'], 'applyInfoIds': [ObjectId('5bea2ef841aa207b5c7272b1')], 'learnHow': [''], 'tradingAuthorization': [''], 'isRelatedAccounts': [''], 'applicationFor': 'individual', 'parentId': 'sales_t1', 'IBparentId': '', 'mailLanguage': 'zh-hans', 'accountOpeningWay': '', 'accountNumber': '123www', 'accountPwd': '', 'personalInfoDeclartion': '', 'agreeToTheTerms': '', 'status': 'success', 'applySeqId': 154, 'roApprovalList': [{'isApproval': True, '_id': ObjectId('5bea2ef841aa20de7d7272af'), 'username': 'don_test'}, {'isApproval': True, '_id': ObjectId('5bea2ef841aa2031b97272ae'), 'username': 'cliff_test'}], 'leadId': '', 'parentPath': '/100000/ceo_t1/ro_t1/sales_t1', 'currency': 'HKD', 'bankAccount': [], 'isMarginAccount': '', 'marginAccountName': '', 'marginAccountNumber': '', 'isDiscretion': '', 'discretionName': '', 'discretionNumber': '', 'isCompanyAccounts': '', 'companyAccountsName': '', 'companyAccountsNumber': '', 'learnHowCode': '', 'learnHowOther': '', 'isBeneficiary': '', 'beneficiaryName': '', 'isOrders': '', 'ordersName': '', 'relatedAccountsOpt': [], 'referralCode': '', 'remark': '', 'principal': '', 'createdTime': 1542074104466, 'updatedTime': 1542074104466}
+2019-04-02 15:23:38,428 del_mongo.py INFO [line:110] ***********************************
+
+2019-04-02 15:23:38,428 del_mongo.py INFO [line:111] 没有关联数据,直接删除apply 表
+2019-04-02 15:23:38,484 del_mongo.py INFO [line:115] {'n': 1, 'opTime': {'ts': Timestamp(1554189818, 1), 't': 98}, 'electionId': ObjectId('7fffffff0000000000000062'), 'ok': 1.0, 'operationTime': Timestamp(1554189818, 1), '$clusterTime': {'clusterTime': Timestamp(1554189818, 1), 'signature': {'hash': b'\xf8\xa3q\xf3\xccr\xc7\x0f*\x9bOA\x87\xeeVM\xed\xd4\x18\xa4', 'keyId': 6636138069080670209}}}
+2019-04-02 15:23:38,485 del_mongo.py INFO [line:118] ***********************************
+
+2019-04-02 15:23:38,485 del_mongo.py INFO [line:110] ***********************************
+
+2019-04-02 15:23:38,485 del_mongo.py INFO [line:111] 没有关联数据,直接删除apply_info 表
+2019-04-02 15:23:38,538 del_mongo.py INFO [line:115] {'n': 1, 'opTime': {'ts': Timestamp(1554189818, 2), 't': 98}, 'electionId': ObjectId('7fffffff0000000000000062'), 'ok': 1.0, 'operationTime': Timestamp(1554189818, 2), '$clusterTime': {'clusterTime': Timestamp(1554189818, 2), 'signature': {'hash': b'\xf8\xa3q\xf3\xccr\xc7\x0f*\x9bOA\x87\xeeVM\xed\xd4\x18\xa4', 'keyId': 6636138069080670209}}}
+2019-04-02 15:23:38,538 del_mongo.py INFO [line:118] ***********************************
+
+2019-04-02 15:23:38,538 del_mongo.py INFO [line:33] close Client
+2019-04-02 15:23:59,656 del_mongo.py INFO [line:27] 连接数据库uat
+2019-04-02 15:24:00,650 del_mongo.py INFO [line:45] client_info 表符合查询条件{'email': '947152623@qq.com'} 的数据有1 条
+2019-04-02 15:24:00,762 del_mongo.py INFO [line:49] {'_id': ObjectId('5bea3005d0d64c80dd1814c3'), 'accountId': [ObjectId('5bea3004d0d64c592b1814c0')], 'applyId': [ObjectId('5bea2ef841aa2070977272ab')], 'clientSeqId': 303, 'title': 'mr', 'firstName': '', 'lastName': '', 'chineseName': '', 'pastEnglishName': '', 'pastChineseName': '', 'email': '947152623@qq.com', 'phone': '15000000000', 'address': '', 'addressMail': '', 'phoneAreaCode': 'ABW', 'nationality': '', 'idType': '', 'idNumber': '', 'countryIssue': '', 'birthday': 1542038400000, 'birthPlace': '', 'employment': '', 'employer': '', 'businessType': '', 'occupation': '', 'businessAddress': '', 'businessPhone': '', 'isMaster': '1', 'parentPath': '/100000/ceo_t1/ro_t1/sales_t1', 'riskInfo': {}, 'relationWithMasterImmediateFamily': '', 'relationWithMasterOthers': '', 'employedPeriod': '', 'employmentOther': '', 'createdTime': 1542074373046, 'updatedTime': 1542074373046}
+2019-04-02 15:24:00,762 del_mongo.py INFO [line:79] client_info 表关联的字段为 accountId : [ObjectId('5bea3004d0d64c592b1814c0')]
+2019-04-02 15:24:00,762 del_mongo.py INFO [line:80] 正在查询关联表 account 的数据
+2019-04-02 15:24:00,818 del_mongo.py INFO [line:45] account 表符合查询条件{'_id': ObjectId('5bea3004d0d64c592b1814c0')} 的数据有0 条
+2019-04-02 15:24:00,928 del_mongo.py INFO [line:79] client_info 表关联的字段为 applyId : [ObjectId('5bea2ef841aa2070977272ab')]
+2019-04-02 15:24:00,928 del_mongo.py INFO [line:80] 正在查询关联表 apply 的数据
+2019-04-02 15:24:00,983 del_mongo.py INFO [line:45] apply 表符合查询条件{'_id': ObjectId('5bea2ef841aa2070977272ab')} 的数据有0 条
+2019-04-02 15:24:01,089 del_mongo.py INFO [line:110] ***********************************
+
+2019-04-02 15:24:01,089 del_mongo.py INFO [line:111] 没有关联数据,直接删除client_info 表
+2019-04-02 15:24:01,089 del_mongo.py INFO [line:118] ***********************************
+
+2019-04-02 15:24:01,089 del_mongo.py INFO [line:33] close Client

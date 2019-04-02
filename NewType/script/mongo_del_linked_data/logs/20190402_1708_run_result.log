@@ -1,0 +1,2 @@
+2019-04-02 17:08:42,450 del_mongo.py INFO [line:27] 连接数据库test
+2019-04-02 17:08:47,556 del_mongo.py INFO [line:27] 连接数据库uat
