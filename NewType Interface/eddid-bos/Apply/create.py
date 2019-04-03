@@ -13,7 +13,7 @@ from requests.packages import urllib3
 url = 'https://eddid-api.ntdev.be/eddid-api-uat/apply/create'
 headers = {
     'Content-Type' : 'application/json' ,
-    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoiYWRtaW4iLCJjb2duaXRvOnJvbGVzIjpbImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSJdLCJhdWQiOiI1MTNqZmNrdHIxbTZldm9nZnF1N29zazdwYSIsImV2ZW50X2lkIjoiMzQ2MTNjM2MtNTUyMS0xMWU5LWI4MTktZDU2ODBlMWEwOGY2IiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NTQxOTM2NzEsImV4cCI6MTU1NDE5NzI3MSwiaWF0IjoxNTU0MTkzNjcxLCJmYW1pbHlfbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbjEyM0BxcS5jb20ifQ.RlMv5Het-ofg1-NI08vXFIwocXHJ2RUNQqlhqMryPVhGCARibckwdIQkB8nk7SRBav5bh0p-3aWjj7FZwq2hhszYhLp6hvV1F62jXrXP5Np7WSmPcC5ITjZAMPU2HGbQd02aKQ627iSeQerZ0Uo7D4R_nWkDxR14QDA8eeYodEz3E55EshfrccYpMvs1m1H2Zefjglvw-zujdUxKha15hkLbvQYRQIxmqSs4QPH5HSLaL3mieLCpkWCmKHtBd8tBP6rxuEEUqxE0HbIF0k8wTSo6kCO59BHkC8HAdDIkSeo2DtGhz_QQauVheBzCMTXSP56VQUk29IxluwpSyFGo9g'
+    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoiYWRtaW4iLCJjb2duaXRvOnJvbGVzIjpbImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSJdLCJhdWQiOiI1MTNqZmNrdHIxbTZldm9nZnF1N29zazdwYSIsImV2ZW50X2lkIjoiMjJiNDcyYTMtNTVlYS0xMWU5LWFkNWItZTM5NGNjMTViYjA4IiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NTQyNzk5NzAsImV4cCI6MTU1NDI4MzU3MCwiaWF0IjoxNTU0Mjc5OTcwLCJmYW1pbHlfbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbjEyMzRAcXEuY29tIn0.gxfOPFjYpablinljlLTG8JaeKMwemTWuwZRzWI17z2leUAkXHgRt5Inx9vZEwiqZ49_U61hw9_mH9vww98czc_flGgqrJK_WY-Q4LdtcrgN5Xkycv-70-hauCf3u6XbtPzXq0zLm1eWATXf8O-alg2IJn3kgnhBWN2tH4xlqFnmLVxMJpiYdYS7cl7wY1r67YUCgAdV7zfYdWg4gMBa-WfUVVmC-eiOYTrkshzStevSXIYnPmCXglxnuVtStNFegW2vt4Cu4ek7-GrJ6XZxKSQ8nedOlGv0kb3h_48EbPpFe-MSn9rQ5bXHnxhLIImvpSLFz-tAASeCyn3akkQW-4w'
 }
 
 
@@ -21,13 +21,13 @@ data = {
     # "applicationFor": "individual",
     "applicationFor": "joint",    
     # goldSpot 黄金
-    # "accountType": ["securitiesCash", "leveragedForeignExchangeAccountMargin","futuresMargin","securitiesDayTradeMargin"],
-    "accountType": ["futuresMargin"],
+    "accountType": ["securitiesCash", "leveragedForeignExchangeAccountMargin","futuresMargin","securitiesDayTradeMargin"],
+    # "accountType": ["bullionMargin"],
     #mobile:手机;visitingAccount:亲临开户;postal:邮递;onlineApplication:网上开户申请
     "accountOpeningWay": "visitingAccount",  #开户方式,
     "personalInfoDeclartion": "Y",
-    # "customerSource": "ballFives",    
-    "customerSource": "app",    
+    "customerSource": "ballFives",    
+    # "customerSource": "app",    
     # "customerSource": "crm",    
     "mailLanguage": "en",
     "appBankName": "",

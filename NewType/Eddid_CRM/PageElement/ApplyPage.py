@@ -310,12 +310,16 @@ class ApplyPage(BasePage.BasePage):
         buyProduct = self.find_element(*self.get_input("买卖衍生", other=True))
         self.scrollinto(buyProduct)
         tag_text = self.get_select()
+        # print(tag_text,"ssssssssssssss")
         if tag_text == "是":
+            # print("是是是是是")
             riskStatement = self.find_element(*self.get_input("结构性产品相关风险声明披露", other=True))
             self.scrollinto(riskStatement)
             tag_text = self.get_select()
             if tag_text == "否":
-                riskStatement.send_keys(Keys.ENTER)
+                print("messageboxmessageboxmessageboxmessagebox")
+                messagebox = (By.XPATH, "//div[@aria-label='提示']//div[@class='el-message-box__btns']/button")
+                self.find_element(*messagebox).click()
 
 
 
@@ -334,28 +338,38 @@ class ApplyPage(BasePage.BasePage):
         # 客户是否艾德证券及/或艾德金业的雇员或任何其客户的亲属?
         if self.driver.page_source.find("艾德证券及/或艾德金业的雇员") != -1:
             customerRelatives = self.find_element(*self.get_input("艾德证券及/或艾德金业的雇员", other=True))
+            self.scrollinto(customerRelatives)
+            tag_text = self.get_select()
+            if tag_text == "是":
+                self.find_element(*self.get_input("艾德金业雇员名称及关系",other=True)).send_keys("relationship")
+
         else:
             customerRelatives = self.find_element(*self.get_input("艾德证券的雇员", other=True))
+            self.scrollinto(customerRelatives)
+            tag_text = self.get_select()
+            if tag_text == "是":
+                self.find_element(*self.get_input("艾德证券雇员名称及关系",other=True)).send_keys("relationship")
 
-        self.scrollinto(customerRelatives)
-        tag_text = self.get_select()
-        if tag_text == "是":
-            self.find_element(*self.get_input("艾德证券雇员名称及关系",other=True)).send_keys("relationship")
 
     def associatedcustomer(self):
         # 3.客户是否与任何艾德证券及/或艾德金业客户有关连?
-        print(self.driver.page_source.find("艾德证券及/或艾德金业客户有关连"),"find find")
+        # print(self.driver.page_source.find("艾德证券及/或艾德金业客户有关连"),"find find")
         if self.driver.page_source.find("艾德证券及/或艾德金业客户有关连") != -1:
-            print("不等于-1")
+            # print("不等于-1")
             associatedcustomer = self.find_element(*self.get_input("艾德金业客户有关连", other=True))
-        else:
-            print("else else")
-            associatedcustomer = self.find_element(*self.get_input("艾德证券客户有关连", other=True))
+            self.scrollinto(associatedcustomer)
+            tag_text = self.get_select()
+            if tag_text == "是":
+                self.find_element(*self.get_input("艾德金业客户名称", other=True)).send_keys("ClientName")
 
-        self.scrollinto(associatedcustomer)
-        tag_text = self.get_select()
-        if tag_text == "是":
-            self.find_element(*self.get_input("艾德证券客户名称", other=True)).send_keys("ClientName")
+        else:
+            # print("else else")
+            associatedcustomer = self.find_element(*self.get_input("艾德证券客户有关连", other=True))
+            self.scrollinto(associatedcustomer)
+            tag_text = self.get_select()
+            if tag_text == "是":
+                self.find_element(*self.get_input("艾德证券客户名称", other=True)).send_keys("ClientName")
+
 
     def director(self):
         # 4.客户是否香港交易所之交易所参与者或证监会之持牌人或注册人之董事、雇员或认可人士?
@@ -372,10 +386,9 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(citizenOfUSA)
         tag_text = self.get_select()
         if tag_text == "是":
-            pass
-            # //div[contains(text(), '美国公民')]/parent::div/parent::span/following-sibling::*//input
             # 税务编号
-            # self.find_element(*self.get_input("text"))
+            citizenOfUSA_Tax = (By.XPATH, "//div[contains(text(), '美国公民')]/parent::div/parent::div/parent::span/following-sibling::*//input")
+            self.find_element(*citizenOfUSA_Tax).send_keys("citizenOfUSA_Tax")
 
     def americanResident(self):
         # 6.就税务而言，您是否美国居民?
@@ -384,7 +397,9 @@ class ApplyPage(BasePage.BasePage):
         tag_text = self.get_select()
         if tag_text == "是":
             # 税务编号
-            pass
+            americanResident_Tax = (By.XPATH, "//div[contains(text(), '美国居民')]/parent::div/parent::div/parent::span/following-sibling::*//input")
+            self.find_element(*americanResident_Tax).send_keys("americanResident_Tax")
+
 
     def PEP_People(self):
         # 7.客户是否香港法律定义下的“政治公众人物（PEP）”或与政治公众人物有密切联系？
@@ -425,22 +440,35 @@ class ApplyPage(BasePage.BasePage):
         marginAccount = self.find_element(*self.get_input("客户的配偶", other=True))
         self.scrollinto(marginAccount)
         tag_text = self.get_select()
-        return tag_text
+        if tag_text == "是":
+            name_or_num = (By.XPATH, "//div[contains(text(), '客户的配偶')]/parent::div/parent::div/parent::span/following-sibling::span//input")
+            el_inputs = self.find_elements(*name_or_num)
+            print(el_inputs)
+            for inputs in el_inputs: 
+                inputs.send_keys("name")
+
 
     def discretion(self):
         # 2.客户及/或其配偶是否单独或共同控制艾德证券之其他保证金账户35%或以上之表决权?
         discretion = self.find_element(*self.get_input("保证金账户35%或以上之表决权", other=True))
         self.scrollinto(discretion)
         tag_text = self.get_select()
-        print(tag_text)
-        return tag_text
+        if tag_text == "是":
+            name_or_num = (By.XPATH, "//div[contains(text(), '保证金账户35%或以上之表决权')]/parent::div/parent::div/parent::span/following-sibling::span//input")
+            el_inputs = self.find_elements(*name_or_num)
+            for inputs in el_inputs: 
+                inputs.send_keys("name")
 
     def companyAccounts(self):
         # 客户是否有以客户的同一集团公司旗下之公司开立保证金账户？
         companyAccounts = self.find_element(*self.get_input("同一集团公司旗下", other=True))
         self.scrollinto(companyAccounts)
         tag_text = self.get_select()
-        return tag_text
+        if tag_text == "是":
+            name_or_num = (By.XPATH, "//div[contains(text(), '同一集团公司旗下')]/parent::div/parent::div/parent::span/following-sibling::span//input")
+            el_inputs = self.find_elements(name_or_num)
+            for inputs in el_inputs: 
+                inputs.send_keys("name")
 
 
     def channel(self):
@@ -456,14 +484,16 @@ class ApplyPage(BasePage.BasePage):
         beneficial = self.find_element(*self.get_input("是否账户的最终实益拥有人", other=True))
         self.scrollinto(beneficial)
         tag_text = self.get_select()
-        return tag_text
+        if tag_text == "否":
+            self.find_element(*self.get_input("最终实益拥有人名称为", other=True)).send_keys("onedi")
 
     def Othed_People(self):
         # 身份声明>>2.客户是否最终负责下单的人?
         othedPeople = self.find_element(*self.get_input("负责下单", other=True))
         self.scrollinto(othedPeople)
         tag_text = self.get_select()
-        return tag_text
+        if tag_text == "否":
+            self.find_element(*self.get_input("最终负责下单人为", other=True)).send_keys("onedi")
 
     def jurisdiction(self):
         # 居留司法管辖区及税务编号或具有等同功能的识辨编号>>请选择您就税务用途的居留司法管辖区(您可选多一项)

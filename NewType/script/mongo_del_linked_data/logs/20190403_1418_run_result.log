@@ -1,0 +1,6 @@
+2019-04-03 14:18:52,085 del_mongo.py INFO [line:27] 连接数据库uat
+2019-04-03 14:18:54,569 del_mongo.py INFO [line:45] client_info 表符合查询条件{'idNumber': '362501199009243083'} 的数据有0 条
+2019-04-03 14:18:54,837 del_mongo.py INFO [line:33] close Client
+2019-04-03 14:18:59,893 del_mongo.py INFO [line:27] 连接数据库uat
+2019-04-03 14:19:01,937 del_mongo.py INFO [line:45] client_info 表符合查询条件{'idNumber': '362501199009243083'} 的数据有0 条
+2019-04-03 14:19:02,218 del_mongo.py INFO [line:33] close Client
