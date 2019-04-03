@@ -30,7 +30,7 @@ class MainPage(BasePage.BasePage):
     #等待CSS.Loading-modal加载完成,防止报错:"Element is not clickable at point (347, 104). 
     #   Other element would receive the click: <div class="Loading-modal"></div>"
     def wait_LoadingModal(self):
-        WebDriverWait(self.driver, 10, 0.1).until_not(
+        WebDriverWait(self.driver, 10).until_not(
             EC.presence_of_element_located(self.LoadingModal_loc))
 
     def show_userid(self):
