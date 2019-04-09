@@ -64,77 +64,77 @@ class addApply(unittest.TestCase):
         
         mainpage.wait_LoadingModal()
 
-        # chineseName = applypage.send_chineseName()
-        # emali = applypage.send_emali()
-        # phoneAreaCode = applypage.send_phoneAreaCode()
-        # phone = applypage.send_phone()
-        # address = applypage.send_address()
-        # addressMail = applypage.send_addressMail()
-        # nationality = applypage.send_nationality()
-        # idList = applypage.send_idType()
-        # for i in range(len(idList)):
-        #     if idList[0] == '其他':
-        #         print(idList[i])
-        #     else:
-        #         print(idList[i])
+        chineseName = applypage.send_chineseName()
+        emali = applypage.send_emali()
+        phoneAreaCode = applypage.send_phoneAreaCode()
+        phone = applypage.send_phone()
+        address = applypage.send_address()
+        addressMail = applypage.send_addressMail()
+        nationality = applypage.send_nationality()
+        idList = applypage.send_idType()
+        for i in range(len(idList)):
+            if idList[0] == '其他':
+                print(idList[i])
+            else:
+                print(idList[i])
 
 
-        # countryIssue = applypage.send_countryIssue()
-        # birthday = applypage.send_birthday()
-        # birthPlace = applypage.send_birthPlace()
+        countryIssue = applypage.send_countryIssue()
+        birthday = applypage.send_birthday()
+        birthPlace = applypage.send_birthPlace()
 
-        # employments = applypage.employment()
-        # if isinstance(employments, tuple):
-        #     for i in range(len(employments)):
-        #         if employments[0].get_attribute("value") == "就业" or employments[0].get_attribute("value") == "自雇":
-        #             print(employments[i].get_attribute("value"))
-        #         else:
-        #             print(employments[i].get_attribut
-        #                 e("value"))
+        employments = applypage.employment()
+        if isinstance(employments, tuple):
+            for i in range(len(employments)):
+                if employments[0].get_attribute("value") == "就业" or employments[0].get_attribute("value") == "自雇":
+                    print(employments[i].get_attribute("value"))
+                else:
+                    print(employments[i].get_attribut
+                        e("value"))
 
-        # else:
-        #     print(employments.get_attribute("value"))
+        else:
+            print(employments.get_attribute("value"))
 
-        # applypage.uploadImage()
+        applypage.uploadImage()
         
-        # totalRevenue = applypage.totalRevenue()
-        # netEstate = applypage.netEstate()
-        # source_of_wealth = applypage.source_of_wealth()
-        # securities = applypage.securities()
-        # CBBCcertificate = applypage.CBBCcertificate()
-        # derivativewarrant = applypage.derivativewarrant()
-        # futures = applypage.futures()
-        # Option = applypage.Option()
-        # foreignexchange = applypage.foreignexchange()
-        # bullion = applypage.bullion()
-        # otherInvest = applypage.otherInvest()
-        # derivativeCourse = applypage.derivativeCourse()
-        # derivativeJobs = applypage.derivativeJobs()
-        # tradingFund = applypage.tradingFund()
-        # buyProduct = applypage.buyProduct()
-        # bankrupt = applypage.bankrupt()
-        # customerRelatives = applypage.customerRelatives()
-        # associatedcustomer = applypage.associatedcustomer()
-        # director = applypage.director()
-        # citizenOfUSA = applypage.citizenOfUSA()
-        # americanResident = applypage.americanResident()
-        # PEP_People = applypage.PEP_People()
-        # investmentTarget = applypage.investmentTarget()
-        # riskTolerance = applypage.riskTolerance()
-        # currency = applypage.currency()
-        # marginAccount = applypage.marginAccount()
-        # discretion = applypage.discretion()
-        # companyAccounts = applypage.companyAccounts()
-        # channel = applypage.channel()
-        # beneficial = applypage.beneficial()
-        # Othed_People = applypage.Othed_People()
-        # jurisdiction = applypage.jurisdiction()
-        # acceptStatement = applypage.acceptStatement()
-        # useStatement = applypage.useStatement()
+        totalRevenue = applypage.totalRevenue()
+        netEstate = applypage.netEstate()
+        source_of_wealth = applypage.source_of_wealth()
+        securities = applypage.securities()
+        CBBCcertificate = applypage.CBBCcertificate()
+        derivativewarrant = applypage.derivativewarrant()
+        futures = applypage.futures()
+        Option = applypage.Option()
+        foreignexchange = applypage.foreignexchange()
+        bullion = applypage.bullion()
+        otherInvest = applypage.otherInvest()
+        derivativeCourse = applypage.derivativeCourse()
+        derivativeJobs = applypage.derivativeJobs()
+        tradingFund = applypage.tradingFund()
+        buyProduct = applypage.buyProduct()
+        bankrupt = applypage.bankrupt()
+        customerRelatives = applypage.customerRelatives()
+        associatedcustomer = applypage.associatedcustomer()
+        director = applypage.director()
+        citizenOfUSA = applypage.citizenOfUSA()
+        americanResident = applypage.americanResident()
+        PEP_People = applypage.PEP_People()
+        investmentTarget = applypage.investmentTarget()
+        riskTolerance = applypage.riskTolerance()
+        currency = applypage.currency()
+        marginAccount = applypage.marginAccount()
+        discretion = applypage.discretion()
+        companyAccounts = applypage.companyAccounts()
+        channel = applypage.channel()
+        beneficial = applypage.beneficial()
+        Othed_People = applypage.Othed_People()
+        jurisdiction = applypage.jurisdiction()
+        acceptStatement = applypage.acceptStatement()
+        useStatement = applypage.useStatement()
 
-        # applypage.click_sublime()
+        applypage.click_sublime()
 
-        # mainpage.wait_LoadingModal()
+        mainpage.wait_LoadingModal()
 
 
 
