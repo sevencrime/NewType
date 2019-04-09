@@ -35,10 +35,10 @@ class Database:
 
 
 	def del_linked(self, collection, query, database=None):
-		# if database == None:
-		# 	self.db = self.client[self.database]
-		# else:
-		# 	self.db = self.client[database]
+		if database == None:
+			self.db = self.client[self.database]
+		else:
+			self.db = self.client[database]
 
 		self.collections.add(collection)
 		result = self.db[collection].find(query)
@@ -89,7 +89,7 @@ class Database:
 									print(e," table[%s]没有与之对应的数据库表" %key)
 
 					elif key == 'idpUserId':
-						continue
+						# continue
 						try:
 							if self.table[key] not in self.collections:
 								self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
@@ -98,7 +98,8 @@ class Database:
 								print(collection,"表关联的字段为 ",key,":",r[key])
 								print("正在查询关联表 %s 的数据" %self.table[key])
 
-								self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpool%s' %self.database)
+								self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpooluat')
+
 
 						except Exception as e:
 							self.log.info(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
@@ -122,7 +123,7 @@ if __name__ == '__main__':
 	# host = 'localhost:27017'
 	database = 'uat'
 	# Database(host, database).del_linked("apply_info", {'email':'onedi@qq.com'})
-	Database(host, database).del_linked("client_info", {'phone':"15919987852"})
+	Database(host, database).del_linked("client_info", {'email':"onedi@qq.com"})
 
 
 

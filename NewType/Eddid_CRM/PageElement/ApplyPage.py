@@ -87,26 +87,32 @@ class ApplyPage(BasePage.BasePage):
         applicationFor = self.find_element(*self.get_input('账户类型'))
         applicationFor.click()
         self.find_element(*self.get_select(text='个人账户')).click()
-        print(applicationFor.get_attribute("value"))
-
+        # print(applicationFor.get_attribute("value"))
+        return applicationFor.get_attribute("value")
     
     def send_accountOpeningWay(self):
         # 开户方法
-        self.find_element(*self.get_input('开户方法')).click()
+        accountOpeningWay = self.find_element(*self.get_input('开户方法'))
+        accountOpeningWay.click()
         self.find_element(*self.get_select(text='亲临开户')).click()
 
-    
+        return accountOpeningWay.get_attribute("value")
+
     def send_parentId(self):
         # 负责人
-        self.find_element(*self.get_input('负责人')).click()
+        parentId = self.find_element(*self.get_input('负责人'))
+        parentId.click()
         self.find_element(*self.get_select(text='sales_t1')).click()
 
-    
+        return parentId.get_attribute("value")
+
     def send_mailLanguage(self):
         # 邮件语言
-        self.find_element(*self.get_input('邮件语言')).click()
+        mailLanguage = self.find_element(*self.get_input('邮件语言'))
+        mailLanguage.click()
         self.find_element(*self.get_select(text='中文(简体)')).click()
 
+        return mailLanguage.get_attribute("value")
 
     def send_accountType(self):
         # 账户类别
@@ -114,51 +120,67 @@ class ApplyPage(BasePage.BasePage):
 
     def send_title(self):
         # 称谓
-        self.find_element(*self.get_input('称谓')).click()
+        title = self.find_element(*self.get_input('称谓'))
+        title.click()
         self.find_element(*self.get_select(text='先生')).click()
+        return title.get_attribute("value")
 
     def send_firstName(self):
         # 名字
-        self.find_element(*self.get_input('名字')).send_keys("firstName")
+        firstName = self.find_element(*self.get_input('名字'))
+        firstName.send_keys("firstName")
 
     def send_lastName(self):
         # 姓氏
-        self.find_element(*self.get_input('姓氏')).send_keys("lastName")
-        self.find_element(*self.get_input('姓氏')).send_keys(Keys.ENTER)
+        lastName = self.find_element(*self.get_input('姓氏'))
+        lastName.send_keys("lastName")
+        lastName.send_keys(Keys.ENTER)
+        return lastName.get_attribute("value")
 
     def send_chineseName(self):
         # 中文姓名
-        self.find_element(*self.get_input('中文姓名')).send_keys("郑某人")
+        chineseName = self.find_element(*self.get_input('中文姓名'))
+        chineseName.send_keys("郑某人")
+        return chineseName
 
     def send_emali(self):
         # 电邮
-        self.find_element(*self.get_input('电邮')).send_keys("oneditest@gmail.com")
+        email = self.find_element(*self.get_input('电邮'))
+        email.send_keys("%sonedi2s%s@qq.com" %(random.randint(0,1000),random.randint(0,10300)))
+        return email
 
     def send_phoneAreaCode(self):
         # 电话号码区号
         phoneAreaCode = self.find_element(*self.get_input('电话号码区号'))
         self.scrollinto(phoneAreaCode)
         tag_text = self.get_select()
-        return tag_text
+        return phoneAreaCode
 
     def send_phone(self):
         # 电话号码
-        self.find_element(*self.get_input("电话号码(用于通讯)")).send_keys("15089510001")
+        phone = self.find_element(*self.get_input("电话号码(用于通讯)"))
+        phone.send_keys("%s6253%s" %(random.randint(0,100002),random.randint(0,10502)))
+        return phone
 
     def send_address(self):
         # 住宅地址
-        self.find_element(*self.get_input("住宅地址(不接受邮政信箱)")).send_keys("桑达科技大厦802")
+        address = self.find_element(*self.get_input("住宅地址(不接受邮政信箱)"))
+        address.send_keys("桑达科技大厦802")
+        return address
 
     def send_addressMail(self):
         # 邮寄地址
-        self.find_element(*self.get_input("邮寄地址(如与住宅地址不同)")).send_keys("桑达科技大厦802")
+        addressMail = self.find_element(*self.get_input("邮寄地址(如与住宅地址不同)"))
+        addressMail.send_keys("桑达科技大厦802")
+
+        return addressMail
 
     def send_nationality(self):
         # 国籍
         nationality = self.find_element(*self.get_input("国籍"))
         self.scrollinto(nationality)
         tag_text = self.get_select()
-        return tag_text
+        return nationality
 
     def send_idType(self):
         # 身份证件类型
@@ -167,9 +189,9 @@ class ApplyPage(BasePage.BasePage):
         tag_text = self.get_select()
         if tag_text == "其他":
             self.find_element(*self.get_input("其他证件类型")).send_keys("idType")
-            self.find_element(*self.get_input("其他证件号码")).send_keys("43110120215251")
+            self.find_element(*self.get_input("其他证件号码")).send_keys("%s423523%s" %(random.randint(0,1001),random.randint(0,10600)))
         else:
-            self.find_element(*self.get_input("身份证或护照号码")).send_keys("44150266621212")
+            self.find_element(*self.get_input("身份证或护照号码")).send_keys("%s423523%s" %(random.randint(0,1001),random.randint(0,10600)))
 
 
     def send_countryIssue(self):

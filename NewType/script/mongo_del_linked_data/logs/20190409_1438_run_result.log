@@ -1,0 +1,6 @@
+2019-04-09 14:38:04,070 del_mongo.py INFO [line:27] 连接数据库feature
+2019-04-09 14:38:05,467 del_mongo.py INFO [line:45] client_info 表符合查询条件{'phone': '13412341234'} 的数据有0 条
+2019-04-09 14:38:05,569 del_mongo.py INFO [line:33] close Client
+2019-04-09 14:38:25,650 del_mongo.py INFO [line:27] 连接数据库feature
+2019-04-09 14:38:26,936 del_mongo.py INFO [line:45] apply_info 表符合查询条件{'phone': '13412341234'} 的数据有0 条
+2019-04-09 14:38:27,419 del_mongo.py INFO [line:33] close Client

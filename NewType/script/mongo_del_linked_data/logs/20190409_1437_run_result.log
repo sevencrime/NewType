@@ -1,0 +1,9 @@
+2019-04-09 14:37:02,729 del_mongo.py INFO [line:27] 连接数据库feature
+2019-04-09 14:37:04,188 del_mongo.py INFO [line:45] client_info 表符合查询条件{'phone': '15089514626'} 的数据有0 条
+2019-04-09 14:37:04,358 del_mongo.py INFO [line:33] close Client
+2019-04-09 14:37:10,896 del_mongo.py INFO [line:27] 连接数据库feature
+2019-04-09 14:37:11,985 del_mongo.py INFO [line:45] apply_info 表符合查询条件{'phone': '15089514626'} 的数据有0 条
+2019-04-09 14:37:12,088 del_mongo.py INFO [line:33] close Client
+2019-04-09 14:37:51,234 del_mongo.py INFO [line:27] 连接数据库feature
+2019-04-09 14:37:52,312 del_mongo.py INFO [line:45] apply_info 表符合查询条件{'phone': '15089514626'} 的数据有0 条
+2019-04-09 14:37:52,426 del_mongo.py INFO [line:33] close Client
