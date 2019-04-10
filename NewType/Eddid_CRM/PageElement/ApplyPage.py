@@ -37,6 +37,7 @@ class ApplyPage(BasePage.BasePage):
 
     def get_select(self, text=False):
         if not text:
+            print("getselectsssssssssssssssss")
             select_loc = (By.XPATH, "//div[contains(@style,'position: absolute;')]//li")
 
             selectlist = self.find_elements(*select_loc)
@@ -84,7 +85,7 @@ class ApplyPage(BasePage.BasePage):
     def send_applicationFor(self, text):
         # 账户类型
         applicationFor = self.find_element(*self.get_input('账户类型'))
-        applicationFor.click()
+        self.scrollinto(applicationFor)
         tag_text = self.get_select(text=text)
         # print(applicationFor.get_attribute("value"))
         return applicationFor.get_attribute("value")
@@ -92,7 +93,7 @@ class ApplyPage(BasePage.BasePage):
     def send_accountOpeningWay(self, text=False):
         # 开户方法
         accountOpeningWay = self.find_element(*self.get_input('开户方法'))
-        accountOpeningWay.click()
+        self.scrollinto(accountOpeningWay)
         tag_text = self.get_select(text=text)
 
         return accountOpeningWay.get_attribute("value")
@@ -100,7 +101,7 @@ class ApplyPage(BasePage.BasePage):
     def send_parentId(self):
         # 负责人
         parentId = self.find_element(*self.get_input('负责人'))
-        parentId.click()
+        self.scrollinto(parentId)
         tag_text = self.get_select(text='sales_t1')
 
         return parentId.get_attribute("value")
@@ -108,7 +109,7 @@ class ApplyPage(BasePage.BasePage):
     def send_mailLanguage(self, text=False):
         # 邮件语言
         mailLanguage = self.find_element(*self.get_input('邮件语言'))
-        mailLanguage.click()
+        self.scrollinto(mailLanguage)
         tag_text = self.get_select(text=text)
 
         return mailLanguage.get_attribute("value")
@@ -120,7 +121,7 @@ class ApplyPage(BasePage.BasePage):
     def send_title(self):
         # 称谓
         title = self.find_element(*self.get_input('称谓'))
-        title.click()
+        self.scrollinto(title)
         tag_text = self.get_select()
         return title.get_attribute("value")
 
@@ -154,7 +155,7 @@ class ApplyPage(BasePage.BasePage):
     def send_phoneAreaCode(self):
         # 电话号码区号
         phoneAreaCode = self.find_element(*self.get_input('电话号码区号'))
-        phoneAreaCode.click()
+        self.scrollinto(phoneAreaCode)
         tag_text = self.get_select()
         return phoneAreaCode.get_attribute("value")
 
@@ -180,16 +181,14 @@ class ApplyPage(BasePage.BasePage):
     def send_nationality(self):
         # 国籍
         nationality = self.find_element(*self.get_input("国籍"))
-        # self.scrollinto(nationality)
-        nationality.click()
+        self.scrollinto(nationality)
         tag_text = self.get_select()
         return nationality.get_attribute("value")
 
     def send_idType(self):
         # 身份证件类型
         idType = self.find_element(*self.get_input("身份证件类型"))
-        # self.scrollinto(idType)
-        idType.click()
+        self.scrollinto(idType)
         tag_text = self.get_select()
         if tag_text == "其他":
             other_type = self.find_element(*self.get_input("其他证件类型"))
@@ -206,8 +205,7 @@ class ApplyPage(BasePage.BasePage):
     def send_countryIssue(self):
         # 签发国籍
         countryIssue = self.find_element(*self.get_input("签发国家"))
-        # self.scrollinto(countryIssue)
-        countryIssue.click()
+        self.scrollinto(countryIssue)
         tag_text = self.get_select()
         return countryIssue.get_attribute("value")
 
@@ -221,8 +219,7 @@ class ApplyPage(BasePage.BasePage):
     def send_birthPlace(self):
         # 出生地点
         birthPlace = self.find_element(*self.get_input('出生地点'))
-        # self.scrollinto(birthPlace)
-        birthPlace.click()
+        self.scrollinto(birthPlace)
         tag_text = self.get_select()
         # print(tag_text)
         return birthPlace.get_attribute("value")
@@ -230,8 +227,7 @@ class ApplyPage(BasePage.BasePage):
     def employment(self):
         # 就业情况
         employment = self.find_element(*self.get_input("就业情况"))
-        # self.scrollinto(employment)
-        employment.click()
+        self.scrollinto(employment)
         tag_text = self.get_select()
 
         if tag_text == "就业" or tag_text == "自雇":        
@@ -265,17 +261,17 @@ class ApplyPage(BasePage.BasePage):
 
 
 
-    def totalRevenue(self):
+    def totalAnnualCustomerRevenueHK(self):
         # 客户全年总收入为(港元)
         self.find_element(*self.get_radio("客户全年总收入为(港元)")).click()
         self.find_element(*self.get_input("请注明资金来源", parent=True)).send_keys("资金来源")
 
-    def netEstate(self):
+    def customerNetAssetValueHK(self):
         # 客户资产净值(港元)
         self.find_element(*self.get_radio("客户资产净值(港元)")).click()
         self.find_element(*self.get_input("请注明资产净值", parent=True)).send_keys("请注明资产净值")
 
-    def source_of_wealth(self):
+    def sourceOfWealth(self):
         # 客户交易的资金/财富来源（选择所有适用）
         self.find_element(*self.get_checkbox("就业薪金")).click()
 
@@ -286,14 +282,14 @@ class ApplyPage(BasePage.BasePage):
         tag_text = self.get_select()
         return securities.get_attribute("value")
 
-    def CBBCcertificate(self):
+    def CBBC(self):
         # 客户投资经验及曾买卖产品>牛熊证
         CBBCcertificate = self.find_element(*self.get_input("牛熊证"))
         self.scrollinto(CBBCcertificate)
         tag_text = self.get_select()
         return CBBCcertificate.get_attribute("value")
 
-    def derivativewarrant(self):
+    def warrants(self):
         # 客户投资经验及曾买卖产品>衍生权证
         derivativewarrant = self.find_element(*self.get_input("衍生权证(窝轮)"))
         self.scrollinto(derivativewarrant)
@@ -314,7 +310,7 @@ class ApplyPage(BasePage.BasePage):
         tag_text = self.get_select()
         return Option.get_attribute("value")
 
-    def foreignexchange(self):
+    def foreignExchange(self):
         # 客户投资经验及曾买卖产品>外汇
         foreignexchange = self.find_element(*self.get_input("外汇"))
         self.scrollinto(foreignexchange)
@@ -329,7 +325,7 @@ class ApplyPage(BasePage.BasePage):
             tag_text = self.get_select()
             return bullion.get_attribute("value")
 
-    def otherInvest(self):
+    def otherInvestmentText(self):
         # 客户投资经验及曾买卖产品>其他投资
         self.find_element(*self.get_input("其他投资")).send_keys("otherInvest")
         # self.get_action("其他投资")
@@ -497,7 +493,7 @@ class ApplyPage(BasePage.BasePage):
         tag_text = self.get_select()
         return riskTolerance.get_attribute("value")
 
-    def currency(self):
+    def bankaccount(self):
         # 结算账户
         currency = self.find_element(*self.get_input("货币", parent=True))
         self.scrollinto(currency)
@@ -549,7 +545,7 @@ class ApplyPage(BasePage.BasePage):
 
         return companyAccounts.get_attribute("value")
 
-    def channel(self):
+    def learnHow(self):
         # 介绍及推广>>1.您透过哪些渠道认识艾德证券及/或艾德金业?(选择所有适用)
         channel_loc = (By.XPATH, "//div[contains(text(), '您透过哪些渠道认识艾德证券')]/parent::div/following-sibling::div//label")
         channel = self.find_elements(*channel_loc)
@@ -598,7 +594,7 @@ class ApplyPage(BasePage.BasePage):
     def acceptStatement(self):
         # 本人声明>>本人接受上述声明
         acceptStatement = self.find_element(*self.get_input("本人接受上述声明"))
-        acceptStatement.click()
+        self.scrollinto(acceptStatement)
         tag_text = self.get_select()
         return acceptStatement.get_attribute("value")
 
@@ -606,8 +602,8 @@ class ApplyPage(BasePage.BasePage):
     def useStatement(self):
         # 个人资料之使用声明>>个人资料之使用声明
         useStatement = self.find_element(*self.get_input("个人资料之使用声明"))
-        useStatement.click()
-        tag_text = self.get_select(top=True)
+        self.scrollinto(useStatement)
+        tag_text = self.get_select()
         return useStatement.get_attribute("value")
 
 

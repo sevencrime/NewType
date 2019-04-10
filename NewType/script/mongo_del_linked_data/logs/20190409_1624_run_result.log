@@ -1,3 +1,0 @@
-2019-04-09 16:24:47,647 del_mongo.py INFO [line:27] 连接数据库uat
-2019-04-09 16:24:49,264 del_mongo.py INFO [line:45] client_info 表符合查询条件{'email': 'onedi.zheng@newtype.io'} 的数据有0 条
-2019-04-09 16:24:49,388 del_mongo.py INFO [line:33] close Client

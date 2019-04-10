@@ -24,6 +24,7 @@ class addApply(unittest.TestCase):
         self.driver.implicitly_wait(30)
         self.url = 'http://eddid-bos-uat.ntdev.be'
 
+
         #在这里先登录
         login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
         login_page.open()
@@ -52,9 +53,10 @@ class addApply(unittest.TestCase):
         mainpage.click_add()
 
         applicationFor = applypage.send_applicationFor("个人账户")
-        accountOpeningWay = applypage.send_accountOpeningWay()
+        accountOpeningWay = applypage.send_accountOpeningWay("亲临开户")
         parentId = applypage.send_parentId()
-        mailLanguage = applypage.send_mailLanguage()
+
+        mailLanguage = applypage.send_mailLanguage("中文(简体)")
 
         accountType = applypage.send_accountType("杠杆式外汇账户(保证金)")
 
@@ -89,25 +91,23 @@ class addApply(unittest.TestCase):
                 if employments[0].get_attribute("value") == "就业" or employments[0].get_attribute("value") == "自雇":
                     print(employments[i].get_attribute("value"))
                 else:
-                    print(employments[i].get_attribut
-                        e("value"))
-
+                    print(employments[i].get_attribute("value"))
         else:
             print(employments.get_attribute("value"))
 
         applypage.uploadImage()
         
-        totalRevenue = applypage.totalRevenue()
-        netEstate = applypage.netEstate()
-        source_of_wealth = applypage.source_of_wealth()
+        totalRevenue = applypage.totalAnnualCustomerRevenueHK()
+        netEstate = applypage.customerNetAssetValueHK()
+        source_of_wealth = applypage.sourceOfWealth()
         securities = applypage.securities()
-        CBBCcertificate = applypage.CBBCcertificate()
-        derivativewarrant = applypage.derivativewarrant()
+        CBBCcertificate = applypage.CBBC()
+        derivativewarrant = applypage.warrants()
         futures = applypage.futures()
         Option = applypage.Option()
-        foreignexchange = applypage.foreignexchange()
+        foreignexchange = applypage.foreignExchange()
         bullion = applypage.bullion()
-        otherInvest = applypage.otherInvest()
+        otherInvest = applypage.otherInvestmentText()
         derivativeCourse = applypage.derivativeCourse()
         derivativeJobs = applypage.derivativeJobs()
         tradingFund = applypage.tradingFund()
@@ -121,11 +121,11 @@ class addApply(unittest.TestCase):
         PEP_People = applypage.PEP_People()
         investmentTarget = applypage.investmentTarget()
         riskTolerance = applypage.riskTolerance()
-        currency = applypage.currency()
+        currency = applypage.bankaccount()
         marginAccount = applypage.marginAccount()
         discretion = applypage.discretion()
         companyAccounts = applypage.companyAccounts()
-        channel = applypage.channel()
+        channel = applypage.learnHow()
         beneficial = applypage.beneficial()
         Othed_People = applypage.Othed_People()
         jurisdiction = applypage.jurisdiction()
@@ -136,6 +136,16 @@ class addApply(unittest.TestCase):
 
         mainpage.wait_LoadingModal()
 
+        self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交开户表单后跳转失败")
+
+
+        pymongo = PyMongo.Pymongo()
+        language = LanguagePack.LanguagePack.language   #语言包
+
+        result = pymongo.find('apply', {'applySeqId':1431})
+        # print(result)
+        self.assertEqual(language[applicationFor], result['applicationFor'], "applicationFor数据错误")
+        self.assertEqual(language[accountOpeningWay], result['accountOpeningWay'], "accountOpeningWay数据错误")
 
 
 
