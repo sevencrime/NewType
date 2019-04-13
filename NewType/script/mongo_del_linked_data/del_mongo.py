@@ -112,7 +112,7 @@ class Database:
 							self.log.info('没有关联数据,直接删除%s 表' %collection)
 							print('没有关联数据,直接删除%s 表' %collection)
 
-							# result = self.db[collection].remove(query)
+							result = self.db[collection].delete_one(query)
 							# self.log.info(result)
 							# print(result)
 

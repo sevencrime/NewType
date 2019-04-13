@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿# usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Date    : 2019-01-03 13:56:31
 # @Author  : Onedi (Onedi@qq.com)
@@ -21,9 +21,10 @@ class addApply(unittest.TestCase):
 
         self.driver = webdriver.Chrome(executable_path = 'chromedriver')
         # self.driver = webdriver.Firefox(executable_path = 'geckodriver')
-        self.driver.implicitly_wait(30)
+        # self.driver.implicitly_wait(30)   
+        self.driver.set_page_load_timeout(30)
+        self.driver.set_script_timeout(30)
         self.url = 'http://eddid-bos-uat.ntdev.be'
-
 
         #在这里先登录
         login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
@@ -31,6 +32,7 @@ class addApply(unittest.TestCase):
         login_page.input_username("admin")
         login_page.input_password("abcd1234")
         login_page.click_submit()
+        login_page.wait_LoadingModal()
         self.assertEqual("admin", login_page.show_userid(), "userid与登录账户不一致")
 
     def tearDown(self):
@@ -38,7 +40,7 @@ class addApply(unittest.TestCase):
         print("结束driver")
         self.driver.quit()
 
-    @unittest.skip("暂时跳过")
+    # @unittest.skip("暂时跳过")
     def test1_addIndividual(self):
         # CRM开户列表,个人账户-随机
         applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
@@ -277,6 +279,7 @@ class addApply(unittest.TestCase):
         mainpage.wait_LoadingModal()
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交开户表单后跳转失败")
 
+    @unittest.skip("暂时跳过")
     def test3_addJointFillAll(self):
         # CRM开户列表,联名账户-全部隐藏框
         applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
@@ -320,12 +323,13 @@ class addApply(unittest.TestCase):
         birthPlace = applypage.send_birthPlace()
 
         employments = applypage.employment()
+
         
         applypage.uploadImage()
         
         totalRevenue = applypage.totalAnnualCustomerRevenueHK()
         netEstate = applypage.customerNetAssetValueHK()
-        source_of_wealth = applypage.sourceOfWealth("其他")
+        applypage.sourceOfWealth("其他")
         securities = applypage.securities()
         CBBCcertificate = applypage.CBBC()
         derivativewarrant = applypage.warrants()
@@ -360,6 +364,8 @@ class addApply(unittest.TestCase):
 
         applypage.click_sublime()
 
+        # self.driver.find_element_by_xpath("//div[contains(text(), '联名账户持有人资料')]").click()
+
         title = applypage.send_title()
         primaryRelations = applypage.primaryRelations()    #联名账户-与主要账户的关系
         firstName = applypage.send_firstName()
@@ -371,7 +377,7 @@ class addApply(unittest.TestCase):
         address = applypage.send_address()
         addressMail = applypage.send_addressMail()
         nationality = applypage.send_nationality()
-        idList = applypage.send_idType()
+        idList = applypage.send_idType(3)
         countryIssue = applypage.send_countryIssue()
         birthday = applypage.send_birthday()
         birthPlace = applypage.send_birthPlace()
@@ -390,14 +396,16 @@ class addApply(unittest.TestCase):
         derivativeCourse = applypage.derivativeCourse()
         derivativeJobs = applypage.derivativeJobs()
         tradingFund = applypage.tradingFund()
-        buyProduct = applypage.buyProduct()
-        bankrupt = applypage.bankrupt()
-        customerRelatives = applypage.customerRelatives()
-        associatedcustomer = applypage.associatedcustomer()
-        director = applypage.director()
-        citizenOfUSA = applypage.citizenOfUSA()
-        americanResident = applypage.americanResident()
-        PEP_People = applypage.PEP_People()
+
+        buyProduct = applypage.buyProduct(0)
+        bankrupt = applypage.bankrupt(0)
+        customerRelatives = applypage.customerRelatives(0)
+        associatedcustomer = applypage.associatedcustomer(0)
+        director = applypage.director(0)
+        citizenOfUSA = applypage.citizenOfUSA(0)
+        americanResident = applypage.americanResident(0)
+        PEP_People = applypage.PEP_People(0)
+
         applypage.click_sublime()
 
         mainpage.wait_LoadingModal()
@@ -405,6 +413,10 @@ class addApply(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    # unittest.main()
+    suite = unittest.TestSuite()
+    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(addApply))
+    runner = unittest.TextTestRunner(verbosity=2)
+    runner.run(suite)
 
 

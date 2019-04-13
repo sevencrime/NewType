@@ -21,7 +21,9 @@ class importAyers(unittest.TestCase):
 
         self.driver = webdriver.Chrome(executable_path = 'chromedriver')
         # self.driver = webdriver.Firefox(executable_path = 'geckodriver')
-        self.driver.implicitly_wait(30)
+        # self.driver.implicitly_wait(30)
+        self.driver.set_page_load_timeout(30)
+        self.driver.set_script_timeout(30)
         self.url = 'http://eddid-bos-uat.ntdev.be'
 
         #在这里先登录

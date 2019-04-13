@@ -17,7 +17,8 @@ from selenium.webdriver.common.keys import Keys
 
 class ApplyPage(BasePage.BasePage):
     # log = Logging.Logs()
-    mob = glob.glob(os.path.abspath(os.path.dirname(os.getcwd()))+r'\image\*.jpg')
+    mob = glob.glob(os.path.abspath(os.path.dirname(os.getcwd()))+r'\image\*')
+
     def get_input(self, text, parent=False):
         if not parent:
             input_loc = (By.XPATH, "//div[contains(text(), '%s')]/following-sibling::span//input" %text)
@@ -82,7 +83,8 @@ class ApplyPage(BasePage.BasePage):
         applicationFor = self.find_element(*self.get_input('账户类型'))
         self.scrollinto(applicationFor)
         tag_text = self.get_select(text=text)
-        # print(applicationFor.get_attribute("value"))
+
+        assert applicationFor.get_attribute("value") != None
         return applicationFor.get_attribute("value")
     
     def send_accountOpeningWay(self, text=False):
@@ -91,6 +93,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(accountOpeningWay)
         tag_text = self.get_select(text=text)
 
+        assert accountOpeningWay.get_attribute("value") != None
         return accountOpeningWay.get_attribute("value")
 
     def send_parentId(self):
@@ -99,6 +102,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(parentId)
         tag_text = self.get_select(text='sales_t1')
 
+        assert parentId.get_attribute("value") != None
         return parentId.get_attribute("value")
 
     def send_mailLanguage(self, text=False):
@@ -107,6 +111,7 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(mailLanguage)
         tag_text = self.get_select(text=text)
 
+        assert mailLanguage.get_attribute("value") != None
         return mailLanguage.get_attribute("value")
 
     def send_accountType(self, text):
@@ -118,6 +123,7 @@ class ApplyPage(BasePage.BasePage):
         title = self.find_element(*self.get_input('称谓'))
         self.scrollinto(title)
         tag_text = self.get_select()
+        assert title.get_attribute("value") != None
         return title.get_attribute("value")
 
     def send_firstName(self):
@@ -125,6 +131,7 @@ class ApplyPage(BasePage.BasePage):
         firstName = self.find_element(*self.get_input('名字'))
         firstName.send_keys("%sfirstname%s" %(random.randint(0,100),random.randint(0,1030)))
 
+        assert firstName.get_attribute("value") != None
         return firstName.get_attribute("value")
 
     def send_lastName(self):
@@ -133,18 +140,21 @@ class ApplyPage(BasePage.BasePage):
         lastName.send_keys("%slastname%s" %(random.randint(0,100),random.randint(0,1030)))
         lastName.send_keys(Keys.ENTER)
 
+        assert lastName.get_attribute("value") != None
         return lastName.get_attribute("value")
 
     def send_chineseName(self):
         # 中文姓名
         chineseName = self.find_element(*self.get_input('中文姓名'))
         chineseName.send_keys("郑某人")
+        assert chineseName.get_attribute("value") != None
         return chineseName.get_attribute("value")
 
     def send_emali(self):
         # 电邮
         email = self.find_element(*self.get_input('电邮'))
         email.send_keys("%sonedi2s%s@qq.com" %(random.randint(0,1000),random.randint(0,10300)))
+        assert email.get_attribute("value") != None
         return email.get_attribute("value")
 
     def send_phoneAreaCode(self):
@@ -152,18 +162,21 @@ class ApplyPage(BasePage.BasePage):
         phoneAreaCode = self.find_element(*self.get_input('电话号码区号'))
         self.scrollinto(phoneAreaCode)
         tag_text = self.get_select()
+        assert phoneAreaCode.get_attribute("value") != None
         return phoneAreaCode.get_attribute("value")
 
     def send_phone(self):
         # 电话号码
         phone = self.find_element(*self.get_input("电话号码(用于通讯)"))
         phone.send_keys("%s6253%s" %(random.randint(0,100002),random.randint(0,10502)))
+        assert phone.get_attribute("value") != None
         return phone.get_attribute("value")
 
     def send_address(self):
         # 住宅地址
         address = self.find_element(*self.get_input("住宅地址(不接受邮政信箱)"))
         address.send_keys("桑达科技大厦802")
+        assert address.get_attribute("value") != None
         return address.get_attribute("value")
 
     def send_addressMail(self):
@@ -171,6 +184,7 @@ class ApplyPage(BasePage.BasePage):
         addressMail = self.find_element(*self.get_input("邮寄地址(如与住宅地址不同)"))
         addressMail.send_keys("桑达科技大厦802")
 
+        assert addressMail.get_attribute("value") != None
         return addressMail.get_attribute("value")
 
     def send_nationality(self):
@@ -178,6 +192,7 @@ class ApplyPage(BasePage.BasePage):
         nationality = self.find_element(*self.get_input("国籍"))
         self.scrollinto(nationality)
         tag_text = self.get_select()
+        assert nationality.get_attribute("value") != None
         return nationality.get_attribute("value")
 
     def send_idType(self, num=None):
@@ -190,10 +205,15 @@ class ApplyPage(BasePage.BasePage):
             other_type.send_keys("idType")
             idNumber = self.find_element(*self.get_input("其他证件号码"))
             idNumber.send_keys("%s423523%s" %(random.randint(0,1001),random.randint(0,10600)))
+            assert idType.get_attribute("value") != None
+            assert other_type.get_attribute("value") != None
+            assert idNumber.get_attribute("value") != None
             return idType.get_attribute("value"), other_type.get_attribute("value"), idNumber.get_attribute("value")
         else:
             idNumber = self.find_element(*self.get_input("身份证或护照号码"))
             idNumber.send_keys("%s423523%s" %(random.randint(0,1001),random.randint(0,10600)))
+            assert idType.get_attribute("value") != None
+            assert idNumber.get_attribute("value") != None
             return idType.get_attribute("value"), idNumber.get_attribute("value")
 
 
@@ -202,13 +222,15 @@ class ApplyPage(BasePage.BasePage):
         countryIssue = self.find_element(*self.get_input("签发国家"))
         self.scrollinto(countryIssue)
         tag_text = self.get_select()
+        assert countryIssue.get_attribute("value") != None
         return countryIssue.get_attribute("value")
 
     def send_birthday(self):
         # 出生日期
         birthday = self.find_element(*self.get_input("出生日期(日/月/年)"))
         birthday.send_keys("21/01/2000")
-        birthday.send_keys(Keys.ENTER)
+        birthday.send_keys(Keys.ENTER) 
+        assert birthday.get_attribute("value") != None
         return birthday.get_attribute("value")
 
     def send_birthPlace(self):
@@ -216,6 +238,7 @@ class ApplyPage(BasePage.BasePage):
         birthPlace = self.find_element(*self.get_input('出生地点'))
         self.scrollinto(birthPlace)
         tag_text = self.get_select()
+        assert birthPlace.get_attribute("value") != None
         return birthPlace.get_attribute("value")
 
     def employment(self, num=None):
@@ -238,32 +261,48 @@ class ApplyPage(BasePage.BasePage):
             businessPhone = self.find_element(*self.get_input("办公室电话"))
             businessPhone.send_keys("15089500015")
 
+            assert employment.get_attribute("value") != None
+            assert occupation.get_attribute("value") != None
+            assert employedPeriod.get_attribute("value") !=None
+            assert employer.get_attribute("value") != None
+            assert businessType.get_attribute("value") != None
+            assert businessAddress.get_attribute("value") != None 
+            assert businessPhone.get_attribute("value") != None
             return employment, occupation, employedPeriod, employer, businessType, businessAddress, businessPhone
 
         elif tag_text == "其他":
             Hidden_loc = (By.XPATH, "//div[contains(text(), '就业情况')]/parent::div/parent::span/following-sibling::span//input")
             Hidden = self.find_element(*Hidden_loc)
             Hidden.send_keys("Hidden")
+            assert employment.get_attribute("value") != None
+            assert Hidden.get_attribute("value") != None
             return employment, Hidden
 
         elif tag_text == "退休" or tag_text == "无业":
+            assert employment.get_attribute("value") != None
             return employment
 
     def uploadImage(self):
         # 上传图片
+        # self.modify_displys(display='block')
         pass
-
 
 
     def totalAnnualCustomerRevenueHK(self):
         # 客户全年总收入为(港元)
         self.find_element(*self.get_radio("客户全年总收入为(港元)")).click()
-        self.find_element(*self.get_input("请注明资金来源", parent=True)).send_keys("资金来源")
+        totalAnnual = self.find_element(*self.get_input("请注明资金来源", parent=True))
+        totalAnnual.send_keys("资金来源")
+        assert totalAnnual.get_attribute("value") != None
+        return totalAnnual
 
     def customerNetAssetValueHK(self):
         # 客户资产净值(港元)
         self.find_element(*self.get_radio("客户资产净值(港元)")).click()
-        self.find_element(*self.get_input("请注明资产净值", parent=True)).send_keys("请注明资产净值")
+        netEstate = self.find_element(*self.get_input("请注明资产净值", parent=True))
+        netEstate.send_keys("请注明资产净值")
+        assert netEstate.get_attribute("value") != None
+        return netEstate
 
     def sourceOfWealth(self, text=False):
         # 客户交易的资金/财富来源（选择所有适用）
@@ -272,14 +311,18 @@ class ApplyPage(BasePage.BasePage):
         else:
             self.find_element(*self.get_checkbox(text)).click()
             if text == "其他":
-                otherOfWealth = (By.XPATH, "//span[contains(text(), '就业薪金')]/ancestor::span[@class='checkbox']/following-sibling::span//input")
-                self.find_element(*otherOfWealth).send_keys("Other of Wealth")
+                otherOfWealth_loc = (By.XPATH, "//span[contains(text(), '就业薪金')]/ancestor::span[@class='checkbox']/following-sibling::span//input")
+                therOfWealth = self.find_element(*otherOfWealth_loc)
+                therOfWealth.send_keys("Other of Wealth")
+                assert therOfWealth.get_attribute("value") != None
+                # return therOfWealth
 
     def securities(self):
         # 客户投资经验及曾买卖产品>证券
         securities = self.find_element(*self.get_input("证券"))
         self.scrollinto(securities)
         tag_text = self.get_select()
+        assert securities.get_attribute("value") != None
         return securities.get_attribute("value")
 
     def CBBC(self):
@@ -287,6 +330,7 @@ class ApplyPage(BasePage.BasePage):
         CBBCcertificate = self.find_element(*self.get_input("牛熊证"))
         self.scrollinto(CBBCcertificate)
         tag_text = self.get_select()
+        assert CBBCcertificate.get_attribute("value") != None
         return CBBCcertificate.get_attribute("value")
 
     def warrants(self):
@@ -294,6 +338,7 @@ class ApplyPage(BasePage.BasePage):
         derivativewarrant = self.find_element(*self.get_input("衍生权证(窝轮)"))
         self.scrollinto(derivativewarrant)
         tag_text = self.get_select()
+        assert derivativewarrant.get_attribute("value") != None
         return derivativewarrant.get_attribute("value")
 
     def futures(self):
@@ -301,6 +346,7 @@ class ApplyPage(BasePage.BasePage):
         futures = self.find_element(*self.get_input("期货"))
         self.scrollinto(futures)
         tag_text = self.get_select()
+        assert futures.get_attribute("value") != None
         return futures.get_attribute("value")
 
     def Option(self):
@@ -308,6 +354,7 @@ class ApplyPage(BasePage.BasePage):
         Option = self.find_element(*self.get_input("期权"))
         self.scrollinto(Option)
         tag_text = self.get_select()
+        assert Option.get_attribute("value") != None
         return Option.get_attribute("value")
 
     def foreignExchange(self):
@@ -315,6 +362,7 @@ class ApplyPage(BasePage.BasePage):
         foreignexchange = self.find_element(*self.get_input("外汇"))
         self.scrollinto(foreignexchange)
         tag_text = self.get_select()
+        assert foreignexchange.get_attribute("value") != None
         return foreignexchange.get_attribute("value")
 
     def bullion(self):
@@ -323,6 +371,7 @@ class ApplyPage(BasePage.BasePage):
             bullion = self.find_element(*self.get_input("贵金属"))
             self.scrollinto(bullion)
             tag_text = self.get_select()
+            assert bullion.get_attribute("value") != None
             return bullion.get_attribute("value")
 
     def otherInvestmentText(self):
@@ -339,6 +388,7 @@ class ApplyPage(BasePage.BasePage):
         derivativeCourse = self.find_element(*self.get_input("相关课程", parent=True))
         self.scrollinto(derivativeCourse)
         tag_text = self.get_select(randox=num)
+        assert derivativeCourse.get_attribute("value") != None
         return derivativeCourse.get_attribute("value")
 
     def derivativeJobs(self, num=None):
@@ -346,6 +396,7 @@ class ApplyPage(BasePage.BasePage):
         derivativeJobs = self.find_element(*self.get_input("工作经验", parent=True))
         self.scrollinto(derivativeJobs)
         tag_text = self.get_select(randox=num)
+        assert derivativeJobs.get_attribute("value") != None
         return derivativeJobs.get_attribute("value")
 
     def tradingFund(self, num=None):
@@ -353,6 +404,7 @@ class ApplyPage(BasePage.BasePage):
         tradingFund = self.find_element(*self.get_input("买卖基金", parent=True))
         self.scrollinto(tradingFund)
         tag_text = self.get_select(randox=num)
+        assert tradingFund.get_attribute("value") != None
         return tradingFund.get_attribute("value")
 
     def buyProduct(self, num=None):
@@ -369,6 +421,7 @@ class ApplyPage(BasePage.BasePage):
                 messagebox = (By.XPATH, "//div[@aria-label='提示']//div[@class='el-message-box__btns']/button")
                 self.find_element(*messagebox).click()
 
+        assert buyProduct.get_attribute("value") != None
         return buyProduct.get_attribute("value")
 
     def bankrupt(self, num=None):
@@ -380,14 +433,19 @@ class ApplyPage(BasePage.BasePage):
             # 破产日期
             self.find_element(*self.get_input("破产日期")).send_keys("02/04/2019")
             self.find_element(*self.get_input("破产日期")).send_keys(Keys.ENTER)
+
             # 破产证明书
+            imgli_loc = (By.XPATH, "//div[contains(text(), '破产解除证明书')]/following-sibling::span//li")
+            
             self.modify_displys(display='block')
             self.find_element(*self.get_input("破产解除证明书")).send_keys(random.sample(self.mob, 1))
             self.modify_displys()
-            loading_loc = (By.XPATH, "//div[contains(text(), '必需提交交易授权书')]/following-sibling::span//i[@class='el-icon-loading']")
-            WebDriverWait(self.driver, 10).until_not(
+
+            loading_loc = (By.XPATH, "//div[contains(text(), '请提供破产解除证明书')]/following-sibling::span//i[@class='el-icon-loading']")
+            WebDriverWait(self.driver, 20).until_not(
                 EC.presence_of_element_located(loading_loc))
 
+        assert bankrupt.get_attribute("value") != None
         return bankrupt.get_attribute("value")
 
     def customerRelatives(self, num=None):
@@ -406,11 +464,11 @@ class ApplyPage(BasePage.BasePage):
             if tag_text == "是":
                 self.find_element(*self.get_input("艾德证券雇员名称及关系",parent=True)).send_keys("relationship")
 
+        assert customerRelatives.get_attribute("value") != None
         return customerRelatives.get_attribute("value")
 
     def associatedcustomer(self, num=None):
         # 3.客户是否与任何艾德证券及/或艾德金业客户有关连?
-        # print(self.driver.page_source.find("艾德证券及/或艾德金业客户有关连"),"find find")
         if self.driver.page_source.find("艾德证券及/或艾德金业客户有关连") != -1:
             # print("不等于-1")
             associatedcustomer = self.find_element(*self.get_input("艾德金业客户有关连", parent=True))
@@ -427,6 +485,7 @@ class ApplyPage(BasePage.BasePage):
             if tag_text == "是":
                 self.find_element(*self.get_input("艾德证券客户名称", parent=True)).send_keys("ClientName")
 
+        assert associatedcustomer.get_attribute("value") != None
         return associatedcustomer.get_attribute("value")
 
     def director(self, num=None):
@@ -436,12 +495,16 @@ class ApplyPage(BasePage.BasePage):
         tag_text = self.get_select(randox=num)
         if tag_text == "是":
             self.find_element(*self.get_input("认可人士(请详述)", parent=True)).send_keys("HKEX")
+
             # 请提供雇主同意书
+            imgli_loc = (By.XPATH, "//div[contains(text(), '请提供雇主同意书')]/parent::div/following-sibling::*//li")
+
             self.modify_displys(display='block')
             self.find_element(*self.get_input("请提供雇主同意书", parent=True)).send_keys(random.sample(self.mob, 1))
             self.modify_displys()
-            loading_loc = (By.XPATH, "//div[contains(text(), '必需提交交易授权书')]/following-sibling::span//i[@class='el-icon-loading']")
-            WebDriverWait(self.driver, 10).until_not(
+
+            loading_loc = (By.XPATH, "//div[contains(text(), '请提供雇主同意书')]/parent::div/following-sibling::div/span//i[@class='el-icon-loading']")
+            WebDriverWait(self.driver, 20).until_not(
                 EC.presence_of_element_located(loading_loc))
 
     def citizenOfUSA(self, num=None):
@@ -454,6 +517,7 @@ class ApplyPage(BasePage.BasePage):
             citizenOfUSA_Tax = (By.XPATH, "//div[contains(text(), '美国公民')]/parent::div/parent::div/parent::span/following-sibling::*//input")
             self.find_element(*citizenOfUSA_Tax).send_keys("citizenOfUSA_Tax")
 
+        assert citizenOfUSA.get_attribute("value") != None
         return citizenOfUSA.get_attribute("value")
 
     def americanResident(self, num=None):
@@ -466,6 +530,7 @@ class ApplyPage(BasePage.BasePage):
             americanResident_Tax = (By.XPATH, "//div[contains(text(), '美国居民')]/parent::div/parent::div/parent::span/following-sibling::*//input")
             self.find_element(*americanResident_Tax).send_keys("americanResident_Tax")
 
+        assert americanResident.get_attribute("value") != None
         return americanResident.get_attribute("value")
 
     def PEP_People(self, num=None):
@@ -476,6 +541,7 @@ class ApplyPage(BasePage.BasePage):
         if tag_text == "是":
             self.find_element(*self.get_input("职位/政治公众人物名称", parent=True)).send_keys("Position/political")
 
+        assert PEP_People.get_attribute("value") != None
         return PEP_People.get_attribute("value")
 
     def investmentTarget(self):
@@ -483,6 +549,7 @@ class ApplyPage(BasePage.BasePage):
         investmentTarget = self.find_element(*self.get_input("投资目标", parent=True))
         self.scrollinto(investmentTarget)
         tag_text = self.get_select()
+        assert investmentTarget.get_attribute("value") != None
         return investmentTarget.get_attribute("value")
 
     def riskTolerance(self):
@@ -490,6 +557,7 @@ class ApplyPage(BasePage.BasePage):
         riskTolerance = self.find_element(*self.get_input("风险承受能力", parent=True))
         self.scrollinto(riskTolerance)
         tag_text = self.get_select()
+        assert riskTolerance.get_attribute("value") != None
         return riskTolerance.get_attribute("value")
 
     def bankaccount(self, num=None):
@@ -528,6 +596,7 @@ class ApplyPage(BasePage.BasePage):
             for inputs in el_inputs: 
                 inputs.send_keys("name")
 
+        assert discretion.get_attribute("value") != None
         return discretion.get_attribute("value")
 
     def companyAccounts(self, num=None):
@@ -542,6 +611,7 @@ class ApplyPage(BasePage.BasePage):
             for inputs in el_inputs: 
                 inputs.send_keys("name")
 
+        assert companyAccounts.get_attribute("value") != None
         return companyAccounts.get_attribute("value")
 
     def learnHow(self):
@@ -562,6 +632,7 @@ class ApplyPage(BasePage.BasePage):
         if tag_text == "否":
             self.find_element(*self.get_input("最终实益拥有人名称为", parent=True)).send_keys("onedi")
 
+        assert beneficial.get_attribute("value") != None
         return beneficial.get_attribute("value")
 
     def Othed_People(self, num=None):
@@ -576,9 +647,10 @@ class ApplyPage(BasePage.BasePage):
             self.find_element(*self.get_input("必需提交交易授权书")).send_keys(random.sample(self.mob, 1))
             self.modify_displys()
             loading_loc = (By.XPATH, "//div[contains(text(), '必需提交交易授权书')]/following-sibling::span//i[@class='el-icon-loading']")
-            WebDriverWait(self.driver, 10).until_not(
+            WebDriverWait(self.driver, 20).until_not(
                 EC.presence_of_element_located(loading_loc))
 
+        assert othedPeople.get_attribute("value") != None
         return othedPeople.get_attribute("value")
 
     def jurisdiction(self):
@@ -595,6 +667,7 @@ class ApplyPage(BasePage.BasePage):
         acceptStatement = self.find_element(*self.get_input("本人接受上述声明"))
         self.scrollinto(acceptStatement)
         tag_text = self.get_select()
+        assert acceptStatement.get_attribute("value") != None
         return acceptStatement.get_attribute("value")
 
 
@@ -603,6 +676,7 @@ class ApplyPage(BasePage.BasePage):
         useStatement = self.find_element(*self.get_input("个人资料之使用声明"))
         self.scrollinto(useStatement)
         tag_text = self.get_select()
+        assert useStatement.get_attribute("value") != None
         return useStatement.get_attribute("value")
 
 
@@ -622,6 +696,7 @@ class ApplyPage(BasePage.BasePage):
         else:
             pass
 
+        assert primaryRelations.get_attribute("value") != None
         return primaryRelations.get_attribute("value")
 
 

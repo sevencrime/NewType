@@ -10,6 +10,8 @@ import os,sys
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 from Commons import *
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class LoginPage(BasePage.BasePage):
@@ -20,8 +22,14 @@ class LoginPage(BasePage.BasePage):
     password_loc = (By.XPATH, "//input[@placeholder='密码']")
     btn_login_loc = (By.XPATH, "//button")
     userid_loc = (By.CSS_SELECTOR, ".el-dropdown-link.el-dropdown-selfdefine ")
-    # 打开网页
+    LoadingModal_loc = (By.CSS_SELECTOR, ".Loading-modal")
 
+    def wait_LoadingModal(self):
+        WebDriverWait(self.driver, 20).until_not(
+            EC.presence_of_element_located(self.LoadingModal_loc))
+
+
+    # 打开网页
     def open(self):
         # 调用page中的_open打开连接
         # self.log.info(sys._getframe().f_code.co_name)

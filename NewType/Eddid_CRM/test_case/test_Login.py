@@ -23,7 +23,9 @@ class Test_Login(unittest.TestCase):
         # self.log.info("正在执行Test_Login")
         self.driver = webdriver.Chrome(
             'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver')
-        self.driver.implicitly_wait(30)
+        # self.driver.implicitly_wait(30)
+        self.driver.set_page_load_timeout(30)
+        self.driver.set_script_timeout(30)
         self.url = 'http://eddid-bos-feature.ntdev.be'
 
     def tearDown(self):
@@ -44,6 +46,7 @@ class Test_Login(unittest.TestCase):
         # 点击登录
         # self.log.info("点击登录")
         login_page.click_submit()
+        login_page.wait_LoadingModal()
         # 断言userid
         # self.log.info("断言userid")
         self.assertEqual("admin", login_page.show_userid(), "userid与登录账户不一致")
