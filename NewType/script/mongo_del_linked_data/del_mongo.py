@@ -113,9 +113,9 @@ class Database:
 							if database == None:
 								self.db = self.client[self.database]
 								
-							# result = self.db[collection].remove(query)
-							# self.log.info(result)
-							# print(result)
+							result = self.db[collection].remove(query)
+							self.log.info(result)
+							print(result)
 
 							self.log.info("***********************************\n")
 
@@ -124,7 +124,7 @@ if __name__ == '__main__':
 	# host = 'localhost:27017'
 	database = 'uat'
 	# Database(host, database).del_linked("apply_info", {'email':'onedi@qq.com'})
-	Database(host, database).del_linked("apply_info", {'phone':"15089514626"})
+	Database(host, database).del_linked("apply_info", {'idNumber':"441581199607304713"})
 
 
 
