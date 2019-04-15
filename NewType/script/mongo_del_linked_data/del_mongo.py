@@ -35,9 +35,7 @@ class Database:
 
 
 	def del_linked(self, collection, query, database=None):
-		if database == None:
-			self.db = self.client[self.database]
-		else:
+		if database != None:
 			self.db = self.client[database]
 
 		self.collections.add(collection)
@@ -73,7 +71,6 @@ class Database:
 						for n in range(len(r[key])):
 							# 判断数组中的字段是否是object类型
 							if isinstance(r[key][n], ObjectId):
-								# continue
 								try:
 									if self.table[key] not in self.collections:
 										self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
@@ -112,7 +109,11 @@ class Database:
 							self.log.info('没有关联数据,直接删除%s 表' %collection)
 							print('没有关联数据,直接删除%s 表' %collection)
 
-							result = self.db[collection].delete_one(query)
+							print(collection, query, database, self.database, "3333333333333333333333333333333")
+							if database == None:
+								self.db = self.client[self.database]
+								
+							# result = self.db[collection].remove(query)
 							# self.log.info(result)
 							# print(result)
 
@@ -123,7 +124,7 @@ if __name__ == '__main__':
 	# host = 'localhost:27017'
 	database = 'uat'
 	# Database(host, database).del_linked("apply_info", {'email':'onedi@qq.com'})
-	Database(host, database).del_linked("client_info", {'email':"kyle_denghuajun@163.com"})
+	Database(host, database).del_linked("apply_info", {'phone':"15089514626"})
 
 
 
