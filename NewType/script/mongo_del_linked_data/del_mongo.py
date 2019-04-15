@@ -113,9 +113,9 @@ class Database:
 							if database == None:
 								self.db = self.client[self.database]
 								
-							result = self.db[collection].remove(query)
-							self.log.info(result)
-							print(result)
+							# result = self.db[collection].remove(query)
+							# self.log.info(result)
+							# print(result)
 
 							self.log.info("***********************************\n")
 
