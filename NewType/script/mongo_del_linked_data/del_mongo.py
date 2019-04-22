@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Date    : 2019-03-03 19:43:34
 # @Author  : onedi (onedi@qq.com)
@@ -20,7 +20,8 @@ class Database:
 		'accountId' : 'account',
 		'applyInfoIds' : 'apply_info',
 		'clientId' : 'client_info',
-		'idpUserId' : 'users'
+		'idpUserId' : 'users' , 
+		'subject' : 'userdevices'
 	}
 
 	def __init__(self, host, database):
@@ -102,20 +103,42 @@ class Database:
 							self.log.info(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
 							print(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
 
+					elif key == 'subject':
+						# continue
+						try:
+							if self.table[key] not in self.collections:
+								self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
+								self.log.info("正在查询关联表 %s 的数据" %self.table[key])
+
+								print(collection,"表关联的字段为 ",key,":",r[key])
+								print("正在查询关联表 %s 的数据" %self.table[key])
+
+								self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpooluat')
+
+
+						except Exception as e:
+							self.log.info(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
+							print(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
+
+
+
+
 					else:
 						# print("index", index)
 						if index >= len(r) :
 							self.log.info("***********************************\n")
 							self.log.info('没有关联数据,直接删除%s 表' %collection)
-							print('没有关联数据,直接删除%s 表' %collection)
+							print('\n\n没有关联数据,直接删除%s 表' %collection)
 
-							print(collection, query, database, self.database, "3333333333333333333333333333333")
+							print(collection, query, database, self.database)
 							if database == None:
 								self.db = self.client[self.database]
 								
+							# 删除操作,请先查询后,确定数据以后再执行删除操作
 							# result = self.db[collection].remove(query)
 							# self.log.info(result)
 							# print(result)
+
 
 							self.log.info("***********************************\n")
 
@@ -123,8 +146,7 @@ if __name__ == '__main__':
 	host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
 	# host = 'localhost:27017'
 	database = 'uat'
-	# Database(host, database).del_linked("apply_info", {'email':'onedi@qq.com'})
-	Database(host, database).del_linked("apply_info", {'idNumber':"441581199607304713"})
+	Database(host, database).del_linked("apply_info", {'phone':"15089514626"})
 
 
 

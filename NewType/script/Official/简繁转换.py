@@ -111,7 +111,7 @@ class Contrast:
 
 if __name__ == '__main__':
     path = 'https://www.eddid.com.hk'
-    url = 'https://www.eddid.com.hk/zh-hant/fund-withdrawal/'
+    url = 'https://www.eddid.com.hk/zh-hant/foreign-exchange/spreads-charges/'
     existed_url = set()
     contrast = Contrast(path)
     url_list = contrast.request(url)

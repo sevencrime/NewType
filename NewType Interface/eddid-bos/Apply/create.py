@@ -10,10 +10,12 @@ import json
 import random
 from requests.packages import urllib3
 
-url = 'https://eddid-api.ntdev.be/eddid-api-develop/apply/create'
+url = 'https://eddid-api.ntdev.be/eddid-api-uat/apply/create'
 headers = {
     'Content-Type' : 'application/json' ,
-    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoidGVzdCIsImNvZ25pdG86cm9sZXMiOlsiYXJuOmF3czppYW06OjgzMjQzMTg2NDY2Njpyb2xlXC9kZXYtZWRkaWQtY29nbml0by1hZG1pbi1yb2xlIl0sImF1ZCI6IjUxM2pmY2t0cjFtNmV2b2dmcXU3b3NrN3BhIiwiZXZlbnRfaWQiOiIyMTRiMTc5YS01YjNlLTExZTktOWJhMy0yM2I5M2ZhNmZkY2QiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU1NDg2NTgwMSwiZXhwIjoxNTU0ODY5NDAxLCJpYXQiOjE1NTQ4NjU4MDEsImZhbWlseV9uYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluMTIzNEAxNjMuY29tIn0.dXSz_gravDqvhd5guq2e_F1ziyj_5dC3-cGoPgPn6sugBj7JGSWpfPtaIKIDzeXAgTPhRTHGRa_c8mBeigUu7pefHicxj0Cim953qeUBy-XVeMsYHzpd3-UvCZ0IGGq-43xouYi5jBwwb6dH1h7USR2RvzjSQDMTuXggP9ODNVfXdgd9Yo1bf0TG0CY3q3uBRgdf11eVfn7J-bRv5OLwvti9ncC790uqiGajvhOPWfu0ugEHsb8T11axqRcd-ILKt5tHHodgEPAEGSr-7FEdIGaH9khMyrZ5wBixQpVP5RCIdu87qeGYOhKlhIXnqcKtk2ue7v6TsR7ZB6kTODiovw'
+    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJlODRjNDM1YS01OTFiLTQzMTktOWVhMC1lZDAyY2NkZTRjM2UiLCJjb2duaXRvOmdyb3VwcyI6WyJjczIiXSwiZW1haWxfdmVyaWZpZWQiOnRydWUsImNvZ25pdG86cHJlZmVycmVkX3JvbGUiOiJhcm46YXdzOmlhbTo6ODMyNDMxODY0NjY2OnJvbGVcL2Rldi1lZGRpZC1jb2duaXRvLWFkbWluLXJvbGUiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuYXAtc291dGhlYXN0LTEuYW1hem9uYXdzLmNvbVwvYXAtc291dGhlYXN0LTFfdTlmejdseW9OIiwiY29nbml0bzp1c2VybmFtZSI6ImNzX3QxIiwiZ2l2ZW5fbmFtZSI6IkFpbWVlIiwiY29nbml0bzpyb2xlcyI6WyJhcm46YXdzOmlhbTo6ODMyNDMxODY0NjY2OnJvbGVcL2Rldi1lZGRpZC1jb2duaXRvLWFkbWluLXJvbGUiXSwiYXVkIjoiNTEzamZja3RyMW02ZXZvZ2ZxdTdvc2s3cGEiLCJldmVudF9pZCI6IjczMTNmNTY2LTY0YTUtMTFlOS1iYzEwLWYxMzBkZjM1MWY3MiIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNTU1ODk5NzM3LCJleHAiOjE1NTU5MDMzMzcsImlhdCI6MTU1NTg5OTczNywiZmFtaWx5X25hbWUiOiJXZWkiLCJlbWFpbCI6IjEyMzQ1NkAxNjMuY29tIn0.YOdClUJSF4uQzPMFTbGszg5vp4VK4qUke5T14ew3y-XCTUkYq-hQTuX5nmWfCiaUXIUKtTkkfLxF_N2-mUA4zwD2YEqzF1RUm74NqhHfhh7HayDRnq-1UKmScWK6e3XGiSn-zrgXl_5UH0f81UIs0cq4AJmD313Bk9EDCIpmy62Hae3tIRylpPDdl0RjGZnILGNiNdD5kfxqiZyXLL8HQ8t_Q4MAYM5xCZ252u6Zs143wOkLEMWPoBXY5EWKTs-JBpFsgkvF2cq_0Ft7mUxdpuDBRY19k7yi-vEnFo1Qu01Ku268O1NbVHzitaKXReilQNBQvT4X5IakpGETeHF__w'
+
+
 }
 
 
@@ -26,9 +28,9 @@ data = {
     #mobile:手机;visitingAccount:亲临开户;postal:邮递;onlineApplication:网上开户申请
     "accountOpeningWay": "visitingAccount",  #开户方式,
     "personalInfoDeclartion": "Y",
-    # "customerSource": "ballFives",    
+    "customerSource": "ballFives",    
     # "customerSource": "app",    
-    "customerSource": "crm",    
+    # "customerSource": "crm",    
     "mailLanguage": "en",
     "appBankName": "",
     "appBankAccount": "",
