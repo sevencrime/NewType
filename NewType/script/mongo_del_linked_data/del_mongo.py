@@ -48,6 +48,7 @@ class Database:
 	"""
 
 	def del_linked(self, collection, query, database=None):
+		collections = set()  #存放一条关联记录中遍历过的表
 		if database != None:
 			# 如果database不等于None则切换数据库
 			self.db = self.client[database]
@@ -56,8 +57,9 @@ class Database:
 		self.log.info("%s 表符合查询条件%s 的数据有%s 条" %(collection, query, result.count()))
 		print("%s 表符合查询条件%s 的数据有%s 条" %(collection, query, result.count()))
 		for r in result:
-
 			self.log.info(r)
+			collections.add(collection)
+
 			if str(r['_id']) in self.collectionsId:
 				print("%s 表已经查询过,跳过" %collection)
 				continue
@@ -69,7 +71,7 @@ class Database:
 					# 判断是否在表中有ObjectID
 					if isinstance(r[key], ObjectId):
 						try:
-							if r[key] not in self.collectionsId:
+							if r[key] not in self.collectionsId and self.table[key] not in collections:
 								self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
 								self.log.info("正在查询关联表 %s 的数据" %self.table[key])
 
@@ -88,7 +90,7 @@ class Database:
 							# 判断数组中的字段是否是object类型
 							if isinstance(r[key][n], ObjectId):
 								try:
-									if r[key][n] not in self.collectionsId:
+									if r[key][n] not in self.collectionsId and self.table[key] not in collections:
 										self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
 										self.log.info("正在查询关联表 %s 的数据" %self.table[key])
 
@@ -104,7 +106,7 @@ class Database:
 					elif key == 'idpUserId':
 						# continue
 						try:
-							if r[key] not in self.collectionsId:
+							if r[key] not in self.collectionsId and self.table[key] not in collections:
 								self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
 								self.log.info("正在查询关联表 %s 的数据" %self.table[key])
 
@@ -121,7 +123,7 @@ class Database:
 					elif key == 'subject':
 						# continue
 						try:
-							if r[key] not in self.collectionsId:
+							if r[key] not in self.collectionsId and self.table[key] not in collections :
 								self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
 								self.log.info("正在查询关联表 %s 的数据" %self.table[key])
 
@@ -134,9 +136,6 @@ class Database:
 						except Exception as e:
 							self.log.info(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
 							print(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
-
-
-
 
 					else:
 						# print("index", index)
@@ -156,8 +155,6 @@ class Database:
 							# print(result)
 
 							self.log.info("***********************************\n")
-
-
 
 
 if __name__ == '__main__':
