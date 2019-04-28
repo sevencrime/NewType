@@ -104,7 +104,7 @@ class Database:
 							print(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
 
 					elif key == 'subject':
-						# continue
+						continue
 						try:
 							if self.table[key] not in self.collections:
 								self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
@@ -146,7 +146,7 @@ if __name__ == '__main__':
 	host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
 	# host = 'localhost:27017'
 	database = 'uat'
-	Database(host, database).del_linked("apply_info", {'phone':"15089514626"})
+	Database(host, database).del_linked("apply_info", {'idNumber':"441502199602120215"})
 
 
 
