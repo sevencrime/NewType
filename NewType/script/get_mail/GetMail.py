@@ -12,6 +12,7 @@ from email.parser import Parser
 import email
 import time
 import datetime
+import os
 
 
 class Analysis_Mail():
@@ -32,27 +33,16 @@ class Analysis_Mail():
         # 处理邮件头
         fromstr = msg.get('From')
         from_name, from_url = email.utils.parseaddr(fromstr)
-        # print(from_name, from_url)
-        name = self.cmps(from_name)
-        print(name)
 
         date = msg.get('Date')
-        print(date[:-5],"oooooooooooooooo")
-        timeReceive = (datetime.datetime.strptime(date[:-5], '%a, %d %b %Y %H:%M:%S ') + datetime.timedelta(hours=(8-int(date[-5:]))))
-        print("time:", timeReceive)
+        timeReceive = (datetime.datetime.strptime(
+            date[:-5], '%a, %d %b %Y %H:%M:%S ') + datetime.timedelta(hours=(8-int(date[-5:]))))
 
         tosrt = msg.get('To')
-        # print("To:", tosrt)
-        # print(email.header.decode_header(tosrt)[0][0].decode('utf-8'))
-        to = self.cmps(tosrt)
-        print(to)
 
         subjectstr = msg.get('Subject')
-        # print("Subject:", subjectstr)
-        # sub = email.header.decode_header(subjectstr)[0][0]
-        # print(sub.decode('utf-8'))
-        sub = self.cmps(subjectstr)
-        print(sub)
+
+        return self.cmps(from_name), self.cmps(from_url), self.cmps(timeReceive), self.cmps(tosrt), self.cmps(subjectstr)
 
     def login(self):
         server = poplib.POP3(self.pop_server)  # 链接服务器
@@ -66,33 +56,28 @@ class Analysis_Mail():
         print(server.stat())  # star()返回邮件总数和总大小
 
         # server.list():
-        resp, mails, octets = server.list()
-        print("响应信息： ", resp)
-        print("所有邮件简要信息： ", mails)
-        print("list方法返回数据大小（字节）： ", octets)
+        resp, mails, octets = server.list() #返回响应信息, 所有邮件简要信息, 邮件大小, 返回tuple
 
         print("邮件总数为:", len(mails))
-        # up_index = len(mails)
-        # # up_resp, up_mail, up_octets = server.retr(up_index)
-        # up_resp, up_mail, up_octets = server.retr(up_index)
 
-        for mail_index in reversed(range(1, len(mails)+1)):
+        for mail_index in reversed(range(1, len(mails)+1)):  # 从最新一封邮件开始遍历
 
-            up_resp, up_mail, up_octets = server.retr(mail_index)
+            up_resp, up_mail, up_octets = server.retr(mail_index)   #拿到每一封邮件, 返回tuple
 
-            msg_content = b'\r\n'.join(up_mail).decode('utf-8')
+            msg_content = b'\r\n'.join(up_mail).decode('utf-8')    #up_mail存储原始邮件的每一行,通过\r\n连接
             # print(msg_content)
 
-            msg = Parser().parsestr(text=msg_content)
-
+            msg = Parser().parsestr(text=msg_content)   #Parser解析邮件
             # print(msg)
-            print(type(msg))
 
-            self.get_details(msg)
+            from_name, from_url, timeReceive, to, sub = self.get_details(msg)   #解析邮件信息头
 
-            for par in msg.walk():
-                # print(par,"Ssssss")
-                if not par.is_multipart():
+            if timeReceive.strftime("%Y%m%d") != time.strftime("%Y%m%d", time.localtime(time.time())):
+                # 只读取当天的邮件
+                continue
+
+            for par in msg.walk():  #以深度优先的遍历顺序迭代消息对象树的所有部分和子部分
+                if not par.is_multipart():  #判断是否EmailMessage对象
                     print("111111111111111111111111111")
                     annex = par.get_param("name")  # 获取附件名
                     if annex:
@@ -108,6 +93,24 @@ class Analysis_Mail():
                         data = par.get_payload(decode=True)
                         # print(data,"4444444444444444444444444")
                         print(data.decode('utf-8'), "55555555555555555555555")
+                        if '<html>' in data.decode('utf-8'):
+
+                            mik_dir = os.getcwd()+'\\mail_TMPL\\%s_now%s' % (
+                                timeReceive.strftime("%Y_%m_%d"), time.strftime("%Y%m%d%H", time.localtime(time.time())))
+                            if os.path.exists(mik_dir) is False:    # 判断文件目录是否存在
+                                os.makedirs(mik_dir)
+
+                            with open(os.getcwd()+'\\mail_TMPL\\%s_now%s\\%s_%s.html' % (
+                                timeReceive.strftime("%Y_%m_%d"), time.strftime("%Y%m%d%H", time.localtime(time.time())), 
+                                timeReceive.strftime("%Y-%m-%d %H-%M-%S"), sub), 'a', encoding='utf-8') as f:
+                                # 写入文件
+                                f.write("<!-- %s,  %s -->" % (from_name, from_url))
+                                f.write("\n<!--DateTime : %s -->" % timeReceive)
+                                f.write("\n<!--To : %s -->" % to)
+                                f.write("\n<!--Subject : %s -->\n" % sub)
+                                f.write(data.decode('utf-8'))
+
+                                f.close()
 
         server.close()  # 关闭服务
 
