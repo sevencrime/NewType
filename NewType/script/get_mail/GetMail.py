@@ -10,11 +10,14 @@ import poplib
 import base64
 from email.parser import Parser
 import email
+import time
+import datetime
+
 
 class Analysis_Mail():
 
-    pop_server = "imap.sina.cn"  #pop服务器
-    username = "15089514626@sina.cn"    
+    pop_server = "imap.sina.cn"  # pop服务器
+    username = "15089514626@sina.cn"
     password = "Abcd1234"
 
     def cmps(self, s):
@@ -33,7 +36,12 @@ class Analysis_Mail():
         name = self.cmps(from_name)
         print(name)
 
-        tosrt= msg.get('To')
+        date = msg.get('Date')
+        print(date[:-5],"oooooooooooooooo")
+        timeReceive = (datetime.datetime.strptime(date[:-5], '%a, %d %b %Y %H:%M:%S ') + datetime.timedelta(hours=(8-int(date[-5:]))))
+        print("time:", timeReceive)
+
+        tosrt = msg.get('To')
         # print("To:", tosrt)
         # print(email.header.decode_header(tosrt)[0][0].decode('utf-8'))
         to = self.cmps(tosrt)
@@ -46,17 +54,16 @@ class Analysis_Mail():
         sub = self.cmps(subjectstr)
         print(sub)
 
-
     def login(self):
-        server = poplib.POP3(self.pop_server)    #链接服务器
+        server = poplib.POP3(self.pop_server)  # 链接服务器
         # server.set_debuglevel(1)    #可选项,打印客户端和服务端的交互信息
-        print(server.getwelcome().decode('utf-8'))  #打印服务器的欢迎信息,验证是否连接成功
+        print(server.getwelcome().decode('utf-8'))  # 打印服务器的欢迎信息,验证是否连接成功
 
         # 身份验证
         server.user(self.username)
         server.pass_(self.password)
 
-        print(server.stat())    #star()返回邮件总数和总大小
+        print(server.stat())  # star()返回邮件总数和总大小
 
         # server.list():
         resp, mails, octets = server.list()
@@ -69,7 +76,7 @@ class Analysis_Mail():
         # # up_resp, up_mail, up_octets = server.retr(up_index)
         # up_resp, up_mail, up_octets = server.retr(up_index)
 
-        for mail_index in reversed(range(1,len(mails)+1)):
+        for mail_index in reversed(range(1, len(mails)+1)):
 
             up_resp, up_mail, up_octets = server.retr(mail_index)
 
@@ -77,6 +84,7 @@ class Analysis_Mail():
             # print(msg_content)
 
             msg = Parser().parsestr(text=msg_content)
+
             # print(msg)
             print(type(msg))
 
@@ -86,14 +94,14 @@ class Analysis_Mail():
                 # print(par,"Ssssss")
                 if not par.is_multipart():
                     print("111111111111111111111111111")
-                    annex = par.get_param("name")   #获取附件名
+                    annex = par.get_param("name")  # 获取附件名
                     if annex:
                         h = email.header.Header(annex)
                         dh = email.header.decode_header(h)
                         fname = dh[0][0]
                         print("附件名:", fname)
                         data = par.get_payload(decode=True)
-                        print(data,"333333333333333333333333333")
+                        print(data, "333333333333333333333333333")
 
                     else:
                         print("elseesleelse")
@@ -101,11 +109,9 @@ class Analysis_Mail():
                         # print(data,"4444444444444444444444444")
                         print(data.decode('utf-8'), "55555555555555555555555")
 
-
-        server.close()  #关闭服务
+        server.close()  # 关闭服务
 
 
 if __name__ == '__main__':
     getmail = Analysis_Mail()
     getmail.login()
-
