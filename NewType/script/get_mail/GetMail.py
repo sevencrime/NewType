@@ -18,11 +18,16 @@ import chardet
 
 class Analysis_Mail():
 
-    num = 0
+    sub_list = [
+        ['開戶審批待辦事項 (UAT)', 'Account opening approval to-do list (UAT)'],
+    ]
 
+
+    num = 0
     pop_server = "imap.sina.cn"  # pop服务器
     username = "15089514626@sina.cn"
     password = "Abcd1234"
+
 
     def cmps(self, s):
         # base64用decode_header解码
@@ -43,7 +48,7 @@ class Analysis_Mail():
 
         date = msg.get('Date')
         timeReceive = (datetime.datetime.strptime(
-            date[:-5], '%a, %d %b %Y %H:%M:%S ') + datetime.timedelta(hours=(8-int(date[-5:-2]))))
+            date[:-5], '%a, %d %b %Y %H:%M:%S ') + datetime.timedelta(hours=(8 - int(date[-5:-2]))))
 
         tosrt = msg.get('To')
         to_name, to_url = email.utils.parseaddr(tosrt)
@@ -64,99 +69,128 @@ class Analysis_Mail():
         # print(server.stat())  # star()返回邮件总数和总大小
 
         # server.list():
-        resp, mails, octets = server.list() #返回响应信息, 所有邮件简要信息, 邮件大小, 返回tuple
+        resp, mails, octets = server.list()  # 返回响应信息, 所有邮件简要信息, 邮件大小, 返回tuple
 
         print("邮件总数为:", len(mails))
 
-        for mail_index in reversed(range(1, len(mails)+1)):  # 从最新一封邮件开始遍历邮件
+        for mail_index in reversed(range(1, len(mails) + 1)):  # 从最新一封邮件开始遍历邮件
 
             self.num += 1
-            if self.num > 1 :
-                print("一个一个一个一个")
-                break
+            up_resp, up_mail, up_octets = server.retr(mail_index)  # 拿到每一封邮件信息, 返回tuple
 
-            up_resp, up_mail, up_octets = server.retr(mail_index)   #拿到每一封邮件信息, 返回tuple
+            msg_content = b'\r\n'.join(up_mail).decode('utf-8')  # 通过\r\n连接拼接原始邮件
 
-            msg_content = b'\r\n'.join(up_mail).decode('utf-8')    #通过\r\n连接拼接原始邮件
-
-            msg = Parser().parsestr(text=msg_content)   #emali.Parser解析邮件,返回Message Obj
+            msg = Parser().parsestr(text=msg_content)  # emali.Parser解析邮件,返回Message Obj
             # print(msg)
 
-            code = self.analysisMessage(msg)   
-            # code = True : 当天邮件已读取完成
+            try:
+                code = self.analysisMessage(msg)
+                # code = True : 当天邮件已读取完成
+                if code:
+                    print("收件箱已经没有当天的邮件")
+                    print('截止到 {time_now}, 当天邮件总数为: {num} 封'.format(
+                        time_now=time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(time.time())), num=self.num))
+                    break
 
-            if code:
-                break
+            except Exception as e:
+                print('ERROR', e)
+                continue
+
+        print("退出邮件服务器,结束程序")
+        server.close()
 
 
-        server.close()  # 关闭服务
 
     # 解析email.message
     def analysisMessage(self, msg):
 
-        from_name, from_url, timeReceive, to_name, to_url, sub = self.get_details(msg)   #解析邮件信息头
+        from_name, from_url, timeReceive, to_name, to_url, sub = self.get_details(msg)  # 解析邮件信息头
 
+        # 只读取当天的邮件
         if timeReceive.strftime("%Y%m%d") != time.strftime("%Y%m%d", time.localtime(time.time())):
-            # 只读取当天的邮件
-            print("收件箱已经没有当天的邮件,结束程序")
             return True
+
+        # 文件保存路径
+        mik_dir = os.getcwd() + '\\mail_TMPL\\{timeReceive}_now{now}'.format(
+            timeReceive=timeReceive.strftime("%Y_%m_%d"),
+            now=time.strftime("%Y%m%d", time.localtime(time.time())))
+
+        # 判断文件目录是否存在
+        if os.path.exists(mik_dir) is False:
+            os.makedirs(mik_dir)
 
         for part in msg.walk():  # 遍历邮件的每一部分,返回Ture表示可继续迭代
 
             if not part.is_multipart():  # 判断内容是否EmailMessage对象,fales为str对象
+
                 annex = part.get_param("name")  # 获取附件名
+
                 if annex:
                     h = email.header.Header(annex)
                     fname = self.cmps(h)
                     print("附件名:", fname)
                     data = part.get_payload(decode=True)
                     data_code = chardet.detect(data)
-                    print(data.decode(data_code['encoding']), "333333333333333333333333333")
-                    with open(os.getcwd()+'\\mail_TMPL\\%s_now%s\\%s_%s.html' % (
-                        timeReceive.strftime("%Y_%m_%d"), time.strftime("%Y%m%d", time.localtime(time.time())), 
-                        timeReceive.strftime("%H%M%S"), ''.join(title for title in sub if title.isalnum())), 
-                        'a+', encoding='utf-8') as f:
-                        f.write('\n\n<!--附件名: %s-->' %fname)
-                        f.write('\n<!--\n %s \n-->' %data.decode(data_code['encoding']))
+                    # print(data.decode(data_code['encoding']), "3333333333333333")
 
+                    with open('{mik_dir}\\{receive_time}_{subject}.html'.format(
+                        mik_dir=mik_dir,
+                        receive_time=timeReceive.strftime("%H%M%S"),
+                        subject=''.join(
+                            title for title in sub if title.isalnum())
+                        ), 'a+', encoding='utf-8') as f:
+
+                        f.write('\n\n<!--附件名: {fileName}-->'.format(fileName=fname))
+                        try:
+                            f.write('\n<!--\n {fileNameContent} \n-->'.format(
+                                fileNameContent=data.decode(data_code['encoding'])))
+                        except UnicodeDecodeError:
+                            if data_code['encoding'] == 'GB2312':
+                                f.write(data.decode('gbk'))
 
                 else:
-                    print("elseesleelse")
-                    # import pdb
-                    # pdb.set_trace()
+                    # print("elseesleelse")
                     data = part.get_payload(decode=True)
-                    # print(data,"4444444444444444444444444")
                     data_code = chardet.detect(data)
-                    print(data.decode(data_code['encoding']), "55555555555555555555555")
-                    # if '<html>' in data.decode('utf-8'):
+                    # print(data.decode(data_code['encoding']), "555555555555")
+
                     if part.get_content_type() == 'text/html':
+                        with open('{mik_dir}\\{receive_time}_{subject}.html'.format(
+                            mik_dir=mik_dir,
+                            receive_time=timeReceive.strftime("%H%M%S"),
+                            subject=''.join(title for title in sub if title.isalnum())
+                            ), 'a+', encoding='utf-8') as f:
 
-                        mik_dir = os.getcwd()+'\\mail_TMPL\\%s_now%s' % (
-                            timeReceive.strftime("%Y_%m_%d"), time.strftime("%Y%m%d", time.localtime(time.time())))
-                        if os.path.exists(mik_dir) is False:    # 判断文件目录是否存在
-                            os.makedirs(mik_dir)
-
-                        # import pdb 
-                        # pdb.set_trace()
-                        with open(os.getcwd()+'\\mail_TMPL\\%s_now%s\\%s_%s.html' % (
-                            timeReceive.strftime("%Y_%m_%d"), time.strftime("%Y%m%d", time.localtime(time.time())), 
-                            timeReceive.strftime("%H%M%S"), ''.join(title for title in sub if title.isalnum())), 
-                            'a+', encoding='utf-8') as f:
                             # 写入文件
-                            f.write("<!-- %s,  %s -->" % (from_name, from_url))
-                            f.write("\n<!--DateTime : %s -->" % timeReceive)
-                            f.write("\n<!--To : %s , %s -->" % (to_name, to_url))
-                            f.write("\n<!--Subject : %s -->\n" % sub)
-                            f.write(data.decode(data_code['encoding']))
+                            f.write("<!-- {from_name},  {from_url} -->".format(from_name=from_name, from_url=from_url))
+                            f.write("\n<!--DateTime : {timeReceive} -->".format(timeReceive=timeReceive))
+                            f.write("\n<!--To : {to_name} , {to_url} -->".format(to_name=to_name, to_url=to_url))
+                            f.write("\n<!--Subject : {subject} -->\n".format(subject=sub))
+                            # import pdb; pdb.set_trace()
+                            try:
+                                f.write(data.decode(data_code['encoding']))
+                            except UnicodeDecodeError:
+                                if data_code['encoding'] == 'GB2312':
+                                    f.write(data.decode('gbk'))
+                                
                             f.close()
-            else:
-                # EmailMessage对象,重新解析
-                print("&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-                print("&&&&&&&&&&&&&&&&&&&&&&&&&&&")
 
+                    elif part.get_content_type() == 'text/plain':
+
+                        # import pdb; pdb.set_trace()
+                        # 判断邮件标题
+                        if sub in [title for s in self.sub_list for title in s ]:
+
+                            data = part.get_payload(decode=True)
+                            data_code = chardet.detect(data)
+                            # print(data.decode(data_code['encoding']), "555555555555")
+
+
+                        # 先匹配标题
+                            # 再匹配内容
 
 
 
 if __name__ == '__main__':
-    getmail = Analysis_Mail()
+    getmail=Analysis_Mail()
     getmail.login()
