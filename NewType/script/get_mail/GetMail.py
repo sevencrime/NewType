@@ -14,13 +14,14 @@ import time
 import datetime
 import os
 import chardet
-
+import re
 
 class Analysis_Mail():
 
-    sub_list = [
-        ['開戶審批待辦事項 (UAT)', 'Account opening approval to-do list (UAT)'],
-    ]
+    sub_dict = {
+       'approval' : ['開戶審批待辦事項 (UAT)', 'Account opening approval to-do list (UAT)'],
+    }
+    
 
 
     num = 0
@@ -178,16 +179,26 @@ class Analysis_Mail():
                     elif part.get_content_type() == 'text/plain':
 
                         # import pdb; pdb.set_trace()
+
                         # 判断邮件标题
-                        if sub in [title for s in self.sub_list for title in s ]:
+                        if [value for v in self.sub_dict.values() for value in v if sub == value]:
 
                             data = part.get_payload(decode=True)
                             data_code = chardet.detect(data)
-                            # print(data.decode(data_code['encoding']), "555555555555")
+                            try:
+                                mContext = data.decode(data_code['encoding'])
+                            except UnicodeDecodeError:
+                                mContext = data.decode('gbk')
 
+                            # 获取邮件的类型
+                            mail_type = "".join([k for k,v in self.sub_dict.items() for value in v if sub == value])
 
-                        # 先匹配标题
-                            # 再匹配内容
+                            if mail_type == 'approval': 
+                                roleName = "".join(re.findall(',(.+):', mContext))  #角色名称
+                            else:
+                                pass
+
+                                
 
 
 
