@@ -15,21 +15,22 @@ import datetime
 import os
 import chardet
 import re
+from apscheduler.schedulers.blocking import BlockingScheduler   # apscheduler定时任务框架
+
 
 class Analysis_Mail():
 
     sub_dict = {
-       'AccountOpeningApproval' : ['开户审批待办事项 (UAT)', '開戶審批待辦事項 (UAT)', 'Account opening approval to-do list (UAT)'],
-       'DailyReport' : ['每日开户表汇总', ],
-       'LeadForm' : ['[電子入場門票]'],
-       'LeadFormRemind' : ['[講座提醒]']
+        'AccountOpeningApproval': ['开户审批待办事项 (UAT)', '開戶審批待辦事項 (UAT)', 'Account opening approval to-do list (UAT)'],
+        'DailyReport': ['每日开户表汇总', ],
+        'LeadForm': ['[電子入場門票]'],
+        'LeadFormRemind': ['[講座提醒]']
     }
-    
-    Role = []   #存放角色
-    DailyReportGB = False   #每日报表邮件
+
+    Role = []  # 存放角色
+    DailyReportGB = False  # 每日报表邮件
     LeadFormGB = False  # 登记讲座邮件
     LeadFormRemindGB = False    # 讲座提醒邮件
-
 
     num = 0
     pop_server = "imap.sina.cn"  # pop服务器
@@ -81,9 +82,11 @@ class Analysis_Mail():
         for mail_index in reversed(range(1, len(mails) + 1)):  # 从最新一封邮件开始遍历邮件
 
             self.num += 1
-            up_resp, up_mail, up_octets = server.retr(mail_index)  # 拿到每一封邮件信息, 返回tuple
+            up_resp, up_mail, up_octets = server.retr(
+                mail_index)  # 拿到每一封邮件信息, 返回tuple
 
-            msg_content = b'\r\n'.join(up_mail).decode('utf-8')  # 通过\r\n连接拼接原始邮件
+            msg_content = b'\r\n'.join(up_mail).decode(
+                'utf-8')  # 通过\r\n连接拼接原始邮件
 
             msg = Parser().parsestr(text=msg_content)  # emali.Parser解析邮件,返回Message Obj
             # print(msg)
@@ -104,12 +107,12 @@ class Analysis_Mail():
         print("退出邮件服务器,结束程序")
         server.close()
 
-
-
     # 解析email.message
+
     def analysisMessage(self, msg):
 
-        from_name, from_url, timeReceive, to_name, to_url, sub = self.get_details(msg)  # 解析邮件信息头
+        from_name, from_url, timeReceive, to_name, to_url, sub = self.get_details(
+            msg)  # 解析邮件信息头
 
         # 只读取当天的邮件
         if timeReceive.strftime("%Y%m%d") != time.strftime("%Y%m%d", time.localtime(time.time())):
@@ -141,9 +144,10 @@ class Analysis_Mail():
                         receive_time=timeReceive.strftime("%H%M%S"),
                         subject=''.join(
                             title for title in sub if title.isalnum())
-                        ), 'a+', encoding='utf-8') as f:
+                    ), 'a+', encoding='utf-8') as f:
 
-                        f.write('\n\n<!--附件名: {fileName}-->'.format(fileName=fname))
+                        f.write(
+                            '\n\n<!--附件名: {fileName}-->'.format(fileName=fname))
                         try:
                             f.write('\n<!--\n {fileNameContent} \n-->'.format(
                                 fileNameContent=data.decode(data_code['encoding'])))
@@ -160,14 +164,19 @@ class Analysis_Mail():
                         with open('{mik_dir}\\{receive_time}_{subject}.html'.format(
                             mik_dir=mik_dir,
                             receive_time=timeReceive.strftime("%H%M%S"),
-                            subject=''.join(title for title in sub if title.isalnum())
-                            ), 'a+', encoding='utf-8') as f:
+                            subject=''.join(
+                                title for title in sub if title.isalnum())
+                        ), 'a+', encoding='utf-8') as f:
 
                             # 写入文件
-                            f.write("<!-- {from_name},  {from_url} -->".format(from_name=from_name, from_url=from_url))
-                            f.write("\n<!--DateTime : {timeReceive} -->".format(timeReceive=timeReceive))
-                            f.write("\n<!--To : {to_name} , {to_url} -->".format(to_name=to_name, to_url=to_url))
-                            f.write("\n<!--Subject : {subject} -->\n".format(subject=sub))
+                            f.write(
+                                "<!-- {from_name},  {from_url} -->".format(from_name=from_name, from_url=from_url))
+                            f.write(
+                                "\n<!--DateTime : {timeReceive} -->".format(timeReceive=timeReceive))
+                            f.write(
+                                "\n<!--To : {to_name} , {to_url} -->".format(to_name=to_name, to_url=to_url))
+                            f.write(
+                                "\n<!--Subject : {subject} -->\n".format(subject=sub))
                             # import pdb; pdb.set_trace()
                             try:
                                 f.write(data.decode(data_code['encoding']))
@@ -175,12 +184,13 @@ class Analysis_Mail():
                                 print("ERROE: UnicodeDecodeError")
                                 if data_code['encoding'] == 'GB2312':
                                     f.write(data.decode('gbk'))
-                                
+
                             f.close()
 
                     elif part.get_content_type() == 'text/plain':
 
-                        import pdb; pdb.set_trace()
+                        import pdb
+                        pdb.set_trace()
 
                         # 判断邮件标题
                         if [value for v in self.sub_dict.values() for value in v if sub == value] and from_name == 'noreply':
@@ -194,23 +204,27 @@ class Analysis_Mail():
                                 mContext = data.decode('gbk')
 
                             # 获取邮件的类型
-                            mail_type = "".join([k for k,v in self.sub_dict.items() for value in v if value in sub])
+                            mail_type = "".join(
+                                [k for k, v in self.sub_dict.items() for value in v if value in sub])
 
-                            if mail_type == 'approval' : 
-                                roleName = "".join(re.findall(',(.+):', mContext))  #角色名称
+                            if mail_type == 'approval':
+                                roleName = "".join(re.findall(
+                                    ',(.+):', mContext))  # 角色名称
                                 self.Role.append(roleName)
                             elif mail_type == 'DailyReport':
                                 self.DailyReportGB = True
-                            elif mail_type == 'LeadForm':    
+                            elif mail_type == 'LeadForm':
                                 self.LeadFormGB = True
                             elif mail_type == 'LeadFormRemind':
                                 self.LeadFormRemindGB = True
                             else:
                                 pass
-      
-
 
 
 if __name__ == '__main__':
-    getmail=Analysis_Mail()
-    getmail.login()
+    getmail = Analysis_Mail()
+    apscheduler = BlockingScheduler()
+    apscheduler.add_job(
+        func=getmail.login, trigger='cron', day_of_week='0-6', hour=16, minute=2)
+    apscheduler.start()
+    # getmail.login()
