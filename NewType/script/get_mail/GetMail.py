@@ -19,16 +19,22 @@ import re
 class Analysis_Mail():
 
     sub_dict = {
-       'approval' : ['開戶審批待辦事項 (UAT)', 'Account opening approval to-do list (UAT)'],
+       'AccountOpeningApproval' : ['开户审批待办事项 (UAT)', '開戶審批待辦事項 (UAT)', 'Account opening approval to-do list (UAT)'],
+       'DailyReport' : ['每日开户表汇总', ],
+       'LeadForm' : ['[電子入場門票]'],
+       'LeadFormRemind' : ['[講座提醒]']
     }
     
+    Role = []   #存放角色
+    DailyReportGB = False   #每日报表邮件
+    LeadFormGB = False  # 登记讲座邮件
+    LeadFormRemindGB = False    # 讲座提醒邮件
 
 
     num = 0
     pop_server = "imap.sina.cn"  # pop服务器
     username = "15089514626@sina.cn"
     password = "Abcd1234"
-
 
     def cmps(self, s):
         # base64用decode_header解码
@@ -41,8 +47,6 @@ class Analysis_Mail():
             return scode[0][0].decode('gbk')
 
     def get_details(self, msg):
-        # import pdb
-        # pdb.set_trace()
         # 处理邮件头
         fromstr = msg.get('From')
         from_name, from_url = email.utils.parseaddr(fromstr)
@@ -127,12 +131,10 @@ class Analysis_Mail():
                 annex = part.get_param("name")  # 获取附件名
 
                 if annex:
-                    h = email.header.Header(annex)
-                    fname = self.cmps(h)
+                    fname = self.cmps(email.header.Header(annex))
                     print("附件名:", fname)
                     data = part.get_payload(decode=True)
                     data_code = chardet.detect(data)
-                    # print(data.decode(data_code['encoding']), "3333333333333333")
 
                     with open('{mik_dir}\\{receive_time}_{subject}.html'.format(
                         mik_dir=mik_dir,
@@ -146,14 +148,13 @@ class Analysis_Mail():
                             f.write('\n<!--\n {fileNameContent} \n-->'.format(
                                 fileNameContent=data.decode(data_code['encoding'])))
                         except UnicodeDecodeError:
+                            print("ERROE: UnicodeDecodeError")
                             if data_code['encoding'] == 'GB2312':
                                 f.write(data.decode('gbk'))
 
                 else:
-                    # print("elseesleelse")
                     data = part.get_payload(decode=True)
                     data_code = chardet.detect(data)
-                    # print(data.decode(data_code['encoding']), "555555555555")
 
                     if part.get_content_type() == 'text/html':
                         with open('{mik_dir}\\{receive_time}_{subject}.html'.format(
@@ -171,6 +172,7 @@ class Analysis_Mail():
                             try:
                                 f.write(data.decode(data_code['encoding']))
                             except UnicodeDecodeError:
+                                print("ERROE: UnicodeDecodeError")
                                 if data_code['encoding'] == 'GB2312':
                                     f.write(data.decode('gbk'))
                                 
@@ -178,27 +180,34 @@ class Analysis_Mail():
 
                     elif part.get_content_type() == 'text/plain':
 
-                        # import pdb; pdb.set_trace()
+                        import pdb; pdb.set_trace()
 
                         # 判断邮件标题
-                        if [value for v in self.sub_dict.values() for value in v if sub == value]:
+                        if [value for v in self.sub_dict.values() for value in v if sub == value] and from_name == 'noreply':
 
                             data = part.get_payload(decode=True)
                             data_code = chardet.detect(data)
                             try:
                                 mContext = data.decode(data_code['encoding'])
                             except UnicodeDecodeError:
+                                print("ERROE: UnicodeDecodeError")
                                 mContext = data.decode('gbk')
 
                             # 获取邮件的类型
-                            mail_type = "".join([k for k,v in self.sub_dict.items() for value in v if sub == value])
+                            mail_type = "".join([k for k,v in self.sub_dict.items() for value in v if value in sub])
 
-                            if mail_type == 'approval': 
+                            if mail_type == 'approval' : 
                                 roleName = "".join(re.findall(',(.+):', mContext))  #角色名称
+                                self.Role.append(roleName)
+                            elif mail_type == 'DailyReport':
+                                self.DailyReportGB = True
+                            elif mail_type == 'LeadForm':    
+                                self.LeadFormGB = True
+                            elif mail_type == 'LeadFormRemind':
+                                self.LeadFormRemindGB = True
                             else:
                                 pass
-
-                                
+      
 
 
 
