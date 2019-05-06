@@ -21,10 +21,13 @@ from apscheduler.schedulers.blocking import BlockingScheduler   # apscheduler定
 class Analysis_Mail():
 
     sub_dict = {
-        'AccountOpeningApproval': ['开户审批待办事项 (UAT)', '開戶審批待辦事項 (UAT)', 'Account opening approval to-do list (UAT)'],
+        'AccountOpeningApproval': ['开户审批待办事项', '開戶審批待辦事項', 'Account opening approval to-do list'],
         'DailyReport': ['每日开户表汇总', ],
         'LeadForm': ['[電子入場門票]'],
-        'LeadFormRemind': ['[講座提醒]']
+        'LeadFormRemind': ['[講座提醒]'], 
+        'accountAudit' : ['开户申请通知 Account Application Notification', '開戶申請通知 Account Application Notification'], 
+        'applyemail' : ['Online Account Application Approved', '艾德網上開戶申請批核確認', '艾德网上开户申请批核确认'],
+        'forCs1Notify' : ['Account opening application notice', '开户申请通知书', '開戶申請通知書']
     }
 
     Role = []  # 存放角色
@@ -193,7 +196,7 @@ class Analysis_Mail():
                         pdb.set_trace()
 
                         # 判断邮件标题
-                        if [value for v in self.sub_dict.values() for value in v if sub == value] and from_name == 'noreply':
+                        if [value for v in self.sub_dict.values() for value in v if value in sub] and from_name == 'noreply':
 
                             data = part.get_payload(decode=True)
                             data_code = chardet.detect(data)
@@ -207,9 +210,8 @@ class Analysis_Mail():
                             mail_type = "".join(
                                 [k for k, v in self.sub_dict.items() for value in v if value in sub])
 
-                            if mail_type == 'approval':
-                                roleName = "".join(re.findall(
-                                    ',(.+):', mContext))  # 角色名称
+                            if mail_type == 'approval' or mail_type == 'forCs1Notify' :
+                                roleName = "".join(re.findall(',(.+):', mContext))  # 角色名称
                                 self.Role.append(roleName)
                             elif mail_type == 'DailyReport':
                                 self.DailyReportGB = True
@@ -223,8 +225,9 @@ class Analysis_Mail():
 
 if __name__ == '__main__':
     getmail = Analysis_Mail()
-    apscheduler = BlockingScheduler()
-    apscheduler.add_job(
-        func=getmail.login, trigger='cron', day_of_week='0-6', hour=16, minute=2)
-    apscheduler.start()
-    # getmail.login()
+    getmail.login()
+
+    # apscheduler = BlockingScheduler()
+    # apscheduler.add_job(
+    #     func=getmail.login, trigger='cron', day_of_week='0-6', hour=16, minute=2)
+    # apscheduler.start()
