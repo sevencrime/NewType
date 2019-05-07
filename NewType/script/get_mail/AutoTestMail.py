@@ -20,6 +20,7 @@ import os
 import chardet
 import re
 from apscheduler.schedulers.blocking import BlockingScheduler   # apscheduler定时任务框架
+from prettytable import PrettyTable     #输出表格库
 
 
 class AutoTestMail():
@@ -205,9 +206,6 @@ class AutoTestMail():
 
                     elif part.get_content_type() == 'text/plain':
 
-                        import pdb
-                        pdb.set_trace()
-
                         # 判断邮件标题
                         if [value for v in self.sub_dict.values() for value in v if value in sub] and from_name == 'noreply':
 
@@ -223,9 +221,8 @@ class AutoTestMail():
                             mail_type = "".join(
                                 [k for k, v in self.sub_dict.items() for value in v if value in sub])
 
-                            if mail_type == 'approval' or mail_type == 'forCs1Notify':
-                                roleName = "".join(re.findall(
-                                    ',(.+):', mContext))  # 角色名称
+                            if mail_type == 'AccountOpeningApproval' or mail_type == 'forCs1Notify':
+                                roleName = "".join(re.findall(',(.+):', mContext))  # 角色名称
                                 self.Role.append(roleName)
                             elif mail_type == 'DailyReport':
                                 self.DailyReportGB.append(True)
@@ -237,26 +234,42 @@ class AutoTestMail():
                                 pass
 
     def send_mail(self):
-        mailContext = """
-            <html>
-            <body>
-                <table border="1">
-                    <caption>邮件接收统计</caption>
-                    <tr>
-                        <th>邮件类型</th>
-                        <th>是否收到</th>
-                        <th>数量</th>
-                    </tr>
-                    <tr>
-                        <th>邮件类型</th>
-                        <th>是否收到</th>
-                        <th>数量</th>
-                    </tr>
-                </table>
-            </body>
-            </html>
+        # mailContext = """
+        #     <html>
+        #     <body>
+        #         <table border="1">
+        #             <caption>邮件接收统计</caption>
+        #             <tr>
+        #                 <th>邮件类型</th>
+        #                 <th>是否收到</th>
+        #                 <th>数量</th>
+        #             </tr>
+        #             <tr>
+        #                 <th>定时邮件({account})</th>
+        #                 <th>{isSend}</th>
+        #                 <th>{count}</th>
+        #             </tr>
+        #         </table>
+        #     </body>
+        #     </html>
 
-        """
+        # """.format(account=self.Role)
+        import pdb;pdb.set_trace()
+        isRepeat = False
+        table = PrettyTable(['邮件类型', '是否收到', '数量'])
+        for col in self.sub_dict.keys():
+            if col == 'AccountOpeningApproval' or col == 'forCs1Notify':
+                if not isRepeat:
+                    for accName in set(self.Role):
+                        table.add_row([col+'>>'+accName, '是', '2'])
+                    isRepeat = True
+
+            else:
+                table.add_row([col, '否', '5'])
+
+        print(table)
+
+
 
         msg = MIMEText(mailContext, 'html', 'utf-8')
         msg['From'] = self.set_details(
