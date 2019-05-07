@@ -7,9 +7,13 @@
 
 
 import poplib
+import smtplib
 import base64
-from email.parser import Parser
 import email
+from email.parser import Parser
+from email.mime.text import MIMEText
+from email.utils import parseaddr, formataddr
+from email.header import Header
 import time
 import datetime
 import os
@@ -18,27 +22,29 @@ import re
 from apscheduler.schedulers.blocking import BlockingScheduler   # apscheduler定时任务框架
 
 
-class Analysis_Mail():
+class AutoTestMail():
 
     sub_dict = {
         'AccountOpeningApproval': ['开户审批待办事项', '開戶審批待辦事項', 'Account opening approval to-do list'],
         'DailyReport': ['每日开户表汇总', ],
         'LeadForm': ['[電子入場門票]'],
-        'LeadFormRemind': ['[講座提醒]'], 
-        'accountAudit' : ['开户申请通知 Account Application Notification', '開戶申請通知 Account Application Notification'], 
-        'applyemail' : ['Online Account Application Approved', '艾德網上開戶申請批核確認', '艾德网上开户申请批核确认'],
-        'forCs1Notify' : ['Account opening application notice', '开户申请通知书', '開戶申請通知書']
+        'LeadFormRemind': ['[講座提醒]'],
+        'accountAudit': ['开户申请通知 Account Application Notification', '開戶申請通知 Account Application Notification'],
+        'applyemail': ['Online Account Application Approved', '艾德網上開戶申請批核確認', '艾德网上开户申请批核确认'],
+        'forCs1Notify': ['Account opening application notice', '开户申请通知书', '開戶申請通知書']
     }
 
     Role = []  # 存放角色
-    DailyReportGB = False  # 每日报表邮件
-    LeadFormGB = False  # 登记讲座邮件
-    LeadFormRemindGB = False    # 讲座提醒邮件
+    DailyReportGB = []  # 每日报表邮件
+    LeadFormGB = []  # 登记讲座邮件
+    LeadFormRemindGB = []    # 讲座提醒邮件
 
     num = 0
     pop_server = "imap.sina.cn"  # pop服务器
+    smtp_server = "smtp.sina.cn"
     username = "15089514626@sina.cn"
     password = "Abcd1234"
+    sendaddr = "onedi@qq.com"
 
     def cmps(self, s):
         # base64用decode_header解码
@@ -50,8 +56,16 @@ class Analysis_Mail():
         except UnicodeDecodeError:
             return scode[0][0].decode('gbk')
 
+    def set_details(self, s):
+        # 转码邮件头
+        name, addr = parseaddr(s)
+        try:
+            return formataddr((Header(name, 'utf-8').encode(), addr))
+        except UnicodeDecodeError:
+            return formataddr((Header(name, 'gbk')).encode(), addr)
+
     def get_details(self, msg):
-        # 处理邮件头
+        # 解析处理邮件头
         fromstr = msg.get('From')
         from_name, from_url = email.utils.parseaddr(fromstr)
 
@@ -111,7 +125,6 @@ class Analysis_Mail():
         server.close()
 
     # 解析email.message
-
     def analysisMessage(self, msg):
 
         from_name, from_url, timeReceive, to_name, to_url, sub = self.get_details(
@@ -137,7 +150,7 @@ class Analysis_Mail():
                 annex = part.get_param("name")  # 获取附件名
 
                 if annex:
-                    fname = self.cmps(email.header.Header(annex))
+                    fname = self.cmps(Header(annex))
                     print("附件名:", fname)
                     data = part.get_payload(decode=True)
                     data_code = chardet.detect(data)
@@ -210,24 +223,60 @@ class Analysis_Mail():
                             mail_type = "".join(
                                 [k for k, v in self.sub_dict.items() for value in v if value in sub])
 
-                            if mail_type == 'approval' or mail_type == 'forCs1Notify' :
-                                roleName = "".join(re.findall(',(.+):', mContext))  # 角色名称
+                            if mail_type == 'approval' or mail_type == 'forCs1Notify':
+                                roleName = "".join(re.findall(
+                                    ',(.+):', mContext))  # 角色名称
                                 self.Role.append(roleName)
                             elif mail_type == 'DailyReport':
-                                self.DailyReportGB = True
+                                self.DailyReportGB.append(True)
                             elif mail_type == 'LeadForm':
-                                self.LeadFormGB = True
+                                self.LeadFormGB.append(True)
                             elif mail_type == 'LeadFormRemind':
-                                self.LeadFormRemindGB = True
+                                self.LeadFormRemindGB.append(True)
                             else:
                                 pass
 
+    def send_mail(self):
+        mailContext = """
+            <html>
+            <body>
+                <table border="1">
+                    <caption>邮件接收统计</caption>
+                    <tr>
+                        <th>邮件类型</th>
+                        <th>是否收到</th>
+                        <th>数量</th>
+                    </tr>
+                    <tr>
+                        <th>邮件类型</th>
+                        <th>是否收到</th>
+                        <th>数量</th>
+                    </tr>
+                </table>
+            </body>
+            </html>
+
+        """
+
+        msg = MIMEText(mailContext, 'html', 'utf-8')
+        msg['From'] = self.set_details(
+            "Onedi<{from_name}>".format(from_name=self.username))
+        msg['To'] = self.set_details(
+            "onedi<{to_url}>".format(to_url=self.sendaddr))
+        msg['Subject'] = Header("每日接收邮件统计", 'utf-8').encode()
+
+        smtpServer = smtplib.SMTP(self.smtp_server, 25)
+        # smtpServer.set_debuglevel(1)
+        smtpServer.login(self.username, self.password)
+        smtpServer.sendmail(self.username, self.sendaddr, msg.as_string())
+        smtpServer.quit()
+
 
 if __name__ == '__main__':
-    getmail = Analysis_Mail()
-    getmail.login()
-
+    testmail = AutoTestMail()
+    testmail.login()
+    testmail.send_mail()
     # apscheduler = BlockingScheduler()
     # apscheduler.add_job(
-    #     func=getmail.login, trigger='cron', day_of_week='0-6', hour=16, minute=2)
+    #     func=testmail.login, trigger='cron', day_of_week='0-6', hour=16, minute=2)
     # apscheduler.start()
