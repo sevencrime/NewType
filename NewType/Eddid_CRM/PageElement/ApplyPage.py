@@ -33,6 +33,7 @@ class ApplyPage(BasePage.BasePage):
 
     def get_select(self, text=False, randox=None):
         if not text:
+            import pdb;pdb.set_trace()
             select_loc = (By.XPATH, "//div[contains(@style,'position: absolute;')]//li")
 
             selectlist = self.find_elements(*select_loc)
@@ -94,6 +95,15 @@ class ApplyPage(BasePage.BasePage):
         tag_text = self.get_select(text=text)
 
         assert accountOpeningWay.get_attribute("value") != None
+        if accountOpeningWay.get_attribute("value") == '手机应用程式身份验证':
+            pass
+        elif accountOpeningWay.get_attribute("value") == '电子签名认证':
+            import pdb; pdb.set_trace()
+            banknamelist = self.find_elements(*self.get_input("银行名称"))
+            print(banknamelist)
+
+
+
         return accountOpeningWay.get_attribute("value")
 
     def send_parentId(self):
@@ -374,6 +384,16 @@ class ApplyPage(BasePage.BasePage):
             assert bullion.get_attribute("value") != None
             return bullion.get_attribute("value")
 
+    def automatic(self):
+        # 自动程式交易
+        if self.driver.page_source.find("自动程式交易") != -1:
+            automatic = self.find_element(*self.get_input("自动程式交易"))
+            self.scrollinto(automatic)
+            tag_text = self.get_select()
+            assert automatic.get_attribute("value") != None
+            return automatic.get_attribute("value")
+
+
     def otherInvestmentText(self):
         # 客户投资经验及曾买卖产品>其他投资
         self.find_element(*self.get_input("其他投资")).send_keys("otherInvest")
@@ -409,20 +429,21 @@ class ApplyPage(BasePage.BasePage):
 
     def buyProduct(self, num=None):
         # 客户是否申请开通买卖衍生权证、牛熊证及结构性等产品
-        buyProduct = self.find_element(*self.get_input("买卖衍生", parent=True))
-        self.scrollinto(buyProduct)
-        tag_text = self.get_select(randox=num)
-        if tag_text == "是":
-            # print("是是是是是")
-            riskStatement = self.find_element(*self.get_input("结构性产品相关风险声明披露", parent=True))
-            self.scrollinto(riskStatement)
-            tag_text = self.get_select()
-            if tag_text == "否":
-                messagebox = (By.XPATH, "//div[@aria-label='提示']//div[@class='el-message-box__btns']/button")
-                self.find_element(*messagebox).click()
+        if self.driver.page_source.find("买卖衍生") != -1:
+            buyProduct = self.find_element(*self.get_input("买卖衍生", parent=True))
+            self.scrollinto(buyProduct)
+            tag_text = self.get_select(randox=num)
+            if tag_text == "是":
+                # print("是是是是是")
+                riskStatement = self.find_element(*self.get_input("结构性产品相关风险声明披露", parent=True))
+                self.scrollinto(riskStatement)
+                tag_text = self.get_select()
+                if tag_text == "否":
+                    messagebox = (By.XPATH, "//div[@aria-label='提示']//div[@class='el-message-box__btns']/button")
+                    self.find_element(*messagebox).click()
 
-        assert buyProduct.get_attribute("value") != None
-        return buyProduct.get_attribute("value")
+            assert buyProduct.get_attribute("value") != None
+            return buyProduct.get_attribute("value")
 
     def bankrupt(self, num=None):
         # 客户是否曾经宣告破产或被申请破产
@@ -546,19 +567,29 @@ class ApplyPage(BasePage.BasePage):
 
     def investmentTarget(self):
         # 8.客户的投资目标是:
-        investmentTarget = self.find_element(*self.get_input("投资目标", parent=True))
-        self.scrollinto(investmentTarget)
-        tag_text = self.get_select()
-        assert investmentTarget.get_attribute("value") != None
-        return investmentTarget.get_attribute("value")
+        # investmentTarget = self.find_element(*self.get_input("投资目标", parent=True))
+        # self.scrollinto(investmentTarget)
+        # tag_text = self.get_select()
+        # assert investmentTarget.get_attribute("value") != None
+        # return investmentTarget.get_attribute("value")
+        self.find_element(*self.get_checkbox('对冲')).click()
+
 
     def riskTolerance(self):
         # 9.客户的风险承受能力是:
-        riskTolerance = self.find_element(*self.get_input("风险承受能力", parent=True))
+        riskTolerance = self.find_element(*self.get_input("客户的风险承受能力是", parent=True))
         self.scrollinto(riskTolerance)
         tag_text = self.get_select()
         assert riskTolerance.get_attribute("value") != None
         return riskTolerance.get_attribute("value")
+
+    def jointRiskTolerance(self):
+        # 9.本人确认并同意主要账户持有人之风险承受能力选择:
+        jointRiskTolerance = self.find_element(*self.get_input("本人确认并同意主要账户持有人之风险承受能力选择", parent=True))
+        self.scrollinto(jointRiskTolerance)
+        tag_text = self.get_select()
+        assert jointRiskTolerance.get_attribute("value") != None
+        return jointRiskTolerance.get_attribute("value")
 
     def bankaccount(self, num=None):
         # 结算账户
