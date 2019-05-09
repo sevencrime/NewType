@@ -34,6 +34,7 @@ class AutoTestMail():
         'applyemail': ['Online Account Application Approved', '艾德網上開戶申請批核確認', '艾德网上开户申请批核确认'],
         'forCs1Notify': ['Account opening application notice', '开户申请通知书', '開戶申請通知書']
     }
+    accName = ['sales', 'cs1', 'cs2', 'cliff', 'don', 'aaron', 'gold', 'comp', 'ops']
 
     Role = []  # 存放角色
     DailyReportGB = []  # 每日报表邮件
