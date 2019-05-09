@@ -21,6 +21,8 @@ import chardet
 import re
 from apscheduler.schedulers.blocking import BlockingScheduler  # apscheduler定时任务框架
 from prettytable import PrettyTable  # 输出表格库
+from multiprocessing import Pool
+
 
 
 class AutoTestMail():
@@ -116,20 +118,21 @@ class AutoTestMail():
 
         print("邮件总数为:", len(mails))
 
+        p = Pool(8)
         for mail_index in reversed(range(1, len(mails) + 1)):  # 从最新一封邮件开始遍历邮件
 
             self.sumMail += 1
-            up_resp, up_mail, up_octets = server.retr(
-                mail_index)  # 拿到每一封邮件信息, 返回tuple
+            up_resp, up_mail, up_octets = server.retr(mail_index)  # 拿到每一封邮件信息, 返回tuple
 
-            msg_content = b'\r\n'.join(up_mail).decode(
-                'utf-8')  # 通过\r\n连接拼接原始邮件
+            msg_content = b'\r\n'.join(up_mail).decode('utf-8')  # 通过\r\n连接拼接原始邮件
 
             msg = Parser().parsestr(text=msg_content)  # emali.Parser解析邮件,返回Message Obj
             # print(msg)
-
             try:
-                code = self.analysisMessage(msg)
+                # code = self.analysisMessage(msg)
+                # code = p.apply_async(self.analysisMessage, args=(msg,))
+                print("hello %d" %(mail_index))
+                code = p.apply(self.analysisMessage, args=(msg,))
                 # code = True : 当天邮件已读取完成
                 if code:
                     print("收件箱已经没有当天的邮件")
@@ -141,14 +144,15 @@ class AutoTestMail():
                 print('ERROR', e)
                 continue
 
+        p.close()
+        p.join()
         print("退出邮件服务器,结束程序")
         server.close()
 
     # 解析email.message
     def analysisMessage(self, msg):
 
-        from_name, from_url, timeReceive, to_name, to_url, sub = self.get_details(
-            msg)  # 解析邮件信息头
+        from_name, from_url, timeReceive, to_name, to_url, sub = self.get_details(msg)  # 解析邮件信息头
 
         # 只读取当天的邮件
         if timeReceive.strftime("%Y%m%d") != time.strftime("%Y%m%d", time.localtime(time.time())):
@@ -258,8 +262,6 @@ class AutoTestMail():
         isRepeat = False  # 用于判断定时邮件是否添加进表格
         table = PrettyTable(['邮件类型', '是否收到', '数量'])  # PrettyTable开始创建表格和表头
         for col in self.sub_dict.keys():
-            # import pdb
-            # pdb.set_trace()
             if col == 'AccountOpeningApproval' and not isRepeat:
                 for accName in self.roleName:
                     if [r for r in set(self.Role) if accName in r]:  # 邮箱收到邮件
@@ -278,9 +280,8 @@ class AutoTestMail():
                     table.add_row([col, '否', 0])
 
         print(table)
-        print(table.get_html_string())
-
-        msg = MIMEText(table.get_html_string(), 'html', 'utf-8')
+        print(table.get_html_string(border=True))
+        msg = MIMEText(table.get_html_string(border=True), 'html', 'utf-8')
         msg['From'] = self.set_details(
             "Onedi<{from_name}>".format(from_name=self.username))
         msg['To'] = self.set_details(
