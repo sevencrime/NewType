@@ -20,11 +20,12 @@ import os
 import chardet
 import re
 from apscheduler.schedulers.blocking import BlockingScheduler   # apscheduler定时任务框架
-from prettytable import PrettyTable     #输出表格库
+from prettytable import PrettyTable  # 输出表格库
 
 
 class AutoTestMail():
 
+    # 定时邮件全部为一个key,待修改2019年5月9日00:07:38
     sub_dict = {
         'AccountOpeningApproval': ['开户审批待办事项', '開戶審批待辦事項', 'Account opening approval to-do list'],
         'DailyReport': ['每日开户表汇总', ],
@@ -32,16 +33,19 @@ class AutoTestMail():
         'LeadFormRemind': ['[講座提醒]'],
         'accountAudit': ['开户申请通知 Account Application Notification', '開戶申請通知 Account Application Notification'],
         'applyemail': ['Online Account Application Approved', '艾德網上開戶申請批核確認', '艾德网上开户申请批核确认'],
-        'forCs1Notify': ['Account opening application notice', '开户申请通知书', '開戶申請通知書']
+        'forCs1Notify': ['Account opening application notice', '开户申请通知书', '開戶申請通知書'],
+        '合规' : ['Account opening automatic approval notice']
     }
     accName = ['sales', 'cs1', 'cs2', 'cliff', 'don', 'aaron', 'gold', 'comp', 'ops']
 
-    Role = []  # 存放角色
-    DailyReportGB = []  # 每日报表邮件
-    LeadFormGB = []  # 登记讲座邮件
-    LeadFormRemindGB = []    # 讲座提醒邮件
+    # 定时邮件全部角色
+    roleName = ['sales', 'cs1', 'cs2', 'comp',
+                'cliff', 'don', 'aaron', 'glod', 'ops']
 
-    num = 0
+    Role = []  # 邮箱接收到的定时邮件角色
+    addition = []   #邮件接收的非定时邮件类型
+
+    sumMail = 0     # 统计当天收到邮件总数
     pop_server = "imap.sina.cn"  # pop服务器
     smtp_server = "smtp.sina.cn"
     username = "15089514626@sina.cn"
@@ -57,6 +61,18 @@ class AutoTestMail():
             return s
         except UnicodeDecodeError:
             return scode[0][0].decode('gbk')
+
+    def fulltohalf(self, s):
+        # 全角转半角
+        newText = []
+        for char in s:
+            num = ord(char)
+            if num == 0x3000:   #判断空格
+                num = 32
+            elif 0xFF01 <= num <= 0xFF5E:
+                num -= 0xfee0
+            newText.append(chr(num))
+        return ''.join(newText)
 
     def set_details(self, s):
         # 转码邮件头
@@ -100,7 +116,7 @@ class AutoTestMail():
 
         for mail_index in reversed(range(1, len(mails) + 1)):  # 从最新一封邮件开始遍历邮件
 
-            self.num += 1
+            self.sumMail += 1
             up_resp, up_mail, up_octets = server.retr(
                 mail_index)  # 拿到每一封邮件信息, 返回tuple
 
@@ -115,8 +131,8 @@ class AutoTestMail():
                 # code = True : 当天邮件已读取完成
                 if code:
                     print("收件箱已经没有当天的邮件")
-                    print('截止到 {time_now}, 当天邮件总数为: {num} 封'.format(
-                        time_now=time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(time.time())), num=self.num))
+                    print('截止到 {time_now}, 当天邮件总数为: {sum} 封'.format(
+                        time_now=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time())), sum=self.sumMail))
                     break
 
             except Exception as e:
@@ -207,70 +223,55 @@ class AutoTestMail():
 
                     elif part.get_content_type() == 'text/plain':
 
-                        # 判断邮件标题
+                        # 判断邮件标题和发件人名称是否符合
                         if [value for v in self.sub_dict.values() for value in v if value in sub] and from_name == 'noreply':
-
                             data = part.get_payload(decode=True)
                             data_code = chardet.detect(data)
                             try:
                                 mContext = data.decode(data_code['encoding'])
+                                mContext = self.fulltohalf(mContext)
                             except UnicodeDecodeError:
-                                print("ERROE: UnicodeDecodeError")
+                                # print("ERROE: UnicodeDecodeError")
                                 mContext = data.decode('gbk')
+                                mContext = self.fulltohalf(mContext)
 
                             # 获取邮件的类型
                             mail_type = "".join(
                                 [k for k, v in self.sub_dict.items() for value in v if value in sub])
 
+                            # 邮件类型属于定时邮件,截取出发送的角色名称
                             if mail_type == 'AccountOpeningApproval' or mail_type == 'forCs1Notify':
+                                import pdb;pdb.set_trace()
                                 roleName = "".join(re.findall(',(.+):', mContext))  # 角色名称
                                 self.Role.append(roleName)
-                            elif mail_type == 'DailyReport':
-                                self.DailyReportGB.append(True)
-                            elif mail_type == 'LeadForm':
-                                self.LeadFormGB.append(True)
-                            elif mail_type == 'LeadFormRemind':
-                                self.LeadFormRemindGB.append(True)
                             else:
-                                pass
+                                # 邮件类型不是定时邮件的,单独存放
+                                self.addition.append(mail_type)
+
 
     def send_mail(self):
-        # mailContext = """
-        #     <html>
-        #     <body>
-        #         <table border="1">
-        #             <caption>邮件接收统计</caption>
-        #             <tr>
-        #                 <th>邮件类型</th>
-        #                 <th>是否收到</th>
-        #                 <th>数量</th>
-        #             </tr>
-        #             <tr>
-        #                 <th>定时邮件({account})</th>
-        #                 <th>{isSend}</th>
-        #                 <th>{count}</th>
-        #             </tr>
-        #         </table>
-        #     </body>
-        #     </html>
 
-        # """.format(account=self.Role)
-        import pdb;pdb.set_trace()
-        isRepeat = False
-        table = PrettyTable(['邮件类型', '是否收到', '数量'])
+        import pdb
+        pdb.set_trace()
+        isRepeat = False    # 用于判断定时邮件是否添加进表格
+        table = PrettyTable(['邮件类型', '是否收到', '数量'])     #PrettyTable开始创建表格和表头
         for col in self.sub_dict.keys():
-            if col == 'AccountOpeningApproval' or col == 'forCs1Notify':
-                if not isRepeat:
-                    for accName in set(self.Role):
-                        table.add_row([col+'>>'+accName, '是', '2'])
-                    isRepeat = True
+            if (col == 'AccountOpeningApproval' or col == 'forCs1Notify') and not isRepeat:
+                for accName in self.roleName:
+                    if accName in set(self.Role):   # 邮箱收到邮件
+                        table.add_row(['定时邮件>>'+accName, '是', self.Role.count(accName)])
+                    else:   # 邮箱未收到邮件
+                        table.add_row(['定时邮件>>'+accName, '否', 0])
+
+                isRepeat = True
 
             else:
-                table.add_row([col, '否', '5'])
+                if col in set(self.addition):
+                    table.add_row([col, '是', self.addition.count(col)])
+                else:
+                    table.add_row([col, '否', 0])
 
         print(table)
-
-
 
         msg = MIMEText(mailContext, 'html', 'utf-8')
         msg['From'] = self.set_details(
