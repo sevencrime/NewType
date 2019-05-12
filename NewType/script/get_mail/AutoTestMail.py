@@ -21,8 +21,9 @@ import chardet
 import re
 from apscheduler.schedulers.blocking import BlockingScheduler  # apscheduler定时任务框架
 from prettytable import PrettyTable  # 输出表格库
-from multiprocessing import Pool
-
+import requests
+from PIL import Image
+from io import BytesIO
 
 
 class AutoTestMail():
@@ -91,8 +92,13 @@ class AutoTestMail():
         from_name, from_url = email.utils.parseaddr(fromstr)
 
         date = msg.get('Date')
-        timeReceive = (datetime.datetime.strptime(
-            date[:-5], '%a, %d %b %Y %H:%M:%S ') + datetime.timedelta(hours=(8 - int(date[-5:-2]))))
+        # import pdb;pdb.set_trace()
+        try:
+            timeReceive = (datetime.datetime.strptime(
+                date[:-5], '%a, %d %b %Y %H:%M:%S ') + datetime.timedelta(hours=(8 - int(date[-5:-2]))))
+        except ValueError:
+            timeReceive = (datetime.datetime.strptime(
+                date[:-5], '%d %b %Y %H:%M:%S ') + datetime.timedelta(hours=(8 - int(date[-5:-2]))))
 
         tosrt = msg.get('To')
         to_name, to_url = email.utils.parseaddr(tosrt)
@@ -118,9 +124,7 @@ class AutoTestMail():
 
         print("邮件总数为:", len(mails))
 
-        p = Pool(8)
         for mail_index in reversed(range(1, len(mails) + 1)):  # 从最新一封邮件开始遍历邮件
-
             self.sumMail += 1
             up_resp, up_mail, up_octets = server.retr(mail_index)  # 拿到每一封邮件信息, 返回tuple
 
@@ -129,23 +133,18 @@ class AutoTestMail():
             msg = Parser().parsestr(text=msg_content)  # emali.Parser解析邮件,返回Message Obj
             # print(msg)
             try:
-                # code = self.analysisMessage(msg)
-                # code = p.apply_async(self.analysisMessage, args=(msg,))
-                print("hello %d" %(mail_index))
-                code = p.apply(self.analysisMessage, args=(msg,))
-                # code = True : 当天邮件已读取完成
-                if code:
+                code = self.analysisMessage(msg)
+
+                if code:    # code = True : 当天邮件已读取完成
                     print("收件箱已经没有当天的邮件")
                     print('截止到 {time_now}, 当天邮件总数为: {sum} 封'.format(
-                        time_now=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time())), sum=self.sumMail))
+                        time_now=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time())), sum=self.sumMail-1))
                     break
 
             except Exception as e:
                 print('ERROR', e)
                 continue
 
-        p.close()
-        p.join()
         print("退出邮件服务器,结束程序")
         server.close()
 
@@ -201,6 +200,20 @@ class AutoTestMail():
                     data_code = chardet.detect(data)
 
                     if part.get_content_type() == 'text/html':
+                        # 判断是否讲座邮件,目的是在这里取出二维码
+                        # if sub.find('[電子入場門票]') or sub.find('[講座提醒]'):
+                        #     import pdb;pdb.set_trace()
+                        #     qrcodeUrl = "".join(re.findall('src="(.*qrcode.*.png)', data.decode(data_code['encoding'])))
+                        #     img = Image.open(BytesIO(requests.get(qrcodeUrl).content))
+                        #     img.save("{mik_dir}\\qrcode_{subject}.png".format(mik_dir=mik_dir, subject =sub))
+                        #     decodeApiUrl = "https://api.qzone.work/api/qr.decode"
+                        #     with open("{mik_dir}\\qrcode_{subject}.png".format(mik_dir=mik_dir, subject =sub),'rb') as f:
+
+                        #         data = {
+                        #             'img_file' : base64.b64encode(f.read())
+                        #         }
+                        #         requests.post(url=decodeApiUrl, data=data)
+
                         with open('{mik_dir}\\{receive_time}_{subject}.html'.format(
                                 mik_dir=mik_dir,
                                 receive_time=timeReceive.strftime("%H%M%S"),
@@ -248,11 +261,13 @@ class AutoTestMail():
 
                             # 邮件类型属于定时邮件,截取出发送的角色名称
                             if mail_type == 'AccountOpeningApproval':
-                                # import pdb
-                                # pdb.set_trace()
-                                roleName = "".join(re.findall(
-                                    ',(.+):', mContext))  # 角色名称
+                                roleName = "".join(re.findall(',(.+):', mContext))  # 角色名称
                                 self.Role.append(roleName.strip())
+
+                            elif mail_type == '登记讲座' or mail_type == "讲座提醒" :
+                                self.addition.append(mail_type)
+                                # 检查讲座邮件是否能显示二维码
+
                             else:
                                 # 邮件类型不是定时邮件的,单独存放
                                 self.addition.append(mail_type)
@@ -260,7 +275,7 @@ class AutoTestMail():
     def send_mail(self):
 
         isRepeat = False  # 用于判断定时邮件是否添加进表格
-        table = PrettyTable(['邮件类型', '是否收到', '数量'])  # PrettyTable开始创建表格和表头
+        table = PrettyTable(['邮件类型', '是否收到', '数量'], border = True)  # PrettyTable开始创建表格和表头
         for col in self.sub_dict.keys():
             if col == 'AccountOpeningApproval' and not isRepeat:
                 for accName in self.roleName:
@@ -280,6 +295,7 @@ class AutoTestMail():
                     table.add_row([col, '否', 0])
 
         print(table)
+
         print(table.get_html_string(border=True))
         msg = MIMEText(table.get_html_string(border=True), 'html', 'utf-8')
         msg['From'] = self.set_details(
@@ -290,8 +306,8 @@ class AutoTestMail():
 
         smtpServer = smtplib.SMTP(self.smtp_server, 25)
         # smtpServer.set_debuglevel(1)
-        smtpServer.login(self.username, self.password)
-        smtpServer.sendmail(self.username, self.sendaddr, msg.as_string())
+        # smtpServer.login(self.username, self.password)
+        # smtpServer.sendmail(self.username, self.sendaddr, msg.as_string())
         smtpServer.quit()
 
 
