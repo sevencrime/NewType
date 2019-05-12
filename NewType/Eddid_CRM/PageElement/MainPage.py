@@ -7,27 +7,36 @@
 
 # main/apply-list页面
 
-import os,sys,time
-sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
-from Commons import *
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+from Commons import *
+import os
+import sys
+import time
+sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
+
 
 class MainPage(BasePage.BasePage):
     log = Logging.Logs()
 
     userid_loc = (By.CSS_SELECTOR, ".el-dropdown-link.el-dropdown-selfdefine ")
-    submit_loc = (By.XPATH, "//button/span[contains(text(),'提交审核')]")
-    add_loc = (By.XPATH, "//button/span[contains(text(),'新增')]")
-    update_loc = (By.XPATH, "//button/span[contains(text(),'修改')]")
-    select_loc = (By.XPATH, "//button/span[contains(text(),'查看')]")
-    StatusSelect_loc = (By.XPATH, '//*[@id="main"]/div[1]/div[1]/div[1]/div/div/div/input')
-    # StatusSelect_loc = (By.XPATH, "//input[@placeholder='请选择']")
-    StatusOption_loc = (By.XPATH, '/html/body/div[3]/div[1]/div[1]/ul/li[2]')
+    submitbtn_loc = (By.XPATH, "//button/span[contains(text(),'提交审核')]")
+    addbtn_loc = (By.XPATH, "//button/span[contains(text(),'新增')]")
+    updatebtn_loc = (By.XPATH, "//button/span[contains(text(),'修改')]")
+    selectbtn_loc = (By.XPATH, "//button/span[contains(text(),'查看')]")
+    StatusSelect_loc = (
+        By.XPATH, '//div[@class="el-row"]//div[@class="position-r"]//input')  # 状态下拉框
     LoadingModal_loc = (By.CSS_SELECTOR, ".Loading-modal")
-    
-    #等待CSS.Loading-modal加载完成,防止报错:"Element is not clickable at point (347, 104). 
+
+    def get_select(self, text):
+        select_loc = (
+            By.XPATH, "//div[contains(@style,'position: absolute;')]//li[span[text()='{text}']]".format(text=text))
+        select_text = self.find_element(*select_loc).click()
+        assert text in select_text.get_attribute("textContent")
+        return select_text.get_attribute("textContent")
+
+    # 等待CSS.Loading-modal加载完成,防止报错:"Element is not clickable at point (347, 104).
     #   Other element would receive the click: <div class="Loading-modal"></div>"
     def wait_LoadingModal(self):
         WebDriverWait(self.driver, 20).until_not(
@@ -36,21 +45,26 @@ class MainPage(BasePage.BasePage):
     def show_userid(self):
         return self.find_element(*self.userid_loc).text
 
-    def click_StatusSelect(self):
-        return self.find_element(*self.StatusSelect_loc).click()
-
-    def click_StatusOption(self):
-        return self.find_element(*self.StatusOption_loc).click()
+    def click_StatusSelect(self, text):
+        statusselect = self.find_element(*self.StatusSelect_loc).click()
+        tag_text = self.get_select(text)
+        return tag_text
 
     def click_submit(self):
-        return self.find_element(*self.submit_loc).click()
+        return self.find_element(*self.submitbtn_loc).click()
 
     def click_add(self):
-        return self.find_element(*self.add_loc).click()
+        return self.find_element(*self.addbtn_loc).click()
 
     def click_update(self):
-        return self.find_element(*self.update_loc).click()
+        return self.find_element(*self.updatebtn_loc).click()
 
     def click_select(self):
-        return self.find_element(*self.select_loc).click()
+        return self.find_element(*self.selectbtn_loc).click()
 
+    def click_checkbox(self, email):
+        # 点击checkbox
+        check_loc = (By.XPATH, '//span[text()={email}]/ancestor::td/preceding-sibling::\
+            td[@class="el-table_3_column_37  el-table-column--selection"]//input'.format(email=email))
+
+        self.find_element(*check_loc).click()

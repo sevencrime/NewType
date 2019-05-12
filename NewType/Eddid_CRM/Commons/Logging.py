@@ -35,12 +35,6 @@ def Logs():
 
     return logger
 
-# def msg(*func):
-
-#     if func == ''
-
-
-
 if __name__ == '__main__':
     lg = Logs()
     lg.info("1111")

@@ -95,21 +95,13 @@ class ApplyPage(BasePage.BasePage):
 
         assert accountOpeningWay.get_attribute("value") != None
 
-        if accountOpeningWay.get_attribute("value") == '手机应用程式身份验证':
-            banknamelist = self.driver.find_elements(*self.get_input("银行名称"))
-            banknamelist[0].send_keys("中国工商银行")
+        if accountOpeningWay.get_attribute("value") == '手机应用程式身份验证' or accountOpeningWay.get_attribute("value") == '电子签名认证':
+            bankname = self.find_element(*self.get_input("银行名称")).send_keys("中国农业银行")
+            bankAccountNumber = self.find_element(*self.get_input("银行账户号码")).send_keys("6228481412637493782")
+            certificateNb = self.find_element(*self.get_input("电子签名证书号码")).send_keys("certificate Number")
 
-            bankAccountlist = self.driver.find_elements(*self.get_input("银行账户号码"))
-            bankAccountlist[0].send_keys("6228454154152626515")
-
-        elif accountOpeningWay.get_attribute("value") == '电子签名认证':
-            # banknamelist = self.driver.find_elements(*bank_loc)
-            banknamelist = self.driver.find_elements(*self.get_input("银行名称"))
-            banknamelist[1].send_keys("中国工商银行")
-
-            bankAccountlist = self.driver.find_elements(*self.get_input("银行账户号码"))
-            bankAccountlist[1].send_keys("6228454154152626515")
             
+
         return accountOpeningWay.get_attribute("value")
 
     def send_parentId(self):
