@@ -147,6 +147,7 @@ class AutoTestMail():
 
         print("退出邮件服务器,结束程序")
         server.close()
+        self.send_mail()
 
     # 解析email.message
     def analysisMessage(self, msg):
@@ -306,16 +307,17 @@ class AutoTestMail():
 
         smtpServer = smtplib.SMTP(self.smtp_server, 25)
         # smtpServer.set_debuglevel(1)
-        # smtpServer.login(self.username, self.password)
-        # smtpServer.sendmail(self.username, self.sendaddr, msg.as_string())
+        smtpServer.login(self.username, self.password)
+        smtpServer.sendmail(self.username, self.sendaddr, msg.as_string())
         smtpServer.quit()
 
 
 if __name__ == '__main__':
     testmail = AutoTestMail()
-    testmail.login()
-    testmail.send_mail()
-    # apscheduler = BlockingScheduler()
-    # apscheduler.add_job(
-    #     func=testmail.login, trigger='cron', day_of_week='0-6', hour=16, minute=2)
-    # apscheduler.start()
+    print("程序已经启动")
+    # testmail.login()
+    # testmail.send_mail()
+    apscheduler = BlockingScheduler()
+    apscheduler.add_job(
+        func=testmail.login, trigger='cron', day_of_week='0-6', hour=19, minute=15)
+    apscheduler.start()
