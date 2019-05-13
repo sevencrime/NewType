@@ -38,9 +38,9 @@ class MainPage(BasePage.BasePage):
         assert text in select_text.get_attribute("textContent")
         return select_text.get_attribute("textContent")
 
-    def scrollinto(self, loc):
-        self.script("arguments[0].scrollIntoView();", loc)
-        self.script("arguments[0].click();", loc)
+    # def scrollinto(self, loc):
+    #     self.script("arguments[0].scrollIntoView();", loc)
+    #     self.script("arguments[0].click();", loc)
 
     def Action(self, loc):
         ActionChains(self.driver).double_click(loc).perform()
@@ -71,7 +71,7 @@ class MainPage(BasePage.BasePage):
         tag_text = self.get_select(text)
         return tag_text
 
-    def click_submit(self):
+    def click_submitreview(self):
         return self.scrollinto(self.find_element(*self.submitbtn_loc))
 
     def click_add(self):

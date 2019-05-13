@@ -101,4 +101,6 @@ class BasePage(object):
         except AttributeError:
             print(u"%s 页面中未能找到 %s 元素" % (self, loc))
 
-
+    def scrollinto(self, loc):
+        self.script("arguments[0].scrollIntoView();", loc)
+        self.script("arguments[0].click();", loc)

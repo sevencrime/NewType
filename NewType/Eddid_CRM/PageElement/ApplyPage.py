@@ -74,9 +74,9 @@ class ApplyPage(BasePage.BasePage):
     #     # time.sleep(5)
     #     ActionChains(self.driver).click(self.find_element(*parents_loc)).perform()
 
-    def scrollinto(self, loc):
-        self.script("arguments[0].scrollIntoView();", loc)
-        self.script("arguments[0].click();", loc)
+    # def scrollinto(self, loc):
+    #     self.script("arguments[0].scrollIntoView();", loc)
+    #     self.script("arguments[0].click();", loc)
 
     def send_applicationFor(self, text):
         # 账户类型
@@ -709,9 +709,11 @@ class ApplyPage(BasePage.BasePage):
         return useStatement.get_attribute("value")
 
 
-    def click_sublime(self):
-        sublime_loc = (By.CLASS_NAME, "button-1")
-        sublime = self.find_element(*sublime_loc).click()
+    def click_sublimeApply(self):
+        sublimeApply_loc = (By.XPATH, '//div[contains(@class, "button-1")]/button[span[contains(text(), "通过")]]')
+        # sublime = self.find_element(*sublime_loc).click()
+        sublimeApply = self.find_element(*sublimeApply_loc)
+        self.scrollinto(sublimeApply)
 
 
     def primaryRelations(self, num=None):

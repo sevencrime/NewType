@@ -56,9 +56,10 @@ class reviewProcess1(unittest.TestCase):
 
 		# 判断状态校验功能是否正常,选择编号
 		mainpage.click_checkbox(email=self.email)	
-		mainpage.click_submit()
+		mainpage.click_submitreview()
 		mainpage.click_popWindow()
 		mainpage.wait_LoadingModal()
+		
 
 	# @unittest.skip("暂时跳过")
 	def test2_Process1_cs2toro(self):
@@ -78,9 +79,14 @@ class reviewProcess1(unittest.TestCase):
 		mainpage.wait_LoadingModal()
 
 		mainpage.get_apply(email=self.email)
-		import pdb;pdb.set_trace()
-		applypage.click_submit()
+		mainpage.wait_LoadingModal()
+		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
+		applypage.click_sublimeApply()
+		mainpage.click_popWindow()
+		mainpage.wait_LoadingModal()
+
+		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
 
 
 
