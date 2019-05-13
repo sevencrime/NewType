@@ -122,7 +122,7 @@ class Database:
 								print(collection,"表关联的字段为 ",key,":",r[key])
 								print("正在查询关联表 %s 的数据" %self.table[key])
 
-								self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpooluat')
+								self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpool{database}'.format(database=self.database))
 
 
 						except Exception as e:
@@ -139,7 +139,7 @@ class Database:
 								print(collection,"表关联的字段为 ",key,":",r[key])
 								print("正在查询关联表 %s 的数据" %self.table[key])
 
-								self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpooluat')
+								self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpool{database}'.format(database=self.database))
 
 
 						except Exception as e:
@@ -154,7 +154,7 @@ class Database:
 							print('\n\n没有关联数据,直接删除%s 表\n' %collection)
 							self.expectedRemoveTotal.append(collection)		#添加所有需要删除的表,统计总数
 
-							print(collection, query, database, self.database)
+							# print(collection, query, database, self.database)
 							if database == None:
 								self.db = self.client[self.database]
 
@@ -174,9 +174,9 @@ class Database:
 if __name__ == '__main__':
 	host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
 	# host = 'localhost:27017'
-	database = 'test'
-	# Database(host, database).del_linked("apply_info", {'idNumber':"441502199602120215"})
-	Database(host, database).del_linked("apply_info", {'email':{"$regex" : ".*onedi.*"}})
+	database = 'uat'
+	Database(host, database).del_linked("apply_info", {'phone':"15089514626"})
+	# Database(host, database).del_linked("apply_info", {'email':{"$regex" : ".*onedi.*"}})
 
 
 
