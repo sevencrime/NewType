@@ -7,9 +7,12 @@ from PageElement import *
 from Commons import *
 import unittest
 from selenium import webdriver
+import time
 
 class reviewProcess1(unittest.TestCase):
 	# CRM and apply_form正向审核: 未处理--待cs2--待RO--待ops--success
+
+	email = "one555di@qq.com"
 
 	def setUp(self):
 		self.driver = webdriver.Chrome()
@@ -31,14 +34,17 @@ class reviewProcess1(unittest.TestCase):
 		login_page.input_password(psw)
 		login_page.click_submit()
 		login_page.wait_LoadingModal()
-		self.assertEqual("admin", login_page.show_userid(), "userid与登录账户不一致")
+		self.assertEqual(user, login_page.show_userid(), "userid与登录账户不一致")
 
-	def test1_Process1_salestocs2(self):
+	@unittest.skip("暂时跳过")
+	def test1_Process1_salestocs2(self, email):
 		# sales--cs2
 		self.login(user='sales_t1')		#先登录
 
 		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
 		mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
+
+		# import pdb;pdb.set_trace()
 
 		applylistpage.click_apply_manager()		#点击开户管理
 		applylistpage.click_applylist()		    #点击开户列表
@@ -49,8 +55,33 @@ class reviewProcess1(unittest.TestCase):
 		mainpage.wait_LoadingModal()
 
 		# 判断状态校验功能是否正常,选择编号
-		mainpage.click_checkbox(email="244563@qq.com")	
+		mainpage.click_checkbox(email=self.email)	
 		mainpage.click_submit()
+		mainpage.click_popWindow()
+		mainpage.wait_LoadingModal()
+
+	# @unittest.skip("暂时跳过")
+	def test2_Process1_cs2toro(self):
+		# cs2 to ro
+		self.login(user='cs_t1')		#先登录
+
+		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
+		mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
+		applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
+
+		applylistpage.click_apply_manager()		#点击开户管理
+		applylistpage.click_applylist()		    #点击开户列表
+		mainpage.wait_LoadingModal()
+
+		# 下拉列表选择待CS2审批
+		mainpage.click_StatusSelect("待CS2审批")
+		mainpage.wait_LoadingModal()
+
+		mainpage.get_apply(email=self.email)
+		import pdb;pdb.set_trace()
+		applypage.click_submit()
+
+
 
 
 if __name__ == "__main__":

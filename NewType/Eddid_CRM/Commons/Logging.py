@@ -12,16 +12,22 @@ import logging
 
 def Logs():
 
-    t = time.strftime('%Y%m%d_%H%M', time.localtime(time.time()))
-    url_log = os.path.abspath(os.path.dirname(os.getcwd())) + '/logs/run_result.log' 
-    # url_log = os.path.abspath(os.path.dirname(os.getcwd())) + '/logs/run_result_%s.log' %t
-    # url_log = "D:/Python_Demo/NewType/Eddid_CRM/Logs/run_result.log"
-    # 获取logger对象，设置日志级别
-    logger = logging.getLogger(__name__)
-    logger.setLevel(level=logging.INFO)
+    try:
+        t = time.strftime('%Y%m%d_%H%M', time.localtime(time.time()))
+        url_log = os.path.abspath(os.path.dirname(os.getcwd())) + '/logs/run_result.log' 
+        # url_log = os.path.abspath(os.path.dirname(os.getcwd())) + '/logs/run_result_%s.log' %t
+        # url_log = "D:/Python_Demo/NewType/Eddid_CRM/Logs/run_result.log"
+        # 获取logger对象，设置日志级别
+        logger = logging.getLogger(__name__)
+        logger.setLevel(level=logging.INFO)
 
-    # 获取文件处理器，并设置级别
-    handler = logging.FileHandler(filename=url_log, encoding='utf-8')
+        # 获取文件处理器，并设置级别
+        handler = logging.FileHandler(filename=url_log, encoding='utf-8')
+    except Exception as e:
+        url_log = os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))) + '/logs/run_result.log' 
+        handler = logging.FileHandler(filename=url_log, encoding='utf-8')
+        
+
     # handler = logging.FileHandler("./logs/log.csv")
     handler.setLevel(logging.INFO)
 

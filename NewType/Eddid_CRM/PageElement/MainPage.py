@@ -10,6 +10,7 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 from Commons import *
 import os
 import sys
@@ -25,16 +26,36 @@ class MainPage(BasePage.BasePage):
     addbtn_loc = (By.XPATH, "//button/span[contains(text(),'新增')]")
     updatebtn_loc = (By.XPATH, "//button/span[contains(text(),'修改')]")
     selectbtn_loc = (By.XPATH, "//button/span[contains(text(),'查看')]")
-    StatusSelect_loc = (
-        By.XPATH, '//div[@class="el-row"]//div[@class="position-r"]//input')  # 状态下拉框
+    StatusSelect_loc = (By.XPATH, '//div[@class="el-row"]//div[@class="position-r"]//input')  # 状态下拉框
     LoadingModal_loc = (By.CSS_SELECTOR, ".Loading-modal")
+    popWindow_loc = (By.XPATH, '//div[@class="el-message-box"]//div[@class="el-message-box__btns"]/button[span[contains(text(), "确定")]]')
 
     def get_select(self, text):
         select_loc = (
             By.XPATH, "//div[contains(@style,'position: absolute;')]//li[span[text()='{text}']]".format(text=text))
-        select_text = self.find_element(*select_loc).click()
+        select_text = self.find_element(*select_loc)
+        self.scrollinto(select_text)
         assert text in select_text.get_attribute("textContent")
         return select_text.get_attribute("textContent")
+
+    def scrollinto(self, loc):
+        self.script("arguments[0].scrollIntoView();", loc)
+        self.script("arguments[0].click();", loc)
+
+    def Action(self, loc):
+        ActionChains(self.driver).double_click(loc).perform()
+
+    def click_checkbox(self, email):
+        # 点击checkbox
+        check_loc = (By.XPATH, '//span[text()="{email}"]/ancestor::td/preceding-sibling::td[contains(@class, "el-table-column--selection")]//span'.format(email=email))
+        self.scrollinto(self.find_element(*check_loc))
+
+    def get_apply(self, email):
+        #  双击进入apply详情
+        applylistEmali_loc = (By.XPATH, '//span[text()="{email}"]/ancestor::td'.format(email=email))
+        applylistEmail = self.find_element(*applylistEmali_loc)
+        self.script("arguments[0].scrollIntoView();", applylistEmail)
+        self.Action(applylistEmail)
 
     # 等待CSS.Loading-modal加载完成,防止报错:"Element is not clickable at point (347, 104).
     #   Other element would receive the click: <div class="Loading-modal"></div>"
@@ -51,7 +72,7 @@ class MainPage(BasePage.BasePage):
         return tag_text
 
     def click_submit(self):
-        return self.find_element(*self.submitbtn_loc).click()
+        return self.scrollinto(self.find_element(*self.submitbtn_loc))
 
     def click_add(self):
         return self.find_element(*self.addbtn_loc).click()
@@ -62,9 +83,5 @@ class MainPage(BasePage.BasePage):
     def click_select(self):
         return self.find_element(*self.selectbtn_loc).click()
 
-    def click_checkbox(self, email):
-        # 点击checkbox
-        check_loc = (By.XPATH, '//span[text()={email}]/ancestor::td/preceding-sibling::\
-            td[@class="el-table_3_column_37  el-table-column--selection"]//input'.format(email=email))
-
-        self.find_element(*check_loc).click()
+    def click_popWindow(self):
+        return self.find_element(*self.popWindow_loc).click()

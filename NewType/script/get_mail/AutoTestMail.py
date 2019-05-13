@@ -16,14 +16,14 @@ from email.utils import parseaddr, formataddr
 from email.header import Header
 import time
 import datetime
+from time import gmtime, strftime
 import os
 import chardet
 import re
 from apscheduler.schedulers.blocking import BlockingScheduler  # apscheduler定时任务框架
 from prettytable import PrettyTable  # 输出表格库
 import requests
-from PIL import Image
-from io import BytesIO
+
 
 
 class AutoTestMail():
