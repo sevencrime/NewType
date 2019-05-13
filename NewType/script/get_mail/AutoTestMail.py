@@ -44,7 +44,7 @@ class AutoTestMail():
 
     # 定时邮件全部角色
     roleName = ['sales', 'cs1', 'cs2', 'comp',
-                'cliff', 'don', 'aaron', 'glod', 'ops']
+                'cliff', 'don', 'aaron', 'gold', 'ops']
 
     Role = []  # 邮箱接收到的定时邮件角色
     addition = []  # 邮件接收的非定时邮件类型
@@ -262,6 +262,7 @@ class AutoTestMail():
 
                             # 邮件类型属于定时邮件,截取出发送的角色名称
                             if mail_type == 'AccountOpeningApproval':
+                                # import pdb;pdb.set_trace()
                                 roleName = "".join(re.findall(',(.+):', mContext))  # 角色名称
                                 self.Role.append(roleName.strip())
 
@@ -297,7 +298,7 @@ class AutoTestMail():
 
         print(table)
 
-        print(table.get_html_string(border=True))
+        # print(table.get_html_string(border=True))
         msg = MIMEText(table.get_html_string(border=True), 'html', 'utf-8')
         msg['From'] = self.set_details(
             "Onedi<{from_name}>".format(from_name=self.username))
@@ -315,9 +316,9 @@ class AutoTestMail():
 if __name__ == '__main__':
     testmail = AutoTestMail()
     print("程序已经启动")
-    # testmail.login()
+    testmail.login()
     # testmail.send_mail()
-    apscheduler = BlockingScheduler()
-    apscheduler.add_job(
-        func=testmail.login, trigger='cron', day_of_week='0-6', hour=19, minute=15)
-    apscheduler.start()
+    # apscheduler = BlockingScheduler()
+    # apscheduler.add_job(
+    #     func=testmail.login, trigger='cron', day_of_week='0-6', hour=19, minute=15)
+    # apscheduler.start()
