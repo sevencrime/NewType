@@ -709,8 +709,8 @@ class ApplyPage(BasePage.BasePage):
         return useStatement.get_attribute("value")
 
 
-    def click_sublimeApply(self):
-        sublimeApply_loc = (By.XPATH, '//div[contains(@class, "button-1")]/button[span[contains(text(), "通过")]]')
+    def click_sublimeApply(self, text):
+        sublimeApply_loc = (By.XPATH, '//div[contains(@class, "button-1")]/button[span[contains(text(), "{btntext}")]]'.format(btntext = text))
         # sublime = self.find_element(*sublime_loc).click()
         sublimeApply = self.find_element(*sublimeApply_loc)
         self.scrollinto(sublimeApply)

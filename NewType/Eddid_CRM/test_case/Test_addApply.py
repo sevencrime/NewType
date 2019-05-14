@@ -137,7 +137,7 @@ class addApply(unittest.TestCase):
         acceptStatement = applypage.acceptStatement()
         useStatement = applypage.useStatement()
 
-        applypage.click_sublimeApply()
+        applypage.click_sublimeApply("提交")
 
         mainpage.wait_LoadingModal()
 
@@ -234,7 +234,7 @@ class addApply(unittest.TestCase):
         acceptStatement = applypage.acceptStatement()
         useStatement = applypage.useStatement()
 
-        applypage.click_sublimeApply()
+        applypage.click_sublimeApply("提交")
 
         title = applypage.send_title()
         primaryRelations = applypage.primaryRelations()    #联名账户-与主要账户的关系
@@ -274,7 +274,7 @@ class addApply(unittest.TestCase):
         citizenOfUSA = applypage.citizenOfUSA()
         americanResident = applypage.americanResident()
         PEP_People = applypage.PEP_People()
-        applypage.click_sublimeApply()
+        applypage.click_sublimeApply("提交")
 
         mainpage.wait_LoadingModal()
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交开户表单后跳转失败")
@@ -362,7 +362,7 @@ class addApply(unittest.TestCase):
         acceptStatement = applypage.acceptStatement()
         useStatement = applypage.useStatement()
 
-        applypage.click_sublimeApply()
+        applypage.click_sublimeApply("提交")
 
         # self.driver.find_element_by_xpath("//div[contains(text(), '联名账户持有人资料')]").click()
 
@@ -406,7 +406,7 @@ class addApply(unittest.TestCase):
         americanResident = applypage.americanResident(0)
         PEP_People = applypage.PEP_People(0)
 
-        applypage.click_sublimeApply()
+        applypage.click_sublimeApply("提交")
 
         mainpage.wait_LoadingModal()
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交开户表单后跳转失败")
