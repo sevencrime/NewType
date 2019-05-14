@@ -37,11 +37,17 @@ class AutoTestMail():
         '讲座提醒': ['[講座提醒]'],
         '提交后发送给客户': ['开户申请通知 Account Application Notification', '開戶申請通知 Account Application Notification'],
         '审核通过入金邮件': ['Online Account Application Approved', '艾德網上開戶申請批核確認', '艾德网上开户申请批核确认'],
+        'clientPort账号密码' : ['艾德会员中心账户资料', '艾德會員中心賬戶資料', 'Eddid Client Portal Account Information'],
         '资产管理' : ['資產管理 - 客戶登記通知'],
+        'APP拒绝邮件' : ['艾德证券期货-开户申请状况', '艾德證券期貨-開戶申請狀況', 'ESFL-Account Opening Status'],
+        'CRM和APPLYFORM拒绝邮件' : ['至申请人', '至申請人', 'To the applicant'] ,
+        '模拟账户' : ['艾德证券期货 - 网上外汇交易平台帐户激活信', '申请开通模拟账号已成功，请点击查看'],
+        '杠杆式外汇' : ['成功开立杠杆式外汇交易', '成功開立槓桿式外匯交易(MT5)賬戶', 'Successful LFX(MT5) Account Opening'],
+        '艾德金业' : ['成功开立艾德金业现货黄金交易 (MT5)账户', '成功開立艾德金業現貨黃金交易(MT5)賬戶']
     }
 
-    accName = ['sales', 'cs1', 'cs2', 'cliff',
-               'don', 'aaron', 'gold', 'comp', 'ops']
+    # accName = ['sales', 'cs1', 'cs2', 'cliff',
+    #            'don', 'aaron', 'gold', 'comp', 'ops']
 
     # 定时邮件全部角色
     roleName = ['sales', 'cs1', 'cs2', 'comp',
