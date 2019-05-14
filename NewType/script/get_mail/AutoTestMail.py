@@ -37,6 +37,7 @@ class AutoTestMail():
         '讲座提醒': ['[講座提醒]'],
         '提交后发送给客户': ['开户申请通知 Account Application Notification', '開戶申請通知 Account Application Notification'],
         '审核通过入金邮件': ['Online Account Application Approved', '艾德網上開戶申請批核確認', '艾德网上开户申请批核确认'],
+        '资产管理' : ['資產管理 - 客戶登記通知'],
     }
 
     accName = ['sales', 'cs1', 'cs2', 'cliff',
