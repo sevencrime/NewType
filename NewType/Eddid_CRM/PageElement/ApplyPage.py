@@ -731,11 +731,51 @@ class ApplyPage(BasePage.BasePage):
         return primaryRelations.get_attribute("value")
 
 
+    def send_accountNumber(self, randox=None):
+        # ops审核菜单
+        self.find_element(*self.get_input("客户编号", parent=True)).send_keys(random.randint(0, 999999))
 
+        if self.driver.page_source.find("证券账户号") != -1:
+            # 存在证券账户号码
+            self.find_element(*self.get_input("证券账户号", parent=True)).send_keys(random.randint(0, 9999999999))
 
+        if self.driver.page_source.find("期货账户号") != -1:
+            # 存在证券账户号码
+            self.find_element(*self.get_input("期货账户号", parent=True)).send_keys(random.randint(0, 9999999999))
 
+        if self.driver.page_source.find("外汇账户号(MT5)") != -1:
+            # 存在证券账户号码
+            self.find_element(*self.get_input("外汇账户号(MT5)", parent=True)).send_keys(random.randint(0, 9999999999))
 
+        if self.driver.page_source.find("现货黄金账户号") != -1:
+            # 存在证券账户号码
+            self.find_element(*self.get_input("现货黄金账户号", parent=True)).send_keys(random.randint(0, 9999999999))
 
+        promoCode_loc = (By.XPATH, '//span[contains(text(), " 优惠码 ")]/following-sibling::div//input')
+        promoCode_select_loc = (By.XPATH, "//div[contains(@style,'position: fixed;')]//li[@class='el-select-dropdown__item']")
+        promoCode = self.find_element(*promoCode_loc)
+        promoCode.click()
+
+        promoCodeValueList = self.find_elements(*promoCode_select_loc)
+        if randox == None:
+            randox = random.randint(0,len(promoCodeValueList)-1)
+
+        for i in range(len(promoCodeValueList)):
+            if i == randox:
+                while promoCodeValueList[i].is_displayed():
+                    self.scrollinto(promoCodeValueList[i])
+                    # self.script("arguments[0].click();", promoCodeValueList[i])
+
+                    try:
+                        tag_text = promoCodeValueList[i].get_attribute("textContent")
+                        # print(tag_text)
+                    except AttributeError:
+                        continue
+
+                # return promoCodeValueList[i].get_attribute("textContent")
+
+        sublime_popwindow_loc = (By.XPATH, "//span[text()='确定']//parent::button")
+        self.find_element(*sublime_popwindow_loc).click()
 
 
 

@@ -90,3 +90,7 @@ class MainPage(BasePage.BasePage):
         status_loc = (By.XPATH, '//span[text()="{email}"]/ancestor::td/following-sibling::td[contains(@class, "table-column-status")]//span'.format(email=email))
         return self.find_element(*status_loc).get_attribute("textContent")
 
+
+
+
+
