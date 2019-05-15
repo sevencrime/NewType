@@ -130,7 +130,7 @@ class Database:
 							print(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
 
 					elif key == 'subject':
-						continue
+						# continue
 						try:
 							if r[key] not in self.collectionsId and self.table[key] not in collections :
 								self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
@@ -159,13 +159,13 @@ class Database:
 								self.db = self.client[self.database]
 
 							# 删除操作,请先查询后,确定数据以后再执行删除操作
-							result = self.db[collection].delete_one(query)
-							print(result.deleted_count)
-							if result.deleted_count > 0 :
-								self.actualRemoveTotal.append(collection)
+							# result = self.db[collection].delete_one(query)
+							# print(result.deleted_count)
+							# if result.deleted_count > 0 :
+							# 	self.actualRemoveTotal.append(collection)
 
-							self.log.info(result)
-							print(result)
+							# self.log.info(result)
+							# print(result)
 
 
 							self.log.info("***********************************\n")
@@ -175,7 +175,7 @@ if __name__ == '__main__':
 	host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
 	# host = 'localhost:27017'
 	database = 'test'
-	Database(host, database).del_linked("apply", {'applySeqId':3120})
+	Database(host, database).del_linked("client_info", {'email':"15089514626@sina.com"})
 	# Database(host, database).del_linked("apply_info", {'email':{"$regex" : ".*onedi.*"}})
 
 

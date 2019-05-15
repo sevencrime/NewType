@@ -12,10 +12,12 @@ import time
 class reviewProcess1(unittest.TestCase):
 	# CRM and apply_form正向审核: 未处理--待cs2--待RO--待ops--success
 
-	email = "606onedi2s2729@qq.com"
+	email = "3080onedi660718@qq.com"
+	status = ""
 
 	def setUp(self):
 		self.driver = webdriver.Chrome()
+		# self.driver = webdriver.Edge()
 		# self.driver = webdriver.Firefox(executable_path = 'geckodriver')
 		# self.driver.implicitly_wait(30)   
 		self.driver.set_page_load_timeout(30)
@@ -36,15 +38,15 @@ class reviewProcess1(unittest.TestCase):
 		login_page.wait_LoadingModal()
 		self.assertEqual(user, login_page.show_userid(), "userid与登录账户不一致")
 
-	# @unittest.skip("暂时跳过")
-	def test1_Process1_salestocs2(self, email):
+	# @unittest.skip()
+	def test1_Process1_salestocs2(self):
 		# sales--cs2
 		self.loginCRM(user='sales_t1')		#先登录
 
 		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
 		mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
 
-		# import pdb;pdb.set_trace()
+		import pdb;pdb.set_trace()
 
 		applylistpage.click_apply_manager()		#点击开户管理
 		applylistpage.click_applylist()		    #点击开户列表
@@ -59,9 +61,13 @@ class reviewProcess1(unittest.TestCase):
 		mainpage.click_submitreview()
 		mainpage.click_popWindow()
 		mainpage.wait_LoadingModal()
+
+		status = mainpage.get_status(self.email)
+		self.assertEqual(status, '待CS2审批', "状态没有改变")
+		self.status = status
 		
 
-	# @unittest.skip("暂时跳过")
+	@unittest.skipUnless(status.find("CS2"), "状态不是待CS2审核")
 	def test2_Process1_cs2toro(self):
 		# cs2 to ro
 		self.loginCRM(user='cs_t1')		#先登录
@@ -78,6 +84,7 @@ class reviewProcess1(unittest.TestCase):
 		mainpage.click_StatusSelect("待CS2审批")
 		mainpage.wait_LoadingModal()
 
+		import pdb;pdb.set_trace()
 		mainpage.get_apply(email=self.email)
 		mainpage.wait_LoadingModal()
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
@@ -87,8 +94,11 @@ class reviewProcess1(unittest.TestCase):
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
+		status = mainpage.get_status(self.email)
+		self.assertEqual(status, '', "状态没有改变")
+		self.status = status
 
-	# @unittest.skip("暂时跳过")
+	@unittest.skipUnless(status.find("待证券RO审批"), "状态不是待证券RO审批")
 	def test3_Process1_cliff(self):
 		# cliff审核
 		self.loginCRM(user='ro1_cliff', psw="Abcd1234")		#先登录
@@ -114,8 +124,11 @@ class reviewProcess1(unittest.TestCase):
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
+		status = mainpage.get_status(self.email)
+		self.assertIsNot("待证券RO审批", status, "cliff审核不通过")
+		self.status = status
 
-	# @unittest.skip("暂时跳过")
+	@unittest.skipUnless(status.find("待期货RO审批"), "状态不是待期货RO审批")
 	def test4_Process1_don(self):
 		# don审核
 		self.loginCRM(user='ro1_don', psw='Abcd1234')		#先登录
@@ -141,8 +154,11 @@ class reviewProcess1(unittest.TestCase):
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
+		status = mainpage.get_status(self.email)
+		self.assertIsNot("待期货RO审批", status, "don审核不通过")
+		self.status = status
 
-	# @unittest.skip("暂时跳过")
+	@unittest.skipUnless(status.find("待外汇RO审批"), "状态不是待外汇RO审批")
 	def test4_Process1_aaron(self):
 		# aaron审核
 		self.loginCRM(user='aaron_chan')		#先登录
@@ -168,8 +184,11 @@ class reviewProcess1(unittest.TestCase):
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
+		status = mainpage.get_status(self.email)
+		self.assertIsNot("待外汇RO审批", status, "aaron审核不通过")
+		self.status = status
 
-	# @unittest.skip("暂时跳过")
+	@unittest.skipUnless(status.find("CS2"), "状态不是待CS2审核")
 	def test4_Process1_gold(self):
 		# gold 审核
 		self.loginCRM(user='gold_onedi', psw="Abcd1234")		#先登录
@@ -195,9 +214,12 @@ class reviewProcess1(unittest.TestCase):
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
+		status = mainpage.get_status(self.email)
+		self.assertIsNot("待黄金RO审批", status, "gold审核不通过")
+		self.status = status
 
-	# @unittest.skip("暂时跳过")
-	def test4_Process1_rotoops(self):
+	@unittest.skipUnless(status.find("CS2"), "状态不是待CS2审核")
+	def test5_Process1_opstosuccess(self):
 		# ro to ops
 		self.loginCRM(user='ops_t1')		#先登录
 
@@ -222,6 +244,9 @@ class reviewProcess1(unittest.TestCase):
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
+		status = mainpage.get_status(self.email)
+		self.assertEqual(status, '成功', "ops审核有误")
+		self.status = status
 
 
 
