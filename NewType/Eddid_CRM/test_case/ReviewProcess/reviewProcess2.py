@@ -14,14 +14,11 @@ from PageElement import *
 
 class reviewProcess2(unittest.TestCase):
 	# App来源正向审核: 待cs1--待cs2--待RO--待ops--success`
-	status = ""
+	globals()["status"] = "待CS1审核"
 
 	@classmethod
 	def setUpClass(self):
-		email = "83onedi314328@qq.com"
-		import pdb;pdb.set_trace()
-		print(globals())
-		globals()["status"] = "待CS1审核"
+		self.email = "83onedi314328@qq.com"
 
 	# 所有case执行之后清理环境
 	@classmethod
@@ -51,7 +48,7 @@ class reviewProcess2(unittest.TestCase):
 		login_page.wait_LoadingModal()
 		self.assertEqual(user, login_page.show_userid(), "userid与登录账户不一致")
 
-	# @unittest.skipUnless(globals()["status"].find("CS1") != -1, "状态不是未处理")
+	@unittest.skipUnless(globals()["status"].find("CS1") != -1, "状态不是未处理")
 	def test1_Process2_cs1tocs2(self):
 		# CS1---CS2
 		self.loginCRM(user='cs1_onedi', psw="Abcd1234")		#先登录
