@@ -19,7 +19,7 @@ sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 
 
 class MainPage(BasePage.BasePage):
-    log = Logging.Logs()
+    # log = Logging.Logs()
 
     userid_loc = (By.CSS_SELECTOR, ".el-dropdown-link.el-dropdown-selfdefine ")
     submitbtn_loc = (By.XPATH, "//button/span[contains(text(),'提交审核')]")

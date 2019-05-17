@@ -174,9 +174,10 @@ class Database:
 if __name__ == '__main__':
 	host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
 	# host = 'localhost:27017'
-	database = 'test'
-	Database(host, database).del_linked("client_info", {'email':"15089514626@sina.com"})
+	database = 'uat'
+	Database(host, database).del_linked("apply", {'idpUserId':"d6cb2d78-ee7e-4e61-8af7-6eeb642d3048"})
 	# Database(host, database).del_linked("apply_info", {'email':{"$regex" : ".*onedi.*"}})
+	
 
 
 

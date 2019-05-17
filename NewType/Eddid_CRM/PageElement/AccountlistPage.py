@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 class AccountlistPage(BasePage.BasePage):
-    log = Logging.Logs()
+    # log = Logging.Logs()
 
     LoadingModal_loc = (By.CSS_SELECTOR, ".Loading-modal")
     importAyers_loc = (By.XPATH, "//button/span[contains(text(),'导入Ayers')]")
