@@ -859,3 +859,8 @@ class ApplyPage(BasePage.BasePage):
         assert reasonRemark.get_attribute("value") != ''
 
         self.find_element(*reasonBtn_loc).click()
+
+
+    def click_popWindow(self, text):
+        popWindow_loc = (By.XPATH, '//div[@class="el-message-box"]//div[@class="el-message-box__btns"]/button[span[contains(text(), "{btntext}}")]]'.format(btntext=text))
+        return self.find_element(*self.popWindow_loc).click()

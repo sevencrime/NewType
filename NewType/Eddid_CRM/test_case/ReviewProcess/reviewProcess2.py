@@ -48,7 +48,7 @@ class reviewProcess2(unittest.TestCase):
 		login_page.wait_LoadingModal()
 		self.assertEqual(user, login_page.show_userid(), "userid与登录账户不一致")
 
-	@unittest.skipUnless(globals()["status"].find("CS1") != -1, "状态不是未处理")
+	@unittest.skipUnless(globals()["status"].find("CS1") != -1, "状态不是CS1")
 	def test1_Process2_cs1tocs2(self):
 		# CS1---CS2
 		self.loginCRM(user='cs1_onedi', psw="Abcd1234")		#先登录
@@ -72,7 +72,7 @@ class reviewProcess2(unittest.TestCase):
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
 		applypage.click_sublimeApply("通过")
-		mainpage.click_popWindow()
+		applypage.click_popWindow("确定")
 		mainpage.wait_LoadingModal()
 
 
@@ -106,7 +106,7 @@ class reviewProcess2(unittest.TestCase):
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
 		applypage.click_sublimeApply("通过")
-		mainpage.click_popWindow()
+		applypage.click_popWindow("确定")
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
@@ -135,7 +135,7 @@ class reviewProcess2(unittest.TestCase):
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
 		applypage.click_sublimeApply("通过")
-		mainpage.click_popWindow()
+		applypage.click_popWindow("确定")
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
@@ -164,7 +164,7 @@ class reviewProcess2(unittest.TestCase):
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
 		applypage.click_sublimeApply("通过")
-		mainpage.click_popWindow()
+		applypage.click_popWindow("确定")
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
@@ -193,7 +193,7 @@ class reviewProcess2(unittest.TestCase):
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
 		applypage.click_sublimeApply("通过")
-		mainpage.click_popWindow()
+		applypage.click_popWindow("确定")
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
@@ -222,7 +222,7 @@ class reviewProcess2(unittest.TestCase):
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
 		applypage.click_sublimeApply("通过")
-		mainpage.click_popWindow()
+		applypage.click_popWindow("确定")
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")

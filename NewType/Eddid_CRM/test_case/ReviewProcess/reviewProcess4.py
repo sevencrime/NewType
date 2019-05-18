@@ -12,9 +12,9 @@ from Commons import *
 from PageElement import *
 
 
-class reviewProcess3(unittest.TestCase):
-	# App来源驳回流程: 待cs1--拒绝--CS1修改后重新提交给CS2--CS2拒绝--sales修改给CS2--RO--OPS--成功
-	globals()["status"] = "待CS1审核"
+class reviewProcess4(unittest.TestCase):
+	# CRM来源驳回流程: 待cs2--拒绝--sales修改给CS2--RO--RO拒绝--CS驳回给RO
+	globals()["status"] = "待CS2审核"
 
 	@classmethod
 	def setUpClass(self):
@@ -48,69 +48,8 @@ class reviewProcess3(unittest.TestCase):
 		login_page.wait_LoadingModal()
 		self.assertEqual(user, login_page.show_userid(), "userid与登录账户不一致")
 
-	@unittest.skipUnless(globals()["status"].find("CS1") != -1, "状态不是CS1")
-	def test1_Process3_cs1torefuse(self):
-		# CS1---Refuse
-		self.loginCRM(user='cs1_onedi', psw="Abcd1234")		#先登录
-
-		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
-		mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
-		applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
-
-		applylistpage.click_apply_manager()		#点击开户管理
-		applylistpage.click_applylist()		    #点击开户列表
-		mainpage.wait_LoadingModal()
-
-		# 下拉列表选择待CS2审批
-		mainpage.click_StatusSelect("待CS1审批")
-		mainpage.wait_LoadingModal()
-
-		mainpage.get_apply(email=self.email)
-		mainpage.wait_LoadingModal()
-		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
-
-		applypage.click_sublimeApply("拒绝")
-		# 选择拒绝原因
-		applypage.rejectReason("确定")
-		mainpage.wait_LoadingModal()
-
-		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
-		self.assertIsNot("拒绝", mainpage.get_status(self.email), "状态没有改变")
-		globals()["status"] = mainpage.get_status(self.email)
-		
-	@unittest.skipUnless(globals()["status"].find("拒绝") != -1, "状态不是拒绝")
-	def test2_Process3_refusetocs2(self):
-		# CS1---Refuse
-		self.loginCRM(user='cs1_onedi', psw="Abcd1234")		#先登录
-
-		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
-		mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
-		applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
-
-		applylistpage.click_apply_manager()		#点击开户管理
-		applylistpage.click_applylist()		    #点击开户列表
-		mainpage.wait_LoadingModal()
-
-		# 下拉列表选择待CS2审批
-		mainpage.click_StatusSelect("拒绝")
-		mainpage.wait_LoadingModal()
-
-		mainpage.click_checkbox(self.email)	#选择多选框
-		mainpage.click_update()	#点击修改按钮
-		mainpage.wait_LoadingModal()
-		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
-
-		applypage.click_sublimeApply("提交")
-		# 选择拒绝原因
-		applypage.click_popWindow("确定")
-		mainpage.wait_LoadingModal()
-
-		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
-		self.assertIsNot("CS2", mainpage.get_status(self.email), "状态没有改变")
-		globals()["status"] = mainpage.get_status(self.email)
-
 	@unittest.skipUnless(globals()["status"].find("CS2") != -1, "状态不是CS2")
-	def test3_Process3_cs2torefuse(self):
+	def test1_Process4_cs2torefuse(self):
 		# CS1---Refuse
 		self.loginCRM(user='cs_t1')		#先登录
 
@@ -140,7 +79,7 @@ class reviewProcess3(unittest.TestCase):
 		globals()["status"] = mainpage.get_status(self.email)
 		
 	@unittest.skipUnless(globals()["status"].find("拒绝") != -1, "状态不是拒绝")
-	def test4_Process3_refusetucs2(self):
+	def test2_Process4_refusetucs2(self):
 		# CS1---Refuse
 		self.loginCRM(user='sales_t1')		#先登录
 
@@ -171,7 +110,7 @@ class reviewProcess3(unittest.TestCase):
 		globals()["status"] = mainpage.get_status(self.email)
 
 	@unittest.skipUnless(globals()["status"].find("CS2") != -1, "状态不是待CS2审核")
-	def test5_Process3_cs2toro(self):
+	def test3_Process4_cs2toro(self):
 		# cs2 to ro
 		self.loginCRM(user='cs_t1')		#先登录
 
@@ -201,8 +140,8 @@ class reviewProcess3(unittest.TestCase):
 		globals()["status"] = mainpage.get_status(self.email)
 
 	@unittest.skipUnless(globals()["status"].find("待证券RO审批") != -1, "状态不是待证券RO审批")
-	def test6_Process3_cliff(self):
-		# cliff审核
+	def test4_Process4_cliffRefuse(self):
+		# cliff拒绝
 		self.loginCRM(user='ro1_cliff', psw="Abcd1234")		#先登录
 
 		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
@@ -221,18 +160,48 @@ class reviewProcess3(unittest.TestCase):
 		mainpage.wait_LoadingModal()
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
+		applypage.click_sublimeApply("拒绝")
+		applypage.rejectReason("确定")
+		mainpage.wait_LoadingModal()
+
+		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
+		self.assertIsNot("证券RO拒绝", mainpage.get_status(self.email), "状态没有改变")
+		globals()["status"] = mainpage.get_status(self.email)
+
+	@unittest.skipUnless(globals()["status"].find("证券RO拒绝") != -1, "状态不是证券RO拒绝")
+	def test5_Process4_cs2toro(self):
+		# cs2 to ro
+		self.loginCRM(user='cs_t1')		#先登录
+
+		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
+		mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
+		applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
+
+		applylistpage.click_apply_manager()		#点击开户管理
+		applylistpage.click_applylist()		    #点击开户列表
+		mainpage.wait_LoadingModal()
+
+		# 下拉列表选择待CS2审批
+		mainpage.click_StatusSelect("待CS2审批")
+		mainpage.wait_LoadingModal()
+
+		# import pdb;pdb.set_trace()
+		mainpage.get_apply(email=self.email)
+		mainpage.wait_LoadingModal()
+		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
+
 		applypage.click_sublimeApply("通过")
 		applypage.click_popWindow("确定")
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
-		self.assertIsNot("待证券RO审批", mainpage.get_status(self.email), "状态没有改变")
+		# self.assertIsNot("CS2", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
 	@unittest.skipUnless(globals()["status"].find("待期货RO审批") != -1, "状态不是待期货RO审批")
-	def test7_Process3_don(self):
-		# don审核
-		self.loginCRM(user='ro1_don', psw='Abcd1234')		#先登录
+	def test6_Process4_donRefuse(self):
+		# cliff拒绝
+		self.loginCRM(user='ro1_don', psw="Abcd1234")		#先登录
 
 		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
 		mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
@@ -250,17 +219,47 @@ class reviewProcess3(unittest.TestCase):
 		mainpage.wait_LoadingModal()
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
+		applypage.click_sublimeApply("拒绝")
+		applypage.rejectReason("确定")
+		mainpage.wait_LoadingModal()
+
+		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
+		self.assertIsNot("期货RO拒绝", mainpage.get_status(self.email), "状态没有改变")
+		globals()["status"] = mainpage.get_status(self.email)
+
+	@unittest.skipUnless(globals()["status"].find("期货RO拒绝") != -1, "状态不是期货RO拒绝")
+	def test7_Process4_cs2toro(self):
+		# cs2 to ro
+		self.loginCRM(user='cs_t1')		#先登录
+
+		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
+		mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
+		applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
+
+		applylistpage.click_apply_manager()		#点击开户管理
+		applylistpage.click_applylist()		    #点击开户列表
+		mainpage.wait_LoadingModal()
+
+		# 下拉列表选择待CS2审批
+		mainpage.click_StatusSelect("待CS2审批")
+		mainpage.wait_LoadingModal()
+
+		# import pdb;pdb.set_trace()
+		mainpage.get_apply(email=self.email)
+		mainpage.wait_LoadingModal()
+		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
+
 		applypage.click_sublimeApply("通过")
 		applypage.click_popWindow("确定")
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
-		self.assertIsNot("待期货RO审批", mainpage.get_status(self.email), "状态没有改变")
+		# self.assertIsNot("CS2", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
-	@unittest.skipUnless(globals()["status"].find("待外汇RO审批") != -1, "状态不是待外汇RO审批")
-	def test8_Process3_aaron(self):
-		# aaron审核
+	@unittest.skipUnless(globals()["status"].find("待外汇RO审批") != -1, "状态不是外汇RO审批")
+	def test8_Process4_aaronRefuse(self):
+		# cliff拒绝
 		self.loginCRM(user='aaron_chan')		#先登录
 
 		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
@@ -279,17 +278,47 @@ class reviewProcess3(unittest.TestCase):
 		mainpage.wait_LoadingModal()
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
+		applypage.click_sublimeApply("拒绝")
+		applypage.rejectReason("确定")
+		mainpage.wait_LoadingModal()
+
+		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
+		self.assertIsNot("外汇RO拒绝", mainpage.get_status(self.email), "状态没有改变")
+		globals()["status"] = mainpage.get_status(self.email)
+
+	@unittest.skipUnless(globals()["status"].find("外汇RO拒绝") != -1, "状态不是外汇RO拒绝")
+	def test9_Process4_cs2toro(self):
+		# cs2 to ro
+		self.loginCRM(user='cs_t1')		#先登录
+
+		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
+		mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
+		applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
+
+		applylistpage.click_apply_manager()		#点击开户管理
+		applylistpage.click_applylist()		    #点击开户列表
+		mainpage.wait_LoadingModal()
+
+		# 下拉列表选择待CS2审批
+		mainpage.click_StatusSelect("待CS2审批")
+		mainpage.wait_LoadingModal()
+
+		# import pdb;pdb.set_trace()
+		mainpage.get_apply(email=self.email)
+		mainpage.wait_LoadingModal()
+		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
+
 		applypage.click_sublimeApply("通过")
 		applypage.click_popWindow("确定")
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
-		self.assertIsNot("待外汇RO审批", mainpage.get_status(self.email), "状态没有改变")
+		# self.assertIsNot("CS2", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
 	@unittest.skipUnless(globals()["status"].find("待黄金RO审批") != -1, "状态不是待黄金RO审批")
-	def test9_Process3_gold(self):
-		# gold 审核
+	def test10_Process4_glodRefuse(self):
+		# cliff拒绝
 		self.loginCRM(user='gold_onedi', psw="Abcd1234")		#先登录
 
 		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
@@ -308,18 +337,18 @@ class reviewProcess3(unittest.TestCase):
 		mainpage.wait_LoadingModal()
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
-		applypage.click_sublimeApply("通过")
-		applypage.click_popWindow("确定")
+		applypage.click_sublimeApply("拒绝")
+		applypage.rejectReason("确定")
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
-		self.assertIsNot("待黄金RO审批", mainpage.get_status(self.email), "状态没有改变")
+		self.assertIsNot("黄金RO拒绝", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
-	@unittest.skipUnless(globals()["status"].find("结算") != -1, "状态不是待结算审核")
-	def test10_Process3_opstosuccess(self):
-		# ro to ops
-		self.loginCRM(user='ops_t1')		#先登录
+	@unittest.skipUnless(globals()["status"].find("黄金RO拒绝") != -1, "状态不是黄金RO拒绝")
+	def test11_Process4_cs2toro(self):
+		# cs2 to ro
+		self.loginCRM(user='cs_t1')		#先登录
 
 		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
 		mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
@@ -329,24 +358,23 @@ class reviewProcess3(unittest.TestCase):
 		applylistpage.click_applylist()		    #点击开户列表
 		mainpage.wait_LoadingModal()
 
-		mainpage.click_StatusSelect("待结算审批")
+		# 下拉列表选择待CS2审批
+		mainpage.click_StatusSelect("待CS2审批")
 		mainpage.wait_LoadingModal()
 
+		# import pdb;pdb.set_trace()
 		mainpage.get_apply(email=self.email)
 		mainpage.wait_LoadingModal()
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
-		applypage.click_sublimeApply("完成")
-		applypage.send_accountNumber(randox=1)
+		applypage.click_sublimeApply("通过")
+		applypage.click_popWindow("确定")
 		mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
-		self.assertEqual("成功", mainpage.get_status(self.email), "状态没有改变")
+		# self.assertIsNot("CS2", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
-
-
-		
 
 
 if __name__ == "__main__":

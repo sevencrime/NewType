@@ -28,7 +28,6 @@ class MainPage(BasePage.BasePage):
     selectbtn_loc = (By.XPATH, "//button/span[contains(text(),'查看')]")
     StatusSelect_loc = (By.XPATH, '//div[@class="el-row"]//div[@class="position-r"]//input')  # 状态下拉框
     LoadingModal_loc = (By.CSS_SELECTOR, ".Loading-modal")
-    popWindow_loc = (By.XPATH, '//div[@class="el-message-box"]//div[@class="el-message-box__btns"]/button[span[contains(text(), "确定")]]')
 
     def get_select(self, text):
         select_loc = (
@@ -82,9 +81,6 @@ class MainPage(BasePage.BasePage):
 
     def click_select(self):
         return self.find_element(*self.selectbtn_loc).click()
-
-    def click_popWindow(self):
-        return self.find_element(*self.popWindow_loc).click()
 
     def get_status(self, email):
         status_loc = (By.XPATH, '//span[text()="{email}"]/ancestor::td/following-sibling::td[contains(@class, "table-column-status")]//span'.format(email=email))
