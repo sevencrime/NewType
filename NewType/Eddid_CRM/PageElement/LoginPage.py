@@ -28,13 +28,6 @@ class LoginPage(BasePage.BasePage):
         WebDriverWait(self.driver, 20).until_not(
             EC.presence_of_element_located(self.LoadingModal_loc))
 
-
-    # 打开网页
-    def open(self):
-        # 调用page中的_open打开连接
-        # self.log.info(sys._getframe().f_code.co_name)
-        self._open(self.base_url, self.pagetitle)
-
     def input_username(self, username):
         # self.log.info(sys._getframe().f_code.co_name)
         self.find_element(*self.username_loc).send_keys(username)

@@ -21,11 +21,10 @@ class Test_Login(unittest.TestCase):
 
     def setUp(self):
         # self.log.info("正在执行Test_Login")
-        self.driver = webdriver.Chrome(
-            'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver')
+        self.driver = webdriver.Chrome()
         # self.driver.implicitly_wait(30)
-        self.driver.set_page_load_timeout(30)
-        self.driver.set_script_timeout(30)
+        self.driver.set_page_load_timeout(20)
+        self.driver.set_script_timeout(20)
         self.url = 'http://eddid-bos-feature.ntdev.be'
 
     def tearDown(self):

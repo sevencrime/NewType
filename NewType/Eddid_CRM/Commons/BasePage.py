@@ -36,16 +36,48 @@ class BasePage(object):
 
     # 打开页面，并校验页面链接是否加载正确
     # 以单下划线_开头的方法，在使用import *时，该方法不会被导入，保证该方法为类私有的。
-    def _open(self, url, pagetitle):
-        # 使用get打开访问链接地址
-        self.driver.get(url)
-        self.driver.maximize_window()
-        # 使用assert进行校验，打开的窗口title是否与配置的title一致。调用on_page()方法
-        assert self.on_page(pagetitle), u"打开开页面失败 %s" % url
+    # def _open(self, url, pagetitle):
+    #     # 使用get打开访问链接地址
+    #     self.driver.get(url)
+    #     self.driver.maximize_window()
+    #     # 使用assert进行校验，打开的窗口title是否与配置的title一致。调用on_page()方法
+    #     assert self.on_page(pagetitle), u"打开开页面失败 %s" % url
+
+
+    def browser(self, url, pagetitle):
+        # driver.get 保护罩,防止打开浏览器超时
+        try:
+            main_win = self.driver.current_window_handle #得到主窗口句柄
+
+            if len(self.driver.window_handles) == 1 : 
+                # 打开保护罩
+                js='window.open("https://www.baidu.com");'
+                self.driver.execute_script(js)
+                for handle in self.driver.window_handles:
+                    if handle == main_win:
+                        # print('保护罩WIN', handle, '\nMain', main_win)
+                        self.driver.switch_to.window(handle)
+
+            self.driver.get(url)
+            self.driver.maximize_window()
+            assert self.on_page(pagetitle), u"打开开页面失败 %s" % url
+
+        except Exception as e:
+            print(e)
+            # 关闭当前超时页面
+            for handle in self.driver.window_handles:
+                if handle != main_win:
+                    self.driver.switch_to_window(handle)
+                    self.browser(url, pagetitle)
+                else:
+                    print("切换保护罩")
+                    self.driver.close()
+
 
     # 定义open方法，调用_open()进行打开链接
     def open(self):
-        self._open(self.base_url, self.pagetitle)
+        # self._open(self.base_url, self.pagetitle)
+        self.browser(self.base_url, self.pagetitle)
 
     # 重写元素定位方法
     def find_element(self, *loc):
