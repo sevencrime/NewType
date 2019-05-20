@@ -12,15 +12,14 @@ import time
 class reviewProcess1(unittest.TestCase):
 	# CRM and apply_form正向审核: 未处理--待cs2--待RO--待ops--success
 	globals()["status"] = "未处理"
+	@classmethod
+	def setUpClass(self):
+		self.email = "1063onedi1193402@qq.com"
 
-    @classmethod
-    def setUpClass(self):
-    	self.email = "1919onedi228528@qq.com"
-
-    # 所有case执行之后清理环境
-    @classmethod
-    def tearDownClass(self):
-        print("This tearDownClass() method only called once too.")
+	# 所有case执行之后清理环境
+	@classmethod
+	def tearDownClass(self):
+	    print("This tearDownClass() method only called once too.")
 
 	def setUp(self):
 		self.driver = webdriver.Chrome()
@@ -45,15 +44,14 @@ class reviewProcess1(unittest.TestCase):
 		login_page.wait_LoadingModal()
 		self.assertEqual(user, login_page.show_userid(), "userid与登录账户不一致")
 
-	@unittest.skipUnless(globals()["status"].find("未处理") != -1, "状态不是未处理")
+	# @unittest.skipIf(globals()["status"].find("未处理") != -1, "状态不是未处理")
 	def test1_Process1_salestocs2(self):
 		# sales--cs2
 		self.loginCRM(user='sales_t1')		#先登录
 
 		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
 		mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
-
-		# import pdb;pdb.set_trace()
+		applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
 
 		applylistpage.click_apply_manager()		#点击开户管理
 		applylistpage.click_applylist()		    #点击开户列表
@@ -72,8 +70,7 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待CS2审批", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 		
-
-	@unittest.skipUnless(globals()["status"].find("CS2") != -1, "状态不是待CS2审核")
+	# @unittest.skipIf(globals()["status"].find("CS2") != -1, "状态不是待CS2审核")
 	def test2_Process1_cs2toro(self):
 		# cs2 to ro
 		self.loginCRM(user='cs_t1')		#先登录
@@ -103,7 +100,7 @@ class reviewProcess1(unittest.TestCase):
 		# self.assertIsNot("待CS2审批", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
-	@unittest.skipUnless(globals()["status"].find("待证券RO审批") != -1, "状态不是待证券RO审批")
+	# @unittest.skipIf(globals()["status"].find("待证券RO审批") != -1, "状态不是待证券RO审批")
 	def test3_Process1_cliff(self):
 		# cliff审核
 		self.loginCRM(user='ro1_cliff', psw="Abcd1234")		#先登录
@@ -132,7 +129,7 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待证券RO审批", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
-	@unittest.skipUnless(globals()["status"].find("待期货RO审批") != -1, "状态不是待期货RO审批")
+	# @unittest.skipIf(globals()["status"].find("待期货RO审批") != -1, "状态不是待期货RO审批")
 	def test4_Process1_don(self):
 		# don审核
 		self.loginCRM(user='ro1_don', psw='Abcd1234')		#先登录
@@ -161,7 +158,7 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待期货RO审批", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
-	@unittest.skipUnless(globals()["status"].find("待外汇RO审批") != -1, "状态不是待外汇RO审批")
+	# @unittest.skipIf(globals()["status"].find("待外汇RO审批") != -1, "状态不是待外汇RO审批")
 	def test5_Process1_aaron(self):
 		# aaron审核
 		self.loginCRM(user='aaron_chan')		#先登录
@@ -190,7 +187,7 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待外汇RO审批", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
-	@unittest.skipUnless(globals()["status"].find("待黄金RO审批") != -1, "状态不是待黄金RO审批")
+	# @unittest.skipIf(globals()["status"].find("待黄金RO审批") != -1, "状态不是待黄金RO审批")
 	def test6_Process1_gold(self):
 		# gold 审核
 		self.loginCRM(user='gold_onedi', psw="Abcd1234")		#先登录
@@ -219,7 +216,7 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待黄金RO审批", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
-	@unittest.skipUnless(globals()["status"].find("结算") != -1, "状态不是待结算审核")
+	# @unittest.skipIf(globals()["status"].find("结算") != -1, "状态不是待结算审核")
 	def test7_Process1_opstosuccess(self):
 		# ro to ops
 		self.loginCRM(user='ops_t1')		#先登录

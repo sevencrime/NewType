@@ -31,10 +31,6 @@ class ApplyListPage(BasePage.BasePage):
     create_seminar = (By.LINK_TEXT, "创建讲座")
     activity_record = (By.LINK_TEXT, "活动记录列表")
 
-
-    def open(self):
-        self._open(self.base_url, self.pagetitle)
-
     def click_apply_manager(self):
         self.find_element(*self.apply_manager).click()
 

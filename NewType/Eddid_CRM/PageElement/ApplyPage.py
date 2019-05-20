@@ -862,5 +862,5 @@ class ApplyPage(BasePage.BasePage):
 
 
     def click_popWindow(self, text):
-        popWindow_loc = (By.XPATH, '//div[@class="el-message-box"]//div[@class="el-message-box__btns"]/button[span[contains(text(), "{btntext}}")]]'.format(btntext=text))
-        return self.find_element(*self.popWindow_loc).click()
+        popWindow_loc = (By.XPATH, '//div[@class="el-message-box"]//div[@class="el-message-box__btns"]/button[span[contains(text(), "{btntext}")]]'.format(btntext=text))
+        return self.find_element(*popWindow_loc).click()

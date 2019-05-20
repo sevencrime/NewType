@@ -159,13 +159,13 @@ class Database:
 								self.db = self.client[self.database]
 
 							# 删除操作,请先查询后,确定数据以后再执行删除操作
-							# result = self.db[collection].delete_one(query)
-							# print(result.deleted_count)
-							# if result.deleted_count > 0 :
-							# 	self.actualRemoveTotal.append(collection)
+							result = self.db[collection].delete_one(query)
+							print(result.deleted_count)
+							if result.deleted_count > 0 :
+								self.actualRemoveTotal.append(collection)
 
-							# self.log.info(result)
-							# print(result)
+							self.log.info(result)
+							print(result)
 
 
 							self.log.info("***********************************\n")
@@ -174,9 +174,9 @@ class Database:
 if __name__ == '__main__':
 	host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
 	# host = 'localhost:27017'
-	database = 'uat'
-	Database(host, database).del_linked("apply", {'idpUserId':"d6cb2d78-ee7e-4e61-8af7-6eeb642d3048"})
-	# Database(host, database).del_linked("apply_info", {'email':{"$regex" : ".*onedi.*"}})
+	database = 'uat'	#查询的数据库
+	# Database(host, database).del_linked("apply_info", {'idNumber':"441502199602120215"})	# 传入需要查询的表和查询条件
+	Database(host, database).del_linked("apply_info", {'email':{"$regex" : ".*onedi.*"}})
 	
 
 

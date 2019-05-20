@@ -31,8 +31,9 @@ class MainPage(BasePage.BasePage):
 
     def get_select(self, text):
         select_loc = (
-            By.XPATH, "//div[contains(@style,'position: absolute;')]//li[span[text()='{text}']]".format(text=text))
+            By.XPATH, "//div[contains(@style,'position: absolute;')]//li[span[contains(text(), '{text}')]]".format(text=text))
         select_text = self.find_element(*select_loc)
+
         self.scrollinto(select_text)
         assert text in select_text.get_attribute("textContent")
         return select_text.get_attribute("textContent")
@@ -68,7 +69,10 @@ class MainPage(BasePage.BasePage):
     def click_StatusSelect(self, text):
         statusselect = self.find_element(*self.StatusSelect_loc).click()
         tag_text = self.get_select(text)
-        return tag_text
+        if text == tag_text.strip():
+            return tag_text.strip()
+        else: 
+            self.click_StatusSelect(textt)   
 
     def click_submitreview(self):
         return self.scrollinto(self.find_element(*self.submitbtn_loc))

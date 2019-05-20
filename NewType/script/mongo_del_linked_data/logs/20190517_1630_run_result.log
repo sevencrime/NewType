@@ -1,9 +1,0 @@
-2019-05-17 16:30:18,015 del_mongo.py INFO [line:31] 连接数据库uat
-2019-05-17 16:30:22,919 del_mongo.py INFO [line:66] apply_info 表符合查询条件{'subject': 'd6cb2d78-ee7e-4e61-8af7-6eeb642d3048'} 的数据有0 条
-2019-05-17 16:30:23,294 del_mongo.py INFO [line:37] close Client
-2019-05-17 16:30:29,667 del_mongo.py INFO [line:31] 连接数据库uat
-2019-05-17 16:30:34,272 del_mongo.py INFO [line:66] apply 表符合查询条件{'subject': 'd6cb2d78-ee7e-4e61-8af7-6eeb642d3048'} 的数据有0 条
-2019-05-17 16:30:34,462 del_mongo.py INFO [line:37] close Client
-2019-05-17 16:30:42,047 del_mongo.py INFO [line:31] 连接数据库uat
-2019-05-17 16:30:47,309 del_mongo.py INFO [line:66] apply 表符合查询条件{'idpUserId': 'd6cb2d78-ee7e-4e61-8af7-6eeb642d3048'} 的数据有0 条
-2019-05-17 16:30:47,502 del_mongo.py INFO [line:37] close Client
