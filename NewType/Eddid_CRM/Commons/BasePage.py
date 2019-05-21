@@ -13,6 +13,7 @@ WebDriverWait提供了显式等待方式。
 '''
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import *
 
 
 class BasePage(object):
@@ -44,32 +45,36 @@ class BasePage(object):
     #     assert self.on_page(pagetitle), u"打开开页面失败 %s" % url
 
 
-    def browser(self, url, pagetitle):
+    def browser(self, url, pagetitle, num = 0):
         # driver.get 保护罩,防止打开浏览器超时
         try:
             main_win = self.driver.current_window_handle #得到主窗口句柄
 
             if len(self.driver.window_handles) == 1 : 
-                # 打开保护罩
+                # 如果只有一个窗口, 打开保护罩
                 js='window.open("https://www.baidu.com");'
-                self.driver.execute_script(js)
+                self.driver.execute_script(js)  #此时焦点在新打开页面
                 for handle in self.driver.window_handles:
-                    if handle == main_win:
+                    if handle == main_win:  
                         # print('保护罩WIN', handle, '\nMain', main_win)
-                        self.driver.switch_to.window(handle)
+                        self.driver.switch_to.window(handle)    #切换回主窗口
 
             self.driver.get(url)
             self.driver.maximize_window()
             assert self.on_page(pagetitle), u"打开开页面失败 %s" % url
 
-        except Exception as e:
-            print(e)
+        except TimeoutException:
+            if num == 3:
+                print(TimeoutException)
+                raise TimeoutException
             # 关闭当前超时页面
             for handle in self.driver.window_handles:
                 if handle != main_win:
+                    # 句柄不等于主窗口,即是保护罩界面,则重新调用
                     self.driver.switch_to_window(handle)
-                    self.browser(url, pagetitle)
+                    self.browser(url, pagetitle, num+1)
                 else:
+                    # 句柄等于主窗口, 关闭窗口
                     print("切换保护罩")
                     self.driver.close()
 
