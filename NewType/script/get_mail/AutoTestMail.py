@@ -252,7 +252,7 @@ class AutoTestMail():
 
                         # 判断邮件标题和发件人名称是否符合
                         if [value for v in self.sub_dict.values() for value in v if
-                                value in sub] and from_name == 'noreply':
+                                value in sub] and from_name.find("no-reply") != -1:
                             data = part.get_payload(decode=True)
                             data_code = chardet.detect(data)
                             try:
