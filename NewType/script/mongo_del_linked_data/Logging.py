@@ -13,7 +13,11 @@ import logging
 def logs():
 
     t = time.strftime('%Y%m%d_%H%M', time.localtime(time.time()))
+    if os.path.exists(os.getcwd()+'/logs') is False:
+        os.makedirs(os.getcwd()+'/logs')
+        
     url_log = os.getcwd() + '/logs/%s_run_result.log' % t
+
     # url_log = os.getcwd()+'/logs/run_result.log'
     # 获取logger对象，设置日志级别
     logger = logging.getLogger(__name__)
