@@ -116,6 +116,10 @@ class AutoTestMail():
             subjectstr)
 
     def login(self):
+        self.Role = []  # 邮箱接收到的定时邮件角色
+        self.addition = []  # 邮件接收的非定时邮件类型
+        self.sumMail = 0  # 统计当天收到邮件总数
+
         server = poplib.POP3(self.pop_server)  # 链接服务器
         # server.set_debuglevel(1)    #可选项,打印客户端和服务端的交互信息
         print(server.getwelcome().decode('utf-8'))  # 打印服务器的欢迎信息,验证是否连接成功
