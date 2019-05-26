@@ -8,6 +8,7 @@ from Commons import *
 import unittest
 from selenium import webdriver
 import time
+import pytest
 
 class reviewProcess1(unittest.TestCase):
 	# CRM and apply_form正向审核: 未处理--待cs2--待RO--待ops--success
@@ -35,17 +36,30 @@ class reviewProcess1(unittest.TestCase):
 		print("结束driver")
 		self.driver.quit()
 
-	# def skipIf(status):
-	# 	def decoration(func):
+	def skipIf(status):
+		def wrapper(func):
+			def inner_wrapper(self):
+				if globals()['status'].find(status) != -1:
+					return func(self)
+				else:
+					print("状态不是 {}".format(status))
+					return 
+			return inner_wrapper
+		return wrapper
 
-	# 		def wrapper(self):
-	# 			if globals()['status'].find(status) != -1:
-	# 				return func(self)
-	# 			else:
-	# 				print("状态不是 {}".format(status))
-	# 				return 
-	# 		return wrapper
-	# 	return decoration
+	def LoginCRM(user='admin', psw='abcd1234'):
+		def wrapper(func):
+			def inner_wrapper(self):
+				login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
+				login_page.open()
+				login_page.input_username(user)
+				login_page.input_password(psw)
+				login_page.click_submit()
+				login_page.wait_LoadingModal()
+				self.assertEqual(user, login_page.show_userid(), "userid与登录账户不一致")
+				return func(self)
+			return inner_wrapper
+		return wrapper
 
 	def loginCRM(self, user='admin', psw='abcd1234'):
 		login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
@@ -56,11 +70,12 @@ class reviewProcess1(unittest.TestCase):
 		login_page.wait_LoadingModal()
 		self.assertEqual(user, login_page.show_userid(), "userid与登录账户不一致")
 
-	# @skipIf(status = "未处理")
-	@Decoration.skipIf(globals()['status'], "未处理")
+	@LoginCRM(user='sales_t1')
+	@skipIf(status = "未处理")
+	# @Decoration.skipIf(globals()['status'], "未处理")
 	def test1_Process1_salestocs2(self):
 		# sales--cs2
-		self.loginCRM(user='sales_t1')		#先登录
+		# self.loginCRM(user='sales_t1')		#先登录
 
 		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
 		mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
@@ -83,8 +98,8 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待CS2审批", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 		
-	# @skipIf(status = "CS2")
-	@Decoration.skipIf(globals()['status'], "CS2")
+	@skipIf(status = "CS2")
+	# @Decoration.skipIf(globals()['status'], "CS2")
 	def test2_Process1_cs2toro(self):
 		# cs2 to ro
 		self.loginCRM(user='cs_t1')		#先登录
@@ -114,8 +129,8 @@ class reviewProcess1(unittest.TestCase):
 		# self.assertIsNot("待CS2审批", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
-	# @skipIf(status = "待证券RO审批")
-	@Decoration.skipIf(globals()['status'], "待证券RO审批")
+	@skipIf(status = "待证券RO审批")
+	# @Decoration.skipIf(globals()['status'], "待证券RO审批")
 	def test3_Process1_cliff(self):
 		# cliff审核
 		self.loginCRM(user='ro1_cliff', psw="Abcd1234")		#先登录
@@ -144,8 +159,8 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待证券RO审批", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
-	# @skipIf(status = "待期货RO审批")
-	@Decoration.skipIf(globals()['status'], "待期货RO审批")
+	@skipIf(status = "待期货RO审批")
+	# @Decoration.skipIf(globals()['status'], "待期货RO审批")
 	def test4_Process1_don(self):
 		# don审核
 		self.loginCRM(user='ro1_don', psw='Abcd1234')		#先登录
@@ -174,8 +189,8 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待期货RO审批", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
-	# @skipIf(status = "待外汇RO审批")
-	@Decoration.skipIf(globals()['status'], "待外汇RO审批")
+	@skipIf(status = "待外汇RO审批")
+	# @Decoration.skipIf(globals()['status'], "待外汇RO审批")
 	def test5_Process1_aaron(self):
 		# aaron审核
 		self.loginCRM(user='aaron_chan')		#先登录
@@ -204,8 +219,8 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待外汇RO审批", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
-	# @skipIf(status = "待黄金RO审批")
-	@Decoration.skipIf(globals()['status'], "待黄金RO审批")
+	@skipIf(status = "待黄金RO审批")
+	# @Decoration.skipIf(globals()['status'], "待黄金RO审批")
 	def test6_Process1_gold(self):
 		# gold 审核
 		self.loginCRM(user='gold_onedi', psw="Abcd1234")		#先登录
@@ -234,8 +249,8 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待黄金RO审批", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
-	# @skipIf(status = "结算")
-	@Decoration.skipIf(globals()['status'], "结算")
+	@skipIf(status = "结算")
+	# @Decoration.skipIf(globals()['status'], "结算")
 	def test7_Process1_opstosuccess(self):
 		# ro to ops
 		self.loginCRM(user='ops_t1')		#先登录
@@ -265,6 +280,7 @@ class reviewProcess1(unittest.TestCase):
 
 
 if __name__ == "__main__":
+	# pytest.main()
 	suite = unittest.TestSuite()
 	suite.addTests(unittest.TestLoader().loadTestsFromTestCase(reviewProcess1))
 	runner = unittest.TextTestRunner(verbosity=2)

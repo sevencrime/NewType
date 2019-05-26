@@ -327,10 +327,10 @@ class AutoTestMail():
 if __name__ == '__main__':
     testmail = AutoTestMail()
     print("程序已经启动")
-    testmail.login()
+    # testmail.login()
     # testmail.send_mail()
-    # apscheduler = BlockingScheduler()
-    # apscheduler.add_job(
-    #     func=testmail.login, trigger='cron', day_of_week='0-6', hour=19, minute=15)
-    # apscheduler.start()
+    apscheduler = BlockingScheduler()
+    apscheduler.add_job(
+        func=testmail.login, trigger='cron', day_of_week='0-6', hour=19, minute=15)
+    apscheduler.start()
 
