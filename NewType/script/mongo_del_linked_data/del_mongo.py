@@ -57,7 +57,7 @@ class Database:
 		database : 查询的数据库
 	"""
 	def del_linked(self, collection, query, database=None):
-		collections = set()  #存放一条关联记录中遍历过的表
+		collections = set()  #存放关联记录中遍历过的表
 		if database != None:
 			# 如果database不等于None则切换数据库
 			self.db = self.client[database]
@@ -159,13 +159,13 @@ class Database:
 								self.db = self.client[self.database]
 
 							# 删除操作,请先查询后,确定数据以后再执行删除操作
-							result = self.db[collection].delete_one(query)
-							print(result.deleted_count)
-							if result.deleted_count > 0 :
-								self.actualRemoveTotal.append(collection)
+							# result = self.db[collection].delete_one(query)
+							# print(result.deleted_count)
+							# if result.deleted_count > 0 :
+							# 	self.actualRemoveTotal.append(collection)
 
-							self.log.info(result)
-							print(result)
+							# self.log.info(result)
+							# print(result)
 
 
 							self.log.info("***********************************\n")
@@ -175,8 +175,8 @@ if __name__ == '__main__':
 	host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
 	# host = 'localhost:27017'
 	database = 'uat'	#查询的数据库
-	# Database(host, database).del_linked("apply_info", {'idNumber':"441502199602120215"})	# 传入需要查询的表和查询条件
-	Database(host, database).del_linked("apply_info", {'email':{"$regex" : ".*onedi.*"}})
+	Database(host, database).del_linked("apply_info", {"phone":"15089514626"})	# 传入需要查询的表和查询条件
+	# Database(host, database).del_linked("apply_info", {'email':{"$regex" : ".*onedi.*"}})
 	
 
 

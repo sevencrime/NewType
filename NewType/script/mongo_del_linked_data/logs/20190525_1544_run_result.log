@@ -1,0 +1,4 @@
+2019-05-25 15:44:03,710 del_mongo.py INFO [line:31] 连接数据库uat
+2019-05-25 15:44:25,937 del_mongo.py INFO [line:37] close Client
+2019-05-25 15:44:32,275 del_mongo.py INFO [line:31] 连接数据库uat
+2019-05-25 15:45:05,033 del_mongo.py INFO [line:37] close Client

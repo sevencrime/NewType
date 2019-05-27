@@ -40,7 +40,7 @@ class addApply(unittest.TestCase):
         print("结束driver")
         self.driver.quit()
 
-    # @unittest.skip("暂时跳过")
+    @unittest.skip("暂时跳过")
     def test1_addIndividual(self):
         # CRM开户列表,个人账户-随机
         applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
@@ -279,7 +279,7 @@ class addApply(unittest.TestCase):
         mainpage.wait_LoadingModal()
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交开户表单后跳转失败")
 
-    @unittest.skip("暂时跳过")
+    # @unittest.skip("暂时跳过")
     def test3_addJointFillAll(self):
         # CRM开户列表,联名账户-全部隐藏框
         applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")

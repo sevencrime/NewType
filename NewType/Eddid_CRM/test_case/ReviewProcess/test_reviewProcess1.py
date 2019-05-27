@@ -24,9 +24,6 @@ class reviewProcess1(unittest.TestCase):
 
 	def setUp(self):
 		self.driver = webdriver.Chrome()
-		# self.driver = webdriver.Edge()
-		# self.driver = webdriver.Firefox(executable_path = 'geckodriver')
-		# self.driver.implicitly_wait(30)   
 		self.driver.set_page_load_timeout(20)
 		self.driver.set_script_timeout(20)
 		self.url = 'http://eddid-bos-uat.ntdev.be'
@@ -97,12 +94,13 @@ class reviewProcess1(unittest.TestCase):
 
 		self.assertIsNot("待CS2审批", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
-		
+	
+	@LoginCRM(user='cs_t1')
 	@skipIf(status = "CS2")
 	# @Decoration.skipIf(globals()['status'], "CS2")
 	def test2_Process1_cs2toro(self):
 		# cs2 to ro
-		self.loginCRM(user='cs_t1')		#先登录
+		# self.loginCRM(user='cs_t1')		#先登录
 
 		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
 		mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
@@ -129,11 +127,12 @@ class reviewProcess1(unittest.TestCase):
 		# self.assertIsNot("待CS2审批", mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = mainpage.get_status(self.email)
 
+	@LoginCRM(user='ro1_cliff', psw="Abcd1234")
 	@skipIf(status = "待证券RO审批")
 	# @Decoration.skipIf(globals()['status'], "待证券RO审批")
 	def test3_Process1_cliff(self):
 		# cliff审核
-		self.loginCRM(user='ro1_cliff', psw="Abcd1234")		#先登录
+		# self.loginCRM(user='ro1_cliff', psw="Abcd1234")		#先登录
 
 		applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
 		mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
