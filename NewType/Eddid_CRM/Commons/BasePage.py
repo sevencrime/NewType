@@ -5,16 +5,9 @@
 # @Link    : ${link}
 # @Version : $Id$
 
-'''
-Project:基础类BasePage，封装所有页面都公用的方法，
-定义open函数，重定义find_element，switch_frame，send_keys等函数。
-在初始化方法中定义驱动driver，基本url，title
-WebDriverWait提供了显式等待方式。
-'''
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import *
-
 
 class BasePage(object):
     """

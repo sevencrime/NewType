@@ -18,12 +18,12 @@ class reviewProcess5(unittest.TestCase):
     globals()["status"] = "待CS2审核"
 
     @classmethod
-    def setUpClass(self):
+    def setUpClass(cls):
         self.email = "9706onedi882636@qq.com"
 
     # 所有case执行之后清理环境
     @classmethod
-    def tearDownClass(self):
+    def tearDownClass(cls):
         print("This tearDownClass() method only called once too.")
 
     def setUp(self):
@@ -77,7 +77,6 @@ class reviewProcess5(unittest.TestCase):
 
         # self.assertIsNot("待CS2审批", mainpage.get_status(self.email), "状态没有改变")
         globals()["status"] = mainpage.get_status(self.email)
-        
 
     # @unittest.skipIf(globals()["status"].find("未处理") != -1, "状态不是未处理")
     def test_b_Process5_roadmin(self):
