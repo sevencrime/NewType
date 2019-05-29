@@ -5,9 +5,9 @@ import os,sys
 sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
 from PageElement import *
 from Commons import *
+from test_case import *
 import unittest
 from selenium import webdriver
-from test_case.public import Decoration
 import time
 import pytest
 
@@ -29,7 +29,7 @@ class reviewProcess1(unittest.TestCase):
 		self.driver.set_script_timeout(20)
 		self.url = 'http://eddid-bos-uat.ntdev.be'
 
-		self.login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
+		# self.login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
 		self.applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
 		self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
 		self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
@@ -50,18 +50,11 @@ class reviewProcess1(unittest.TestCase):
 			return inner_wrapper
 		return wrapper
 
-	def loginCRM(self, user='admin', psw='abcd1234'):
-		self.login_page.open()
-		self.login_page.input_username(user)
-		self.login_page.input_password(psw)
-		self.login_page.click_submit()
-		self.login_page.wait_LoadingModal()
-		self.assertEqual(user, self.login_page.show_userid(), "userid与登录账户不一致")
-
 	@skipIf(status = "未处理")
 	def test1_Process1_salestocs2(self):
 		# sales--cs2
-		self.loginCRM(user='sales_t1')		#先登录
+		# self.loginCRM(user='sales_t1')		#先登录
+		Test_Login.LoginCRM(user='sales_t1')
 
 		self.applylistpage.click_apply_manager()		#点击开户管理
 		self.applylistpage.click_applylist()		    #点击开户列表
@@ -83,7 +76,8 @@ class reviewProcess1(unittest.TestCase):
 	@skipIf(status = "CS2")
 	def test2_Process1_cs2toro(self):
 		# cs2 to ro
-		self.loginCRM(user='cs_t1')		#先登录
+		# self.loginCRM(user='cs_t1')		#先登录
+		Test_Login.LoginCRM(user='cs_t1')
 
 		self.applylistpage.click_apply_manager()		#点击开户管理
 		self.applylistpage.click_applylist()		    #点击开户列表
@@ -109,7 +103,8 @@ class reviewProcess1(unittest.TestCase):
 	@skipIf(status = "待证券RO审批")
 	def test3_Process1_cliff(self):
 		# cliff审核
-		self.loginCRM(user='ro1_cliff', psw="Abcd1234")		#先登录
+		# self.loginCRM(user='ro1_cliff', psw="Abcd1234")		#先登录
+		Test_Login.LoginCRM(user='ro1_cliff', psw="Abcd1234")
 
 		self.applylistpage.click_apply_manager()		#点击开户管理
 		self.applylistpage.click_applylist()		    #点击开户列表
@@ -134,7 +129,8 @@ class reviewProcess1(unittest.TestCase):
 	@skipIf(status = "待期货RO审批")
 	def test4_Process1_don(self):
 		# don审核
-		self.loginCRM(user='ro1_don', psw='Abcd1234')		#先登录
+		# self.loginCRM(user='ro1_don', psw='Abcd1234')		#先登录
+		Test_Login.LoginCRM(user='ro1_don', psw='Abcd1234')
 
 		self.applylistpage.click_apply_manager()		#点击开户管理
 		self.applylistpage.click_applylist()		    #点击开户列表
@@ -159,7 +155,8 @@ class reviewProcess1(unittest.TestCase):
 	@skipIf(status = "待外汇RO审批")
 	def test5_Process1_aaron(self):
 		# aaron审核
-		self.loginCRM(user='aaron_chan')		#先登录
+		# self.loginCRM(user='aaron_chan')		#先登录
+		Test_Login.LoginCRM(user='aaron_chan')
 
 		self.applylistpage.click_apply_manager()		#点击开户管理
 		self.applylistpage.click_applylist()		    #点击开户列表
@@ -184,7 +181,8 @@ class reviewProcess1(unittest.TestCase):
 	@skipIf(status = "待黄金RO审批")
 	def test6_Process1_gold(self):
 		# gold 审核
-		self.loginCRM(user='gold_onedi', psw="Abcd1234")		#先登录
+		# self.loginCRM(user='gold_onedi', psw="Abcd1234")		#先登录
+		Test_Login.LoginCRM(user='gold_onedi', psw="Abcd1234")
 
 		self.applylistpage.click_apply_manager()		#点击开户管理
 		self.applylistpage.click_applylist()		    #点击开户列表
@@ -209,7 +207,8 @@ class reviewProcess1(unittest.TestCase):
 	@skipIf(status = "结算")
 	def test7_Process1_opstosuccess(self):
 		# ro to ops
-		self.loginCRM(user='ops_t1')		#先登录
+		# self.loginCRM(user='ops_t1')		#先登录
+		Test_Login.LoginCRM(user='ops_t1')
 
 		self.applylistpage.click_apply_manager()		#点击开户管理
 		self.applylistpage.click_applylist()		    #点击开户列表
