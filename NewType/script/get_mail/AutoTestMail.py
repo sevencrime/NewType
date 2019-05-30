@@ -98,12 +98,13 @@ class AutoTestMail():
         fromstr = msg.get('From')
         from_name, from_url = email.utils.parseaddr(fromstr)
 
-        date = msg.get('Date')
+        date = msg.get('Date').strip()
         # import pdb;pdb.set_trace()
         try:
             timeReceive = (datetime.datetime.strptime(
                 date[:-5], '%a, %d %b %Y %H:%M:%S ') + datetime.timedelta(hours=(8 - int(date[-5:-2]))))
         except ValueError:
+            import pdb; pdb.set_trace()
             timeReceive = (datetime.datetime.strptime(
                 date[:-5], '%d %b %Y %H:%M:%S ') + datetime.timedelta(hours=(8 - int(date[-5:-2]))))
 
@@ -256,7 +257,7 @@ class AutoTestMail():
 
                         # 判断邮件标题和发件人名称是否符合
                         if [value for v in self.sub_dict.values() for value in v if
-                                value in sub] and from_name.find("no-reply") != -1:
+                                value in sub]:
                             data = part.get_payload(decode=True)
                             data_code = chardet.detect(data)
                             try:
@@ -270,6 +271,13 @@ class AutoTestMail():
                             # 获取邮件的类型
                             mail_type = "".join(
                                 [k for k, v in self.sub_dict.items() for value in v if value in sub])
+
+                            if sub.find('[電子入場門票]') != -1 or sub.find('[講座提醒]') != -1:
+                                print("进去")
+                                import pdb; pdb.set_trace()
+                                clientArr = "2位"
+                                if Context.find(clientArr) != -1:
+                                    print("正确正确正确")
 
                             # 邮件类型属于定时邮件,截取出发送的角色名称
                             if mail_type == 'AccountOpeningApproval':
@@ -292,6 +300,7 @@ class AutoTestMail():
         for col in self.sub_dict.keys():
             if col == 'AccountOpeningApproval' and not isRepeat:
                 for accName in self.roleName:
+                    # import pdb; pdb.set_trace()
                     if [r for r in set(self.Role) if accName in r]:  # 邮箱收到邮件
                         table.add_row(['定时邮件>>' + accName, '是',
                                        len([v for v in self.Role if v.find(accName) != -1])])
