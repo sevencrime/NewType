@@ -43,14 +43,14 @@ class addApply(unittest.TestCase):
     @unittest.skip("暂时跳过")
     def test1_addIndividual(self):
         # CRM开户列表,个人账户-随机
-        applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
+        MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
         mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
         applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
 
         #点击开户管理，判断
-        applylistpage.click_apply_manager()
+        MenuListPage.click_apply_manager()
         #点击开户列表，判断
-        applylistpage.click_applylist()
+        MenuListPage.click_applylist()
         #等待
         mainpage.wait_LoadingModal()
         #点击新增按钮
@@ -155,14 +155,14 @@ class addApply(unittest.TestCase):
     @unittest.skip("暂时跳过")
     def test2_addJoint(self):
         # CRM开户列表,联名账户-随机
-        applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
+        MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
         mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
         applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
 
         #点击开户管理，判断
-        applylistpage.click_apply_manager()
+        MenuListPage.click_apply_manager()
         #点击开户列表，判断
-        applylistpage.click_applylist()
+        MenuListPage.click_applylist()
         #等待
         mainpage.wait_LoadingModal()
         #点击新增按钮
@@ -282,14 +282,14 @@ class addApply(unittest.TestCase):
     # @unittest.skip("暂时跳过")
     def test3_addJointFillAll(self):
         # CRM开户列表,联名账户-全部隐藏框
-        applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
+        MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
         mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
         applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
 
         #点击开户管理，判断
-        applylistpage.click_apply_manager()
+        MenuListPage.click_apply_manager()
         #点击开户列表，判断
-        applylistpage.click_applylist()
+        MenuListPage.click_applylist()
         #等待
         mainpage.wait_LoadingModal()
         #点击新增按钮

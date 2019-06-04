@@ -35,76 +35,82 @@ class reviewProcess5(unittest.TestCase):
         self.driver.set_script_timeout(30)
         self.url = 'http://eddid-bos-uat.ntdev.be'
 
+        self.MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
+        self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
+        self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
+
     def tearDown(self):
         # time.sleep(5)
         print("结束driver")
         self.driver.quit()
 
-    def loginCRM(self, user='admin', psw='abcd1234'):
-        login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
-        login_page.open()
-        login_page.input_username(user)
-        login_page.input_password(psw)
-        login_page.click_submit()
-        login_page.wait_LoadingModal()
-        self.assertEqual(user, login_page.show_userid(), "userid与登录账户不一致")
+    def skipIf(status):
+        def wrapper(func):
+            def inner_wrapper(self):
+                if globals()['status'].find(status) != -1:
+                    return func(self)
+                else:
+                    print("状态不是 {}".format(status))
+                    return 
+            return inner_wrapper
+        return wrapper
 
     # @unittest.skipIf(globals()["status"].find("未处理") != -1, "状态不是未处理")
     def test_a_Process5_aaron(self):
-        # sales--cs2
-        self.loginCRM(user='aaron_test')      #先登录
+        # aaron 通过
+        Test_Login.LoginCRM(user='aaron_test')      #先登录
 
-        applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
-        mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
-        applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
+        self.MenuListPage = self.MenuListPage.self.MenuListPage(self.driver, self.url, "Eddid")
+        self.mainpage = self.mainpage.self.mainpage(self.driver, self.url, "Eddid")
+        self.applypage = self.applypage.self.applypage(self.driver, self.url, "Eddid")
 
-        applylistpage.click_apply_manager()     #点击开户管理
-        applylistpage.click_applylist()         #点击开户列表
-        mainpage.wait_LoadingModal()
+        self.MenuListPage.click_apply_manager()     #点击开户管理
+        self.MenuListPage.click_applylist()         #点击开户列表
+        self.mainpage.wait_LoadingModal()
         # import pdb; pdb.set_trace()
         # 下拉列表选择未处理
-        mainpage.click_StatusSelect("待RO审批")
-        mainpage.wait_LoadingModal()
+        self.mainpage.click_StatusSelect("待RO审批")
+        self.mainpage.wait_LoadingModal()
 
         # 判断状态校验功能是否正常,选择编号
-        mainpage.get_apply(email=self.email)   
-        mainpage.wait_LoadingModal()
+        self.mainpage.get_apply(email=self.email)   
+        self.mainpage.wait_LoadingModal()
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
-        applypage.click_sublimeApply("通过")
-        applypage.click_popWindow("确定")
-        mainpage.wait_LoadingModal()
+        self.applypage.click_sublimeApply("通过")
+        self.applypage.click_popWindow("确定")
+        self.mainpage.wait_LoadingModal()
 
-        # self.assertIsNot("待CS2审批", mainpage.get_status(self.email), "状态没有改变")
-        globals()["status"] = mainpage.get_status(self.email)
+        # self.assertIsNot("待CS2审批", self.mainpage.get_status(self.email), "状态没有改变")
+        globals()["status"] = self.mainpage.get_status(self.email)
 
     # @unittest.skipIf(globals()["status"].find("未处理") != -1, "状态不是未处理")
     def test_b_Process5_roadmin(self):
-        # sales--cs2
-        self.loginCRM(user='onedi.admin', psw="Abcd1234")      #先登录
+        # 多角色通过
+        Test_Login.LoginCRM(user='onedi.admin', psw="Abcd1234")      #先登录
 
-        applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
-        mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
-        applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
+        self.MenuListPage = self.MenuListPage.self.MenuListPage(self.driver, self.url, "Eddid")
+        self.mainpage = self.mainpage.self.mainpage(self.driver, self.url, "Eddid")
+        self.applypage = self.applypage.self.applypage(self.driver, self.url, "Eddid")
 
-        applylistpage.click_apply_manager()     #点击开户管理
-        applylistpage.click_applylist()         #点击开户列表
-        mainpage.wait_LoadingModal()
+        self.MenuListPage.click_apply_manager()     #点击开户管理
+        self.MenuListPage.click_applylist()         #点击开户列表
+        self.mainpage.wait_LoadingModal()
 
         # 下拉列表选择未处理
-        mainpage.click_StatusSelect("待RO审批")
-        mainpage.wait_LoadingModal()
+        self.mainpage.click_StatusSelect("待RO审批")
+        self.mainpage.wait_LoadingModal()
         # 判断状态校验功能是否正常,选择编号
-        mainpage.get_apply(email=self.email)   
-        mainpage.wait_LoadingModal()
+        self.mainpage.get_apply(email=self.email)   
+        self.mainpage.wait_LoadingModal()
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
-        applypage.click_sublimeApply("通过")
-        applypage.click_popWindow("确定")
-        mainpage.wait_LoadingModal()
+        self.applypage.click_sublimeApply("通过")
+        self.applypage.click_popWindow("确定")
+        self.mainpage.wait_LoadingModal()
 
-        # self.assertIsNot("待CS2审批", mainpage.get_status(self.email), "状态没有改变")
-        globals()["status"] = mainpage.get_status(self.email)
+        # self.assertIsNot("待CS2审批", self.mainpage.get_status(self.email), "状态没有改变")
+        globals()["status"] = self.mainpage.get_status(self.email)
         
 
 

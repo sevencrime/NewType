@@ -30,7 +30,7 @@ class reviewProcess1(unittest.TestCase):
 		self.url = 'http://eddid-bos-uat.ntdev.be'
 
 		# self.login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
-		self.applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
+		self.MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
 		self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
 		self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
 
@@ -40,6 +40,7 @@ class reviewProcess1(unittest.TestCase):
 		self.driver.quit()
 
 	def skipIf(status):
+		# 装饰器, 用于判断用例是否执行
 		def wrapper(func):
 			def inner_wrapper(self):
 				if globals()['status'].find(status) != -1:
@@ -51,13 +52,13 @@ class reviewProcess1(unittest.TestCase):
 		return wrapper
 
 	@skipIf(status = "未处理")
-	def test1_Process1_salestocs2(self):
+	def test1_Process1_sales_to_cs2(self):
 		# sales--cs2
-		# self.loginCRM(user='sales_t1')		#先登录
 		Test_Login.LoginCRM(user='sales_t1')
 
-		self.applylistpage.click_apply_manager()		#点击开户管理
-		self.applylistpage.click_applylist()		    #点击开户列表
+		# self.MenuListPage.click_apply_manager()		#点击开户管理
+		# self.MenuListPage.click_applylist()		    #点击开户列表
+		self.MenuListPage.click_menulist("开户管理", "开户列表")
 		self.mainpage.wait_LoadingModal()
 
 		# 下拉列表选择未处理
@@ -74,13 +75,14 @@ class reviewProcess1(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 	
 	@skipIf(status = "CS2")
-	def test2_Process1_cs2toro(self):
+	def test2_Process1_cs2_to_ro(self):
 		# cs2 to ro
 		# self.loginCRM(user='cs_t1')		#先登录
 		Test_Login.LoginCRM(user='cs_t1')
 
-		self.applylistpage.click_apply_manager()		#点击开户管理
-		self.applylistpage.click_applylist()		    #点击开户列表
+		# self.MenuListPage.click_apply_manager()		#点击开户管理
+		# self.MenuListPage.click_applylist()		    #点击开户列表
+		self.MenuListPage.click_menulist("开户管理", "开户列表")
 		self.mainpage.wait_LoadingModal()
 
 		# 下拉列表选择待CS2审批
@@ -106,8 +108,9 @@ class reviewProcess1(unittest.TestCase):
 		# self.loginCRM(user='ro1_cliff', psw="Abcd1234")		#先登录
 		Test_Login.LoginCRM(user='ro1_cliff', psw="Abcd1234")
 
-		self.applylistpage.click_apply_manager()		#点击开户管理
-		self.applylistpage.click_applylist()		    #点击开户列表
+		# self.MenuListPage.click_apply_manager()		#点击开户管理
+		# self.MenuListPage.click_applylist()		    #点击开户列表
+		self.MenuListPage.click_menulist("开户管理", "开户列表")
 		self.mainpage.wait_LoadingModal()
 
 		self.mainpage.click_StatusSelect("待RO审批")
@@ -132,8 +135,9 @@ class reviewProcess1(unittest.TestCase):
 		# self.loginCRM(user='ro1_don', psw='Abcd1234')		#先登录
 		Test_Login.LoginCRM(user='ro1_don', psw='Abcd1234')
 
-		self.applylistpage.click_apply_manager()		#点击开户管理
-		self.applylistpage.click_applylist()		    #点击开户列表
+		# self.MenuListPage.click_apply_manager()		#点击开户管理
+		# self.MenuListPage.click_applylist()		    #点击开户列表
+		self.MenuListPage.click_menulist("开户管理", "开户列表")
 		self.mainpage.wait_LoadingModal()
 
 		self.mainpage.click_StatusSelect("待RO审批")
@@ -158,8 +162,9 @@ class reviewProcess1(unittest.TestCase):
 		# self.loginCRM(user='aaron_chan')		#先登录
 		Test_Login.LoginCRM(user='aaron_chan')
 
-		self.applylistpage.click_apply_manager()		#点击开户管理
-		self.applylistpage.click_applylist()		    #点击开户列表
+		# self.MenuListPage.click_apply_manager()		#点击开户管理
+		# self.MenuListPage.click_applylist()		    #点击开户列表
+		self.MenuListPage.click_menulist("开户管理", "开户列表")
 		self.mainpage.wait_LoadingModal()
 
 		self.mainpage.click_StatusSelect("待RO审批")
@@ -184,8 +189,9 @@ class reviewProcess1(unittest.TestCase):
 		# self.loginCRM(user='gold_onedi', psw="Abcd1234")		#先登录
 		Test_Login.LoginCRM(user='gold_onedi', psw="Abcd1234")
 
-		self.applylistpage.click_apply_manager()		#点击开户管理
-		self.applylistpage.click_applylist()		    #点击开户列表
+		# self.MenuListPage.click_apply_manager()		#点击开户管理
+		# self.MenuListPage.click_applylist()		    #点击开户列表
+		self.MenuListPage.click_menulist("开户管理", "开户列表")
 		self.mainpage.wait_LoadingModal()
 
 		self.mainpage.click_StatusSelect("待RO审批")
@@ -205,13 +211,14 @@ class reviewProcess1(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	@skipIf(status = "结算")
-	def test7_Process1_opstosuccess(self):
+	def test7_Process1_ops_to_success(self):
 		# ro to ops
 		# self.loginCRM(user='ops_t1')		#先登录
 		Test_Login.LoginCRM(user='ops_t1')
 
-		self.applylistpage.click_apply_manager()		#点击开户管理
-		self.applylistpage.click_applylist()		    #点击开户列表
+		# self.MenuListPage.click_apply_manager()		#点击开户管理
+		# self.MenuListPage.click_applylist()		    #点击开户列表
+		self.MenuListPage.click_menulist("开户管理", "开户列表")
 		self.mainpage.wait_LoadingModal()
 
 		self.mainpage.click_StatusSelect("待结算审批")

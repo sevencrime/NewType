@@ -44,13 +44,13 @@ class searchInfo(unittest.TestCase):
         self.driver.quit()
 
     def test_searchInfo(self):
-        applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
+        MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
         mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
 
         #点击开户管理，判断
-        applylistpage.click_apply_manager()
+        MenuListPage.click_apply_manager()
         #点击开户列表，判断
-        applylistpage.click_applylist()
+        MenuListPage.click_applylist()
 
         #等待CSS.Loading-Modal加载完成
         mainpage.wait_LoadingModal()

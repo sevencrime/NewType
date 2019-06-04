@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 from Commons import *
 from selenium.webdriver.common.by import By
 
-class ApplyListPage(BasePage.BasePage):
+class MenuListPage(BasePage.BasePage):
 
     apply_manager = (By.XPATH, "//span[contains(text(),'开户管理')]")     #通过<i>标签定位
     applylist = (By.LINK_TEXT, "开户列表")
@@ -30,6 +30,13 @@ class ApplyListPage(BasePage.BasePage):
     activitylist = (By.LINK_TEXT, "活动列表")
     create_seminar = (By.LINK_TEXT, "创建讲座")
     activity_record = (By.LINK_TEXT, "活动记录列表")
+
+    def click_menulist(ul_text, li_text):
+        manager_loc = (By.XPATH, "//span[contains(text(),'{}')]".format(ul_text))
+        self.find_element(*manager_loc).click()     #点击主菜单
+        # 子菜单
+        linkmenu_loc = (By.LINK_TEXT, "{}".format(li_text))
+        self.find_element(*linkmenu_loc).click()    #点击子菜单
 
     def click_apply_manager(self):
         self.find_element(*self.apply_manager).click()

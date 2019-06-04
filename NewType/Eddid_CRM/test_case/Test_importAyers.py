@@ -59,9 +59,9 @@ class importAyers(unittest.TestCase):
 
         data = self.getNumber()
         print(data)
-        applylistpage = ApplyListPage.ApplyListPage(self.driver, self.url, "Eddid")
-        applylistpage.click_account_manager()
-        applylistpage.click_accountlist()
+        MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
+        MenuListPage.click_account_manager()
+        MenuListPage.click_accountlist()
 
         accountpage = AccountlistPage.AccountlistPage(self.driver, self.url, "Eddid")
         accountpage.wait_LoadingModal()
