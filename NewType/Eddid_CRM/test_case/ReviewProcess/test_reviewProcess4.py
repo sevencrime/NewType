@@ -55,6 +55,7 @@ class reviewProcess4(unittest.TestCase):
 		return wrapper
 
 	# @unittest.skipIf(globals()["status"].find("未处理") != -1, "状态不是未处理")
+	@skipIf("未处理")
 	def test_a_Process1_salestocs2(self):
 		# sales--cs2
 		Test_Login.LoginCRM(user='sales_t1')		#先登录
@@ -77,6 +78,7 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 		
 	# @unittest.skipUnless(globals()["status"].find("CS2") != -1, "状态不是CS2")
+	@skipIf("CS2")
 	def test_b_Process4_cs2torefuse(self):
 		# CS1---Refuse
 		Test_Login.LoginCRM(user='cs_t1')		#先登录
@@ -84,7 +86,6 @@ class reviewProcess4(unittest.TestCase):
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
 		self.mainpage.wait_LoadingModal()
-		import pdb; pdb.set_trace()
 		# 下拉列表选择待CS2审批
 		self.mainpage.click_StatusSelect("待CS2审批")
 		self.mainpage.wait_LoadingModal()
@@ -103,6 +104,7 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 		
 	# @unittest.skipUnless(globals()["status"].find("拒绝") != -1, "状态不是拒绝")
+	@skipIf("拒绝")
 	def test_c_Process4_refusetucs2(self):
 		# CS1---Refuse
 		Test_Login.LoginCRM(user='sales_t1')		#先登录
@@ -130,6 +132,7 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("CS2") != -1, "状态不是待CS2审核")
+	@skipIf("CS2")
 	def test_d_Process4_cs2toro(self):
 		# cs2 to ro
 		Test_Login.LoginCRM(user='cs_t1')		#先登录
@@ -156,6 +159,7 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("待证券RO审批") != -1, "状态不是待证券RO审批")
+	@skipIf("待证券RO审批")
 	def test_e_Process4_cliffRefuse(self):
 		# cliff拒绝
 		Test_Login.LoginCRM(user='ro1_cliff', psw="Abcd1234")		#先登录
@@ -181,6 +185,7 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("证券RO拒绝") != -1, "状态不是证券RO拒绝")
+	@skipIf("证券RO拒绝")
 	def test_f_Process4_cs2toro(self):
 		# cs2 to ro
 		Test_Login.LoginCRM(user='cs_t1')		#先登录
@@ -207,6 +212,7 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("待期货RO审批") != -1, "状态不是待期货RO审批")
+	@skipIf("待期货RO审批")
 	def test_g_Process4_donRefuse(self):
 		# cliff拒绝
 		Test_Login.LoginCRM(user='ro1_don', psw="Abcd1234")		#先登录
@@ -232,6 +238,7 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("期货RO拒绝") != -1, "状态不是期货RO拒绝")
+	@skipIf("期货RO拒绝")
 	def test_h_Process4_cs2toro(self):
 		# cs2 to ro
 		Test_Login.LoginCRM(user='cs_t1')		#先登录
@@ -258,6 +265,7 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("待外汇RO审批") != -1, "状态不是外汇RO审批")
+	@skipIf("待外汇RO审批")
 	def test_i_Process4_aaronRefuse(self):
 		# cliff拒绝
 		Test_Login.LoginCRM(user='aaron_chan')		#先登录
@@ -283,6 +291,7 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("外汇RO拒绝") != -1, "状态不是外汇RO拒绝")
+	@skipIf("外汇RO拒绝")
 	def test_j_Process4_cs2toro(self):
 		# cs2 to ro
 		Test_Login.LoginCRM(user='cs_t1')		#先登录
@@ -309,6 +318,7 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("待黄金RO审批") != -1, "状态不是待黄金RO审批")
+	@skipIf("待黄金RO审批")
 	def test_k_Process4_glodRefuse(self):
 		# cliff拒绝
 		Test_Login.LoginCRM(user='gold_onedi', psw="Abcd1234")		#先登录
@@ -334,6 +344,7 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("黄金RO拒绝") != -1, "状态不是黄金RO拒绝")
+	@skipIf("黄金RO拒绝")
 	def test_l_Process4_cs2toro(self):
 		# cs2 to ro
 		Test_Login.LoginCRM(user='cs_t1')		#先登录

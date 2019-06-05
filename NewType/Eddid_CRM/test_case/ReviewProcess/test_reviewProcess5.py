@@ -56,6 +56,7 @@ class reviewProcess5(unittest.TestCase):
         return wrapper
 
     # @unittest.skipIf(globals()["status"].find("未处理") != -1, "状态不是未处理")
+    @skipIf("未处理")
     def test_a_Process5_aaron(self):
         # aaron 通过
         Test_Login.LoginCRM(user='aaron_test')      #先登录
