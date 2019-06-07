@@ -163,7 +163,7 @@ class Database:
 							# print(result.deleted_count)
 							# if result.deleted_count > 0 :
 							# 	self.actualRemoveTotal.append(collection)
-
+							#
 							# self.log.info(result)
 							# print(result)
 
@@ -174,8 +174,8 @@ class Database:
 if __name__ == '__main__':
 	host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
 	# host = 'localhost:27017'
-	database = 'uat'	#查询的数据库
-	Database(host, database).del_linked("apply_info", {"phone":"15089514626"})	# 传入需要查询的表和查询条件
+	database = 'feature'	#查询的数据库
+	Database(host, database).del_linked("apply_info", {"email":"1398onedi997132@qq.com"})	# 传入需要查询的表和查询条件
 	# Database(host, database).del_linked("apply_info", {'email':{"$regex" : ".*onedi.*"}})
 	
 

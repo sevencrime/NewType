@@ -80,7 +80,7 @@ class reviewProcess4(unittest.TestCase):
 	# @unittest.skipUnless(globals()["status"].find("CS2") != -1, "状态不是CS2")
 	@skipIf("CS2")
 	def test_b_Process4_cs2torefuse(self):
-		# CS1---Refuse
+		# CS2---Refuse
 		Test_Login.LoginCRM(user='cs_t1')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
@@ -106,7 +106,7 @@ class reviewProcess4(unittest.TestCase):
 	# @unittest.skipUnless(globals()["status"].find("拒绝") != -1, "状态不是拒绝")
 	@skipIf("拒绝")
 	def test_c_Process4_refusetucs2(self):
-		# CS1---Refuse
+		# Refuse -- CS2
 		Test_Login.LoginCRM(user='sales_t1')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
