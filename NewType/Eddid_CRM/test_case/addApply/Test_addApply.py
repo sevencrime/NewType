@@ -6,10 +6,10 @@
 # @Version : $Id$
 
 import time,os,sys
-sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
+sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
 from PageElement import *
 from Commons import *
-from Test_Login import Test_Login
+from test_case.Test_Login import *
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
