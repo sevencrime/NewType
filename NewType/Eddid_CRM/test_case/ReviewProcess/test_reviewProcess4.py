@@ -8,6 +8,7 @@ import unittest
 sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
 # sys.path.append(os.getcwd()+"\\NewType\\Eddid_CRM")
 from selenium import webdriver
+from test_case.Test_Login import *
 from Commons import *
 from PageElement import *
 
@@ -58,7 +59,7 @@ class reviewProcess4(unittest.TestCase):
 	@skipIf("未处理")
 	def test_a_Process1_salestocs2(self):
 		# sales--cs2
-		Test_Login.LoginCRM(user='sales_t1')		#先登录
+		Test_Login.LoginCRM(self, user='sales_t1')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -80,8 +81,13 @@ class reviewProcess4(unittest.TestCase):
 	# @unittest.skipUnless(globals()["status"].find("CS2") != -1, "状态不是CS2")
 	@skipIf("CS2")
 	def test_b_Process4_cs2torefuse(self):
+<<<<<<< HEAD
 		# CS2---Refuse
 		Test_Login.LoginCRM(user='cs_t1')		#先登录
+=======
+		# CS1---Refuse
+		Test_Login.LoginCRM(self, user='cs_t1')		#先登录
+>>>>>>> 3ee115518442b81c7735d5556351f24ae549c0fb
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -106,8 +112,13 @@ class reviewProcess4(unittest.TestCase):
 	# @unittest.skipUnless(globals()["status"].find("拒绝") != -1, "状态不是拒绝")
 	@skipIf("拒绝")
 	def test_c_Process4_refusetucs2(self):
+<<<<<<< HEAD
 		# Refuse -- CS2
 		Test_Login.LoginCRM(user='sales_t1')		#先登录
+=======
+		# CS1---Refuse
+		Test_Login.LoginCRM(self, user='sales_t1')		#先登录
+>>>>>>> 3ee115518442b81c7735d5556351f24ae549c0fb
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -135,7 +146,7 @@ class reviewProcess4(unittest.TestCase):
 	@skipIf("CS2")
 	def test_d_Process4_cs2toro(self):
 		# cs2 to ro
-		Test_Login.LoginCRM(user='cs_t1')		#先登录
+		Test_Login.LoginCRM(self, user='cs_t1')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -162,7 +173,7 @@ class reviewProcess4(unittest.TestCase):
 	@skipIf("待证券RO审批")
 	def test_e_Process4_cliffRefuse(self):
 		# cliff拒绝
-		Test_Login.LoginCRM(user='ro1_cliff', psw="Abcd1234")		#先登录
+		Test_Login.LoginCRM(self, user='ro1_cliff', psw="Abcd1234")		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -188,7 +199,7 @@ class reviewProcess4(unittest.TestCase):
 	@skipIf("证券RO拒绝")
 	def test_f_Process4_cs2toro(self):
 		# cs2 to ro
-		Test_Login.LoginCRM(user='cs_t1')		#先登录
+		Test_Login.LoginCRM(self, user='cs_t1')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -215,7 +226,7 @@ class reviewProcess4(unittest.TestCase):
 	@skipIf("待期货RO审批")
 	def test_g_Process4_donRefuse(self):
 		# cliff拒绝
-		Test_Login.LoginCRM(user='ro1_don', psw="Abcd1234")		#先登录
+		Test_Login.LoginCRM(self, user='ro1_don', psw="Abcd1234")		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -241,7 +252,7 @@ class reviewProcess4(unittest.TestCase):
 	@skipIf("期货RO拒绝")
 	def test_h_Process4_cs2toro(self):
 		# cs2 to ro
-		Test_Login.LoginCRM(user='cs_t1')		#先登录
+		Test_Login.LoginCRM(self, user='cs_t1')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -268,7 +279,7 @@ class reviewProcess4(unittest.TestCase):
 	@skipIf("待外汇RO审批")
 	def test_i_Process4_aaronRefuse(self):
 		# cliff拒绝
-		Test_Login.LoginCRM(user='aaron_chan')		#先登录
+		Test_Login.LoginCRM(self, user='aaron_chan')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -294,7 +305,7 @@ class reviewProcess4(unittest.TestCase):
 	@skipIf("外汇RO拒绝")
 	def test_j_Process4_cs2toro(self):
 		# cs2 to ro
-		Test_Login.LoginCRM(user='cs_t1')		#先登录
+		Test_Login.LoginCRM(self, user='cs_t1')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -321,7 +332,7 @@ class reviewProcess4(unittest.TestCase):
 	@skipIf("待黄金RO审批")
 	def test_k_Process4_glodRefuse(self):
 		# cliff拒绝
-		Test_Login.LoginCRM(user='gold_onedi', psw="Abcd1234")		#先登录
+		Test_Login.LoginCRM(self, user='gold_onedi', psw="Abcd1234")		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -347,7 +358,7 @@ class reviewProcess4(unittest.TestCase):
 	@skipIf("黄金RO拒绝")
 	def test_l_Process4_cs2toro(self):
 		# cs2 to ro
-		Test_Login.LoginCRM(user='cs_t1')		#先登录
+		Test_Login.LoginCRM(self, user='cs_t1')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
