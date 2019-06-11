@@ -9,7 +9,7 @@ import time,os,sys
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 from PageElement import *
 from Commons import *
-from test_case import *
+from Test_Login import Test_Login
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -27,7 +27,7 @@ class addApply(unittest.TestCase):
         self.driver.set_script_timeout(30)
         self.url = 'http://eddid-bos-uat.ntdev.be'
 
-        Test_Login.LoginCRM()   #登录
+        Test_Login.LoginCRM(self)
 
         self.MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
         self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
