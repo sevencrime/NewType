@@ -6,6 +6,7 @@ sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
 from PageElement import *
 from Commons import *
 from test_case import *
+from test_case.Test_Login import *
 import unittest
 from selenium import webdriver
 import time
@@ -16,7 +17,7 @@ class reviewProcess1(unittest.TestCase):
 	globals()["status"] = "未处理"
 	@classmethod
 	def setUpClass(self):
-		self.email = "7296onedi35717@qq.com"
+		self.email = "5600onedi1235041@qq.com"
 
 	# 所有case执行之后清理环境
 	@classmethod
@@ -54,7 +55,8 @@ class reviewProcess1(unittest.TestCase):
 	@skipIf(status = "未处理")
 	def test1_Process1_sales_to_cs2(self):
 		# sales--cs2
-		Test_Login.LoginCRM(user='sales_t1')
+		Test_Login.LoginCRM(self, user='sales_t1')
+
 
 		# self.MenuListPage.click_apply_manager()		#点击开户管理
 		# self.MenuListPage.click_applylist()		    #点击开户列表
@@ -78,7 +80,7 @@ class reviewProcess1(unittest.TestCase):
 	def test2_Process1_cs2_to_ro(self):
 		# cs2 to ro
 		# self.loginCRM(user='cs_t1')		#先登录
-		Test_Login.LoginCRM(user='cs_t1')
+		Test_Login.LoginCRM(self, user='cs_t1')
 
 		# self.MenuListPage.click_apply_manager()		#点击开户管理
 		# self.MenuListPage.click_applylist()		    #点击开户列表
@@ -106,7 +108,7 @@ class reviewProcess1(unittest.TestCase):
 	def test3_Process1_cliff(self):
 		# cliff审核
 		# self.loginCRM(user='ro1_cliff', psw="Abcd1234")		#先登录
-		Test_Login.LoginCRM(user='ro1_cliff', psw="Abcd1234")
+		Test_Login.LoginCRM(self, user='ro1_cliff', psw="Abcd1234")
 
 		# self.MenuListPage.click_apply_manager()		#点击开户管理
 		# self.MenuListPage.click_applylist()		    #点击开户列表
@@ -133,7 +135,7 @@ class reviewProcess1(unittest.TestCase):
 	def test4_Process1_don(self):
 		# don审核
 		# self.loginCRM(user='ro1_don', psw='Abcd1234')		#先登录
-		Test_Login.LoginCRM(user='ro1_don', psw='Abcd1234')
+		Test_Login.LoginCRM(self, user='ro1_don', psw='Abcd1234')
 
 		# self.MenuListPage.click_apply_manager()		#点击开户管理
 		# self.MenuListPage.click_applylist()		    #点击开户列表
@@ -160,7 +162,7 @@ class reviewProcess1(unittest.TestCase):
 	def test5_Process1_aaron(self):
 		# aaron审核
 		# self.loginCRM(user='aaron_chan')		#先登录
-		Test_Login.LoginCRM(user='aaron_chan')
+		Test_Login.LoginCRM(self, user='aaron_chan')
 
 		# self.MenuListPage.click_apply_manager()		#点击开户管理
 		# self.MenuListPage.click_applylist()		    #点击开户列表
@@ -187,7 +189,7 @@ class reviewProcess1(unittest.TestCase):
 	def test6_Process1_gold(self):
 		# gold 审核
 		# self.loginCRM(user='gold_onedi', psw="Abcd1234")		#先登录
-		Test_Login.LoginCRM(user='gold_onedi', psw="Abcd1234")
+		Test_Login.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
 
 		# self.MenuListPage.click_apply_manager()		#点击开户管理
 		# self.MenuListPage.click_applylist()		    #点击开户列表
@@ -214,7 +216,7 @@ class reviewProcess1(unittest.TestCase):
 	def test7_Process1_ops_to_success(self):
 		# ro to ops
 		# self.loginCRM(user='ops_t1')		#先登录
-		Test_Login.LoginCRM(user='ops_t1')
+		Test_Login.LoginCRM(self, user='ops_t1')
 
 		# self.MenuListPage.click_apply_manager()		#点击开户管理
 		# self.MenuListPage.click_applylist()		    #点击开户列表

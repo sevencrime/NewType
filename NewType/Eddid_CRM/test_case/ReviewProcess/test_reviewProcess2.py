@@ -8,6 +8,7 @@ import unittest
 sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
 # sys.path.append(os.getcwd()+"\\NewType\\Eddid_CRM")
 from selenium import webdriver
+from test_case.Test_Login import *
 from Commons import *
 from PageElement import *
 from test_case import *
@@ -58,7 +59,7 @@ class reviewProcess2(unittest.TestCase):
 	@skipIf(status = "CS1")
 	def test1_Process2_cs1tocs2(self):
 		# CS1---CS2
-		Test_Login.LoginCRM(user='cs1_onedi', psw="Abcd1234")
+		Test_Login.LoginCRM(self, user='cs1_onedi', psw="Abcd1234")
 
 		self.MenuListPage.click_applylist()		    #点击开户列表
 		self.mainpage.wait_LoadingModal()
@@ -86,7 +87,7 @@ class reviewProcess2(unittest.TestCase):
 	@skipIf(status = "CS2")
 	def test2_Process2_cs2toro(self):
 		# cs2 to ro
-		Test_Login.LoginCRM(user='cs_t1')
+		Test_Login.LoginCRM(self, user='cs_t1')
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -112,7 +113,7 @@ class reviewProcess2(unittest.TestCase):
 	@skipIf(status = "待证券RO审批")
 	def test3_Process2_cliff(self):
 		# cliff审核
-		Test_Login.LoginCRM(user='ro1_cliff', psw="Abcd1234")
+		Test_Login.LoginCRM(self, user='ro1_cliff', psw="Abcd1234")
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -137,7 +138,7 @@ class reviewProcess2(unittest.TestCase):
 	@skipIf(status = "待期货RO审批")
 	def test4_Process2_don(self):
 		# don审核
-		Test_Login.LoginCRM(user='ro1_don', psw='Abcd1234')
+		Test_Login.LoginCRM(self, user='ro1_don', psw='Abcd1234')
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -162,7 +163,7 @@ class reviewProcess2(unittest.TestCase):
 	@skipIf(status = "待外汇RO审批")
 	def test5_Process2_aaron(self):
 		# aaron审核
-		Test_Login.LoginCRM(user='aaron_chan')
+		Test_Login.LoginCRM(self, user='aaron_chan')
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -187,7 +188,7 @@ class reviewProcess2(unittest.TestCase):
 	@skipIf(status = "待黄金RO审批")
 	def test6_Process2_gold(self):
 		# gold 审核
-		Test_Login.LoginCRM(self.loginCRM(user='gold_onedi', psw="Abcd1234"))
+		Test_Login.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -212,7 +213,7 @@ class reviewProcess2(unittest.TestCase):
 	@skipIf(status = "结算")
 	def test7_Process2_opstosuccess(self):
 		# ro to ops
-		Test_Login.LoginCRM(user='ops_t1')
+		Test_Login.LoginCRM(self, user='ops_t1')
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表

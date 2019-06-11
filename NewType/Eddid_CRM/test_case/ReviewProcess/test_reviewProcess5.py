@@ -8,6 +8,7 @@ import unittest
 sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
 # sys.path.append(os.getcwd()+"\\NewType\\Eddid_CRM")
 from selenium import webdriver
+from test_case.Test_Login import *
 from Commons import *
 from PageElement import *
 import pytest
@@ -59,7 +60,7 @@ class reviewProcess5(unittest.TestCase):
     @skipIf("未处理")
     def test_a_Process5_aaron(self):
         # aaron 通过
-        Test_Login.LoginCRM(user='aaron_test')      #先登录
+        Test_Login.LoginCRM(self, user='aaron_test')      #先登录
 
         self.MenuListPage = self.MenuListPage.self.MenuListPage(self.driver, self.url, "Eddid")
         self.mainpage = self.mainpage.self.mainpage(self.driver, self.url, "Eddid")
@@ -77,7 +78,6 @@ class reviewProcess5(unittest.TestCase):
         self.mainpage.get_apply(email=self.email)   
         self.mainpage.wait_LoadingModal()
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
-
         self.applypage.click_sublimeApply("通过")
         self.applypage.click_popWindow("确定")
         self.mainpage.wait_LoadingModal()
@@ -88,7 +88,7 @@ class reviewProcess5(unittest.TestCase):
     # @unittest.skipIf(globals()["status"].find("未处理") != -1, "状态不是未处理")
     def test_b_Process5_roadmin(self):
         # 多角色通过
-        Test_Login.LoginCRM(user='onedi.admin', psw="Abcd1234")      #先登录
+        Test_Login.LoginCRM(self, user='onedi.admin', psw="Abcd1234")      #先登录
 
         self.MenuListPage = self.MenuListPage.self.MenuListPage(self.driver, self.url, "Eddid")
         self.mainpage = self.mainpage.self.mainpage(self.driver, self.url, "Eddid")

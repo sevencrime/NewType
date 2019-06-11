@@ -33,6 +33,7 @@ class Test_Login(unittest.TestCase):
         self.driver.quit()
 
     def LoginCRM(self, user='admin', psw='abcd1234'):
+
         # self.log.info("实例化LoginPage")
         login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
         # 打开浏览器
@@ -48,7 +49,7 @@ class Test_Login(unittest.TestCase):
         login_page.wait_LoadingModal()
         # 断言userid
         # self.log.info("断言userid")
-        self.assertEqual("admin", login_page.show_userid(), "userid与登录账户不一致")
+        self.assertEqual(user, login_page.show_userid(), "userid与登录账户不一致")
 
     def test_login(self):
         self.LoginCRM()

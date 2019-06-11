@@ -31,7 +31,7 @@ class MenuListPage(BasePage.BasePage):
     create_seminar = (By.LINK_TEXT, "创建讲座")
     activity_record = (By.LINK_TEXT, "活动记录列表")
 
-    def click_menulist(ul_text, li_text):
+    def click_menulist(self, ul_text, li_text):
         manager_loc = (By.XPATH, "//span[contains(text(),'{}')]".format(ul_text))
         self.find_element(*manager_loc).click()     #点击主菜单
         # 子菜单
