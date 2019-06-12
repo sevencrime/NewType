@@ -21,7 +21,8 @@ sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 
 class ApplyPage(BasePage.BasePage):
     # log = Logging.Logs()
-    mob = glob.glob(os.path.abspath(os.path.dirname(os.getcwd()))+r'\image\*')
+    # mob = glob.glob(os.path.abspath(os.path.dirname(os.getcwd()))+r'\image\*')
+    mob = glob.glob(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd())))+r'\image\*')
 
     def get_input(self, text, parent=False):
         if not parent:
@@ -480,8 +481,8 @@ class ApplyPage(BasePage.BasePage):
                 By.XPATH, "//div[contains(text(), '破产解除证明书')]/following-sibling::span//li")
 
             self.modify_displys(display='block')
-            self.find_element(*self.get_input("破产解除证明书")
-                              ).send_keys(random.sample(self.mob, 1))
+            # import pdb; pdb.set_trace()
+            self.find_element(*self.get_input("破产解除证明书")).send_keys(random.sample(self.mob, 1))
             self.modify_displys()
 
             loading_loc = (

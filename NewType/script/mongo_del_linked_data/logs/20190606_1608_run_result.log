@@ -1,6 +1,0 @@
-2019-06-06 16:08:08,349 del_mongo.py INFO [line:31] 连接数据库uat
-2019-06-06 16:08:13,485 del_mongo.py INFO [line:66] apply_info 表符合查询条件{'phone': '13480994387'} 的数据有0 条
-2019-06-06 16:08:13,594 del_mongo.py INFO [line:37] close Client
-2019-06-06 16:08:24,363 del_mongo.py INFO [line:31] 连接数据库uat
-2019-06-06 16:08:29,164 del_mongo.py INFO [line:66] apply_info 表符合查询条件{'phone': '15823114387'} 的数据有0 条
-2019-06-06 16:08:29,277 del_mongo.py INFO [line:37] close Client

@@ -5,7 +5,6 @@ import os,sys
 sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
 from PageElement import *
 from Commons import *
-from test_case import *
 from test_case.Test_Login import *
 import unittest
 from selenium import webdriver

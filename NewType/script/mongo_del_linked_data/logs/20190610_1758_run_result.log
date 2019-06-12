@@ -1,6 +1,0 @@
-2019-06-10 17:58:03,653 del_mongo.py INFO [line:31] 连接数据库uat
-2019-06-10 17:58:08,523 del_mongo.py INFO [line:66] apply_info 表符合查询条件{'email': 'onedi@qq.com'} 的数据有0 条
-2019-06-10 17:58:08,634 del_mongo.py INFO [line:37] close Client
-2019-06-10 17:58:18,822 del_mongo.py INFO [line:31] 连接数据库uat
-2019-06-10 17:58:23,641 del_mongo.py INFO [line:66] apply_info 表符合查询条件{'phone': '15089514626'} 的数据有0 条
-2019-06-10 17:58:23,752 del_mongo.py INFO [line:37] close Client

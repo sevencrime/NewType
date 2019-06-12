@@ -81,8 +81,13 @@ class reviewProcess4(unittest.TestCase):
 	# @unittest.skipUnless(globals()["status"].find("CS2") != -1, "状态不是CS2")
 	@skipIf("CS2")
 	def test_b_Process4_cs2torefuse(self):
+<<<<<<< HEAD
+		# CS2---Refuse
+		Test_Login.LoginCRM(user='cs_t1')		#先登录
+=======
 		# CS1---Refuse
 		Test_Login.LoginCRM(self, user='cs_t1')		#先登录
+>>>>>>> 3ee115518442b81c7735d5556351f24ae549c0fb
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -107,8 +112,13 @@ class reviewProcess4(unittest.TestCase):
 	# @unittest.skipUnless(globals()["status"].find("拒绝") != -1, "状态不是拒绝")
 	@skipIf("拒绝")
 	def test_c_Process4_refusetucs2(self):
+<<<<<<< HEAD
+		# Refuse -- CS2
+		Test_Login.LoginCRM(user='sales_t1')		#先登录
+=======
 		# CS1---Refuse
 		Test_Login.LoginCRM(self, user='sales_t1')		#先登录
+>>>>>>> 3ee115518442b81c7735d5556351f24ae549c0fb
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
