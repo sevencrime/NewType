@@ -21,7 +21,8 @@ sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 
 class ApplyPage(BasePage.BasePage):
     # log = Logging.Logs()
-    mob = glob.glob(os.path.abspath(os.path.dirname(os.getcwd()))+r'\image\*')
+    # mob = glob.glob(os.path.abspath(os.path.dirname(os.getcwd()))+r'\image\*')
+    mob = glob.glob(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd())))+r'\image\*')
 
     def get_input(self, text, parent=False):
         if not parent:
@@ -105,15 +106,31 @@ class ApplyPage(BasePage.BasePage):
 
         assert accountOpeningWay.get_attribute("value") != None
 
-        if accountOpeningWay.get_attribute("value") == '手机应用程式身份验证' or accountOpeningWay.get_attribute("value") == '电子签名认证':
-            bankname = self.find_element(
-                *self.get_input("银行名称")).send_keys("中国农业银行")
-            bankAccountNumber = self.find_element(
-                *self.get_input("银行账户号码")).send_keys("6228481412637493782")
-            certificateNb = self.find_element(
-                *self.get_input("电子签名证书号码")).send_keys("certificate Number")
+        if text == False and (accountOpeningWay.get_attribute("value") == '手机应用程式身份验证' or accountOpeningWay.get_attribute("value") == '电子签名认证'):
+            # bankname = self.find_element(
+            #     *self.get_input("银行名称")).send_keys("中国农业银行")
+            # bankAccountNumber = self.find_element(
+            #     *self.get_input("银行账户号码")).send_keys("6228481412637493782")
+            # certificateNb = self.find_element(
+            #     *self.get_input("电子签名证书号码")).send_keys("certificate Number")
+            self.send_appBankName()
+            self.send_appBankAccount()
+            self.send_appcertificateNb()
 
         return accountOpeningWay.get_attribute("value")
+
+    def send_appBankName(self):
+        bankname = self.find_element(
+            *self.get_input("银行名称")).send_keys("中国农业银行")  
+
+    def send_appBankAccount(self):
+        bankAccountNumber = self.find_element(
+            *self.get_input("银行账户号码")).send_keys("6228481412637493782")
+
+    def send_appcertificateNb(self):
+        certificateNb = self.find_element(
+            *self.get_input("电子签名证书号码")).send_keys("certificate Number")
+
 
     def send_parentId(self):
         # 负责人
@@ -480,8 +497,8 @@ class ApplyPage(BasePage.BasePage):
                 By.XPATH, "//div[contains(text(), '破产解除证明书')]/following-sibling::span//li")
 
             self.modify_displys(display='block')
-            self.find_element(*self.get_input("破产解除证明书")
-                              ).send_keys(random.sample(self.mob, 1))
+            # import pdb; pdb.set_trace()
+            self.find_element(*self.get_input("破产解除证明书")).send_keys(random.sample(self.mob, 1))
             self.modify_displys()
 
             loading_loc = (
