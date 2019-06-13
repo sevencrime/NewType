@@ -881,3 +881,10 @@ class ApplyPage(BasePage.BasePage):
     def click_popWindow(self, text):
         popWindow_loc = (By.XPATH, '//div[@class="el-message-box"]//div[@class="el-message-box__btns"]/button[span[contains(text(), "{btntext}")]]'.format(btntext=text))
         return self.find_element(*popWindow_loc).click()
+
+
+    def apply_error(self):
+        errormsg_loc = (By.XPATH, '//div[@class="el-form-item__error"]/ancestor::span/preceding-sibling::div')
+        errormsg = self.find_elements(*errormsg_loc)
+
+        return errormsg

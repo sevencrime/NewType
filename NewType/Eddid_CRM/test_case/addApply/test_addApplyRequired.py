@@ -66,7 +66,10 @@ class addApplyRequired(unittest.TestCase):
 
                 except Exception as e:
                     # 查找出报错的位置
-                    print(e)
+                    print(e, "提交失败,有必填项为空")
+                    errormsg = self.applypage.apply_error()
+                    for err in errormsg:
+                        print(err.get_attribute("value"))
                     raise e
 
                 else:
