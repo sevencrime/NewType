@@ -885,6 +885,9 @@ class ApplyPage(BasePage.BasePage):
 
     def apply_error(self):
         errormsg_loc = (By.XPATH, '//div[@class="el-form-item__error"]/ancestor::span/preceding-sibling::div')
-        errormsg = self.find_elements(*errormsg_loc)
-
-        return errormsg
+        try:
+            errormsg = self.find_elements(*errormsg_loc)
+            for err in errormsg:
+                print(err.get_attribute("value"), "字段值为空! ")
+        except Exception as e:
+            print("表单没有报错")
