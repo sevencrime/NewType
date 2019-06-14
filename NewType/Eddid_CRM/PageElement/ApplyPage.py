@@ -777,11 +777,17 @@ class ApplyPage(BasePage.BasePage):
         return useStatement.get_attribute("value")
 
     def click_sublimeApply(self, text):
+        # 点击按钮
         sublimeApply_loc = (
             By.XPATH, '//div[contains(@class, "button-1")]/button[span[contains(text(), "{btntext}")]]'.format(btntext=text))
         # sublime = self.find_element(*sublime_loc).click()
         sublimeApply = self.find_element(*sublimeApply_loc)
-        self.scrollinto(sublimeApply)
+        # self.scrollinto(sublimeApply)
+
+        # 滑动操作. 在这里先用js滑动到控件位置,然后再点击控件
+        # 直接使用self.scrollinto,会出现没有点击的错误
+        self.script("arguments[0].scrollIntoView();", sublimeApply)
+        sublimeApply.click()
 
     def primaryRelations(self, num=None):
         primaryRelations = self.find_element(*self.get_input("与主要账户持有人的关系"))

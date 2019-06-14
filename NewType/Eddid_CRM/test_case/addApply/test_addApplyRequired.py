@@ -34,15 +34,17 @@ class addApplyRequired(unittest.TestCase):
         self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
 
         Test_Login.LoginCRM(self)
+        # self.MenuListPage.click_menulist("开户管理", "开户列表")
         self.MenuListPage.click_menulist("开户管理", "开户列表")
         #等待
         self.mainpage.wait_LoadingModal()
         #点击新增按钮
         self.mainpage.click_add()
 
+
     def tearDown(self):
         time.sleep(20)
-        print("结束driver")
+        print("结束用例")
         self.driver.quit()
 
     def AccountOpeningWay(way):
@@ -68,12 +70,11 @@ class addApplyRequired(unittest.TestCase):
 
                     #点击提交
                     try:
+                        # import pdb; pdb.set_trace()
                         self.applypage.click_sublimeApply("提交")
                         self.mainpage.wait_LoadingModal()   #loading
                         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败, 页面没有跳转")
-                        
                     except AssertionError:
-                        import pdb; pdb.set_trace()
                         # 断言失败, 数据提交失败
                         # 查找是否有数据为空,并打印出为空的栏位
                         self.applypage.apply_error()
@@ -197,6 +198,7 @@ class addApplyRequired(unittest.TestCase):
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交开户表单后跳转失败")
 
     @AccountOpeningWay(way="手机应用程式身份验证")
+    @unittest.skip("跳过")
     def test_apply_MobileAuthentication(self):
         # 用例: 手机应用程式身份认证--校验银行名称和银行账户号码是否必填
         # 账户类型
@@ -297,7 +299,6 @@ class addApplyRequired(unittest.TestCase):
         self.applypage.click_sublimeApply("提交")
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
-
 
     @AccountOpeningWay(way="电子签名认证")
     def test_apply_certificateNb(self):
