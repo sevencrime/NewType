@@ -21,7 +21,7 @@ class Test_Login(unittest.TestCase):
         # self.driver.implicitly_wait(30)
         self.driver.set_page_load_timeout(20)
         self.driver.set_script_timeout(20)
-        self.url = 'http://eddid-bos-feature.ntdev.be'
+        self.url = 'http://eddid-bos-uat.ntdev.be'
 
     def tearDown(self):
         time.sleep(5)

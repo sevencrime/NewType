@@ -67,11 +67,13 @@ class addApplyRequired(unittest.TestCase):
                         self.applypage.send_appcertificateNb()
 
                     #点击提交
-                    self.applypage.click_sublimeApply("提交")
-                    self.mainpage.wait_LoadingModal()   #loading
                     try:
+                        self.applypage.click_sublimeApply("提交")
+                        self.mainpage.wait_LoadingModal()   #loading
                         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败, 页面没有跳转")
+                        
                     except AssertionError:
+                        import pdb; pdb.set_trace()
                         # 断言失败, 数据提交失败
                         # 查找是否有数据为空,并打印出为空的栏位
                         self.applypage.apply_error()
@@ -92,6 +94,7 @@ class addApplyRequired(unittest.TestCase):
             return inner_wrapper
         return wrapper
 
+    @unittest.skip("跳过")
     def test_apply_Required(self):
         # 用例: 个人账户--必填参数
         # 账户类型
