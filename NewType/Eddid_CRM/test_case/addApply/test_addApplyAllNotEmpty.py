@@ -11,18 +11,16 @@ sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
 from addApplyTool import addApplyTool
 import unittest, pytest
 
-class addApplyRequired(addApplyTool):
+class test_addApplyAllNotEmpty(addApplyTool):
 
-    # 开户方式必填框校验
+    # 个人账户和联名账户, 必填项开户
 
-    @addApplyTool.AccountOpeningWay(way="手机应用程式身份验证")
-    # @unittest.skip("跳过")
-    def test_apply_MobileAuthentication(self):
-        # 用例: 手机应用程式身份认证--校验银行名称和银行账户号码是否必填
+    def test_apply_IndividualNotEmpty(self):
+        # 用例: 个人账户--必填参数
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
         # 开户方法
-        # accountOpeningWay = self.applypage.send_accountOpeningWay("亲临开户")
+        accountOpeningWay = self.applypage.send_accountOpeningWay("亲临开户")
         # 负责人
         parentId = self.applypage.send_parentId()
         # 邮件语言
@@ -116,15 +114,19 @@ class addApplyRequired(addApplyTool):
         # 点击提交按钮
         self.applypage.click_sublimeApply("提交")
         self.mainpage.wait_LoadingModal()   #loading
-        self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
-    @addApplyTool.AccountOpeningWay(way="电子签名认证")
-    def test_apply_certificateNb(self):
-        # 用例: 电子签名认证--校验电子签名证书栏位是否必填
+        try:
+            self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交开户表单后跳转失败")
+        except AssertionError:
+            self.applypage.apply_error()
+
+
+    def test_apply_JointNotEmpty(self):
+        # 用例: 联名账户--必填参数
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
         # 开户方法
-        # accountOpeningWay = self.applypage.send_accountOpeningWay("亲临开户")
+        accountOpeningWay = self.applypage.send_accountOpeningWay("亲临开户")
         # 负责人
         parentId = self.applypage.send_parentId()
         # 邮件语言
@@ -218,8 +220,84 @@ class addApplyRequired(addApplyTool):
         # 点击提交按钮
         self.applypage.click_sublimeApply("提交")
         self.mainpage.wait_LoadingModal()   #loading
-        self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
+        # 进入联名账户
+        # 联名账户- 称谓
+        Jointtitle = self.applypage.send_title()
+        # 联名账户- 与主要账户持有人关系 + 触发的隐藏框
+        Jointprimary = self.applypage.primaryRelations()
+        # 联名账户- 名字
+        JointfirstName = self.applypage.send_firstName()
+        # 联名账户- 姓氏
+        JointlastName = self.applypage.send_lastName()
+        self.mainpage.wait_LoadingModal() # 这里校验姓名是否重复
+        # 联名账户-中文姓名
+        JointchineseName = self.applypage.send_chineseName()
+        # 联名账户- 电邮
+        Jointemali = self.applypage.send_emali()
+        # 联名账户- 电话号码区号
+        JointphoneAreaCode = self.applypage.send_phoneAreaCode()
+        # 联名账户- 电话号码
+        Jointphone = self.applypage.send_phone()
+        # 联名账户- 住宅地址
+        Jointaddress = self.applypage.send_address()
+        # 联名账户- 国籍
+        Jointnationality = self.applypage.send_nationality()
+        # 联名账户- 身份证件类型++身份证号码
+        JointidList = self.applypage.send_idType()
+        # 联名账户- 签发国家
+        JointcountryIssue = self.applypage.send_countryIssue()
+        # 联名账户- 出生日期
+        Jointbirthday = self.applypage.send_birthday()
+        # 联名账户- 出生地点
+        JointbirthPlace = self.applypage.send_birthPlace()
+        # 联名账户- 就业情况
+        Jointemployments = self.applypage.employment()
+        # 联名账户- 客户全年总收入
+        JointtotalRevenue = self.applypage.totalAnnualCustomerRevenueHK()
+        # 联名账户- 客户资产净值
+        JointnetEstate = self.applypage.customerNetAssetValueHK()
+        # 联名账户- 客户交易资金/财富来源
+        Jointsource_of_wealth = self.applypage.sourceOfWealth()
+        # 联名账户- 证券
+        Jointsecurities = self.applypage.securities()
+        # 联名账户- 牛熊证
+        JointCBBCcertificate = self.applypage.CBBC()
+        # 联名账户- 衍生权证
+        Jointderivativewarrant = self.applypage.warrants()
+        # 联名账户- 期货
+        Jointfutures = self.applypage.futures()
+        # 联名账户- 期权
+        JointOption = self.applypage.Option()
+        # 联名账户- 客户是否曾接受有关衍生产品性质和风险的一般知识培训或修读相关课程
+        JointderivativeCourse = self.applypage.derivativeCourse()
+        # 联名账户- 客户是否从现时或过去拥有与衍生产品有关的工作经验? 
+        JointderivativeJobs = self.applypage.derivativeJobs()
+        # 联名账户- 客户是否于过去3年曾执行 5次或以上有关衍生产品的交易，例如：衍生权证、牛熊证、股票期权、期货及期权、商品、结构性产品及交易所买卖基金等?
+        JointtradingFund = self.applypage.tradingFund()
+        # 联名账户- 客户是否曾经宣告破产或被申请破产?
+        Jointbankrupt = self.applypage.bankrupt()
+        # 联名账户- 客户是否艾德证券及/或艾德金业的雇员或任何其客户的亲属?
+        JointcustomerRelatives = self.applypage.customerRelatives()
+        # 联名账户- 客户是否与任何艾德证券及/或艾德金业客户有关连?
+        Jointassociatedcustomer = self.applypage.associatedcustomer()
+        # 联名账户- 客户是否香港交易所之交易所参与者或证监会之持牌人或注册人之董事、雇员或认可人士?
+        Jointdirector = self.applypage.director()
+        # 联名账户- 客户是否拥有美国公民或美国合法永久居民身份?
+        JointcitizenOfUSA = self.applypage.citizenOfUSA()
+        # 联名账户- 就税务而言，您是否美国居民?
+        JointamericanResident = self.applypage.americanResident()
+        # 联名账户- 客户是否香港法律定义下的“政治公众人物（PEP）”或与政治公众人物有密切联系？
+        JointPEP_People = self.applypage.PEP_People()
+
+        # 联名账户- 本人确认并同意主要账户持有人之风险承受能力选择？
+        # 提交
+        self.applypage.click_sublimeApply("提交")
+        self.mainpage.wait_LoadingModal()   #loading
+        try:
+            self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交开户表单后跳转失败")
+        except AssertionError:
+            self.applypage.apply_error()
 
 
 if __name__ == '__main__':

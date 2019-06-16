@@ -790,6 +790,7 @@ class ApplyPage(BasePage.BasePage):
         sublimeApply.click()
 
     def primaryRelations(self, num=None):
+        # 联名账户- 与主要账户持有人关系
         primaryRelations = self.find_element(*self.get_input("与主要账户持有人的关系"))
         self.scrollinto(primaryRelations)
         tag_text = self.get_select(randox=num)

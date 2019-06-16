@@ -43,6 +43,10 @@ class addApplyTool(unittest.TestCase):
         print("结束用例")
         self.driver.quit()
 
+    """
+    开户方式装饰器
+    用于校验开户方式所触发的隐藏框是否必填
+    """
     def AccountOpeningWay(way):
         # 把开户方法变成装饰器实现
         def wrapper(func):
