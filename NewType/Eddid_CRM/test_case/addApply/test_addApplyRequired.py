@@ -1,9 +1,5 @@
 # usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Date    : 2019-01-03 13:56:31
-# @Author  : Onedi (Onedi@qq.com)
-# @Link    : ${link}
-# @Version : $Id$
 
 import time,os,sys
 sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
