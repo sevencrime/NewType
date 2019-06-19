@@ -469,18 +469,20 @@ class ApplyPage(BasePage.BasePage):
             self.scrollinto(buyProduct)
             tag_text = self.get_select(randox=num)
             if tag_text == "是" and linkTag:
-                # print("是是是是是")
-                riskStatement = self.find_element(
-                    *self.get_input("结构性产品相关风险声明披露", parent=True))
-                self.scrollinto(riskStatement)
-                tag_text = self.get_select()
-                if tag_text == "否":
-                    messagebox = (
-                        By.XPATH, "//div[@aria-label='提示']//div[@class='el-message-box__btns']/button")
-                    self.find_element(*messagebox).click()
+                self.riskStatement()
 
             assert buyProduct.get_attribute("value") != None
             return buyProduct.get_attribute("value")
+
+    def riskStatement(self):
+        riskStatement = self.find_element(*self.get_input("结构性产品相关风险声明披露", parent=True))
+        self.scrollinto(riskStatement)
+        tag_text = self.get_select()
+        if tag_text == "否":
+            messagebox = (
+                By.XPATH, "//div[@aria-label='提示']//div[@class='el-message-box__btns']/button")
+            self.find_element(*messagebox).click()
+
 
     def bankrupt(self, num=None):
         # 客户是否曾经宣告破产或被申请破产

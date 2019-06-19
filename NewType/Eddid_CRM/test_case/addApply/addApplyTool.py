@@ -104,7 +104,7 @@ class addApplyTool(unittest.TestCase):
                 try:
                     return func(self, *args, **kwargs)
                 except AssertionError:
-                    import pdb; pdb.set_trace()
+                    # import pdb; pdb.set_trace()
                     # 断言错误,提交失败,输入衍生产品隐藏框后再次点击提交按钮
                     # 输入衍生产品隐藏框
                     self.applypage.buyProduct(num, linkTag)
