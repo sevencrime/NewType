@@ -474,7 +474,7 @@ class ApplyPage(BasePage.BasePage):
                     *self.get_input("结构性产品相关风险声明披露", parent=True))
                 self.scrollinto(riskStatement)
                 tag_text = self.get_select()
-                if tag_text == "否":
+                if tag_text == "否": 
                     messagebox = (
                         By.XPATH, "//div[@aria-label='提示']//div[@class='el-message-box__btns']/button")
                     self.find_element(*messagebox).click()
