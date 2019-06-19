@@ -461,26 +461,27 @@ class ApplyPage(BasePage.BasePage):
         assert tradingFund.get_attribute("value") != None
         return tradingFund.get_attribute("value")
 
-    def buyProduct(self, num=None):
+    def buyProduct(self, num=None, linkTag=False, linknum=None):
         # 客户是否申请开通买卖衍生权证、牛熊证及结构性等产品
         if self.driver.page_source.find("买卖衍生") != -1:
-            buyProduct = self.find_element(
-                *self.get_input("买卖衍生", parent=True))
+            buyProduct = self.find_element(*self.get_input("买卖衍生", parent=True))
             self.scrollinto(buyProduct)
             tag_text = self.get_select(randox=num)
-            if tag_text == "是":
-                # print("是是是是是")
-                riskStatement = self.find_element(
-                    *self.get_input("结构性产品相关风险声明披露", parent=True))
-                self.scrollinto(riskStatement)
-                tag_text = self.get_select()
-                if tag_text == "否": 
-                    messagebox = (
-                        By.XPATH, "//div[@aria-label='提示']//div[@class='el-message-box__btns']/button")
-                    self.find_element(*messagebox).click()
+            if tag_text == "是" and linkTag == True:
+                self.riskStatement(linknum)
 
             assert buyProduct.get_attribute("value") != None
             return buyProduct.get_attribute("value")
+
+    def riskStatement(self, num):
+        riskStatement = self.find_element(*self.get_input("结构性产品相关风险声明披露", parent=True))
+        self.scrollinto(riskStatement)
+        tag_text = self.get_select(num)
+        if tag_text == "否":
+            messagebox = (
+                By.XPATH, "//div[@aria-label='提示']//div[@class='el-message-box__btns']/button")
+            self.find_element(*messagebox).click()
+
 
     def bankrupt(self, num=None):
         # 客户是否曾经宣告破产或被申请破产

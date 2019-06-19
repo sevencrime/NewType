@@ -89,8 +89,48 @@ class addApplyTool(unittest.TestCase):
 
                 else:
                     # 用例执行失败
-                    print(way, "没有输入必填参数")
+                    print("触发选项没有输入可以提交成功, 用例'{}'执行失败".format(func.__name__))
                     assert 1 > 0    #只抛出异常
 
             return inner_wrapper
         return wrapper
+
+    # 衍生产品隐藏框
+    # 用于校验触发该隐藏框后是否必填
+    def DerivativeProduct(num=None, linkTag=False, linknum=None):
+
+        def wrapper(func):
+            def inner_wrapper(self, *args, **kwargs):
+                try:
+                    return func(self, *args, **kwargs)
+                except AssertionError:
+                    # import pdb; pdb.set_trace()
+                    # 断言错误,提交失败,输入衍生产品隐藏框后再次点击提交按钮
+                    # 输入衍生产品隐藏框
+                    import pdb; pdb.set_trace()
+                    self.applypage.buyProduct(num, linkTag, linknum)
+                    try:
+                        # import pdb; pdb.set_trace()
+                        self.applypage.click_sublimeApply("提交")
+                        self.mainpage.wait_LoadingModal()   #loading
+                        self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败, 页面没有跳转")
+                    except AssertionError:
+                        # 断言失败, 数据提交失败
+                        # 查找是否有数据为空,并打印出为空的栏位
+                        self.applypage.apply_error()
+
+                    except Exception as e:
+                        raise e
+
+                except Exception as e:
+                    # 查找出报错的位置
+                    print(e, "用例执行失败")
+                    raise e
+
+                else:
+                    print("衍生产品没有输入可以提交成功, 用例'{}'执行失败".format(func.__name__))
+                    assert 1 > 0    #只抛出异常
+
+            return inner_wrapper
+        return wrapper
+

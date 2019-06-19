@@ -175,7 +175,7 @@ if __name__ == '__main__':
 	host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
 	# host = 'localhost:27017'
 	database = 'uat'	#查询的数据库
-	Database(host, database).del_linked("apply_info", {"idNumber":"500101198612296436"})	# 传入需要查询的表和查询条件
+	Database(host, database).del_linked("apply_info", {"phone":"13544204625"})	# 传入需要查询的表和查询条件
 
 	# Database(host, database).del_linked("apply_info", {'email':{"$regex" : ".*onedi.*"}})
 	
