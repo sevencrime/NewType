@@ -97,7 +97,7 @@ class addApplyTool(unittest.TestCase):
 
     # 衍生产品隐藏框
     # 用于校验触发该隐藏框后是否必填
-    def DerivativeProduct(num=None, linkTag=False):
+    def DerivativeProduct(num=None, linkTag=False, linknum=None):
 
         def wrapper(func):
             def inner_wrapper(self, *args, **kwargs):
@@ -107,7 +107,8 @@ class addApplyTool(unittest.TestCase):
                     # import pdb; pdb.set_trace()
                     # 断言错误,提交失败,输入衍生产品隐藏框后再次点击提交按钮
                     # 输入衍生产品隐藏框
-                    self.applypage.buyProduct(num, linkTag)
+                    import pdb; pdb.set_trace()
+                    self.applypage.buyProduct(num, linkTag, linknum)
                     try:
                         # import pdb; pdb.set_trace()
                         self.applypage.click_sublimeApply("提交")
