@@ -21,8 +21,15 @@ class addApplyTool(unittest.TestCase):
         self.driver = webdriver.Chrome(executable_path = 'chromedriver')
         # self.driver = webdriver.Firefox(executable_path = 'geckodriver')
         # self.driver.implicitly_wait(30)   
-        self.driver.set_page_load_timeout(35)
-        self.driver.set_script_timeout(35)
+
+    def tearDown(self):
+        time.sleep(20)
+        print("结束用例")
+        self.driver.quit()
+
+    def precondition(self):
+        self.driver.set_page_load_timeout(30)
+        self.driver.set_script_timeout(3)
         self.url = 'http://eddid-bos-uat.ntdev.be'
 
         self.MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
@@ -36,11 +43,6 @@ class addApplyTool(unittest.TestCase):
         #点击新增按钮
         self.mainpage.click_add()
 
-
-    def tearDown(self):
-        time.sleep(20)
-        print("结束用例")
-        self.driver.quit()
 
     """
     开户方式装饰器

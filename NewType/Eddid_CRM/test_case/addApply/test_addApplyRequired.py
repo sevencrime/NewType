@@ -10,11 +10,15 @@ import unittest, pytest
 class addApplyRequired(addApplyTool):
 
     # 开户方式必填框校验
-
+    """
+    # 用例: 手机应用程式身份认证--校验银行名称和银行账户号码是否必填
+    """
     @addApplyTool.AccountOpeningWay(way="手机应用程式身份验证")
     # @unittest.skip("跳过")
     def test_apply_MobileAuthentication(self):
-        # 用例: 手机应用程式身份认证--校验银行名称和银行账户号码是否必填
+        # 用例的前置条件
+        addApplyTool.precondition()
+
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
         # 开户方法
@@ -114,9 +118,15 @@ class addApplyRequired(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
+
+    """
+    # 用例: 电子签名认证--校验电子签名证书栏位是否必填
+    """
     @addApplyTool.AccountOpeningWay(way="电子签名认证")
     def test_apply_certificateNb(self):
-        # 用例: 电子签名认证--校验电子签名证书栏位是否必填
+        # 用例的前置条件
+        addApplyTool.precondition()
+        
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
         # 开户方法

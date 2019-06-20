@@ -17,6 +17,8 @@ class test_addApplyAllNotEmpty(addApplyTool):
 
     def test_apply_IndividualNotEmpty(self):
         # 用例: 个人账户--必填参数
+        # 用例的前置条件
+        addApplyTool.precondition()
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
         # 开户方法
@@ -123,6 +125,9 @@ class test_addApplyAllNotEmpty(addApplyTool):
 
     def test_apply_JointNotEmpty(self):
         # 用例: 联名账户--必填参数
+        # 用例的前置条件
+        addApplyTool.precondition()
+        
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
         # 开户方法

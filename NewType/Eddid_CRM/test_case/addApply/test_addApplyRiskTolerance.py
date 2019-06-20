@@ -16,7 +16,9 @@ class addApplyRiskTolerance(addApplyTool):
     """
     @addApplyTool.RiskTolerance(num=2)
     def test_apply_BullionRiskToleranceLow(self):
-
+        # 用例的前置条件
+        addApplyTool.precondition()
+        
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
         # 开户方法
@@ -122,7 +124,9 @@ class addApplyRiskTolerance(addApplyTool):
     """
     @addApplyTool.RiskTolerance(num=1)
     def test_apply_BullionRiskToleranceMiddle(self):
-
+        # 用例的前置条件
+        addApplyTool.precondition()
+        
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
         # 开户方法
@@ -228,7 +232,9 @@ class addApplyRiskTolerance(addApplyTool):
     """
     @addApplyTool.RiskTolerance(num=0)
     def test_apply_BullionRiskToleranceHigh(self):
-
+        # 用例的前置条件
+        addApplyTool.precondition()
+        
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
         # 开户方法

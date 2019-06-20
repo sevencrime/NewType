@@ -16,6 +16,8 @@ class addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=1)
     def test_apply_CashNotDerivativeProduct(self):
+        # 用例的前置条件
+        addApplyTool.precondition()
 
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -122,6 +124,8 @@ class addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=0)
     def test_apply_CashisDerivativeProductNone(self):
+        # 用例的前置条件
+        addApplyTool.precondition()
 
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -228,6 +232,8 @@ class addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=0, linkTag=True, linknum=0)
     def test_apply_CashisDerivativeProductyes(self):
+        # 用例的前置条件
+        addApplyTool.precondition()
 
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -334,6 +340,8 @@ class addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=0, linkTag=True, linknum=1)
     def test_apply_CashisDerivativeProductNo(self):
+        # 用例的前置条件
+        addApplyTool.precondition()
 
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -441,6 +449,9 @@ class addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=1)
     def test_apply_MarginNotDerivativeProduct(self):
+        # 用例的前置条件
+        addApplyTool.precondition()
+
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
         # 开户方法
@@ -546,6 +557,8 @@ class addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=0)
     def test_apply_MarginisDerivativeProductNone(self):
+        # 用例的前置条件
+        addApplyTool.precondition()
 
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -652,6 +665,8 @@ class addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=0, linkTag=True, linknum=0)
     def test_apply_MarginisDerivativeProductyes(self):
+        # 用例的前置条件
+        addApplyTool.precondition()
 
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -758,7 +773,9 @@ class addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=0, linkTag=True, linknum=1)
     def test_apply_MarginisDerivativeProductNo(self):
-
+        # 用例的前置条件
+        addApplyTool.precondition()
+        
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
         # 开户方法
