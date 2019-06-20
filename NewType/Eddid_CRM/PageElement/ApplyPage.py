@@ -643,13 +643,16 @@ class ApplyPage(BasePage.BasePage):
             # 弹出框:若阁下选择低或中风险，将不能买卖槓杆式外汇、黄金、结构性产品及衍生产品
             # 定位弹窗的确定按钮
             warnbox_loc = (By.XPATH, '//div[@class="el-message-box"]//button[span]')
-            warnbox = self.find_element(*warnbox_loc)
-            # 按回车,点确定,取消弹框
-            try:
+            while :
+                # 利用死循环,保证弹框消失
+                warnbox = self.find_element(*warnbox_loc)
+                if warnbox == False:
+                    # 校验风险填低或高时,不是否能填内容
+                    assert riskTolerance.get_attribute("value") == ''
+                    return True
+
                 warnbox.click()
-            except Exception as e:
-                print("没有显示风险弹框")
-                raise e
+
 
         return riskTolerance.get_attribute("value")
 
@@ -907,6 +910,7 @@ class ApplyPage(BasePage.BasePage):
         try:
             errormsg = self.find_elements(*errormsg_loc)
             for err in errormsg:
-                print(err.get_attribute("value"), "字段值为空! ")
+                print(err.get_attribute("value"), "栏 字段值为空! ")
         except Exception as e:
-            print("表单没有报错")
+            print("表单必填项已全部填写")
+            print("错误原因可能是接口报错")

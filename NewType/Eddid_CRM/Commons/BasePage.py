@@ -93,9 +93,10 @@ class BasePage(object):
             return self.driver.find_element(*loc)
         except:
             print(u"%s 页面中未能找到 %s 元素" % (self, loc))
+            flag = False
+            return flag
 
     def find_elements(self, *loc):
-
         try:
             # 确保元素是可见的。
             # 注意：以下入参为元组的元素，需要加*。Python存在这种特性，就是将入参放在元组里。
@@ -107,6 +108,8 @@ class BasePage(object):
             return self.driver.find_elements(*loc)
         except:
             print(u"%s 页面中未能找到 %s 元素" % (self, loc))
+            flag = False
+            return flag
 
     # 重写switch_frame方法
     def switch_frame(self, loc):

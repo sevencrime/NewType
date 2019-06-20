@@ -30,7 +30,6 @@ class addApplyTool(unittest.TestCase):
         self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
 
         Test_Login.LoginCRM(self)
-        # self.MenuListPage.click_menulist("开户管理", "开户列表")
         self.MenuListPage.click_menulist("开户管理", "开户列表")
         #等待
         self.mainpage.wait_LoadingModal()
@@ -78,19 +77,19 @@ class addApplyTool(unittest.TestCase):
                         # 断言失败, 数据提交失败
                         # 查找是否有数据为空,并打印出为空的栏位
                         self.applypage.apply_error()
+                        raise AssertionError("断言失败(可能是接口报错)")
 
                     except Exception as e:
                         raise e
 
                 except Exception as e:
                     # 查找出报错的位置
-                    print(e, "用例执行失败")
+                    print(e, "用例 {} 执行失败".format(func.__name__))
                     raise e
 
                 else:
-                    # 用例执行失败
-                    print("触发选项没有输入可以提交成功, 用例'{}'执行失败".format(func.__name__))
-                    raise AttributeError("用例报错")    #只抛出异常
+                    print("风险承受能力为低或为中可以提交成功, 用例'{}'执行失败".format(func.__name__))
+                    raise AttributeError("用例 {} , 测试结果为失败".format(func.__name__))   #只抛出异常
 
             return inner_wrapper
         return wrapper
@@ -118,18 +117,20 @@ class addApplyTool(unittest.TestCase):
                         # 断言失败, 数据提交失败
                         # 查找是否有数据为空,并打印出为空的栏位
                         self.applypage.apply_error()
+                        raise AssertionError("断言失败(可能是接口报错)")
+
 
                     except Exception as e:
                         raise e
 
                 except Exception as e:
                     # 查找出报错的位置
-                    print(e, "用例执行失败")
+                    print(e, "用例 {} 执行失败".format(func.__name__))
                     raise e
 
                 else:
-                    print("衍生产品没有输入可以提交成功, 用例'{}'执行失败".format(func.__name__))
-                    raise AttributeError("用例报错")   #只抛出异常
+                    print("风险承受能力为低或为中可以提交成功, 用例'{}'执行失败".format(func.__name__))
+                    raise AttributeError("用例 {} , 测试结果为失败".format(func.__name__))   #只抛出异常
 
             return inner_wrapper
         return wrapper
@@ -148,6 +149,7 @@ class addApplyTool(unittest.TestCase):
                         # 输入风险承受能力
                         riskTolerance = self.applypage.riskTolerance(num)
                         if num == 0:
+                            # 风险承受能力选择为"高"
                             self.applypage.click_sublimeApply("提交")
                             self.mainpage.wait_LoadingModal()   #loading
                             self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败, 页面没有跳转")
@@ -155,20 +157,22 @@ class addApplyTool(unittest.TestCase):
                     except AttributeError:
                         print("点击风险承受能力方法有异常, 请优化方法")
                         raise AttributeError
+
                     except AssertionError:
                         # 断言失败, 数据提交失败
                         # 查找是否有数据为空,并打印出为空的栏位
                         self.applypage.apply_error()
+                        raise AssertionError("断言失败(可能是接口报错)")
 
 
                 except Exception as e:
                     # 查找出报错的位置
-                    print(e, "用例执行失败")
+                    print(e, "用例 {} 执行失败".format(func.__name__))
                     raise e
 
                 else:
                     print("风险承受能力为低或为中可以提交成功, 用例'{}'执行失败".format(func.__name__))
-                    raise AttributeError("用例报错")   #只抛出异常
+                    raise AttributeError("用例 {} , 测试结果为失败".format(func.__name__))   #只抛出异常
 
             return inner_wrapper
         return wrapper

@@ -14,7 +14,7 @@ class addApplyRiskTolerance(addApplyTool):
     # 用例: 账户类别选择黄金账户,校验风险提示.
     #       风险提示选择 "低"
     """
-    @addApplyTool.RiskTolerance(num=0)
+    @addApplyTool.RiskTolerance(num=2)
     def test_apply_BullionRiskToleranceLow(self):
 
         # 账户类型
@@ -226,7 +226,7 @@ class addApplyRiskTolerance(addApplyTool):
     # 用例: 账户类别选择黄金账户,校验风险提示.
     #       风险提示选择 "高"
     """
-    @addApplyTool.RiskTolerance(num=2)
+    @addApplyTool.RiskTolerance(num=0)
     def test_apply_BullionRiskToleranceHigh(self):
 
         # 账户类型
