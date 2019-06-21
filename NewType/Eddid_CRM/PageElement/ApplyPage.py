@@ -461,7 +461,7 @@ class ApplyPage(BasePage.BasePage):
         assert tradingFund.get_attribute("value") != ''
         return tradingFund.get_attribute("value")
 
-    def buyProduct(self, num=None, linkTag=False, linknum=None):
+    def buyProduct(self, num=None, linkTag=True, linknum=None):
         # 客户是否申请开通买卖衍生权证、牛熊证及结构性等产品
         if self.driver.page_source.find("买卖衍生") != -1:
             buyProduct = self.find_element(*self.get_input("买卖衍生", parent=True))
@@ -473,7 +473,7 @@ class ApplyPage(BasePage.BasePage):
             assert buyProduct.get_attribute("value") != ''
             return buyProduct.get_attribute("value")
 
-    def riskStatement(self, num):
+    def riskStatement(self, num=None):
         riskStatement = self.find_element(*self.get_input("结构性产品相关风险声明披露", parent=True))
         self.scrollinto(riskStatement)
         tag_text = self.get_select(num)
