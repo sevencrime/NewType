@@ -643,7 +643,7 @@ class ApplyPage(BasePage.BasePage):
             # 弹出框:若阁下选择低或中风险，将不能买卖槓杆式外汇、黄金、结构性产品及衍生产品
             # 定位弹窗的确定按钮
             warnbox_loc = (By.XPATH, '//div[@class="el-message-box"]//button[span]')
-            while :
+            while True:
                 # 利用死循环,保证弹框消失
                 warnbox = self.find_element(*warnbox_loc)
                 if warnbox == False:

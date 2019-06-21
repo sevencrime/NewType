@@ -21,13 +21,6 @@ class addApplyTool(unittest.TestCase):
         self.driver = webdriver.Chrome(executable_path = 'chromedriver')
         # self.driver = webdriver.Firefox(executable_path = 'geckodriver')
         # self.driver.implicitly_wait(30)   
-
-    def tearDown(self):
-        time.sleep(20)
-        print("结束用例")
-        self.driver.quit()
-
-    def precondition(self):
         self.driver.set_page_load_timeout(30)
         self.driver.set_script_timeout(3)
         self.url = 'http://eddid-bos-uat.ntdev.be'
@@ -35,14 +28,17 @@ class addApplyTool(unittest.TestCase):
         self.MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
         self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
         self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
-
         Test_Login.LoginCRM(self)
+
         self.MenuListPage.click_menulist("开户管理", "开户列表")
         #等待
         self.mainpage.wait_LoadingModal()
         #点击新增按钮
         self.mainpage.click_add()
 
+    def tearDown(self):
+        print("用例执行完成")
+        self.driver.quit()
 
     """
     开户方式装饰器
@@ -143,12 +139,14 @@ class addApplyTool(unittest.TestCase):
 
         def wrapper(func):
             def inner_wrapper(self, *args, **kwargs):
+                print("正在执行用例 :", func.__name__)
                 try:
                     return func(self, *args, **kwargs)
                 except AssertionError:
                     # 风险承受能力
                     try:
                         # 输入风险承受能力
+                        # import pdb; pdb.set_trace()
                         riskTolerance = self.applypage.riskTolerance(num)
                         if num == 0:
                             # 风险承受能力选择为"高"
