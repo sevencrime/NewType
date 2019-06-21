@@ -1010,7 +1010,7 @@ if __name__ == '__main__':
     unittest.main()
     suite = unittest.TestSuite()
     suite.addTests(unittest.TestLoader().loadTestsFromTestCase(addApplyRiskTolerance))
-    runner = unittest.TextTestRunner(verbosity=3)
+    runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)
 
     # pytest.main()

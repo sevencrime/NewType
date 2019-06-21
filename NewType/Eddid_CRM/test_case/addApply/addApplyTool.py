@@ -40,6 +40,7 @@ class addApplyTool(unittest.TestCase):
         print("用例执行完成")
         self.driver.quit()
 
+
     """
     开户方式装饰器
     用于校验开户方式所触发的隐藏框是否必填
