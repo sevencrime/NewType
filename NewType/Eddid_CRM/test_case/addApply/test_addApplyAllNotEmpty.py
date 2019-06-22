@@ -11,7 +11,7 @@ sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
 from addApplyTool import addApplyTool
 import unittest, pytest
 
-class test_addApplyAllNotEmpty(addApplyTool):
+class Test_addApplyAllNotEmpty(addApplyTool):
 
     # 个人账户和联名账户, 必填项开户
 

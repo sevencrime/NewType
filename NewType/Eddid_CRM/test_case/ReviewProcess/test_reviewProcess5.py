@@ -1,63 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-import time
-import unittest
+import os,sys
 sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
-# sys.path.append(os.getcwd()+"\\NewType\\Eddid_CRM")
-from selenium import webdriver
 from test_case.Test_Login import *
-from Commons import *
-from PageElement import *
+import unittest
 import pytest
+from ReviewProcessTool import ReviewProcessTool
 
-
-class reviewProcess5(unittest.TestCase):
+class reviewProcess5(ReviewProcessTool):
     # 多角色RO
     globals()["status"] = "待CS2审核"
-
-    @classmethod
-    def setUpClass(cls):
-        self.email = "9706onedi882636@qq.com"
-
-    # 所有case执行之后清理环境
-    @classmethod
-    def tearDownClass(cls):
-        print("This tearDownClass() method only called once too.")
-
-    def setUp(self):
-        self.driver = webdriver.Chrome()
-        # self.driver = webdriver.Edge()
-        # self.driver = webdriver.Firefox(executable_path = 'geckodriver')
-        # self.driver.implicitly_wait(30)   
-        self.driver.set_page_load_timeout(30)
-        self.driver.set_script_timeout(30)
-        self.url = 'http://eddid-bos-uat.ntdev.be'
-
-        self.MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
-        self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
-        self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
-
-    def tearDown(self):
-        # time.sleep(5)
-        print("结束driver")
-        self.driver.quit()
-
-    def skipIf(status):
-        def wrapper(func):
-            def inner_wrapper(self):
-                if globals()['status'].find(status) != -1:
-                    return func(self)
-                else:
-                    print("状态不是 {}".format(status))
-                    return 
-            return inner_wrapper
-        return wrapper
-
+    email = "9706onedi882636@qq.com"
+    
     # @unittest.skipIf(globals()["status"].find("未处理") != -1, "状态不是未处理")
-    @skipIf("未处理")
+    # @skipIf("未处理")
     def test_a_Process5_aaron(self):
         # aaron 通过
         Test_Login.LoginCRM(self, user='aaron_test')      #先登录

@@ -3,59 +3,20 @@
 
 import os,sys
 sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
-from PageElement import *
-from Commons import *
 from test_case.Test_Login import *
 import unittest
-from selenium import webdriver
-import time
 import pytest
+from ReviewProcessTool import ReviewProcessTool
 
-class reviewProcess1(unittest.TestCase):
+class reviewProcess1(ReviewProcessTool):
 	# CRM and apply_form正向审核: 未处理--待cs2--待RO--待ops--success
-	globals()["status"] = "未处理"
-	@classmethod
-	def setUpClass(self):
-		self.email = "5600onedi1235041@qq.com"
+	globals()["status"] = ""
+	email = "5600onedi1235041@qq.com"
 
-	# 所有case执行之后清理环境
-	@classmethod
-	def tearDownClass(self):
-	    print("This tearDownClass() method only called once too.")
-
-	def setUp(self):
-		self.driver = webdriver.Chrome()
-		self.driver.set_page_load_timeout(20)
-		self.driver.set_script_timeout(20)
-		self.url = 'http://eddid-bos-uat.ntdev.be'
-
-		# self.login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
-		self.MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
-		self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
-		self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
-
-	def tearDown(self):
-		# time.sleep(5)
-		print("结束driver")
-		self.driver.quit()
-
-	def skipIf(status):
-		# 装饰器, 用于判断用例是否执行
-		def wrapper(func):
-			def inner_wrapper(self):
-				if globals()['status'].find(status) != -1:
-					return func(self)
-				else:
-					print("状态不是 {}".format(status))
-					return 
-			return inner_wrapper
-		return wrapper
-
-	@skipIf(status = "未处理")
+	# @reviewProcessTool.skipIf(status = "未处理")
 	def test1_Process1_sales_to_cs2(self):
 		# sales--cs2
 		Test_Login.LoginCRM(self, user='sales_t1')
-
 
 		# self.MenuListPage.click_apply_manager()		#点击开户管理
 		# self.MenuListPage.click_applylist()		    #点击开户列表
@@ -75,9 +36,13 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待CS2审批", self.mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = self.mainpage.get_status(self.email)
 	
-	@skipIf(status = "CS2")
+	# @reviewProcessTool.skipIf(status = "CS2")
 	def test2_Process1_cs2_to_ro(self):
 		# cs2 to ro
+		#先判断状态是否正确
+		if "CS2" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+
 		# self.loginCRM(user='cs_t1')		#先登录
 		Test_Login.LoginCRM(self, user='cs_t1')
 
@@ -103,9 +68,12 @@ class reviewProcess1(unittest.TestCase):
 		# self.assertIsNot("待CS2审批", self.mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = self.mainpage.get_status(self.email)
 
-	@skipIf(status = "待证券RO审批")
+	# @reviewProcessTool.skipIf(status = "待证券RO审批")
 	def test3_Process1_cliff(self):
 		# cliff审核
+		if "待证券RO审批" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+			
 		# self.loginCRM(user='ro1_cliff', psw="Abcd1234")		#先登录
 		Test_Login.LoginCRM(self, user='ro1_cliff', psw="Abcd1234")
 
@@ -130,9 +98,12 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待证券RO审批", self.mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = self.mainpage.get_status(self.email)
 
-	@skipIf(status = "待期货RO审批")
+	# @reviewProcessTool.skipIf(status = "待期货RO审批")
 	def test4_Process1_don(self):
 		# don审核
+		if "待期货RO审批" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+			
 		# self.loginCRM(user='ro1_don', psw='Abcd1234')		#先登录
 		Test_Login.LoginCRM(self, user='ro1_don', psw='Abcd1234')
 
@@ -157,9 +128,12 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待期货RO审批", self.mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = self.mainpage.get_status(self.email)
 
-	@skipIf(status = "待外汇RO审批")
+	# @reviewProcessTool.skipIf(status = "待外汇RO审批")
 	def test5_Process1_aaron(self):
 		# aaron审核
+		if "待外汇RO审批" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+			
 		# self.loginCRM(user='aaron_chan')		#先登录
 		Test_Login.LoginCRM(self, user='aaron_chan')
 
@@ -184,9 +158,12 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待外汇RO审批", self.mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = self.mainpage.get_status(self.email)
 
-	@skipIf(status = "待黄金RO审批")
+	# @reviewProcessTool.skipIf(status = "待黄金RO审批")
 	def test6_Process1_gold(self):
 		# gold 审核
+		if "待黄金RO审批" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+		
 		# self.loginCRM(user='gold_onedi', psw="Abcd1234")		#先登录
 		Test_Login.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
 
@@ -211,9 +188,12 @@ class reviewProcess1(unittest.TestCase):
 		self.assertIsNot("待黄金RO审批", self.mainpage.get_status(self.email), "状态没有改变")
 		globals()["status"] = self.mainpage.get_status(self.email)
 
-	@skipIf(status = "结算")
+	# @reviewProcessTool.skipIf(status = "结算")
 	def test7_Process1_ops_to_success(self):
 		# ro to ops
+		if "结算" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+			
 		# self.loginCRM(user='ops_t1')		#先登录
 		Test_Login.LoginCRM(self, user='ops_t1')
 

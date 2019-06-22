@@ -16,7 +16,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from PageElement import *
 from Commons import *
 
-class searchInfo(unittest.TestCase):
+class Test_searchInfo(unittest.TestCase):
 
     # log = Logging.Logs()
 

@@ -9,10 +9,6 @@ from Commons import *
 from test_case.Test_Login import *
 import unittest
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import *
 
 class addApplyTool(unittest.TestCase):
 
@@ -147,7 +143,6 @@ class addApplyTool(unittest.TestCase):
                     # 风险承受能力
                     try:
                         # 输入风险承受能力
-                        # import pdb; pdb.set_trace()
                         riskTolerance = self.applypage.riskTolerance(num)
                         if num == 0:
                             # 风险承受能力选择为"高"
@@ -172,7 +167,7 @@ class addApplyTool(unittest.TestCase):
                     raise e
 
                 else:
-                    print("风险承受能力为低或为中可以提交成功, 用例'{}'执行失败".format(func.__name__))
+                    print("风险承受能力为空可以提交成功, 用例'{}'执行失败".format(func.__name__))
                     raise AttributeError("用例 {} , 测试结果为失败".format(func.__name__))   #只抛出异常
 
             return inner_wrapper

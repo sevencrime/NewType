@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
 from addApplyTool import addApplyTool
 import unittest, pytest
 
-class addApplyDerivativeProduct(addApplyTool):
+class Test_addApplyDerivativeProduct(addApplyTool):
     # 校验衍生产品隐藏框是否必填
 
     """

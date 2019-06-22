@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
 from addApplyTool import addApplyTool
 import unittest, pytest
 
-class addApplyRequired(addApplyTool):
+class Test_addApplyRequired(addApplyTool):
 
     # 开户方式必填框校验
     """

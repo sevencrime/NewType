@@ -14,7 +14,7 @@ from PageElement import *
 from Commons import *
 
 #交易账户列表导入Ayers数据
-class importAyers(unittest.TestCase):
+class Test_importAyers(unittest.TestCase):
 
     def setUp(self):
         # self.log.info("正在执行Test_Login")

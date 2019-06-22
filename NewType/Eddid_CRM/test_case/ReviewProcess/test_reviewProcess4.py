@@ -1,62 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-import time
-import unittest
+import os,sys
 sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
-# sys.path.append(os.getcwd()+"\\NewType\\Eddid_CRM")
-from selenium import webdriver
 from test_case.Test_Login import *
-from Commons import *
-from PageElement import *
+import unittest
+import pytest
+from ReviewProcessTool import ReviewProcessTool
 
 
-class reviewProcess4(unittest.TestCase):
+class reviewProcess4(ReviewProcessTool):
 	# CRM来源驳回流程: 未处理---待cs2--拒绝--sales修改给CS2--RO--RO拒绝--CS驳回给RO
 	globals()["status"] = "待CS2审核"
-
-	@classmethod
-	def setUpClass(self):
-		self.email = "8307onedi493907@qq.com"
-
-	# 所有case执行之后清理环境
-	@classmethod
-	def tearDownClass(self):
-	    print("This tearDownClass() method only called once too.")
-
-	def setUp(self):
-		self.driver = webdriver.Chrome()
-		# self.driver = webdriver.Edge()
-		# self.driver = webdriver.Firefox(executable_path = 'geckodriver')
-		# self.driver.implicitly_wait(30)   
-		self.driver.set_page_load_timeout(30)
-		self.driver.set_script_timeout(30)
-		self.url = 'http://eddid-bos-uat.ntdev.be'
-
-		self.MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
-		self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
-		self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
-
-	def tearDown(self):
-		# time.sleep(5)
-		print("结束driver")
-		self.driver.quit()
-
-	def skipIf(status):
-		def wrapper(func):
-			def inner_wrapper(self):
-				if globals()['status'].find(status) != -1:
-					return func(self)
-				else:
-					print("状态不是 {}".format(status))
-					return 
-			return inner_wrapper
-		return wrapper
+	email = "8307onedi493907@qq.com"
 
 	# @unittest.skipIf(globals()["status"].find("未处理") != -1, "状态不是未处理")
-	@skipIf("未处理")
+	# @skipIf("未处理")
 	def test_a_Process1_salestocs2(self):
 		# sales--cs2
 		Test_Login.LoginCRM(self, user='sales_t1')		#先登录
@@ -79,15 +38,14 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 		
 	# @unittest.skipUnless(globals()["status"].find("CS2") != -1, "状态不是CS2")
-	@skipIf("CS2")
+	# @skipIf("CS2")
 	def test_b_Process4_cs2torefuse(self):
-<<<<<<< HEAD
-		# CS2---Refuse
-		Test_Login.LoginCRM(user='cs_t1')		#先登录
-=======
 		# CS1---Refuse
+		#先判断状态是否正确
+		if "CS2" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+
 		Test_Login.LoginCRM(self, user='cs_t1')		#先登录
->>>>>>> 3ee115518442b81c7735d5556351f24ae549c0fb
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -110,15 +68,14 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 		
 	# @unittest.skipUnless(globals()["status"].find("拒绝") != -1, "状态不是拒绝")
-	@skipIf("拒绝")
+	# @skipIf("拒绝")
 	def test_c_Process4_refusetucs2(self):
-<<<<<<< HEAD
-		# Refuse -- CS2
-		Test_Login.LoginCRM(user='sales_t1')		#先登录
-=======
 		# CS1---Refuse
+		#先判断状态是否正确
+		if "拒绝" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+
 		Test_Login.LoginCRM(self, user='sales_t1')		#先登录
->>>>>>> 3ee115518442b81c7735d5556351f24ae549c0fb
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
 		self.MenuListPage.click_applylist()		    #点击开户列表
@@ -143,9 +100,13 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("CS2") != -1, "状态不是待CS2审核")
-	@skipIf("CS2")
+	# @skipIf("CS2")
 	def test_d_Process4_cs2toro(self):
 		# cs2 to ro
+		#先判断状态是否正确
+		if "CS2" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+
 		Test_Login.LoginCRM(self, user='cs_t1')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
@@ -170,9 +131,13 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("待证券RO审批") != -1, "状态不是待证券RO审批")
-	@skipIf("待证券RO审批")
+	# @skipIf("待证券RO审批")
 	def test_e_Process4_cliffRefuse(self):
 		# cliff拒绝
+		#先判断状态是否正确
+		if "待证券RO审批" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+
 		Test_Login.LoginCRM(self, user='ro1_cliff', psw="Abcd1234")		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
@@ -196,9 +161,13 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("证券RO拒绝") != -1, "状态不是证券RO拒绝")
-	@skipIf("证券RO拒绝")
+	# @skipIf("证券RO拒绝")
 	def test_f_Process4_cs2toro(self):
 		# cs2 to ro
+		#先判断状态是否正确
+		if "证券RO拒绝" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+
 		Test_Login.LoginCRM(self, user='cs_t1')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
@@ -223,9 +192,13 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("待期货RO审批") != -1, "状态不是待期货RO审批")
-	@skipIf("待期货RO审批")
+	# @skipIf("待期货RO审批")
 	def test_g_Process4_donRefuse(self):
 		# cliff拒绝
+		#先判断状态是否正确
+		if "待期货RO审批" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+
 		Test_Login.LoginCRM(self, user='ro1_don', psw="Abcd1234")		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
@@ -249,9 +222,13 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("期货RO拒绝") != -1, "状态不是期货RO拒绝")
-	@skipIf("期货RO拒绝")
+	# @skipIf("期货RO拒绝")
 	def test_h_Process4_cs2toro(self):
 		# cs2 to ro
+		#先判断状态是否正确
+		if "期货RO拒绝" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+
 		Test_Login.LoginCRM(self, user='cs_t1')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
@@ -276,9 +253,13 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("待外汇RO审批") != -1, "状态不是外汇RO审批")
-	@skipIf("待外汇RO审批")
+	# @skipIf("待外汇RO审批")
 	def test_i_Process4_aaronRefuse(self):
 		# cliff拒绝
+		#先判断状态是否正确
+		if "待外汇RO审批" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+
 		Test_Login.LoginCRM(self, user='aaron_chan')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
@@ -302,9 +283,13 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("外汇RO拒绝") != -1, "状态不是外汇RO拒绝")
-	@skipIf("外汇RO拒绝")
+	# @skipIf("外汇RO拒绝")
 	def test_j_Process4_cs2toro(self):
 		# cs2 to ro
+		#先判断状态是否正确
+		if "外汇RO拒绝" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+
 		Test_Login.LoginCRM(self, user='cs_t1')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
@@ -329,9 +314,13 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("待黄金RO审批") != -1, "状态不是待黄金RO审批")
-	@skipIf("待黄金RO审批")
+	# @skipIf("待黄金RO审批")
 	def test_k_Process4_glodRefuse(self):
 		# cliff拒绝
+		#先判断状态是否正确
+		if "待黄金RO审批" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+
 		Test_Login.LoginCRM(self, user='gold_onedi', psw="Abcd1234")		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
@@ -355,9 +344,13 @@ class reviewProcess4(unittest.TestCase):
 		globals()["status"] = self.mainpage.get_status(self.email)
 
 	# @unittest.skipUnless(globals()["status"].find("黄金RO拒绝") != -1, "状态不是黄金RO拒绝")
-	@skipIf("黄金RO拒绝")
+	# @skipIf("黄金RO拒绝")
 	def test_l_Process4_cs2toro(self):
 		# cs2 to ro
+		#先判断状态是否正确
+		if "黄金RO拒绝" not in globals()["status"] :
+			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+			
 		Test_Login.LoginCRM(self, user='cs_t1')		#先登录
 
 		self.MenuListPage.click_apply_manager()		#点击开户管理
