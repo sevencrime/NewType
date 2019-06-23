@@ -163,13 +163,13 @@ class Database:
                                 self.db = self.client[self.database]
 
                             # 删除操作,请先查询后,确定数据以后再执行删除操作
-                            # result = self.db[collection].delete_one(query)
-                            # print(result.deleted_count)
-                            # if result.deleted_count > 0 :
-                            #   self.actualRemoveTotal.append(collection)
+                            result = self.db[collection].delete_one(query)
+                            print(result.deleted_count)
+                            if result.deleted_count > 0 :
+                              self.actualRemoveTotal.append(collection)
                             
-                            # self.log.info(result)
-                            # print(result)
+                            self.log.info(result)
+                            print(result)
 
 
                             self.log.info("***********************************\n")

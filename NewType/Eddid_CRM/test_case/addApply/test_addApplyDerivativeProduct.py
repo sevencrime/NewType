@@ -17,7 +17,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=1)
     def test_apply_CashNotDerivativeProduct(self):
         # 用例的前置条件
-        addApplyTool.precondition()
+        # addApplyTool.precondition()
 
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -117,6 +117,8 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.applypage.click_sublimeApply("提交")
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
+
+        globals()["email"] = emali
 
     """
     # 用例: 账户类别选择香港及环球证券账户(现金),校验衍生产品是否必填.
@@ -125,7 +127,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=0, linkTag=False)
     def test_apply_CashisDerivativeProductNone(self):
         # 用例的前置条件
-        addApplyTool.precondition()
+        # addApplyTool.precondition()
 
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -225,6 +227,8 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.applypage.click_sublimeApply("提交")
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
+
+        globals()["email"] = emali
 
     """
     # 用例: 账户类别选择香港及环球证券账户(现金),校验衍生产品是否必填.
@@ -233,7 +237,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=0, linknum=0)
     def test_apply_CashisDerivativeProductyes(self):
         # 用例的前置条件
-        addApplyTool.precondition()
+        # addApplyTool.precondition()
 
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -333,6 +337,8 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.applypage.click_sublimeApply("提交")
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
+
+        globals()["email"] = emali
 
     """
     # 用例: 账户类别选择香港及环球证券账户(现金),校验衍生产品是否必填.
@@ -341,7 +347,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=0, linknum=1)
     def test_apply_CashisDerivativeProductNo(self):
         # 用例的前置条件
-        addApplyTool.precondition()
+        # addApplyTool.precondition()
 
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -441,6 +447,8 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.applypage.click_sublimeApply("提交")
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
+
+        globals()["email"] = emali
 
 
     """
@@ -450,7 +458,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=1)
     def test_apply_MarginNotDerivativeProduct(self):
         # 用例的前置条件
-        addApplyTool.precondition()
+        # addApplyTool.precondition()
 
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -551,6 +559,8 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
+        globals()["email"] = emali
+
     """
     # 用例: 账户类别选择香港及环球证券账户(保证金),校验衍生产品是否必填.
     #       衍生产品选择"是", 风险声明披露不填
@@ -558,7 +568,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=0, linkTag=False)
     def test_apply_MarginisDerivativeProductNone(self):
         # 用例的前置条件
-        addApplyTool.precondition()
+        # addApplyTool.precondition()
 
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -659,6 +669,8 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
+        globals()["email"] = emali
+
     """
     # 用例: 账户类别选择香港及环球证券账户(保证金),校验衍生产品是否必填.
     #       衍生产品选择"是", 风险声明披露选 "是"
@@ -666,7 +678,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=0, linknum=0)
     def test_apply_MarginisDerivativeProductyes(self):
         # 用例的前置条件
-        addApplyTool.precondition()
+        # addApplyTool.precondition()
 
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -767,6 +779,8 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
+        globals()["email"] = emali
+
     """
     # 用例: 账户类别选择香港及环球证券账户(保证金),校验衍生产品是否必填.
     #       衍生产品选择"是", 风险声明披露选 "否"
@@ -774,7 +788,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=0, linknum=1)
     def test_apply_MarginisDerivativeProductNo(self):
         # 用例的前置条件
-        addApplyTool.precondition()
+        # addApplyTool.precondition()
         
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -875,6 +889,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
+        globals()["email"] = emali
 
 
 

@@ -17,7 +17,7 @@ class Test_addApplyRequired(addApplyTool):
     # @unittest.skip("跳过")
     def test_apply_MobileAuthentication(self):
         # 用例的前置条件
-        addApplyTool.precondition()
+        # addApplyTool.precondition()
 
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -118,6 +118,7 @@ class Test_addApplyRequired(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
+        globals()["email"] = emali
 
     """
     # 用例: 电子签名认证--校验电子签名证书栏位是否必填
@@ -125,7 +126,7 @@ class Test_addApplyRequired(addApplyTool):
     @addApplyTool.AccountOpeningWay(way="电子签名认证")
     def test_apply_certificateNb(self):
         # 用例的前置条件
-        addApplyTool.precondition()
+        # addApplyTool.precondition()
         
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
@@ -226,6 +227,7 @@ class Test_addApplyRequired(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
+        globals()["email"] = emali
 
 
 if __name__ == '__main__':

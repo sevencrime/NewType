@@ -131,6 +131,8 @@ class Test_addApplyRiskTolerance(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
+        globals()["email"] = emali
+
 
     """
     # 用例: 账户类别选择黄金账户,校验风险提示.
@@ -246,6 +248,8 @@ class Test_addApplyRiskTolerance(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
+        globals()["email"] = emali
+
     """
     # 用例: 账户类别选择黄金账户,校验风险提示.
     #       风险提示选择 "高"
@@ -359,6 +363,8 @@ class Test_addApplyRiskTolerance(addApplyTool):
         self.applypage.click_sublimeApply("提交")
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
+
+        globals()["email"] = emali
 
 
 
