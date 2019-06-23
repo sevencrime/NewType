@@ -12,8 +12,10 @@ from selenium import webdriver
 
 class addApplyTool(unittest.TestCase):
 
-    def setUp(self):
+    globals()["email"] = ""
 
+    def setUp(self):
+        globals()["email"] = ""
         self.driver = webdriver.Chrome(executable_path = 'chromedriver')
         # self.driver = webdriver.Firefox(executable_path = 'geckodriver')
         # self.driver.implicitly_wait(30)   
@@ -35,6 +37,9 @@ class addApplyTool(unittest.TestCase):
     def tearDown(self):
         print("用例执行完成")
         self.driver.quit()
+        # 删除数据
+        if globals()["email"] == "":
+            PyMongo.Database().del_linked("apply_info", {"email": globals()["email"]})
 
 
     """

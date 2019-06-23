@@ -122,6 +122,8 @@ class Test_addApplyAllNotEmpty(addApplyTool):
         except AssertionError:
             self.applypage.apply_error()
 
+        globals()["email"] = emali
+
 
     def test_apply_JointNotEmpty(self):
         # 用例: 联名账户--必填参数
@@ -303,6 +305,8 @@ class Test_addApplyAllNotEmpty(addApplyTool):
             self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交开户表单后跳转失败")
         except AssertionError:
             self.applypage.apply_error()
+
+        globals()["email"] = emali
 
 
 if __name__ == '__main__':
