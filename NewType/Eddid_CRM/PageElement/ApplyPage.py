@@ -474,6 +474,7 @@ class ApplyPage(BasePage.BasePage):
             return buyProduct.get_attribute("value")
 
     def riskStatement(self, num=None):
+        # 客户是否已明白买卖衍生权证，牛熊证及结构性产品的风险。并已详细阅读「结构性产品相关风险声明披露」
         riskStatement = self.find_element(*self.get_input("结构性产品相关风险声明披露", parent=True))
         self.scrollinto(riskStatement)
         tag_text = self.get_select(num)

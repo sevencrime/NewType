@@ -8,14 +8,13 @@
 import os,sys
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 import pymongo
-from Commons import Modify_xls
 from bson.objectid import ObjectId
 from collections import Counter
-import Logging
+from Commons import Logging
 
 class Database:
     
-    log = Logging.logs()
+    log = Logging.Logs()
     collectionsId = set()       #存放已经遍历过的数据库表的id
     expectedRemoveTotal = []        #预期删除总数
     actualRemoveTotal = []      #实际删除总数

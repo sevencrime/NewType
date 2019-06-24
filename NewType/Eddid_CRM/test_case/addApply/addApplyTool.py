@@ -38,7 +38,7 @@ class addApplyTool(unittest.TestCase):
         print("用例执行完成")
         self.driver.quit()
         # 删除数据
-        if globals()["email"] == "":
+        if globals()["email"] != "":
             PyMongo.Database().del_linked("apply_info", {"email": globals()["email"]})
 
 
@@ -96,14 +96,19 @@ class addApplyTool(unittest.TestCase):
 
     # 衍生产品隐藏框
     # 用于校验触发该隐藏框后是否必填
+    """
+    num : 下拉框选项,从上往下
+    linkTag : 判断触发的隐藏框是否填写
+    linknum : 触发的隐藏框的下拉框选项
+    """
     def DerivativeProduct(num=None, linkTag=False, linknum=None):
 
         def wrapper(func):
             def inner_wrapper(self, *args, **kwargs):
+                print("正在执行用例 {}".format(func.__name__))
                 try:
                     return func(self, *args, **kwargs)
                 except AssertionError:
-                    # import pdb; pdb.set_trace()
                     # 断言错误,提交失败,输入衍生产品隐藏框后再次点击提交按钮
                     # 输入衍生产品隐藏框
                     # import pdb; pdb.set_trace()
@@ -112,7 +117,12 @@ class addApplyTool(unittest.TestCase):
                         # import pdb; pdb.set_trace()
                         self.applypage.click_sublimeApply("提交")
                         self.mainpage.wait_LoadingModal()   #loading
-                        self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败, 页面没有跳转")
+                        if linkTag == True or num == 1:
+                            self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败, 页面没有跳转")
+                        else:
+                            self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-create', "表单没有停留在同一页")
+
+
                     except AssertionError:
                         # 断言失败, 数据提交失败
                         # 查找是否有数据为空,并打印出为空的栏位

@@ -13,12 +13,12 @@ import unittest, pytest
 
 class Test_addApplyAllNotEmpty(addApplyTool):
 
+    @unittest.skip("暂时跳过")
     # 个人账户和联名账户, 必填项开户
-
     def test_apply_IndividualNotEmpty(self):
         # 用例: 个人账户--必填参数
         # 用例的前置条件
-        addApplyTool.precondition()
+        # addApplyTool.precondition()
         # 账户类型
         applicationFor = self.applypage.send_applicationFor("个人账户")
         # 开户方法
@@ -97,7 +97,7 @@ class Test_addApplyAllNotEmpty(addApplyTool):
         # 客户的投资目标是:
         investmentTarget = self.applypage.investmentTarget()
         # 客户的风险承受能力是:---需校验
-        riskTolerance = self.applypage.riskTolerance()
+        riskTolerance = self.applypage.riskTolerance(num=0)
         # 结算账户-货币
         currency = self.applypage.bankaccount()
         # 介绍与推广--您透过哪些渠道认识艾德证券及/或艾德金业?(选择所有适用)
@@ -128,10 +128,10 @@ class Test_addApplyAllNotEmpty(addApplyTool):
     def test_apply_JointNotEmpty(self):
         # 用例: 联名账户--必填参数
         # 用例的前置条件
-        addApplyTool.precondition()
+        # addApplyTool.precondition()
         
         # 账户类型
-        applicationFor = self.applypage.send_applicationFor("个人账户")
+        applicationFor = self.applypage.send_applicationFor("联名账户")
         # 开户方法
         accountOpeningWay = self.applypage.send_accountOpeningWay("亲临开户")
         # 负责人
@@ -208,7 +208,7 @@ class Test_addApplyAllNotEmpty(addApplyTool):
         # 客户的投资目标是:
         investmentTarget = self.applypage.investmentTarget()
         # 客户的风险承受能力是:---需校验
-        riskTolerance = self.applypage.riskTolerance()
+        riskTolerance = self.applypage.riskTolerance(num=0)
         # 结算账户-货币
         currency = self.applypage.bankaccount()
         # 介绍与推广--您透过哪些渠道认识艾德证券及/或艾德金业?(选择所有适用)
@@ -316,3 +316,4 @@ if __name__ == '__main__':
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)
 
+    # pytest.main(["-s", "test_addApplyAllNotEmpty.py"])

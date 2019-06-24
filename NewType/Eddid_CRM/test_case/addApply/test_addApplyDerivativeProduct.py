@@ -39,7 +39,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 中文姓名
         chineseName = self.applypage.send_chineseName()
         # 电邮
-        emali = self.applypage.send_emali()
+        globals()["globals()["email"]"] = self.applypage.send_emali()
         # 电话号码区号
         phoneAreaCode = self.applypage.send_phoneAreaCode()
         # 电话号码
@@ -97,7 +97,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 客户的投资目标是:
         investmentTarget = self.applypage.investmentTarget()
         # 客户的风险承受能力是:---需校验
-        riskTolerance = self.applypage.riskTolerance()
+        riskTolerance = self.applypage.riskTolerance(num=0)
         # 结算账户-货币
         currency = self.applypage.bankaccount()
         # 介绍与推广--您透过哪些渠道认识艾德证券及/或艾德金业?(选择所有适用)
@@ -118,7 +118,6 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
-        globals()["email"] = emali
 
     """
     # 用例: 账户类别选择香港及环球证券账户(现金),校验衍生产品是否必填.
@@ -149,7 +148,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 中文姓名
         chineseName = self.applypage.send_chineseName()
         # 电邮
-        emali = self.applypage.send_emali()
+        globals()["email"] = self.applypage.send_emali()
         # 电话号码区号
         phoneAreaCode = self.applypage.send_phoneAreaCode()
         # 电话号码
@@ -207,7 +206,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 客户的投资目标是:
         investmentTarget = self.applypage.investmentTarget()
         # 客户的风险承受能力是:---需校验
-        riskTolerance = self.applypage.riskTolerance()
+        riskTolerance = self.applypage.riskTolerance(num=0)
         # 结算账户-货币
         currency = self.applypage.bankaccount()
         # 介绍与推广--您透过哪些渠道认识艾德证券及/或艾德金业?(选择所有适用)
@@ -228,7 +227,6 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
-        globals()["email"] = emali
 
     """
     # 用例: 账户类别选择香港及环球证券账户(现金),校验衍生产品是否必填.
@@ -259,7 +257,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 中文姓名
         chineseName = self.applypage.send_chineseName()
         # 电邮
-        emali = self.applypage.send_emali()
+        globals()["email"] = self.applypage.send_emali()
         # 电话号码区号
         phoneAreaCode = self.applypage.send_phoneAreaCode()
         # 电话号码
@@ -317,7 +315,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 客户的投资目标是:
         investmentTarget = self.applypage.investmentTarget()
         # 客户的风险承受能力是:---需校验
-        riskTolerance = self.applypage.riskTolerance()
+        riskTolerance = self.applypage.riskTolerance(num=0)
         # 结算账户-货币
         currency = self.applypage.bankaccount()
         # 介绍与推广--您透过哪些渠道认识艾德证券及/或艾德金业?(选择所有适用)
@@ -338,7 +336,6 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
-        globals()["email"] = emali
 
     """
     # 用例: 账户类别选择香港及环球证券账户(现金),校验衍生产品是否必填.
@@ -369,7 +366,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 中文姓名
         chineseName = self.applypage.send_chineseName()
         # 电邮
-        emali = self.applypage.send_emali()
+        globals()["email"] = self.applypage.send_emali()
         # 电话号码区号
         phoneAreaCode = self.applypage.send_phoneAreaCode()
         # 电话号码
@@ -427,7 +424,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 客户的投资目标是:
         investmentTarget = self.applypage.investmentTarget()
         # 客户的风险承受能力是:---需校验
-        riskTolerance = self.applypage.riskTolerance()
+        riskTolerance = self.applypage.riskTolerance(num=0)
         # 结算账户-货币
         currency = self.applypage.bankaccount()
         # 介绍与推广--您透过哪些渠道认识艾德证券及/或艾德金业?(选择所有适用)
@@ -448,7 +445,6 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
-        globals()["email"] = emali
 
 
     """
@@ -480,7 +476,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 中文姓名
         chineseName = self.applypage.send_chineseName()
         # 电邮
-        emali = self.applypage.send_emali()
+        globals()["email"] = self.applypage.send_emali()
         # 电话号码区号
         phoneAreaCode = self.applypage.send_phoneAreaCode()
         # 电话号码
@@ -538,7 +534,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 客户的投资目标是:
         investmentTarget = self.applypage.investmentTarget()
         # 客户的风险承受能力是:---需校验
-        riskTolerance = self.applypage.riskTolerance()
+        riskTolerance = self.applypage.riskTolerance(num=0)
         # 结算账户-货币
         currency = self.applypage.bankaccount()
         # 介绍与推广--您透过哪些渠道认识艾德证券及/或艾德金业?(选择所有适用)
@@ -559,7 +555,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
-        globals()["email"] = emali
+
 
     """
     # 用例: 账户类别选择香港及环球证券账户(保证金),校验衍生产品是否必填.
@@ -590,7 +586,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 中文姓名
         chineseName = self.applypage.send_chineseName()
         # 电邮
-        emali = self.applypage.send_emali()
+        globals()["email"] = self.applypage.send_emali()
         # 电话号码区号
         phoneAreaCode = self.applypage.send_phoneAreaCode()
         # 电话号码
@@ -648,7 +644,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 客户的投资目标是:
         investmentTarget = self.applypage.investmentTarget()
         # 客户的风险承受能力是:---需校验
-        riskTolerance = self.applypage.riskTolerance()
+        riskTolerance = self.applypage.riskTolerance(num=0)
         # 结算账户-货币
         currency = self.applypage.bankaccount()
         # 介绍与推广--您透过哪些渠道认识艾德证券及/或艾德金业?(选择所有适用)
@@ -669,7 +665,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
-        globals()["email"] = emali
+
 
     """
     # 用例: 账户类别选择香港及环球证券账户(保证金),校验衍生产品是否必填.
@@ -700,7 +696,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 中文姓名
         chineseName = self.applypage.send_chineseName()
         # 电邮
-        emali = self.applypage.send_emali()
+        globals()["email"] = self.applypage.send_emali()
         # 电话号码区号
         phoneAreaCode = self.applypage.send_phoneAreaCode()
         # 电话号码
@@ -758,7 +754,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 客户的投资目标是:
         investmentTarget = self.applypage.investmentTarget()
         # 客户的风险承受能力是:---需校验
-        riskTolerance = self.applypage.riskTolerance()
+        riskTolerance = self.applypage.riskTolerance(num=0)
         # 结算账户-货币
         currency = self.applypage.bankaccount()
         # 介绍与推广--您透过哪些渠道认识艾德证券及/或艾德金业?(选择所有适用)
@@ -779,7 +775,6 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
-        globals()["email"] = emali
 
     """
     # 用例: 账户类别选择香港及环球证券账户(保证金),校验衍生产品是否必填.
@@ -810,7 +805,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 中文姓名
         chineseName = self.applypage.send_chineseName()
         # 电邮
-        emali = self.applypage.send_emali()
+        globals()["email"] = self.applypage.send_emali()
         # 电话号码区号
         phoneAreaCode = self.applypage.send_phoneAreaCode()
         # 电话号码
@@ -868,7 +863,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 客户的投资目标是:
         investmentTarget = self.applypage.investmentTarget()
         # 客户的风险承受能力是:---需校验
-        riskTolerance = self.applypage.riskTolerance()
+        riskTolerance = self.applypage.riskTolerance(num=0)
         # 结算账户-货币
         currency = self.applypage.bankaccount()
         # 介绍与推广--您透过哪些渠道认识艾德证券及/或艾德金业?(选择所有适用)
@@ -888,9 +883,6 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         self.applypage.click_sublimeApply("提交")
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
-
-        globals()["email"] = emali
-
 
 
 

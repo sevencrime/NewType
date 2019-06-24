@@ -47,7 +47,7 @@ class Test_addApplyRiskTolerance(addApplyTool):
         # 中文姓名
         chineseName = self.applypage.send_chineseName()
         # 电邮
-        emali = self.applypage.send_emali()
+        globals()["email"] = self.applypage.send_emali()
         # 电话号码区号
         phoneAreaCode = self.applypage.send_phoneAreaCode()
         # 电话号码
@@ -131,7 +131,6 @@ class Test_addApplyRiskTolerance(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
-        globals()["email"] = emali
 
 
     """
@@ -164,7 +163,7 @@ class Test_addApplyRiskTolerance(addApplyTool):
         # 中文姓名
         chineseName = self.applypage.send_chineseName()
         # 电邮
-        emali = self.applypage.send_emali()
+        globals()["email"] = self.applypage.send_emali()
         # 电话号码区号
         phoneAreaCode = self.applypage.send_phoneAreaCode()
         # 电话号码
@@ -248,7 +247,6 @@ class Test_addApplyRiskTolerance(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
-        globals()["email"] = emali
 
     """
     # 用例: 账户类别选择黄金账户,校验风险提示.
@@ -280,7 +278,7 @@ class Test_addApplyRiskTolerance(addApplyTool):
         # 中文姓名
         chineseName = self.applypage.send_chineseName()
         # 电邮
-        emali = self.applypage.send_emali()
+        globals()["email"] = self.applypage.send_emali()
         # 电话号码区号
         phoneAreaCode = self.applypage.send_phoneAreaCode()
         # 电话号码
@@ -364,7 +362,6 @@ class Test_addApplyRiskTolerance(addApplyTool):
         self.mainpage.wait_LoadingModal()   #loading
         self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败")
 
-        globals()["email"] = emali
 
 
 
