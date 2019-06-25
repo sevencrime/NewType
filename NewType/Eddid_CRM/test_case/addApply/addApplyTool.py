@@ -38,6 +38,7 @@ class addApplyTool(unittest.TestCase):
         print("用例执行完成")
         self.driver.quit()
         # 删除数据
+        print(globals()["email"])
         if globals()["email"] != "":
             PyMongo.Database().del_linked("apply_info", {"email": globals()["email"]})
 
@@ -57,6 +58,7 @@ class addApplyTool(unittest.TestCase):
                 try:
                     return func(self)   #执行用例
                 except AssertionError:
+                    print("断言失败,进行装饰器校验")
                     # 捕捉断言失败异常AssertionError
                     if way == "手机应用程式身份验证":
                         # 输入银行名称
@@ -109,6 +111,7 @@ class addApplyTool(unittest.TestCase):
                 try:
                     return func(self, *args, **kwargs)
                 except AssertionError:
+                    print("断言失败,进行装饰器校验")
                     # 断言错误,提交失败,输入衍生产品隐藏框后再次点击提交按钮
                     # 输入衍生产品隐藏框
                     # import pdb; pdb.set_trace()
@@ -153,8 +156,10 @@ class addApplyTool(unittest.TestCase):
             def inner_wrapper(self, *args, **kwargs):
                 print("正在执行用例 :", func.__name__)
                 try:
+                    # import pdb; pdb.set_trace()
                     return func(self, *args, **kwargs)
                 except AssertionError:
+                    print("断言失败,进行装饰器校验")
                     # 风险承受能力
                     try:
                         # 输入风险承受能力
