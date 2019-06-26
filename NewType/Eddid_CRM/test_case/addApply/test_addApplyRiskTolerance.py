@@ -1,11 +1,12 @@
 # usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import time,os,sys
-sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
-# import addApplyTool
+import pytest
+import unittest
 from addApplyTool import addApplyTool
-import unittest, pytest
+import time
+# import addApplyTool
+
 
 class Test_addApplyRiskTolerance(addApplyTool):
     # 校验风险承受能力,黄金,杠杆,结构性产品
@@ -17,10 +18,10 @@ class Test_addApplyRiskTolerance(addApplyTool):
     @addApplyTool.RiskTolerance(num=2)
     def test_apply_BullionRiskToleranceLow(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="艾德金业现货黄金账户(保证金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", 
+                           type="艾德金业现货黄金账户(保证金)")
         self.applySublime()
-        
-
 
     """
     # 用例: 账户类别选择黄金账户,校验风险提示.
@@ -29,10 +30,9 @@ class Test_addApplyRiskTolerance(addApplyTool):
     @addApplyTool.RiskTolerance(num=1)
     def test_apply_BullionRiskToleranceMiddle(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="艾德金业现货黄金账户(保证金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", type="艾德金业现货黄金账户(保证金)")
         self.applySublime()
-        
-
 
     """
     # 用例: 账户类别选择黄金账户,校验风险提示.
@@ -41,9 +41,10 @@ class Test_addApplyRiskTolerance(addApplyTool):
     @addApplyTool.RiskTolerance(num=0)
     def test_apply_BullionRiskToleranceHigh(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="艾德金业现货黄金账户(保证金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", 
+                           type="艾德金业现货黄金账户(保证金)")
         self.applySublime()
-        
 
     """
     # 用例: 账户类别分别选择杠杆式外汇账户(保证金),校验风险提示.
@@ -52,9 +53,9 @@ class Test_addApplyRiskTolerance(addApplyTool):
     @addApplyTool.RiskTolerance(num=2)
     def test_apply_LeveragedRiskToleranceLow(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="杠杆式外汇账户(保证金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", type="杠杆式外汇账户(保证金)")
         self.applySublime()
-
 
     """
     # 用例: 账户类别选择杠杆式外汇账户(保证金),校验风险提示.
@@ -63,10 +64,9 @@ class Test_addApplyRiskTolerance(addApplyTool):
     @addApplyTool.RiskTolerance(num=1)
     def test_apply_LeveragedRiskToleranceMiddle(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="杠杆式外汇账户(保证金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", type="杠杆式外汇账户(保证金)")
         self.applySublime()
-
-
 
     """
     # 用例: 账户类别选择杠杆式外汇账户(保证金),校验风险提示.
@@ -75,11 +75,10 @@ class Test_addApplyRiskTolerance(addApplyTool):
     @addApplyTool.RiskTolerance(num=0)
     def test_apply_LeveragedRiskToleranceHigh(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="杠杆式外汇账户(保证金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", 
+                           type="杠杆式外汇账户(保证金)")
         self.applySublime()
-
-
-
 
     """
     # 用例: 账户类别分别选择衍生产品,校验风险提示.
@@ -88,11 +87,10 @@ class Test_addApplyRiskTolerance(addApplyTool):
     @addApplyTool.RiskTolerance(num=2)
     def test_apply_BuyProductRiskToleranceLow(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="香港及环球证券账户(现金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", 
+                           type="香港及环球证券账户(现金)")
         self.applySublime()
-
-
-
 
     """
     # 用例: 账户类别选择衍生产品,校验风险提示.
@@ -101,11 +99,10 @@ class Test_addApplyRiskTolerance(addApplyTool):
     @addApplyTool.RiskTolerance(num=1)
     def test_apply_BuyProductRiskToleranceMiddle(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="香港及环球证券账户(现金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", 
+                           type="香港及环球证券账户(现金)")
         self.applySublime()
-
-
-
 
     """
     # 用例: 账户类别选择衍生产品,校验风险提示.
@@ -114,13 +111,10 @@ class Test_addApplyRiskTolerance(addApplyTool):
     @addApplyTool.RiskTolerance(num=0)
     def test_apply_BuyProductRiskToleranceHigh(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="香港及环球证券账户(现金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", 
+                           type="香港及环球证券账户(现金)")
         self.applySublime()
-
-
-
-
-
 
 
 if __name__ == '__main__':

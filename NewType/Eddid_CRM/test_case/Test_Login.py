@@ -11,7 +11,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from PageElement import *
 from Commons import *
 
-class Test_Login(unittest.TestCase):
 
     # log = Logging.Logs()
 
@@ -53,3 +52,5 @@ class Test_Login(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+

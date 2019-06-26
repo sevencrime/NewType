@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 
 
-import time,os,sys
+import os, sys
 sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
-from PageElement import *
-from Commons import *
-from test_case.Test_Login import *
-import unittest
 from selenium import webdriver
+import unittest
+from test_case.Test_Login import *
+from Commons import *
+from PageElement import *
+import time
+
 
 class addApplyTool(unittest.TestCase):
 
@@ -16,22 +18,23 @@ class addApplyTool(unittest.TestCase):
 
     def setUp(self):
         globals()["email"] = ""
-        self.driver = webdriver.Chrome(executable_path = 'chromedriver')
+        self.driver = webdriver.Chrome(executable_path='chromedriver')
         # self.driver = webdriver.Firefox(executable_path = 'geckodriver')
-        # self.driver.implicitly_wait(30)   
+        # self.driver.implicitly_wait(30)
         self.driver.set_page_load_timeout(30)
         self.driver.set_script_timeout(3)
         self.url = 'http://eddid-bos-uat.ntdev.be'
 
-        self.MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
+        self.MenuListPage = MenuListPage.MenuListPage(
+            self.driver, self.url, "Eddid")
         self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
         self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
         Test_Login.LoginCRM(self)
 
         self.MenuListPage.click_menulist("开户管理", "开户列表")
-        #等待
+        # 等待
         self.mainpage.wait_LoadingModal()
-        #点击新增按钮
+        # 点击新增按钮
         self.mainpage.click_add()
 
     def tearDown(self):
@@ -45,11 +48,14 @@ class addApplyTool(unittest.TestCase):
     """
         #Apply 必填步骤
     """
+
     def RequiredField(self, *args, **kwargs):
         # 账户类型
-        applicationFor = self.applypage.send_applicationFor(kwargs["applicationFor"])
+        applicationFor = self.applypage.send_applicationFor(
+            kwargs["applicationFor"])
         # 开户方法
-        accountOpeningWay = self.applypage.send_accountOpeningWay(kwargs["way"])
+        accountOpeningWay = self.applypage.send_accountOpeningWay(
+            kwargs["way"])
         # 负责人
         parentId = self.applypage.send_parentId()
         # 邮件语言
@@ -62,7 +68,7 @@ class addApplyTool(unittest.TestCase):
         firstName = self.applypage.send_firstName()
         # 姓氏
         lastName = self.applypage.send_lastName()
-        self.mainpage.wait_LoadingModal() # 这里校验姓名是否重复
+        self.mainpage.wait_LoadingModal()  # 这里校验姓名是否重复
         # 中文姓名
         chineseName = self.applypage.send_chineseName()
         # 电邮
@@ -103,7 +109,7 @@ class addApplyTool(unittest.TestCase):
         Option = self.applypage.Option()
         # 客户是否曾接受有关衍生产品性质和风险的一般知识培训或修读相关课程
         derivativeCourse = self.applypage.derivativeCourse()
-        # 客户是否从现时或过去拥有与衍生产品有关的工作经验? 
+        # 客户是否从现时或过去拥有与衍生产品有关的工作经验?
         derivativeJobs = self.applypage.derivativeJobs()
         # 客户是否于过去3年曾执行 5次或以上有关衍生产品的交易，例如：衍生权证、牛熊证、股票期权、期货及期权、商品、结构性产品及交易所买卖基金等?
         tradingFund = self.applypage.tradingFund()
@@ -143,6 +149,7 @@ class addApplyTool(unittest.TestCase):
     """
         #Apply 联名账户必填步骤
     """
+
     def JoinRequiredField(self):
         # 进入联名账户
         # 联名账户- 称谓
@@ -153,7 +160,7 @@ class addApplyTool(unittest.TestCase):
         JointfirstName = self.applypage.send_firstName()
         # 联名账户- 姓氏
         JointlastName = self.applypage.send_lastName()
-        self.mainpage.wait_LoadingModal() # 这里校验姓名是否重复
+        self.mainpage.wait_LoadingModal()  # 这里校验姓名是否重复
         # 联名账户-中文姓名
         JointchineseName = self.applypage.send_chineseName()
         # 联名账户- 电邮
@@ -194,7 +201,7 @@ class addApplyTool(unittest.TestCase):
         JointOption = self.applypage.Option()
         # 联名账户- 客户是否曾接受有关衍生产品性质和风险的一般知识培训或修读相关课程
         JointderivativeCourse = self.applypage.derivativeCourse()
-        # 联名账户- 客户是否从现时或过去拥有与衍生产品有关的工作经验? 
+        # 联名账户- 客户是否从现时或过去拥有与衍生产品有关的工作经验?
         JointderivativeJobs = self.applypage.derivativeJobs()
         # 联名账户- 客户是否于过去3年曾执行 5次或以上有关衍生产品的交易，例如：衍生权证、牛熊证、股票期权、期货及期权、商品、结构性产品及交易所买卖基金等?
         JointtradingFund = self.applypage.tradingFund()
@@ -215,23 +222,25 @@ class addApplyTool(unittest.TestCase):
         # 联名账户- 本人确认并同意主要账户持有人之风险承受能力选择？
         self.applypage.jointRiskTolerance()
 
-        
     """
         #提交表单按钮
     """
+
     def applySublime(self, Jump=True):
         # 点击提交按钮
         self.applypage.click_sublimeApply("提交")
-        self.mainpage.wait_LoadingModal()   #loading
+        self.mainpage.wait_LoadingModal()  # loading
         try:
-            if Jump:
-                self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交开户表单后跳转失败")
+            if Jump == True:
+                self.assertEqual(
+                    self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交开户表单后跳转失败")
             else:
-                self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-create', "提交开户表单后跳转失败")
+                self.assertEqual(
+                    self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-create', "提交开户表单后跳转失败")
 
         except AssertionError:
             self.applypage.apply_error()
-
+            raise AssertionError
 
     """
     开户方式装饰器
@@ -241,12 +250,8 @@ class addApplyTool(unittest.TestCase):
         # 把开户方法变成装饰器实现
         def wrapper(func):
             def inner_wrapper(self, *args, **kwargs):
-                # 点击选择开户方法
-                accountOpeningWay = self.applypage.send_accountOpeningWay(way)
-                assert way in accountOpeningWay
-
                 try:
-                    return func(self, *args, **kwargs)   #执行用例
+                    return func(self, *args, **kwargs)  # 执行用例
                 except AssertionError:
                     print("断言失败,进行装饰器校验")
                     # 捕捉断言失败异常AssertionError
@@ -259,20 +264,8 @@ class addApplyTool(unittest.TestCase):
                         # 输入电子签名证书号码
                         self.applypage.send_appcertificateNb()
 
-                    #点击提交
-                    try:
-                        # import pdb; pdb.set_trace()
-                        self.applypage.click_sublimeApply("提交")
-                        self.mainpage.wait_LoadingModal()   #loading
-                        self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败, 页面没有跳转")
-                    except AssertionError:
-                        # 断言失败, 数据提交失败
-                        # 查找是否有数据为空,并打印出为空的栏位
-                        self.applypage.apply_error()
-                        raise AssertionError("断言失败(可能是接口报错)")
-
-                    except Exception as e:
-                        raise e
+                    # 点击提交
+                    self.applySublime()
 
                 except Exception as e:
                     # 查找出报错的位置
@@ -281,7 +274,8 @@ class addApplyTool(unittest.TestCase):
 
                 else:
                     print("风险承受能力为低或为中可以提交成功, 用例'{}'执行失败".format(func.__name__))
-                    raise AttributeError("用例 {} , 测试结果为失败".format(func.__name__))   #只抛出异常
+                    raise AttributeError(
+                        "用例 {} , 测试结果为失败".format(func.__name__))  # 只抛出异常
 
             return inner_wrapper
         return wrapper
@@ -307,21 +301,20 @@ class addApplyTool(unittest.TestCase):
                     # import pdb; pdb.set_trace()
                     self.applypage.buyProduct(num, linkTag, linknum)
                     try:
-                        # import pdb; pdb.set_trace()
                         self.applypage.click_sublimeApply("提交")
-                        self.mainpage.wait_LoadingModal()   #loading
+                        self.mainpage.wait_LoadingModal()  # loading
                         if linkTag == True or num == 1:
-                            self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败, 页面没有跳转")
+                            self.assertEqual(
+                                self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败, 页面没有跳转")
                         else:
-                            self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-create', "表单没有停留在同一页")
-
+                            self.assertEqual(
+                                self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-create', "表单没有停留在同一页")
 
                     except AssertionError:
                         # 断言失败, 数据提交失败
                         # 查找是否有数据为空,并打印出为空的栏位
                         self.applypage.apply_error()
                         raise AssertionError("断言失败(可能是接口报错)")
-
 
                     except Exception as e:
                         raise e
@@ -333,13 +326,14 @@ class addApplyTool(unittest.TestCase):
 
                 else:
                     print("风险承受能力为低或为中可以提交成功, 用例'{}'执行失败".format(func.__name__))
-                    raise AttributeError("用例 {} , 测试结果为失败".format(func.__name__))   #只抛出异常
+                    raise AttributeError(
+                        "用例 {} , 测试结果为失败".format(func.__name__))  # 只抛出异常
 
             return inner_wrapper
         return wrapper
 
-
     # 风险承受能力装饰器
+
     def RiskTolerance(num=None):
 
         def wrapper(func):
@@ -356,19 +350,11 @@ class addApplyTool(unittest.TestCase):
                         riskTolerance = self.applypage.riskTolerance(num)
                         if num == 0:
                             # 风险承受能力选择为"高"
-                            self.applypage.click_sublimeApply("提交")
-                            self.mainpage.wait_LoadingModal()   #loading
-                            self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败, 页面没有跳转")
+                            self.applySublime()
 
                     except AttributeError:
                         print("点击风险承受能力方法有异常, 请优化方法")
                         raise AttributeError
-
-                    except AssertionError:
-                        # 断言失败, 数据提交失败
-                        # 查找是否有数据为空,并打印出为空的栏位
-                        self.applypage.apply_error()
-                        raise AssertionError("断言失败(可能是接口报错)")
 
 
                 except Exception as e:
@@ -378,12 +364,13 @@ class addApplyTool(unittest.TestCase):
 
                 else:
                     print("风险承受能力为空可以提交成功, 用例'{}'执行失败".format(func.__name__))
-                    raise AttributeError("用例 {} , 测试结果为失败".format(func.__name__))   #只抛出异常
+                    raise AttributeError(
+                        "用例 {} , 测试结果为失败".format(func.__name__))  # 只抛出异常
 
             return inner_wrapper
         return wrapper
 
 
-
-
-
+if __name__ == "__main__":
+    print(sys.path)
+    print(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))

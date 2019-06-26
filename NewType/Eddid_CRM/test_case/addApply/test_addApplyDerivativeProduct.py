@@ -1,11 +1,12 @@
 # usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import time,os,sys
-sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
-# import addApplyTool
+import pytest
+import unittest
 from addApplyTool import addApplyTool
-import unittest, pytest
+import time
+# import addApplyTool
+
 
 class Test_addApplyDerivativeProduct(addApplyTool):
     # 校验衍生产品隐藏框是否必填
@@ -17,10 +18,11 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=1)
     def test_apply_CashNotDerivativeProduct(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="香港及环球证券账户(现金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", 
+                           type="香港及环球证券账户(现金)")
         # 点击提交按钮
         self.applySublime()
-
 
     """
     # 用例: 账户类别选择香港及环球证券账户(现金),校验衍生产品是否必填.
@@ -29,10 +31,11 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=0, linkTag=False)
     def test_apply_CashisDerivativeProductNone(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="香港及环球证券账户(现金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", 
+                           type="香港及环球证券账户(现金)")
         # 点击提交按钮
         self.applySublime()
-
 
     """
     # 用例: 账户类别选择香港及环球证券账户(现金),校验衍生产品是否必填.
@@ -41,10 +44,11 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=0, linknum=0)
     def test_apply_CashisDerivativeProductyes(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="香港及环球证券账户(现金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", 
+                           type="香港及环球证券账户(现金)")
         # 点击提交按钮
         self.applySublime()
-
 
     """
     # 用例: 账户类别选择香港及环球证券账户(现金),校验衍生产品是否必填.
@@ -53,10 +57,11 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=0, linknum=1)
     def test_apply_CashisDerivativeProductNo(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="香港及环球证券账户(现金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", 
+                           type="香港及环球证券账户(现金)")
         # 点击提交按钮
         self.applySublime()
-
 
     """
     # 用例: 账户类别选择香港及环球证券账户(保证金),校验衍生产品是否必填.
@@ -65,10 +70,11 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=1)
     def test_apply_MarginNotDerivativeProduct(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="香港及环球证券账户(保证金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", 
+                           type="香港及环球证券账户(保证金)")
         # 点击提交按钮
         self.applySublime()
-
 
     """
     # 用例: 账户类别选择香港及环球证券账户(保证金),校验衍生产品是否必填.
@@ -77,11 +83,11 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=0, linkTag=False)
     def test_apply_MarginisDerivativeProductNone(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="香港及环球证券账户(保证金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", 
+                           type="香港及环球证券账户(保证金)")
         # 点击提交按钮
         self.applySublime()
-
-
 
     """
     # 用例: 账户类别选择香港及环球证券账户(保证金),校验衍生产品是否必填.
@@ -90,10 +96,11 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     @addApplyTool.DerivativeProduct(num=0, linknum=0)
     def test_apply_MarginisDerivativeProductyes(self):
 
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="香港及环球证券账户(保证金)")
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", 
+                           type="香港及环球证券账户(保证金)")
         # 点击提交按钮
         self.applySublime()
-
 
     """
     # 用例: 账户类别选择香港及环球证券账户(保证金),校验衍生产品是否必填.
@@ -101,18 +108,18 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=0, linknum=1)
     def test_apply_MarginisDerivativeProductNo(self):
-        
-        self.RequiredField(applicationFor="个人账户", way="亲临开户", type="香港及环球证券账户(保证金)")
+
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户", 
+                           type="香港及环球证券账户(保证金)")
         # 点击提交按钮
         self.applySublime()
-
-
 
 
 if __name__ == '__main__':
     unittest.main()
     suite = unittest.TestSuite()
-    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(addApplyDerivativeProduct))
+    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(
+        addApplyDerivativeProduct))
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)
-

@@ -55,6 +55,7 @@ class Test_importAyers(unittest.TestCase):
 
         return data
 
+    @unittest.skip("废弃用例,跳过")
     def test_importAyers(self):
 
         data = self.getNumber()

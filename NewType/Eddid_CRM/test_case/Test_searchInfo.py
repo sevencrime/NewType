@@ -43,6 +43,8 @@ class Test_searchInfo(unittest.TestCase):
         print("结束driver")
         self.driver.quit()
 
+        
+    @unittest.skip("废弃用例,跳过")
     def test_searchInfo(self):
         MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
         mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
