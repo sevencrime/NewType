@@ -210,3 +210,5 @@
 2019-06-26 11:24:17,050 PyMongo.py INFO [line:47] apply 表预计删除 2 条记录
 2019-06-26 11:24:17,050 PyMongo.py INFO [line:54] apply_info 表实际删除 3 条记录
 2019-06-26 11:24:17,050 PyMongo.py INFO [line:54] apply 表实际删除 2 条记录
+2019-06-26 16:19:00,474 PyMongo.py INFO [line:34] 连接数据库uat
+2019-06-26 16:19:06,155 PyMongo.py INFO [line:69] apply_info 表符合查询条件{'email': '155onedi2s2311@qq.com'} 的数据有0 条

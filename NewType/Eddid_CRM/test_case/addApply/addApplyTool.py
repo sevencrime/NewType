@@ -240,13 +240,13 @@ class addApplyTool(unittest.TestCase):
     def AccountOpeningWay(way):
         # 把开户方法变成装饰器实现
         def wrapper(func):
-            def inner_wrapper(self):
+            def inner_wrapper(self, *args, **kwargs):
                 # 点击选择开户方法
                 accountOpeningWay = self.applypage.send_accountOpeningWay(way)
                 assert way in accountOpeningWay
 
                 try:
-                    return func(self)   #执行用例
+                    return func(self, *args, **kwargs)   #执行用例
                 except AssertionError:
                     print("断言失败,进行装饰器校验")
                     # 捕捉断言失败异常AssertionError
