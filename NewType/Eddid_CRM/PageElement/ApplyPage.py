@@ -907,11 +907,22 @@ class ApplyPage(BasePage.BasePage):
 
 
     def apply_error(self):
+        # import pdb; pdb.set_trace()
         errormsg_loc = (By.XPATH, '//div[@class="el-form-item__error"]/ancestor::span/preceding-sibling::div')
+        errormsg2_loc = (By.XPATH, '//div[@class="el-form-item__error"]/ancestor::span/parent::div/preceding-sibling::div/div')
         try:
             errormsg = self.find_elements(*errormsg_loc)
-            for err in errormsg:
-                print(err.get_attribute("value"), "栏 字段值为空! ")
+            errormsg2 = self.find_elements(*errormsg2_loc)
+            if errormsg != False:
+                print("errormsg 不为空")
+                for err in errormsg:
+                    print(err.text, "栏 字段不能为空! ")
+
+            if errormsg2 != False:
+                print("errormsg2 不为空")
+                for err2 in errormsg2:
+                    print(err2.text, "栏 字段不能为空! ")
+
         except Exception as e:
             print("表单必填项已全部填写")
             print("错误原因可能是接口报错")

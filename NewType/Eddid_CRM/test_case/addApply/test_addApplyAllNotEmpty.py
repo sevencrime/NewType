@@ -32,8 +32,9 @@ class Test_addApplyAllNotEmpty(addApplyTool):
         self.RequiredField(applicationFor="联名账户",
                            way="亲临开户", 
                            type="香港及环球期货账户(保证金)")
+
         # 点击个人账户-提交按钮
-        self.applySublime()
+        self.applySublime(Jump=False)
 
         # 进入联名账户表单
         self.JoinRequiredField()

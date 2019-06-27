@@ -3,7 +3,11 @@
 
 
 import os, sys
-sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
+# sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
+sys.path.append(rootPath)
+
 from selenium import webdriver
 import unittest
 from test_case.Test_Login import *

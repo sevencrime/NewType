@@ -11,6 +11,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from PageElement import *
 from Commons import *
 
+class Test_Login(unittest.main):
 
     # log = Logging.Logs()
 

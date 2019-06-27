@@ -18,6 +18,8 @@ def Logs():
         curPath = os.path.abspath(os.path.dirname(__file__))
         # 项目根目录
         rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
+        if os.path.exists(rootPath+"Logs") is False:
+            os.makedirs(rootPath+"Logs")
         # print(rootPath)
         url_log = rootPath + 'Logs/run_log.log' 
         # url_log = os.path.abspath(os.path.dirname(os.getcwd())) + '/logs/run_result_%s.log' %t
