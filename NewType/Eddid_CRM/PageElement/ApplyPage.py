@@ -625,14 +625,18 @@ class ApplyPage(BasePage.BasePage):
         assert PEP_People.get_attribute("value") != ''
         return PEP_People.get_attribute("value")
 
-    def investmentTarget(self):
+    def investmentTarget(self, text=None):
         # 8.客户的投资目标是:
         # investmentTarget = self.find_element(*self.get_input("投资目标", parent=True))
         # self.scrollinto(investmentTarget)
         # tag_text = self.get_select()
         # assert investmentTarget.get_attribute("value") != ''
         # return investmentTarget.get_attribute("value")
-        self.find_element(*self.get_checkbox('对冲')).click()
+        if text == None:
+            self.find_element(*self.get_checkbox('对冲')).click()
+        else:
+            self.find_element(*self.get_checkbox(text)).click()
+
 
     def riskTolerance(self, num=None):
         # 9.客户的风险承受能力是:

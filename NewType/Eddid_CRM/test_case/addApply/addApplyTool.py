@@ -3,7 +3,6 @@
 
 
 import os, sys
-# sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
 sys.path.append(rootPath)
@@ -52,14 +51,16 @@ class addApplyTool(unittest.TestCase):
     """
         #Apply 必填步骤
     """
-
     def RequiredField(self, *args, **kwargs):
         # 账户类型
-        applicationFor = self.applypage.send_applicationFor(
-            kwargs["applicationFor"])
+        applicationFor = self.applypage.send_applicationFor(kwargs["applicationFor"])
         # 开户方法
-        accountOpeningWay = self.applypage.send_accountOpeningWay(
-            kwargs["way"])
+        try:
+            if kwargs["way"]:
+                accountOpeningWay = self.applypage.send_accountOpeningWay(kwargs["way"])
+        except KeyError:
+            accountOpeningWay = self.applypage.send_accountOpeningWay()
+            
         # 负责人
         parentId = self.applypage.send_parentId()
         # 邮件语言
@@ -131,8 +132,14 @@ class addApplyTool(unittest.TestCase):
         americanResident = self.applypage.americanResident()
         # 客户是否香港法律定义下的“政治公众人物（PEP）”或与政治公众人物有密切联系？
         PEP_People = self.applypage.PEP_People()
+
         # 客户的投资目标是:
-        investmentTarget = self.applypage.investmentTarget()
+        try:
+            if kwargs["investmentTarget"]:
+                investmentTarget = self.applypage.investmentTarget(text = kwargs["investmentTarget"])
+        except KeyError:
+            investmentTarget = self.applypage.investmentTarget()
+
         # 客户的风险承受能力是:---需校验
         riskTolerance = self.applypage.riskTolerance(num=0)
         # 结算账户-货币
@@ -150,10 +157,10 @@ class addApplyTool(unittest.TestCase):
         # 个人资料之使用声明
         useStatement = self.applypage.useStatement()
 
+
     """
         #Apply 联名账户必填步骤
     """
-
     def JoinRequiredField(self):
         # 进入联名账户
         # 联名账户- 称谓
@@ -226,10 +233,10 @@ class addApplyTool(unittest.TestCase):
         # 联名账户- 本人确认并同意主要账户持有人之风险承受能力选择？
         self.applypage.jointRiskTolerance()
 
+
     """
         #提交表单按钮
     """
-
     def applySublime(self, Jump=True):
         # 点击提交按钮
         self.applypage.click_sublimeApply("提交")
@@ -245,6 +252,7 @@ class addApplyTool(unittest.TestCase):
         except AssertionError:
             self.applypage.apply_error()
             raise AssertionError
+
 
     """
     开户方式装饰器
@@ -283,6 +291,7 @@ class addApplyTool(unittest.TestCase):
 
             return inner_wrapper
         return wrapper
+
 
     # 衍生产品隐藏框
     # 用于校验触发该隐藏框后是否必填
@@ -336,8 +345,8 @@ class addApplyTool(unittest.TestCase):
             return inner_wrapper
         return wrapper
 
-    # 风险承受能力装饰器
 
+    # 风险承受能力装饰器
     def RiskTolerance(num=None):
 
         def wrapper(func):
