@@ -118,6 +118,13 @@ class addApplyTool(unittest.TestCase):
         derivativeJobs = self.applypage.derivativeJobs()
         # 客户是否于过去3年曾执行 5次或以上有关衍生产品的交易，例如：衍生权证、牛熊证、股票期权、期货及期权、商品、结构性产品及交易所买卖基金等?
         tradingFund = self.applypage.tradingFund()
+        # 隐藏框, 衍生产品
+        try:
+            if kwargs["buyProduct"]:
+                buyProduct = self.applypage.buyProduct(num=0, linknum=0)
+        except Exception as e:
+            print(e)
+            
         # 客户是否曾经宣告破产或被申请破产?
         bankrupt = self.applypage.bankrupt()
         # 客户是否艾德证券及/或艾德金业的雇员或任何其客户的亲属?
@@ -265,7 +272,6 @@ class addApplyTool(unittest.TestCase):
                 try:
                     return func(self, *args, **kwargs)  # 执行用例
                 except AssertionError:
-                    print("断言失败,进行装饰器校验")
                     # 捕捉断言失败异常AssertionError
                     if way == "手机应用程式身份验证":
                         # 输入银行名称
@@ -311,7 +317,6 @@ class addApplyTool(unittest.TestCase):
                     print("断言失败,进行装饰器校验")
                     # 断言错误,提交失败,输入衍生产品隐藏框后再次点击提交按钮
                     # 输入衍生产品隐藏框
-                    # import pdb; pdb.set_trace()
                     self.applypage.buyProduct(num, linkTag, linknum)
                     try:
                         self.applypage.click_sublimeApply("提交")

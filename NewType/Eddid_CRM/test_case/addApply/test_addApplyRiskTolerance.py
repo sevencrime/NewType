@@ -31,7 +31,8 @@ class Test_addApplyRiskTolerance(addApplyTool):
     def test_apply_BullionRiskToleranceMiddle(self):
 
         self.RequiredField(applicationFor="个人账户",
-                           way="亲临开户", type="艾德金业现货黄金账户(保证金)")
+                           way="亲临开户", 
+                           type="艾德金业现货黄金账户(保证金)")
         self.applySublime()
 
     """
@@ -54,7 +55,8 @@ class Test_addApplyRiskTolerance(addApplyTool):
     def test_apply_LeveragedRiskToleranceLow(self):
 
         self.RequiredField(applicationFor="个人账户",
-                           way="亲临开户", type="杠杆式外汇账户(保证金)")
+                           way="亲临开户", 
+                           type="杠杆式外汇账户(保证金)")
         self.applySublime()
 
     """
@@ -65,7 +67,8 @@ class Test_addApplyRiskTolerance(addApplyTool):
     def test_apply_LeveragedRiskToleranceMiddle(self):
 
         self.RequiredField(applicationFor="个人账户",
-                           way="亲临开户", type="杠杆式外汇账户(保证金)")
+                           way="亲临开户", 
+                           type="杠杆式外汇账户(保证金)")
         self.applySublime()
 
     """
@@ -81,7 +84,7 @@ class Test_addApplyRiskTolerance(addApplyTool):
         self.applySublime()
 
     """
-    # 用例: 账户类别分别选择衍生产品,校验风险提示.
+    # 用例: 选择衍生产品,校验风险提示.
     #       风险提示选择 "低"
     """
     @addApplyTool.RiskTolerance(num=2)
@@ -89,11 +92,12 @@ class Test_addApplyRiskTolerance(addApplyTool):
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户", 
-                           type="香港及环球证券账户(现金)")
+                           type="香港及环球证券账户(现金)", 
+                           buyProduct=True)
         self.applySublime()
 
     """
-    # 用例: 账户类别选择衍生产品,校验风险提示.
+    # 用例: 选择衍生产品,校验风险提示.
     #       风险提示选择 "中"
     """
     @addApplyTool.RiskTolerance(num=1)
@@ -101,11 +105,12 @@ class Test_addApplyRiskTolerance(addApplyTool):
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户", 
-                           type="香港及环球证券账户(现金)")
+                           type="香港及环球证券账户(现金)",
+                           buyProduct=True)
         self.applySublime()
 
     """
-    # 用例: 账户类别选择衍生产品,校验风险提示.
+    # 用例: 选择衍生产品,校验风险提示.
     #       风险提示选择 "高"
     """
     @addApplyTool.RiskTolerance(num=0)
@@ -113,7 +118,8 @@ class Test_addApplyRiskTolerance(addApplyTool):
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户", 
-                           type="香港及环球证券账户(现金)")
+                           type="香港及环球证券账户(现金)",
+                           buyProduct=True)
         self.applySublime()
 
 
