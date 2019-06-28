@@ -1,3 +1,0 @@
-2019-06-13 14:36:55,553 del_mongo.py INFO [line:31] 连接数据库uat
-2019-06-13 14:37:00,485 del_mongo.py INFO [line:66] apply_info 表符合查询条件{'phone': '15089514626'} 的数据有0 条
-2019-06-13 14:37:00,602 del_mongo.py INFO [line:37] close Client

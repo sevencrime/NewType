@@ -46,7 +46,7 @@ class ReviewProcessTool(unittest.TestCase):
 
 	"""
 		# 通过审核
-		# 适用于CS1, CS2, RO, OPS 状态
+		# 适用于CS1, CS2, RO 状态
 		# 通过email,确定需要操作的数据
 		# 双击进入apply表单, 点击通过操作
 
