@@ -316,12 +316,14 @@ class addApplyTool(unittest.TestCase):
                     try:
                         self.applypage.click_sublimeApply("提交")
                         self.mainpage.wait_LoadingModal()  # loading
-                        if linkTag == True or num == 1:
-                            self.assertEqual(
-                                self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败, 页面没有跳转")
-                        else:
+                        # 下拉选择是, 隐藏框填写
+                        if linkTag == False and num == 0:
                             self.assertEqual(
                                 self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-create', "表单没有停留在同一页")
+
+                        else:
+                            self.assertEqual(
+                                self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "提交表单失败, 页面没有跳转")
 
                     except AssertionError:
                         # 断言失败, 数据提交失败
