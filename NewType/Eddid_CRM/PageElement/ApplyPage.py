@@ -824,30 +824,40 @@ class ApplyPage(BasePage.BasePage):
         assert primaryRelations.get_attribute("value") != ''
         return primaryRelations.get_attribute("value")
 
-    def send_accountNumber(self, randox=None):
+    def send_accountNumber(self, randox=None, manualInput=False):
         # ops审核菜单
-        self.find_element(*self.get_input("客户编号", parent=True)
-                          ).send_keys(random.randint(0, 999999))
+        # self.find_element(*self.get_input("客户编号", parent=True)
+        #                   ).send_keys(random.randint(0, 999999))
 
-        if self.driver.page_source.find("证券账户号") != -1:
-            # 存在证券账户号码
-            self.find_element(*self.get_input("证券账户号", parent=True)
-                              ).send_keys(random.randint(0, 9999999999))
+        # 生成按钮
+        generate_btn_loc = (By.XPATH, '//span[contains(text(), "生成")]/parent::button')
+        # 客户编号下拉框
+        accountNoSel_loc = (By.XPATH, '//span[contains(text(), "生成")]/parent::button/preceding-sibling::div[@class="el-select"]')
+        # 客户编号输入框
+        accountNoInput_loc = (By.XPATH, '//span[contains(text(), "生成")]/parent::button/preceding-sibling::div[@class="el-input"]')
+        # 客户编号确认按钮
+        accountNobtn_loc = (By.XPATH, '//span[contains(text(), "生成")]/parent::button/following-sibling::button[span[contains(text(), "确认")]]')
 
-        if self.driver.page_source.find("期货账户号") != -1:
-            # 存在证券账户号码
-            self.find_element(*self.get_input("期货账户号", parent=True)
-                              ).send_keys(random.randint(0, 9999999999))
+        if not manualInput:
+            if self.driver.page_source.find("证券账户号") != -1:
+                # 存在证券账户号码
+                self.find_element(*self.get_input("证券账户号", parent=True)
+                                  ).send_keys(random.randint(0, 9999999999))
 
-        if self.driver.page_source.find("外汇账户号(MT5)") != -1:
-            # 存在证券账户号码
-            self.find_element(*self.get_input("外汇账户号(MT5)", parent=True)
-                              ).send_keys(random.randint(0, 9999999999))
+            if self.driver.page_source.find("期货账户号") != -1:
+                # 存在证券账户号码
+                self.find_element(*self.get_input("期货账户号", parent=True)
+                                  ).send_keys(random.randint(0, 9999999999))
 
-        if self.driver.page_source.find("现货黄金账户号") != -1:
-            # 存在证券账户号码
-            self.find_element(*self.get_input("现货黄金账户号", parent=True)
-                              ).send_keys(random.randint(0, 9999999999))
+            if self.driver.page_source.find("外汇账户号(MT5)") != -1:
+                # 存在证券账户号码
+                self.find_element(*self.get_input("外汇账户号(MT5)", parent=True)
+                                  ).send_keys(random.randint(0, 9999999999))
+
+            if self.driver.page_source.find("现货黄金账户号") != -1:
+                # 存在证券账户号码
+                self.find_element(*self.get_input("现货黄金账户号", parent=True)
+                                  ).send_keys(random.randint(0, 9999999999))
 
         promoCode_loc = (
             By.XPATH, '//span[contains(text(), " 优惠码 ")]/following-sibling::div//input')
@@ -878,6 +888,7 @@ class ApplyPage(BasePage.BasePage):
         sublime_popwindow_loc = (
             By.XPATH, "//span[text()='确定']//parent::button")
         self.find_element(*sublime_popwindow_loc).click()
+
 
     def rejectReason(self, btntext):
         reasontext = ["开户资料", "主要账户持有人资料", "主要账户持有人就业资料", "主要账户持有人证明资料",

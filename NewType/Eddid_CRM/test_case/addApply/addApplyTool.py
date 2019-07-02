@@ -371,6 +371,8 @@ class addApplyTool(unittest.TestCase):
                         if num == 0:
                             # 风险承受能力选择为"高"
                             self.applySublime()
+                        else:
+                            self.applySublime(Jump=False)
 
                     except AttributeError:
                         print("点击风险承受能力方法有异常, 请优化方法")

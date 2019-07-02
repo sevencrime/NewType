@@ -72,7 +72,8 @@ class ReviewProcessTool(unittest.TestCase):
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
 		# self.assertIsNot("待CS2审批", self.mainpage.get_status(self.email), "状态没有改变")
-		globals()["status"] = self.mainpage.get_status(self.email)
+		# import pdb; pdb.set_trace()
+		return self.mainpage.get_status(self.email)
 
 
 	"""
@@ -100,9 +101,9 @@ class ReviewProcessTool(unittest.TestCase):
 		self.mainpage.wait_LoadingModal()
 
 		self.assertIsNot("待CS2审批", self.mainpage.get_status(self.email), "状态没有改变")
-		globals()["status"] = self.mainpage.get_status(self.email)
+		# globals()["status"] = self.mainpage.get_status(self.email)
 
-
+		return self.mainpage.get_status(self.email)
 	"""
 		# 拒绝数据
 		# 适用于CS1, CS2, RO状态
@@ -132,7 +133,7 @@ class ReviewProcessTool(unittest.TestCase):
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
 		# self.assertIsNot("拒绝", self.mainpage.get_status(self.email), "状态没有改变")
-		globals()["status"] = self.mainpage.get_status(self.email)
+		return self.mainpage.get_status(self.email)
 
 
 	"""
@@ -162,4 +163,5 @@ class ReviewProcessTool(unittest.TestCase):
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
 		self.assertEqual("成功", self.mainpage.get_status(self.email), "状态没有改变")
-		globals()["status"] = self.mainpage.get_status(self.email)
+
+		return self.mainpage.get_status(self.email)
