@@ -824,40 +824,30 @@ class ApplyPage(BasePage.BasePage):
         assert primaryRelations.get_attribute("value") != ''
         return primaryRelations.get_attribute("value")
 
-    def send_accountNumber(self, randox=None, manualInput=False):
+    # 已废弃, 老的ops审核输入编号(没有自动创建生成)
+    def send_accountNumber(self, randox=None):
         # ops审核菜单
-        # self.find_element(*self.get_input("客户编号", parent=True)
-        #                   ).send_keys(random.randint(0, 999999))
+        self.find_element(*self.get_input("客户编号", parent=True)
+                          ).send_keys(random.randint(0, 999999))
 
-        # 生成按钮
-        generate_btn_loc = (By.XPATH, '//span[contains(text(), "生成")]/parent::button')
-        # 客户编号下拉框
-        accountNoSel_loc = (By.XPATH, '//span[contains(text(), "生成")]/parent::button/preceding-sibling::div[@class="el-select"]')
-        # 客户编号输入框
-        accountNoInput_loc = (By.XPATH, '//span[contains(text(), "生成")]/parent::button/preceding-sibling::div[@class="el-input"]')
-        # 客户编号确认按钮
-        accountNobtn_loc = (By.XPATH, '//span[contains(text(), "生成")]/parent::button/following-sibling::button[span[contains(text(), "确认")]]')
+        if self.driver.page_source.find("证券账户号") != -1:
+        # 存在证券账户号码
+            self.find_element(*self.get_input("证券账户号", parent=True)).send_keys(random.randint(0, 9999999999))
 
-        if not manualInput:
-            if self.driver.page_source.find("证券账户号") != -1:
-                # 存在证券账户号码
-                self.find_element(*self.get_input("证券账户号", parent=True)
-                                  ).send_keys(random.randint(0, 9999999999))
+        if self.driver.page_source.find("期货账户号") != -1:
+            # 存在证券账户号码
+            self.find_element(*self.get_input("期货账户号", parent=True)
+                              ).send_keys(random.randint(0, 9999999999))
 
-            if self.driver.page_source.find("期货账户号") != -1:
-                # 存在证券账户号码
-                self.find_element(*self.get_input("期货账户号", parent=True)
-                                  ).send_keys(random.randint(0, 9999999999))
+        if self.driver.page_source.find("外汇账户号(MT5)") != -1:
+            # 存在证券账户号码
+            self.find_element(*self.get_input("外汇账户号(MT5)", parent=True)
+                              ).send_keys(random.randint(0, 9999999999))
 
-            if self.driver.page_source.find("外汇账户号(MT5)") != -1:
-                # 存在证券账户号码
-                self.find_element(*self.get_input("外汇账户号(MT5)", parent=True)
-                                  ).send_keys(random.randint(0, 9999999999))
-
-            if self.driver.page_source.find("现货黄金账户号") != -1:
-                # 存在证券账户号码
-                self.find_element(*self.get_input("现货黄金账户号", parent=True)
-                                  ).send_keys(random.randint(0, 9999999999))
+        if self.driver.page_source.find("现货黄金账户号") != -1:
+            # 存在证券账户号码
+            self.find_element(*self.get_input("现货黄金账户号", parent=True)
+                              ).send_keys(random.randint(0, 9999999999))
 
         promoCode_loc = (
             By.XPATH, '//span[contains(text(), " 优惠码 ")]/following-sibling::div//input')
@@ -941,3 +931,88 @@ class ApplyPage(BasePage.BasePage):
         except Exception as e:
             print("表单必填项已全部填写")
             print("错误原因可能是接口报错")
+
+
+    """
+        ops审核, 下拉列表选择账户类型, 点击生成按钮
+    """
+    def autoCreateAccountNO(self, randox=None):
+
+        # 生成按钮
+        generate_btn_loc = (By.XPATH, '//span[contains(text(), "生成")]/parent::button')
+        # 客户编号下拉框
+        accountNOSel_loc = (By.XPATH, '//span[contains(text(), "生成")]/parent::button/preceding-sibling::div[@class="el-select"]')
+
+        # 下拉框
+        accountwaySel_loc = (By.XPATH, '//div[@x-placement="bottom-start"]//li')
+
+        # 下拉列表选择客户编号
+        self.find_element(*accountNOSel_loc).click()
+        accountwaylist = self.find_elements(*accountwaySel_loc)
+
+        if randox == None:
+            randox = random.randint(0, len(accountwaylist)-1)
+
+        for i in range(len(accountwaylist)):
+            if i == randox:
+                while accountwaylist[i].is_displayed():
+                    self.scrollinto(accountwaylist[i])
+                    # self.script("arguments[0].click();", selectlist[i])
+
+                    try:
+                        tag_text = accountwaylist[i].get_attribute("textContent")
+                        # print(tag_text)
+                    except AttributeError:
+                        continue
+
+                # 点击生成按钮
+                self.find_element(*generate_btn_loc).click()
+
+                return accountwaylist[i].get_attribute("textContent")
+
+    # 点击确定,创建账号
+    def createTradeAccount(self):
+        # 客户编号确认按钮
+        accountNobtn_loc = (By.XPATH, '//span[contains(text(), "生成")]/parent::button/following-sibling::button[span[contains(text(), "确认")]]')
+        self.find_element(*accountNobtn_loc).click()
+
+    # 手动输入客户编号
+    def manualSendAccountNo(self):
+        # 客户编号输入框
+        accountNoInput_loc = (By.XPATH, '//span[contains(text(), "生成")]/parent::button/preceding-sibling::div[@class="el-input"]')
+        self.find_element(*accountNoInput_loc).send_keys(random.randint(0, 999999))
+
+    # 输入优惠码
+    def send_promoCode(self, randox=None):
+
+        promoCode_loc = (
+            By.XPATH, '//span[contains(text(), "优惠码")]/following-sibling::div//input')
+        promoCode_select_loc = (
+            By.XPATH, "//div[contains(@style,'position: fixed;')]//li[@class='el-select-dropdown__item']")
+
+        promoCode = self.find_element(*promoCode_loc)
+        promoCode.click()
+
+        promoCodeValueList = self.find_elements(*promoCode_select_loc)
+        if randox == None:
+            randox = random.randint(0, len(promoCodeValueList)-1)
+
+        for i in range(len(promoCodeValueList)):
+            if i == randox:
+                while promoCodeValueList[i].is_displayed():
+                    self.scrollinto(promoCodeValueList[i])
+                    # self.script("arguments[0].click();", promoCodeValueList[i])
+
+                    try:
+                        tag_text = promoCodeValueList[i].get_attribute("textContent")
+                        # print(tag_text)
+                    except AttributeError:
+                        continue
+
+                # return promoCodeValueList[i].get_attribute("textContent")
+
+    # OPS创建账号框,点击确定
+    def ops_createNO(self):
+        sublime_popwindow_loc = (
+            By.XPATH, "//span[text()='确定']//parent::button")
+        self.find_element(*sublime_popwindow_loc).click()

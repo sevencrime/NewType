@@ -158,7 +158,16 @@ class ReviewProcessTool(unittest.TestCase):
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
 		self.applypage.click_sublimeApply("完成")
-		self.applypage.send_accountNumber(randox=1)
+		# self.applypage.send_accountNumber(randox=1)
+		# 自动生成客户编号
+		self.applypage.autoCreateAccountNO()
+		self.mainpage.wait_LoadingModal()
+		# 点击确认按钮,生成账户号
+		self.applypage.createTradeAccount()
+		# 选择优惠码
+		self.applypage.send_promoCode()
+		# 点击确认按钮
+		self.applypage.ops_createNO()
 		self.mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")

@@ -13,13 +13,13 @@ from ReviewProcessTool import ReviewProcessTool
 class reviewProcess1(ReviewProcessTool):
 	# CRM and apply_form正向审核: 未处理--待cs2--待RO--待ops--success
 	globals()["status"] = ""
-	email = "8747onedi858501@qq.com"
+	email = "6621onedi374130@qq.com"
+
 
 	# @reviewProcessTool.skipIf(status = "未处理")
 	def test1_Process1_sales_to_cs2(self):
 		# sales--cs2
 		Test_Login.LoginCRM(self, user='sales_t1')
-		# import pdb; pdb.set_trace()
 		globals()["status"] = self.submitReview(email=self.email, statusSel="未处理")
 		
 	# @reviewProcessTool.skipIf(status = "CS2")
@@ -29,7 +29,6 @@ class reviewProcess1(ReviewProcessTool):
 		if globals()["status"].find("待CS2审批") == -1:
 			pytest.xfail("数据状态是 {}".format(globals()["status"]))
 
-		# self.loginCRM(user='cs_t1')		#先登录
 		Test_Login.LoginCRM(self, user='cs_t1')
 		globals()["status"] = self.reviewPass(email=self.email, statusSel="待CS2审批")
 
@@ -40,7 +39,6 @@ class reviewProcess1(ReviewProcessTool):
 		if globals()["status"].find("待证券RO审批") == -1 :
 			pytest.xfail("数据状态是 {}".format(globals()["status"]))
 			
-		# self.loginCRM(user='ro1_cliff', psw="Abcd1234")		#先登录
 		Test_Login.LoginCRM(self, user='ro1_cliff', psw="Abcd1234")
 		globals()["status"] = self.reviewPass(email=self.email, statusSel="待RO审批")
 
@@ -50,7 +48,6 @@ class reviewProcess1(ReviewProcessTool):
 		if globals()["status"].find("待期货RO审批") == -1 :
 			pytest.xfail("数据状态是 {}".format(globals()["status"]))
 			
-		# self.loginCRM(user='ro1_don', psw='Abcd1234')		#先登录
 		Test_Login.LoginCRM(self, user='ro1_don', psw='Abcd1234')
 		globals()["status"] = self.reviewPass(email=self.email, statusSel="待RO审批")
 
@@ -69,9 +66,9 @@ class reviewProcess1(ReviewProcessTool):
 		if globals()["status"].find("待黄金RO审批") == -1 :
 			pytest.xfail("数据状态是 {}".format(globals()["status"]))
 		
-		# self.loginCRM(user='gold_onedi', psw="Abcd1234")		#先登录
 		Test_Login.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
 		globals()["status"] = self.reviewPass(email=self.email, statusSel="待RO审批")
+
 
 	# @reviewProcessTool.skipIf(status = "结算")
 	def test7_Process1_ops_to_success(self):
@@ -79,7 +76,6 @@ class reviewProcess1(ReviewProcessTool):
 		if globals()["status"].find("待结算审批") == -1 :
 			pytest.xfail("数据状态是 {}".format(globals()["status"]))
 			
-		# self.loginCRM(user='ops_t1')		#先登录
 		Test_Login.LoginCRM(self, user='ops_t1')
 		globals()["status"] = self.reviewFinish(email=self.email, statusSel="待结算审批")
 
