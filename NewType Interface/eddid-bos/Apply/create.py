@@ -23,9 +23,9 @@ data = {
     # "applicationFor": "joint",
     # "accountType": ["securitiesCash"],
     "accountType": ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"],
-    "status" : "finish",
-    # "customerSource" : "app",
-    "customerSource" : "crm",
+    "status" : "reviewing",
+    "customerSource" : "app",
+    # "customerSource" : "crm",
     "client": [{
         "title": "mr",
         "firstName": "名",

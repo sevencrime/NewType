@@ -72,7 +72,6 @@ class ReviewProcessTool(unittest.TestCase):
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
 		# self.assertIsNot("待CS2审批", self.mainpage.get_status(self.email), "状态没有改变")
-		# import pdb; pdb.set_trace()
 		return self.mainpage.get_status(self.email)
 
 
