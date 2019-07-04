@@ -8,65 +8,29 @@ from ReviewProcessTool import ReviewProcessTool
 
 class reviewProcess5(ReviewProcessTool):
     # 多角色RO
-    globals()["status"] = "待CS2审核"
+    globals()["status"] = ""
     email = "9706onedi882636@qq.com"
     
     # @unittest.skipIf(globals()["status"].find("未处理") != -1, "状态不是未处理")
     # @skipIf("未处理")
-    def test_a_Process5_aaron(self):
+    def test_01_Process5_aaron(self):
         # aaron 通过
-        Test_Login.LoginCRM(self, user='aaron_test')      #先登录
+        Test_Login.LoginCRM(self, user='aaron_chan')
+        globals()["status"] = self.reviewPass(email=self.email, statusSel="待RO审批")
 
-        self.MenuListPage = self.MenuListPage.self.MenuListPage(self.driver, self.url, "Eddid")
-        self.mainpage = self.mainpage.self.mainpage(self.driver, self.url, "Eddid")
-        self.applypage = self.applypage.self.applypage(self.driver, self.url, "Eddid")
-
-        self.MenuListPage.click_apply_manager()     #点击开户管理
-        self.MenuListPage.click_applylist()         #点击开户列表
-        self.mainpage.wait_LoadingModal()
-        # import pdb; pdb.set_trace()
-        # 下拉列表选择未处理
-        self.mainpage.click_StatusSelect("待RO审批")
-        self.mainpage.wait_LoadingModal()
-
-        # 判断状态校验功能是否正常,选择编号
-        self.mainpage.get_apply(email=self.email)   
-        self.mainpage.wait_LoadingModal()
-        self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
-        self.applypage.click_sublimeApply("通过")
-        self.applypage.click_popWindow("确定")
-        self.mainpage.wait_LoadingModal()
-
-        # self.assertIsNot("待CS2审批", self.mainpage.get_status(self.email), "状态没有改变")
-        globals()["status"] = self.mainpage.get_status(self.email)
 
     # @unittest.skipIf(globals()["status"].find("未处理") != -1, "状态不是未处理")
-    def test_b_Process5_roadmin(self):
+    def test_02_Process5_roadmin(self):
         # 多角色通过
+
+        if globals()["status"].find("待外汇RO审批") != -1:
+            pytest.xfail("数据状态是 {}".format(globals()["status"]))
+
         Test_Login.LoginCRM(self, user='onedi.admin', psw="Abcd1234")      #先登录
+        globals()["status"] = self.reviewPass(email=self.email, statusSel="待RO审批")
 
-        self.MenuListPage = self.MenuListPage.self.MenuListPage(self.driver, self.url, "Eddid")
-        self.mainpage = self.mainpage.self.mainpage(self.driver, self.url, "Eddid")
-        self.applypage = self.applypage.self.applypage(self.driver, self.url, "Eddid")
+        self.assertEqual("待结算审批", globals()["status"], "onedi.admin审核后状态没有改变")
 
-        self.MenuListPage.click_apply_manager()     #点击开户管理
-        self.MenuListPage.click_applylist()         #点击开户列表
-        self.mainpage.wait_LoadingModal()
-
-        # 下拉列表选择未处理
-        self.mainpage.click_StatusSelect("待RO审批")
-        self.mainpage.wait_LoadingModal()
-        # 判断状态校验功能是否正常,选择编号
-        self.mainpage.get_apply(email=self.email)   
-        self.mainpage.wait_LoadingModal()
-        self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
-
-        self.applypage.click_sublimeApply("通过")
-        self.applypage.click_popWindow("确定")
-        self.mainpage.wait_LoadingModal()
-
-        # self.assertIsNot("待CS2审批", self.mainpage.get_status(self.email), "状态没有改变")
-        globals()["status"] = self.mainpage.get_status(self.email)
         
 
 

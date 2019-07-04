@@ -1,0 +1,12 @@
+APP来源完整审核
+CRM来源完整审核
+CS1拒绝
+CS2拒绝
+RO拒绝给CS2, CS2驳回给RO
+RO拒绝给CS2, CS2确定拒绝
+sales修改
+CS1修改图片
+CS2修改图片
+OPS修改图片和优惠码
+多角色RO通过
+多角色RO拒绝
