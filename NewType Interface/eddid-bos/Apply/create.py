@@ -1,10 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Date    : 2019-01-30 09:44:36
-# @Author  : Onedi (Onedi@qq.com)
-# @Link    : ${link}
-# @Version : $Id$
-
 import requests 
 import json
 import random
@@ -14,7 +9,7 @@ url = 'https://eddid-api.ntdev.be/eddid-api-uat/apply/create'
 
 headers = {
     'Content-Type' : 'application/json' ,
-    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoidGVzdCIsImNvZ25pdG86cm9sZXMiOlsiYXJuOmF3czppYW06OjgzMjQzMTg2NDY2Njpyb2xlXC9kZXYtZWRkaWQtY29nbml0by1hZG1pbi1yb2xlIl0sImF1ZCI6IjUxM2pmY2t0cjFtNmV2b2dmcXU3b3NrN3BhIiwiZXZlbnRfaWQiOiJjMTY3MGM3Ny1mZjBiLTRlYjMtOTEwZi1hNGI4OWJkMDE1ZDkiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU2MjIyNDQ4OSwiZXhwIjoxNTYyMjI4MDg5LCJpYXQiOjE1NjIyMjQ0ODksImZhbWlseV9uYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluMTIzNEAxNjMuY29tIn0.Oymc_AIOM9PunGp09o3ctLb8yZKywcnLkPgGpVc9p_qhrERrUHgkpCBmb0RKNS2s-orOxLCvKTnJV_WLjmnGYxT3DGpWcKJncJEi03FYKGeVmbbU7d2lDtkUD2qTyZJ3d-tpQEcpv2uUMbR99a3u4YuUfHcFXIpV3SSU-bdBSQnBgOxSnEEMuhPSZPVNHR4CU93TGywY4V4bFb7acbIig9_fq4BcfDW9uAVkWFevj8jbH4JPI2sC5WKEnxlbQxfKLlRmbFNacsk1D_5AJ9zRlm6TxjEYyJ-EA0ONo0PXPVTcKyTdIxLM2P-B5JH8cGDmvjLgx8jPJiAg4gEJ3eg21w'
+    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJlODRjNDM1YS01OTFiLTQzMTktOWVhMC1lZDAyY2NkZTRjM2UiLCJjb2duaXRvOmdyb3VwcyI6WyJjczIiXSwiZW1haWxfdmVyaWZpZWQiOnRydWUsImNvZ25pdG86cHJlZmVycmVkX3JvbGUiOiJhcm46YXdzOmlhbTo6ODMyNDMxODY0NjY2OnJvbGVcL2Rldi1lZGRpZC1jb2duaXRvLWFkbWluLXJvbGUiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuYXAtc291dGhlYXN0LTEuYW1hem9uYXdzLmNvbVwvYXAtc291dGhlYXN0LTFfdTlmejdseW9OIiwiY29nbml0bzp1c2VybmFtZSI6ImNzX3QxIiwiZ2l2ZW5fbmFtZSI6IkFpbWVlMSIsImNvZ25pdG86cm9sZXMiOlsiYXJuOmF3czppYW06OjgzMjQzMTg2NDY2Njpyb2xlXC9kZXYtZWRkaWQtY29nbml0by1hZG1pbi1yb2xlIl0sImF1ZCI6IjUxM2pmY2t0cjFtNmV2b2dmcXU3b3NrN3BhIiwiZXZlbnRfaWQiOiJlMjY3MWRmZi0zNmZhLTRiMjAtYmMxNi02M2YwYWZiMjVmMDIiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU2MjIyNjUwMywiZXhwIjoxNTYyMjM1OTIwLCJpYXQiOjE1NjIyMzIzMjAsImZhbWlseV9uYW1lIjoiV2VpMSIsImVtYWlsIjoiMTIzNDU2MzNAMTYzLmNvbSJ9.A1IrvxflXufdjRofkkU-AnVZLD-zDXOI-d2cRnT0jv6E5HI0urlyMiZ8ZFV_mtQLhihnFiaduYWeyA_NYr9zTN9Oq__2AMxq89mWd0GS7k6cmicCwZ3GOompNcMlFsjG-atafTtG1_qplLmrzEHpa92IP1Ce6rMsoInysiRfl1gD0MzaG9rcD8Nunj2kfi3p2y6z8BDkdp8qga0nNBpxt-zAXE2kMye6ykPzfYGXGzk-R505XPCpBQ3X7p_Idh3ivJJEEYAlQt-AhAxk9MsAYWR5Go5FnChFIyk5TMJOo8RrS_1CG_GHTpPgyqejlLUjZJLb4YEC9WS8tUZv_KEXwg'
 
 }
 
@@ -39,8 +34,8 @@ data = {
         # "nationality": "CHN",
         "nationality": "HKG",
         "idType": "2",
-        "idNumber": "56%s56456" %(random.randint(1,102365)),
-        # "idNumber": "563296356456",
+        # "idNumber": "56%s56456" %(random.randint(1,102365)),
+        "idNumber": "568194956456",
         "countryIssue": "HKG",
         "birthday": 947001600000,
         "birthPlace": "CHN",
@@ -107,5 +102,5 @@ data = {
 urllib3.disable_warnings()
 resp = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
 print(resp.json())
-
+print(resp.status_code)
 print(data['client'][0]['email'])

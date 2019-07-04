@@ -22,7 +22,7 @@ class reviewProcess7(ReviewProcessTool):
         globals()["status"] = self.reviewRefuse(email=self.email, statusSel="待RO审批")
 
 
-    def test_01_Process7_cstoRefuse(self):
+    def test_02_Process7_cstoRefuse(self):
         if globals()["status"].find("待CS2审批") == -1 :
             pytest.xfail("数据状态是 {}".format(globals()["status"]))
 
@@ -33,6 +33,6 @@ class reviewProcess7(ReviewProcessTool):
 if __name__ == "__main__":
     # pytest.main()
     suite = unittest.TestSuite()
-    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(reviewProcess1))
+    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(reviewProcess7))
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)

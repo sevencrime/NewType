@@ -12,6 +12,7 @@ import unittest
 from test_case.Test_Login import *
 from Commons import *
 from PageElement import *
+from Interface import *
 import time
 
 
@@ -28,8 +29,7 @@ class addApplyTool(unittest.TestCase):
         self.driver.set_script_timeout(3)
         self.url = 'http://eddid-bos-uat.ntdev.be'
 
-        self.MenuListPage = MenuListPage.MenuListPage(
-            self.driver, self.url, "Eddid")
+        self.MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
         self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
         self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
         Test_Login.LoginCRM(self)
@@ -44,7 +44,7 @@ class addApplyTool(unittest.TestCase):
         print("用例执行完成")
         self.driver.quit()
         # 删除数据
-        print(globals()["email"])
+        # print(globals()["email"])
         if globals()["email"] != "":
             PyMongo.Database().del_linked("apply_info", {"email": globals()["email"]})
 

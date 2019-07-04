@@ -10,29 +10,31 @@ import unittest
 import pytest
 from ReviewProcessTool import ReviewProcessTool
 
-class reviewProcess13(ReviewProcessTool):
+class Test_reviewProcess13(ReviewProcessTool):
     #  黄金RO拒绝, CS2 确定拒绝
     globals()["status"] = ""
-    email = "6621onedi374130@qq.com"
 
     # @reviewProcessTool.skipIf(status = "待证券RO审批")
     def test_01_Process13_gold(self):
+        print(globals()["email"])
+        import pdb;pdb.set_trace()
         # cliff审核
         Test_Login.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
-        globals()["status"] = self.reviewRefuse(email=self.email, statusSel="待RO审批")
+        globals()["status"] = self.reviewRefuse(email=globals()["email"], statusSel="待RO审批")
 
 
-    def test_01_Process13_cstoRefuse(self):
+    def test_02_Process13_cstoRefuse(self):
+        print(globals()["email"])
         if globals()["status"].find("待CS2审批") == -1 :
             pytest.xfail("数据状态是 {}".format(globals()["status"]))
 
         Test_Login.LoginCRM(self, user='cs_t1')
-        globals()["status"] = self.reviewPass(email=self.email, statusSel="待RO审批", btn_text="确定拒绝")
+        globals()["status"] = self.reviewPass(email=globals()["email"], statusSel="待RO审批", btn_text="确定拒绝")
         
 
 if __name__ == "__main__":
     # pytest.main()
     suite = unittest.TestSuite()
-    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(reviewProcess1))
+    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(Test_reviewProcess13))
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)
