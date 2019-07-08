@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Date    : 2018-12-20 14:56:29
-# @Author  : Onedi (Onedi@qq.com)
-# @Link    : ${link}
-# @Version : $Id$
 
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC

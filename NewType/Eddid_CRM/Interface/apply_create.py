@@ -106,12 +106,15 @@ def apply_create_api():
 
         urllib3.disable_warnings()
         resp = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
-
         if resp.status_code == 200:
             return data['client'][0]['email']
 
 
+<<<<<<< HEAD
 if __name__ == '__main__':
 
     a = apply_create_api()
     print(a)
+=======
+
+>>>>>>> ff79fd9697223b77c7849ce1674309d69a2bdf59

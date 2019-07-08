@@ -16,8 +16,24 @@ import pytest
 
 class ReviewProcessTool(unittest.TestCase):
 	# CRM and apply_form正向审核: 未处理--待cs2--待RO--待ops--success
+	gm = GlobalMap.GlobalMap()
 
-	globals()["email"] = ""
+	@classmethod
+	def setUpClass(cls):
+		print("调用apply的create接口创建测试数据")
+		cls.gm.set_value(email = apply_create.apply_create_api())
+
+	# 所有case执行之后清理环境
+	@classmethod
+	def tearDownClass(cls):
+		print("删除数据")
+		if cls.gm.get_value("email") != "":
+			PyMongo.Database().del_linked("client_info", {"email": cls.gm.get_value("email")})
+			PyMongo.Database().del_linked("apply_info", {"email": cls.gm.get_value("email")})
+
+		print("删除变量")
+		cls.gm.del_map("email")
+
 
 	def setUp(self):
 		globals()["email"] = ""
@@ -31,15 +47,11 @@ class ReviewProcessTool(unittest.TestCase):
 		self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
 		self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
 		globals()["email"] = apply_create.apply_create_api()
+		GlobalMap.set_value("email", apply_create.apply_create_api())
 
 	def tearDown(self):
-		# time.sleep(5)
 		print("结束driver")
 		self.driver.quit()
-
-		if globals()["email"] != "":
-			PyMongo.Database().del_linked("client_info", {"email": globals()["email"]})
-			PyMongo.Database().del_linked("apply_info", {"email": globals()["email"]})
 
 
 	"""

@@ -221,6 +221,7 @@
 2019-07-04 18:20:02,440 PyMongo.py INFO [line:47] apply 表预计删除 2 条记录
 2019-07-04 18:20:02,440 PyMongo.py INFO [line:54] apply_info 表实际删除 2 条记录
 2019-07-04 18:20:02,440 PyMongo.py INFO [line:54] apply 表实际删除 2 条记录
+<<<<<<< HEAD
 2019-07-05 09:49:45,405 PyMongo.py INFO [line:34] 连接数据库uat
 2019-07-05 09:49:50,712 PyMongo.py INFO [line:69] client_info 表符合查询条件{'email': '6478onedi243952@qq.com'} 的数据有0 条
 2019-07-05 09:49:50,915 PyMongo.py INFO [line:40] close Client
@@ -313,3 +314,17 @@
 2019-07-05 14:11:35,096 PyMongo.py INFO [line:34] 连接数据库uat
 2019-07-05 14:11:40,434 PyMongo.py INFO [line:69] apply_info 表符合查询条件{'email': None} 的数据有0 条
 2019-07-05 14:11:41,194 PyMongo.py INFO [line:40] close Client
+=======
+2019-07-07 20:03:19,329 PyMongo.py INFO [line:34] 连接数据库uat
+2019-07-07 20:03:19,329 PyMongo.py INFO [line:34] 连接数据库uat
+2019-07-07 20:03:25,230 PyMongo.py INFO [line:69] client_info 表符合查询条件{'email': 'None'} 的数据有0 条
+2019-07-07 20:03:25,230 PyMongo.py INFO [line:69] client_info 表符合查询条件{'email': 'None'} 的数据有0 条
+2019-07-07 20:03:25,983 PyMongo.py INFO [line:40] close Client
+2019-07-07 20:03:25,983 PyMongo.py INFO [line:40] close Client
+2019-07-07 20:03:26,395 PyMongo.py INFO [line:34] 连接数据库uat
+2019-07-07 20:03:26,395 PyMongo.py INFO [line:34] 连接数据库uat
+2019-07-07 20:03:37,452 PyMongo.py INFO [line:69] apply_info 表符合查询条件{'email': 'None'} 的数据有0 条
+2019-07-07 20:03:37,452 PyMongo.py INFO [line:69] apply_info 表符合查询条件{'email': 'None'} 的数据有0 条
+2019-07-07 20:03:38,691 PyMongo.py INFO [line:40] close Client
+2019-07-07 20:03:38,691 PyMongo.py INFO [line:40] close Client
+>>>>>>> ff79fd9697223b77c7849ce1674309d69a2bdf59
