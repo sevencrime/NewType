@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import time,os,sys
-sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
+import os,sys
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
+sys.path.append(rootPath)
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -11,7 +13,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from PageElement import *
 from Commons import *
 
-class Test_Login(unittest.main):
+class Test_Login(unittest.TestCase):
 
     # log = Logging.Logs()
 

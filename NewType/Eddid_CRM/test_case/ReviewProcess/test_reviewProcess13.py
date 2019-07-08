@@ -23,13 +23,13 @@ class Test_reviewProcess13(ReviewProcessTool):
         globals()["status"] = self.reviewRefuse(email=globals()["email"], statusSel="待RO审批")
 
 
-    def test_02_Process13_cstoRefuse(self):
-        print(globals()["email"])
-        if globals()["status"].find("待CS2审批") == -1 :
-            pytest.xfail("数据状态是 {}".format(globals()["status"]))
+    # def test_02_Process13_cstoRefuse(self):
+    #     print(globals()["email"])
+    #     if globals()["status"].find("待CS2审批") == -1 :
+    #         pytest.xfail("数据状态是 {}".format(globals()["status"]))
 
-        Test_Login.LoginCRM(self, user='cs_t1')
-        globals()["status"] = self.reviewPass(email=globals()["email"], statusSel="待RO审批", btn_text="确定拒绝")
+    #     Test_Login.LoginCRM(self, user='cs_t1')
+    #     globals()["status"] = self.reviewPass(email=globals()["email"], statusSel="待RO审批", btn_text="确定拒绝")
         
 
 if __name__ == "__main__":
@@ -38,3 +38,5 @@ if __name__ == "__main__":
     suite.addTests(unittest.TestLoader().loadTestsFromTestCase(Test_reviewProcess13))
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)
+
+    # pytest.main(['-s', 'test_reviewProcess13.py'])
