@@ -1,27 +1,35 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+import os,sys
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
+sys.path.append(rootPath)
 import requests 
 import json
 import random
 from requests.packages import urllib3
-
+from Commons import *
 
 def apply_create_api():
 
+    gm = GlobalMap.GlobalMap()
+ 
     url = 'https://eddid-api.ntdev.be/eddid-api-uat/apply/create'
 
     headers = {
         'Content-Type' : 'application/json' ,
-        'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJlODRjNDM1YS01OTFiLTQzMTktOWVhMC1lZDAyY2NkZTRjM2UiLCJjb2duaXRvOmdyb3VwcyI6WyJjczIiXSwiZW1haWxfdmVyaWZpZWQiOnRydWUsImNvZ25pdG86cHJlZmVycmVkX3JvbGUiOiJhcm46YXdzOmlhbTo6ODMyNDMxODY0NjY2OnJvbGVcL2Rldi1lZGRpZC1jb2duaXRvLWFkbWluLXJvbGUiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuYXAtc291dGhlYXN0LTEuYW1hem9uYXdzLmNvbVwvYXAtc291dGhlYXN0LTFfdTlmejdseW9OIiwiY29nbml0bzp1c2VybmFtZSI6ImNzX3QxIiwiZ2l2ZW5fbmFtZSI6IkFpbWVlMSIsImNvZ25pdG86cm9sZXMiOlsiYXJuOmF3czppYW06OjgzMjQzMTg2NDY2Njpyb2xlXC9kZXYtZWRkaWQtY29nbml0by1hZG1pbi1yb2xlIl0sImF1ZCI6IjUxM2pmY2t0cjFtNmV2b2dmcXU3b3NrN3BhIiwiZXZlbnRfaWQiOiJlMjY3MWRmZi0zNmZhLTRiMjAtYmMxNi02M2YwYWZiMjVmMDIiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU2MjIyNjUwMywiZXhwIjoxNTYyMjk0MTM2LCJpYXQiOjE1NjIyOTA1MzYsImZhbWlseV9uYW1lIjoiV2VpMSIsImVtYWlsIjoiMTIzNDU2MzNAMTYzLmNvbSJ9.hJKpHtKZ_mzA8UH39BdL0juhqzBwHlKRIZ-B0_rH1UjkQxwu0UiUM-o79oleiqGCROiKaulRQXmH62rDSdC005aewjBjRTZOsdA2eL_dlEmlFPWhcRt6Hkil89FF_YjtidfhfkF5_RwLJOyc6B-rtXS8PTgm_vB1zMwno3s7xh05sahf6x3d7dBoJZUJDn5OlseKVmWplGdC5zK8xe9audGppVUO6NIYHl_Luuh5kBisppsi0ZYDvvY82LdlrlFDgVl6-K3arx2Z6cPzJMHIS2VaMGibPYuxyJ4L-_z7AXpQAMjRkBvvVYz-3fqaaRDQIRSGRCxAhPbn1pLY8k4Zhg'
+        'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoidGVzdCIsImNvZ25pdG86cm9sZXMiOlsiYXJuOmF3czppYW06OjgzMjQzMTg2NDY2Njpyb2xlXC9kZXYtZWRkaWQtY29nbml0by1hZG1pbi1yb2xlIl0sImF1ZCI6IjUxM2pmY2t0cjFtNmV2b2dmcXU3b3NrN3BhIiwiZXZlbnRfaWQiOiJiOWQ0NzhjOS01YWZmLTRjNGQtYjAyMi1iNWE5Y2YxZDdlODMiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU2MjU3MjUxNiwiZXhwIjoxNTYyNTc2MTE2LCJpYXQiOjE1NjI1NzI1MTYsImZhbWlseV9uYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluMTIzNEAxNjMuY29tIn0.aEsU3WC_7Jnxv0akmFdOc62lVj4yJPa2RxPXsXAFwWM3Qm-waXSScohppPQX4q51gFtduGVzSnwmHBBA9QESIKDsD3RtLbss52uHMJJuNUmGqzrHbrXjHGgW0Ed-DvOowb1ulQ8w-Aki0nE51URDEsI8ly4gMkNYOTYfNiW6DiTth4rqxgw4JXDyAzPI4Fx2ieP70TO9EU2at9PrFOW57vHfN6pB7Gdn3kjQMRqymhOoEvQxMTxeb2sRyzk3Uwwyuw1wk1SmxHgwNvX3MI6O1qn-MUqy0V161LZLQ0GW2O2HgGMikix44V1iiSQy98gEUSS5kiEbSOIwhXkIMbOp8g'
 
     }
 
     data = {
         "applicationFor": "individual",
         # "applicationFor": "joint",
-        # "accountType": ["securitiesCash"],
-        "accountType": ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"],
-        "status" : "finish",
+        "accountType": gm.get_value("accountType"),
+        # "accountType": ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"],
+        # "status" : "finish",
+        "status" : gm.get_value("apiStatus"),
         # "customerSource" : "app",
         "customerSource" : "crm",
         "client": [{
@@ -100,8 +108,6 @@ def apply_create_api():
         "personalInfoDeclartion": "Y"
     }
 
-
-    # print(data)
     for i in range(3):
 
         urllib3.disable_warnings()
@@ -110,11 +116,7 @@ def apply_create_api():
             return data['client'][0]['email']
 
 
-<<<<<<< HEAD
 if __name__ == '__main__':
 
     a = apply_create_api()
     print(a)
-=======
-
->>>>>>> ff79fd9697223b77c7849ce1674309d69a2bdf59

@@ -1,7 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os,sys
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
+sys.path.append(rootPath)
 from Commons import Logging
+import json
 
 class GlobalMap:
     # 拼装成字典构造全局变量  借鉴map  包含变量的增删改查
@@ -9,10 +14,14 @@ class GlobalMap:
     map = {}
 
     def set_map(self, key, value):
-        if(isinstance(value, dict)):
+        if (isinstance(value, dict)):
             # 把dict转为str
             value = json.dumps(value)
         self.map[key] = value
+
+    def set_List(self, key, value):
+        if (isinstance(value, list)):
+            self.map[key] = value
 
     def set_value(self, **keys):
         try:
@@ -47,3 +56,10 @@ class GlobalMap:
         except KeyError:
             self.log.warning("key:'" + str(key) + "'  不存在")
             return 'Null_'
+
+
+if __name__ == '__main__':
+    gm = GlobalMap()
+    gm.set_List("accountType", ["bullionMargin"])
+    a = gm.get_value("accountType")
+    print(a)
