@@ -14,12 +14,13 @@ from Commons import *
 def apply_create_api():
 
     gm = GlobalMap.GlobalMap()
+    log = Logging.Logs()
  
     url = 'https://eddid-api.ntdev.be/eddid-api-uat/apply/create'
 
     headers = {
         'Content-Type' : 'application/json' ,
-        'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoidGVzdCIsImNvZ25pdG86cm9sZXMiOlsiYXJuOmF3czppYW06OjgzMjQzMTg2NDY2Njpyb2xlXC9kZXYtZWRkaWQtY29nbml0by1hZG1pbi1yb2xlIl0sImF1ZCI6IjUxM2pmY2t0cjFtNmV2b2dmcXU3b3NrN3BhIiwiZXZlbnRfaWQiOiJiOWQ0NzhjOS01YWZmLTRjNGQtYjAyMi1iNWE5Y2YxZDdlODMiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU2MjU3MjUxNiwiZXhwIjoxNTYyNTc2MTE2LCJpYXQiOjE1NjI1NzI1MTYsImZhbWlseV9uYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluMTIzNEAxNjMuY29tIn0.aEsU3WC_7Jnxv0akmFdOc62lVj4yJPa2RxPXsXAFwWM3Qm-waXSScohppPQX4q51gFtduGVzSnwmHBBA9QESIKDsD3RtLbss52uHMJJuNUmGqzrHbrXjHGgW0Ed-DvOowb1ulQ8w-Aki0nE51URDEsI8ly4gMkNYOTYfNiW6DiTth4rqxgw4JXDyAzPI4Fx2ieP70TO9EU2at9PrFOW57vHfN6pB7Gdn3kjQMRqymhOoEvQxMTxeb2sRyzk3Uwwyuw1wk1SmxHgwNvX3MI6O1qn-MUqy0V161LZLQ0GW2O2HgGMikix44V1iiSQy98gEUSS5kiEbSOIwhXkIMbOp8g'
+        'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoidGVzdCIsImNvZ25pdG86cm9sZXMiOlsiYXJuOmF3czppYW06OjgzMjQzMTg2NDY2Njpyb2xlXC9kZXYtZWRkaWQtY29nbml0by1hZG1pbi1yb2xlIl0sImF1ZCI6IjUxM2pmY2t0cjFtNmV2b2dmcXU3b3NrN3BhIiwiZXZlbnRfaWQiOiIwOWFmZGU1MC0xZGM4LTQ3NWItYTZmNy0zNGQzZWQ3OWM0Y2EiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU2MjY1MTkzNCwiZXhwIjoxNTYyNjU1NTM0LCJpYXQiOjE1NjI2NTE5MzQsImZhbWlseV9uYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluMTIzNEAxNjMuY29tIn0.NlSV48x9l80oaKG9kW3NJ-taXa1ZaK1IlYlkgI8wLRbnLFE4jIlBSMiHazzvAgRY94KGtb5ZekcIbC_mY9i2L7j5aRSZ-xVmSJrHZNNrppHPrRuc9-3V0nWyU8pjrQhLNZIsO4uYlg90T__uergurBp3rdciVFFnGnArZCPnM5BA4kE5dbqbLtmtxXa3al5iCSk2V7CP_5lGrmAJNFa9h-0IsULYZbHBASBSrnVNcJMbXecQgJZuhG8ha1laHVUwo0yMD1ezv3NEa2JJss29jf_CBSkBQbh7b-6-96AOtVM3FgMY_V_vBcZQsFdOawY6UWB0znuFzHNL36ymo_Vklw'
 
     }
 
@@ -108,11 +109,14 @@ def apply_create_api():
         "personalInfoDeclartion": "Y"
     }
 
+    # 失败重新请求三次
     for i in range(3):
 
         urllib3.disable_warnings()
         resp = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
+        log.info("/apply/create: ", resp.json())
         if resp.status_code == 200:
+            log.info("新创建数据的[email]为: ", data['client'][0]['email'])
             return data['client'][0]['email']
 
 

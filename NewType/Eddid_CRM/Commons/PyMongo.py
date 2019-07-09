@@ -40,17 +40,13 @@ class Database:
         self.log.info("close Client")
         self.client.close()     #关闭数据库
 
-        # print("\n\n此次操作总共删除",Counter(self.removeTotal))
         expectedTotal = set(self.expectedRemoveTotal)
         for item in expectedTotal:  #输出删除总数
-            print("%s 表预计删除 %d 条记录" %(item, self.expectedRemoveTotal.count(item)))
             self.log.info("%s 表预计删除 %d 条记录" %(item, self.expectedRemoveTotal.count(item)))
 
 
-        print("\n********************************************************\n")
         actualTotal = set(self.actualRemoveTotal)
         for actual in actualTotal:
-            print("%s 表实际删除 %d 条记录" %(actual, self.actualRemoveTotal.count(actual)))
             self.log.info("%s 表实际删除 %d 条记录" %(actual, self.actualRemoveTotal.count(actual)))
 
 
@@ -67,13 +63,11 @@ class Database:
 
         result = self.db[collection].find(query)
         self.log.info("%s 表符合查询条件%s 的数据有%s 条" %(collection, query, result.count()))
-        print("%s 表符合查询条件%s 的数据有%s 条" %(collection, query, result.count()))
         for r in result:
             self.log.info(r)
             collections.add(collection)
 
             if str(r['_id']) in self.collectionsId:
-                print("%s 表已经查询过,跳过" %collection)
                 continue
             self.collectionsId.add(str(r['_id']))
             index = 0   #用于记录查询数据的字段个数
@@ -87,14 +81,11 @@ class Database:
                                 self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
                                 self.log.info("正在查询关联表 %s 的数据" %self.table[key])
 
-                                print(collection,"表关联的字段为 ",key,":",r[key])
-                                print("正在查询关联表 %s 的数据" %self.table[key])
 
                                 self.del_linked(self.table[key], {'_id':r[key]})
 
                         except Exception as e:
                             self.log.info(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
-                            print(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
 
                     elif isinstance(r[key], list):
 
@@ -106,14 +97,11 @@ class Database:
                                         self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
                                         self.log.info("正在查询关联表 %s 的数据" %self.table[key])
 
-                                        print(collection,"表关联的字段为 ",key,":",r[key][n])
-                                        print("正在查询关联表 %s 的数据" %self.table[key])
 
                                         self.del_linked(self.table[key], {'_id':r[key][n]})
 
                                 except Exception as e:
                                     self.log.info(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
-                                    print(e," table[%s]没有与之对应的数据库表" %key)
 
                     elif key == 'idpUserId':
                         # continue
@@ -122,15 +110,11 @@ class Database:
                                 self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
                                 self.log.info("正在查询关联表 %s 的数据" %self.table[key])
 
-                                print(collection,"表关联的字段为 ",key,":",r[key])
-                                print("正在查询关联表 %s 的数据" %self.table[key])
-
                                 self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpool{database}'.format(database=self.database))
 
 
                         except Exception as e:
                             self.log.info(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
-                            print(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
 
                     elif key == 'subject':
                         # continue
@@ -139,36 +123,28 @@ class Database:
                                 self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
                                 self.log.info("正在查询关联表 %s 的数据" %self.table[key])
 
-                                print(collection,"表关联的字段为 ",key,":",r[key])
-                                print("正在查询关联表 %s 的数据" %self.table[key])
 
                                 self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpool{database}'.format(database=self.database))
 
 
                         except Exception as e:
                             self.log.info(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
-                            print(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
 
                     else:
-                        # print("index", index)
                         if index >= len(r) :
                             self.log.info("***********************************\n")
                             self.log.info('没有关联数据,直接删除%s 表' %collection)
-                            print('\n\n没有关联数据,直接删除%s 表\n' %collection)
                             self.expectedRemoveTotal.append(collection)     #添加所有需要删除的表,统计总数
 
-                            # print(collection, query, database, self.database)
                             if database == None:
                                 self.db = self.client[self.database]
 
                             # 删除操作,请先查询后,确定数据以后再执行删除操作
                             result = self.db[collection].delete_one(query)
-                            print(result.deleted_count)
                             if result.deleted_count > 0 :
                               self.actualRemoveTotal.append(collection)
                             
                             self.log.info(result)
-                            print(result)
 
 
                             self.log.info("***********************************\n")

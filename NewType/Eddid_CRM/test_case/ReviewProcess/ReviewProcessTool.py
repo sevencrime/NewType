@@ -15,23 +15,24 @@ import time
 import pytest
 
 class ReviewProcessTool(unittest.TestCase):
-	# CRM and apply_form正向审核: 未处理--待cs2--待RO--待ops--success
+
 	gm = GlobalMap.GlobalMap()
+	log = Logging.Logs()
 
 	@classmethod
 	def setUpClass(cls):
-		print("调用apply的create接口创建测试数据")
+		log.info("调用apply的create接口创建测试数据")
 		cls.gm.set_value(email = apply_create.apply_create_api())
 
 	# 所有case执行之后清理环境
 	@classmethod
 	def tearDownClass(cls):
-		print("删除数据")
+		log.info("删除数据")
 		if cls.gm.get_value("email") != "" or cls.gm.get_value("email") == None:
 			PyMongo.Database().del_linked("client_info", {"email": cls.gm.get_value("email")})
 			PyMongo.Database().del_linked("apply_info", {"email": cls.gm.get_value("email")})
 
-		print("删除变量")
+		log.info("删除变量")
 		cls.gm.del_map("email")
 
 
@@ -41,13 +42,12 @@ class ReviewProcessTool(unittest.TestCase):
 		self.driver.set_script_timeout(20)
 		self.url = 'http://eddid-bos-uat.ntdev.be'
 
-		# self.login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
 		self.MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
 		self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
 		self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
 
 	def tearDown(self):
-		print("结束driver")
+		log.info("结束driver")
 		self.driver.quit()
 
 
@@ -69,9 +69,11 @@ class ReviewProcessTool(unittest.TestCase):
 		self.mainpage.click_StatusSelect(statusSel)
 		self.mainpage.wait_LoadingModal()
 
+		# 双击进入apply表单
 		self.mainpage.get_apply(email=email)
 		self.mainpage.wait_LoadingModal()
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
+
 		try:
 			if kwarsg['btn_text']:
 				self.applypage.click_sublimeApply(kwarsg['btn_text'])
@@ -82,7 +84,6 @@ class ReviewProcessTool(unittest.TestCase):
 		self.mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
-		# self.assertIsNot("待CS2审批", self.mainpage.get_status(self.email), "状态没有改变")
 		return self.mainpage.get_status(email)
 
 
@@ -110,8 +111,8 @@ class ReviewProcessTool(unittest.TestCase):
 		self.applypage.click_popWindow("确定")
 		self.mainpage.wait_LoadingModal()
 
-		self.assertIsNot("待CS2审批", self.mainpage.get_status(self.email), "状态没有改变")
-		# globals()["status"] = self.mainpage.get_status(self.email)
+		self.assertIsNot("待CS2审批", self.mainpage.get_status(email), "状态没有改变")
+		# globals()["status"] = self.mainpage.get_status(self.gm.get_value("email"))
 
 		return self.mainpage.get_status(email)
 	"""
@@ -145,7 +146,7 @@ class ReviewProcessTool(unittest.TestCase):
 		self.mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
-		# self.assertIsNot("拒绝", self.mainpage.get_status(self.email), "状态没有改变")
+		# self.assertIsNot("拒绝", self.mainpage.get_status(self.gm.get_value("email")), "状态没有改变")
 		return self.mainpage.get_status(email)
 
 
@@ -184,7 +185,7 @@ class ReviewProcessTool(unittest.TestCase):
 		self.mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
-		self.assertEqual("成功", self.mainpage.get_status(self.email), "状态没有改变")
+		self.assertEqual("成功", self.mainpage.get_status(email), "状态没有改变")
 
 		return self.mainpage.get_status(email)
 
@@ -217,8 +218,6 @@ class ReviewProcessTool(unittest.TestCase):
 		self.mainpage.wait_LoadingModal()
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
-		self.assertIsNot("CS2", self.mainpage.get_status(email), "状态没有改变")
-		globals()["status"] = self.mainpage.get_status(email)
 
 
 if __name__ == '__main__':

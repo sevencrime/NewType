@@ -12,10 +12,10 @@ from ReviewProcessTool import ReviewProcessTool
 
 class reviewProcess1(ReviewProcessTool):
 	# CRM and apply_form正向审核: 未处理--待cs2--待RO--待ops--success
-    globals()["status"] = ""
-    gm = GlobalMap.GlobalMap()
-    gm.set_value(apiStatus="unprocessed")
-    gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
+	globals()["status"] = ""
+	gm = GlobalMap.GlobalMap()
+	gm.set_value(apiStatus="unprocessed")
+	gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
 
 
 	# @reviewProcessTool.skipIf(status = "未处理")

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import unittest
+import unittest, pytest
 from unittest import defaultTestLoader
 import os
 
@@ -15,5 +15,6 @@ def get_TestCase():
 
 if __name__ == '__main__':
 	# get_TestCase()
-	runner = unittest.TextTestRunner(verbosity=3)
-	runner.run(get_TestCase())
+	# runner = unittest.TextTestRunner(verbosity=3)
+	# runner.run(get_TestCase())
+    pytest.main()
