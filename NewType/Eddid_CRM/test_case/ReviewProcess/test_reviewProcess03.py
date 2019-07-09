@@ -9,14 +9,16 @@ from ReviewProcessTool import ReviewProcessTool
 
 class reviewProcess3(ReviewProcessTool):
 	# App来源驳回流程: 待cs1--拒绝--CS1修改后重新提交给CS2--CS2拒绝
-	globals()["status"] = ""
-	email = "5953onedi417211@qq.com"
+    globals()["status"] = ""
+    gm = GlobalMap.GlobalMap()
+    gm.set_value(apiStatus="reviewing")
+    gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
 
 	# @skipIf("CS1")
 	def test_01_Process3_cs1torefuse(self):
 		# CS1---Refuse
 		Test_Login.LoginCRM(self, user='cs1_onedi', psw="Abcd1234")		#先登录
-		globals()["status"] = self.reviewRefuse(email=self.email, statusSel="待CS1审批")
+		globals()["status"] = self.reviewRefuse(email=self.gm.get_value("email"), statusSel="待CS1审批")
 		
 	# @skipIf("拒绝")
 	def test_02_Process3_refusetocs2(self):
@@ -26,7 +28,7 @@ class reviewProcess3(ReviewProcessTool):
 			pytest.xfail("数据状态是 {}".format(globals()["status"]))
 
 		Test_Login.LoginCRM(self, user='cs1_onedi', psw="Abcd1234")		#先登录
-		globals()["status"] = self.reviewUpdate(email=self.email, statusSel="拒绝")
+		globals()["status"] = self.reviewUpdate(email=self.gm.get_value("email"), statusSel="拒绝")
 
 
 	# @skipIf("CS2")
@@ -37,7 +39,7 @@ class reviewProcess3(ReviewProcessTool):
 			pytest.xfail("数据状态是 {}".format(globals()["status"]))
 
 		Test_Login.LoginCRM(self, user='cs_t1')		#先登录
-		globals()["status"] = self.reviewRefuse(email=self.email, statusSel="待CS2审批")
+		globals()["status"] = self.reviewRefuse(email=self.gm.get_value("email"), statusSel="待CS2审批")
 
 
 	# @skipIf("拒绝")		
@@ -48,7 +50,7 @@ class reviewProcess3(ReviewProcessTool):
 			pytest.xfail("数据状态是 {}".format(globals()["status"]))
 
 		Test_Login.LoginCRM(self, user='sales_t1')		#先登录
-		globals()["status"] = self.reviewUpdate(email=self.email, statusSel="拒绝")
+		globals()["status"] = self.reviewUpdate(email=self.gm.get_value("email"), statusSel="拒绝")
 
 
 

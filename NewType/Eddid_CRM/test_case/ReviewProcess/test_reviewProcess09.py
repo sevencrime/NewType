@@ -13,21 +13,23 @@ from ReviewProcessTool import ReviewProcessTool
 class reviewProcess9(ReviewProcessTool):
     # CRM来源, 期货RO拒绝, CS2 确定拒绝
     globals()["status"] = ""
-    email = "6621onedi374130@qq.com"
+    gm = GlobalMap.GlobalMap()
+    gm.set_value(apiStatus="processing")
+    gm.set_List("accountType", ["futuresMargin"])
 
     # @reviewProcessTool.skipIf(status = "待证券RO审批")
     def test_01_Process9_don(self):
         # cliff审核
         Test_Login.LoginCRM(self, user='ro1_don', psw="Abcd1234")
-        globals()["status"] = self.reviewRefuse(email=self.email, statusSel="待RO审批")
+        globals()["status"] = self.reviewRefuse(email=self.gm.get_value("email"), statusSel="待RO审批")
 
 
     def test_02_Process9_cstoRefuse(self):
-        if globals()["status"].find("待CS2审批") == -1 :
+        if globals()["status"].find("期货RO拒绝") == -1 :
             pytest.xfail("数据状态是 {}".format(globals()["status"]))
 
         Test_Login.LoginCRM(self, user='cs_t1')
-        globals()["status"] = self.reviewPass(email=self.email, statusSel="待RO审批", btn_text="确定拒绝")
+        globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批", btn_text="确定拒绝")
         
 
 if __name__ == "__main__":

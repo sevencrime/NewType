@@ -19,14 +19,14 @@ class Test_reviewProcess13(ReviewProcessTool):
 
     # @reviewProcessTool.skipIf(status = "待证券RO审批")
     def test_01_Process13_gold(self):
-        print(self.gm.get_value("email"))
+        # print(self.gm.get_value("email"))
         # cliff审核
         Test_Login.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
         globals()["status"] = self.reviewRefuse(email = self.gm.get_value("email"), statusSel="待RO审批")
 
 
     def test_02_Process13_cstoRefuse(self):
-        print(self.gm.get_value("email"))
+        # print(self.gm.get_value("email"))
 
         if globals()["status"].find("黄金RO拒绝") == -1 :
             pytest.xfail("数据状态是 {}".format(globals()["status"]))
