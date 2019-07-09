@@ -21,18 +21,18 @@ class ReviewProcessTool(unittest.TestCase):
 
 	@classmethod
 	def setUpClass(cls):
-		log.info("调用apply的create接口创建测试数据")
+		cls.log.info("调用apply的create接口创建测试数据")
 		cls.gm.set_value(email = apply_create.apply_create_api())
 
 	# 所有case执行之后清理环境
 	@classmethod
 	def tearDownClass(cls):
-		log.info("删除数据")
+		cls.log.info("删除数据")
 		if cls.gm.get_value("email") != "" or cls.gm.get_value("email") == None:
 			PyMongo.Database().del_linked("client_info", {"email": cls.gm.get_value("email")})
 			PyMongo.Database().del_linked("apply_info", {"email": cls.gm.get_value("email")})
 
-		log.info("删除变量")
+		cls.log.info("删除变量")
 		cls.gm.del_map("email")
 
 
@@ -47,7 +47,7 @@ class ReviewProcessTool(unittest.TestCase):
 		self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
 
 	def tearDown(self):
-		log.info("结束driver")
+		self.log.info("结束driver")
 		self.driver.quit()
 
 
@@ -115,6 +115,7 @@ class ReviewProcessTool(unittest.TestCase):
 		# globals()["status"] = self.mainpage.get_status(self.gm.get_value("email"))
 
 		return self.mainpage.get_status(email)
+		
 	"""
 		# 拒绝数据
 		# 适用于CS1, CS2, RO状态

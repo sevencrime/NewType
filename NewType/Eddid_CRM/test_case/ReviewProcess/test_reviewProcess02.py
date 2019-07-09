@@ -13,10 +13,10 @@ from ReviewProcessTool import ReviewProcessTool
 
 class reviewProcess2(ReviewProcessTool):
 	# App来源正向审核: 待cs1--待cs2--待RO--待ops--success`
-    globals()["status"] = ""
-    gm = GlobalMap.GlobalMap()
-    gm.set_value(apiStatus="reviewing")
-    gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
+	globals()["status"] = ""
+	gm = GlobalMap.GlobalMap()
+	gm.set_value(apiStatus="reviewing")
+	gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
 
 	# @skipIf(status = "CS1")
 	def test1_Process2_cs1tocs2(self):

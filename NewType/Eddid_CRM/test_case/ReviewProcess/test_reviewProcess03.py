@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os,sys
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
+sys.path.append(rootPath)
 from test_case.Test_Login import *
 import unittest
 import pytest
@@ -9,10 +13,10 @@ from ReviewProcessTool import ReviewProcessTool
 
 class reviewProcess3(ReviewProcessTool):
 	# App来源驳回流程: 待cs1--拒绝--CS1修改后重新提交给CS2--CS2拒绝
-    globals()["status"] = ""
-    gm = GlobalMap.GlobalMap()
-    gm.set_value(apiStatus="reviewing")
-    gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
+	globals()["status"] = ""
+	gm = GlobalMap.GlobalMap()
+	gm.set_value(apiStatus="reviewing")
+	gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
 
 	# @skipIf("CS1")
 	def test_01_Process3_cs1torefuse(self):
