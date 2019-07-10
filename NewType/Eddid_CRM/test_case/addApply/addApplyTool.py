@@ -393,6 +393,42 @@ class addApplyTool(unittest.TestCase):
         return wrapper
 
 
+
+    def InvestmentTarget(func):
+        def wrapper(self, *args, **kwargs):
+            print("正在执行用例 :", func.__name__)
+            try:
+                # import pdb; pdb.set_trace()
+                return func(self, *args, **kwargs)
+            except AssertionError:
+                # 校验投资目标选择"利息/股息收入"是否会弹出提示框
+                try:
+                    # 校验是否弹出提示框(判断是否可以点击确定按钮)
+                    alert_context = applypage.investmentTarget_alert()
+                    assert "利息/股息收入" in alert_context
+
+                except AssertionError:
+                    print("投资目标弹出提示框内容有误, 请确认!!!")
+
+                except Exception as e:
+                    print("investmentTarget_alert() 方法异常, 请确认!!!")
+                    raise AttributeError
+
+
+            except Exception as e:
+                # 查找出报错的位置
+                print(e, "用例 {} 执行失败".format(func.__name__))
+                raise e
+
+            else:
+                print("客户的投资目标为'利息/股息收入'可以直接提交成功, 用例'{}'执行失败".format(func.__name__))
+                raise AttributeError(
+                    "用例 {} , 测试结果为失败".format(func.__name__))  # 只抛出异常
+
+        return wrapper
+
+
+
 if __name__ == "__main__":
     print(sys.path)
     print(os.path.abspath(os.path.dirname(os.path.dirname(os.getcwd()))))

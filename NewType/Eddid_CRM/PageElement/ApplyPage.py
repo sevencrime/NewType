@@ -637,6 +637,15 @@ class ApplyPage(BasePage.BasePage):
         else:
             self.find_element(*self.get_checkbox(text)).click()
 
+    def investmentTarget_alert(self):
+        # 买卖杠杆式外汇、黄金、结构性产品及衍生产品并不适合投资目标仅为「利息/股息收入」人士。
+        # 校验弹框 alert
+        investmentalertbtn_loc = (By.XPATH, '//div[@class="el-message-box"]//button[span[contains(text(), "确认")]]')
+        investmentalertcontent_loc = (By.XPATH, '//div[@class="el-message-box"]//p')
+        investmentalertcontent = self.find_element(*investmentalertcontent_loc).text
+        investmentalertbtn = self.find_element(*investmentalertbtn_loc).click()
+
+        return investmentalertcontent
 
     def riskTolerance(self, num=None):
         # 9.客户的风险承受能力是:
@@ -1016,3 +1025,4 @@ class ApplyPage(BasePage.BasePage):
         sublime_popwindow_loc = (
             By.XPATH, "//span[text()='确定']//parent::button")
         self.find_element(*sublime_popwindow_loc).click()
+
