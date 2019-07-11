@@ -115,6 +115,11 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 点击提交按钮
         self.applySublime()
 
+    """
+    # 用例: 选择非外汇, 黄金, 衍生产品 ,校验衍生产品是否必填.
+    #       
+    """
+
 
 
 if __name__ == '__main__':
