@@ -67,7 +67,15 @@ class addApplyTool(unittest.TestCase):
         # 邮件语言
         mailLanguage = self.applypage.send_mailLanguage("中文(简体)")
         # 账户类别
-        accountType = self.applypage.send_accountType(kwargs["type"])
+        try:
+            if isinstance(kwargs['type'], list):
+                for t in kwargs['type']:
+                    accountType = self.applypage.send_accountType(t)
+            else:
+                accountType = self.applypage.send_accountType(t)
+        except Exception as e:
+            print("账户类别输入有误")
+            raise e
         # 称谓
         title = self.applypage.send_title()
         # 名字
