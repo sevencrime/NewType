@@ -19,6 +19,7 @@ import time
 class addApplyTool(unittest.TestCase):
 
     globals()["email"] = ""
+    log = Logging.Logs()
 
     def setUp(self):
         globals()["email"] = ""
@@ -243,6 +244,7 @@ class addApplyTool(unittest.TestCase):
 
     """
         #提交表单按钮
+        # Jump = True : 表单提交成功
     """
     def applySublime(self, Jump=True):
         # 点击提交按钮
