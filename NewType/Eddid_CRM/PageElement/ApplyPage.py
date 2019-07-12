@@ -637,7 +637,7 @@ class ApplyPage(BasePage.BasePage):
         else:
             self.find_element(*self.get_checkbox(text)).click()
 
-    def investmentTarget_alert(self):
+    def box_alert(self):
         # 买卖杠杆式外汇、黄金、结构性产品及衍生产品并不适合投资目标仅为「利息/股息收入」人士。
         # 校验弹框 alert
         investmentalertbtn_loc = (By.XPATH, '//div[@class="el-message-box"]//button[span[contains(text(), "确认")]]')
@@ -653,7 +653,6 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(riskTolerance)
         tag_text = self.get_select(randox=num)
         if tag_text != "高":
-            # import pdb; pdb.set_trace()
             # 弹出框:若阁下选择低或中风险，将不能买卖槓杆式外汇、黄金、结构性产品及衍生产品
             # 定位弹窗的确定按钮
             warnbox_loc = (By.XPATH, '//div[@class="el-message-box"]//button[span]')
@@ -928,12 +927,12 @@ class ApplyPage(BasePage.BasePage):
             errormsg = self.find_elements(*errormsg_loc)
             errormsg2 = self.find_elements(*errormsg2_loc)
             if errormsg != False:
-                print("errormsg 不为空")
+                print("errormsg 为空")
                 for err in errormsg:
                     print(err.text, "栏 字段不能为空! ")
 
             if errormsg2 != False:
-                print("errormsg2 不为空")
+                print("errormsg2 为空")
                 for err2 in errormsg2:
                     print(err2.text, "栏 字段不能为空! ")
 

@@ -50,7 +50,7 @@ class addApplyTool(unittest.TestCase):
             PyMongo.Database().del_linked("apply_info", {"email": globals()["email"]})
 
     """
-        #Apply 必填步骤
+        #Apply 个人账户必填步骤
     """
     def RequiredField(self, *args, **kwargs):
         # 账户类型
@@ -130,9 +130,14 @@ class addApplyTool(unittest.TestCase):
         # 隐藏框, 衍生产品
         try:
             if kwargs["buyProduct"]:
-                buyProduct = self.applypage.buyProduct(num=0, linknum=0)
+                if kwargs['num'] and kwargs['linknum']:
+                    buyProduct = self.applypage.buyProduct(num=kwargs['num'], linknum=kwargs['linknum'])
+                else:
+                    buyProduct = self.applypage.buyProduct(num=0, linknum=0)
+
         except Exception as e:
-            print(e)
+            print("个人账户衍生产品隐藏框", e)
+            raise e
             
         # 客户是否曾经宣告破产或被申请破产?
         bankrupt = self.applypage.bankrupt()
@@ -177,7 +182,7 @@ class addApplyTool(unittest.TestCase):
     """
         #Apply 联名账户必填步骤
     """
-    def JoinRequiredField(self):
+    def JoinRequiredField(self, *args, **kwargs):
         # 进入联名账户
         # 联名账户- 称谓
         Jointtitle = self.applypage.send_title()
@@ -231,6 +236,21 @@ class addApplyTool(unittest.TestCase):
         # 联名账户- 客户是否从现时或过去拥有与衍生产品有关的工作经验?
         JointderivativeJobs = self.applypage.derivativeJobs()
         # 联名账户- 客户是否于过去3年曾执行 5次或以上有关衍生产品的交易，例如：衍生权证、牛熊证、股票期权、期货及期权、商品、结构性产品及交易所买卖基金等?
+        try:
+            if kwargs["buyProduct"]:
+                if kwargs['num'] and kwargs['linknum']:
+                    buyProduct = self.applypage.buyProduct(num=kwargs['num'], linknum=kwargs['linknum'])
+                    if kwargs['alert']:
+                        alert_context = self.applypage.box_alert()
+                        assert "「衍生权证、牛熊证及结构性产品」与主要账户持有人选择不一致" in alert_context 
+                else:
+                    buyProduct = self.applypage.buyProduct(num=0, linknum=0)
+
+        except Exception as e:
+            print("个人账户衍生产品隐藏框", e)
+            raise e
+            
+
         JointtradingFund = self.applypage.tradingFund()
         # 联名账户- 客户是否曾经宣告破产或被申请破产?
         Jointbankrupt = self.applypage.bankrupt()
@@ -414,14 +434,14 @@ class addApplyTool(unittest.TestCase):
                 # 校验投资目标选择"利息/股息收入"是否会弹出提示框
                 try:
                     # 校验是否弹出提示框(判断是否可以点击确定按钮)
-                    alert_context = applypage.investmentTarget_alert()
+                    alert_context = applypage.box_alert()
                     assert "利息/股息收入" in alert_context
 
                 except AssertionError:
                     print("投资目标弹出提示框内容有误, 请确认!!!")
 
                 except Exception as e:
-                    print("investmentTarget_alert() 方法异常, 请确认!!!")
+                    print("box_alert() 方法异常, 请确认!!!")
                     raise AttributeError
 
 

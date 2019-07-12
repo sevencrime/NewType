@@ -120,13 +120,106 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     """
     def test_apply_PassDerivativeProduct(self):
 
-        accounttype = ["香港股票期权账户(现金)", "香港证券即日买卖账户(保证金)",
-                       "香港及环球期货账户(保证金)", "香港期货即日买卖账户(保证金)", "盈透证券综合户口(保证金)"]
+        accounttype = ["香港股票期权账户(现金)", "香港及环球期货账户(保证金)",
+                       "香港期货即日买卖账户(保证金)", "杠杆式外汇账户(保证金)", "艾德金业现货黄金账户(保证金)"]
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户",
                            type=accounttype)
         # 点击提交按钮
         self.applySublime()
+
+    """
+    # 用例: 联名账户.个人是, 联名是
+    """
+    def test_apply_jointDerivativeProductsame(self):
+        # 个人账户, 衍生产品选择是
+        self.RequiredField(applicationFor="联名账户",
+                           way="亲临开户",
+                           type="香港及环球证券账户(保证金)", 
+                           buyProduct = True, 
+                           num = 0,
+                           linknum = 0
+                           )
+
+        # 点击提交按钮
+        self.applySublime(Jump=False)
+        # 填写联名账户
+        self.JoinRequiredField(buyProduct=True, num=0, linknum=0)
+        # 提交
+        self.applySublime()
+
+
+    """
+    # 用例: 联名账户.个人是, 联名否
+    """
+    def test_apply_jointDerivativeProductsame(self):
+        # 个人账户, 衍生产品选择是
+        self.RequiredField(applicationFor="联名账户",
+                           way="亲临开户",
+                           type="香港及环球证券账户(保证金)", 
+                           buyProduct = True, 
+                           num = 0,
+                           linknum = 0,
+                           alert = True
+                           )
+
+        # 点击提交按钮
+        self.applySublime(Jump=False)
+        # 填写联名账户
+        self.JoinRequiredField(buyProduct=True, num=1, linknum=None)
+        # 提交
+        self.applySublime()
+
+
+    """
+    # 用例: 联名账户.个人否, 联名否
+    """
+    def test_apply_jointDerivativeProductsame(self):
+        # 个人账户, 衍生产品选择是
+        self.RequiredField(applicationFor="联名账户",
+                           way="亲临开户",
+                           type="香港及环球证券账户(保证金)", 
+                           buyProduct = True, 
+                           num = 1,
+                           linknum = None
+                           )
+
+        # 点击提交按钮
+        self.applySublime(Jump=False)
+        # 填写联名账户
+        self.JoinRequiredField(buyProduct=True, num=1, linknum=None)
+        # 提交
+        self.applySublime()
+
+
+    """
+    # 用例: 联名账户.个人否, 联名是
+    """
+    def test_apply_jointDerivativeProductsame(self):
+        # 个人账户, 衍生产品选择是
+        self.RequiredField(applicationFor="联名账户",
+                           way="亲临开户",
+                           type="香港及环球证券账户(保证金)", 
+                           buyProduct = True, 
+                           num = 1,
+                           linknum = None,
+                           alert = True
+                           )
+
+        # 点击提交按钮
+        self.applySublime(Jump=False)
+        # 填写联名账户
+        self.JoinRequiredField(buyProduct=True, num=0, linknum=0)
+        # 提交
+        self.applySublime()
+
+
+
+
+
+
+
+
 
 
 if __name__ == '__main__':

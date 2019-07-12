@@ -5,19 +5,19 @@ import json
 import random
 from requests.packages import urllib3
 
-url = 'https://eddid-api.ntdev.be/eddid-api-feature/apply/create'
+url = 'https://eddid-api.ntdev.be/eddid-api-uat/apply/create'
 
 headers = {
     'Content-Type' : 'application/json' ,
-    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoidGVzdCIsImNvZ25pdG86cm9sZXMiOlsiYXJuOmF3czppYW06OjgzMjQzMTg2NDY2Njpyb2xlXC9kZXYtZWRkaWQtY29nbml0by1hZG1pbi1yb2xlIl0sImF1ZCI6IjUxM2pmY2t0cjFtNmV2b2dmcXU3b3NrN3BhIiwiZXZlbnRfaWQiOiJiOWQ0NzhjOS01YWZmLTRjNGQtYjAyMi1iNWE5Y2YxZDdlODMiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU2MjU3MjUxNiwiZXhwIjoxNTYyNTc2MTE2LCJpYXQiOjE1NjI1NzI1MTYsImZhbWlseV9uYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluMTIzNEAxNjMuY29tIn0.aEsU3WC_7Jnxv0akmFdOc62lVj4yJPa2RxPXsXAFwWM3Qm-waXSScohppPQX4q51gFtduGVzSnwmHBBA9QESIKDsD3RtLbss52uHMJJuNUmGqzrHbrXjHGgW0Ed-DvOowb1ulQ8w-Aki0nE51URDEsI8ly4gMkNYOTYfNiW6DiTth4rqxgw4JXDyAzPI4Fx2ieP70TO9EU2at9PrFOW57vHfN6pB7Gdn3kjQMRqymhOoEvQxMTxeb2sRyzk3Uwwyuw1wk1SmxHgwNvX3MI6O1qn-MUqy0V161LZLQ0GW2O2HgGMikix44V1iiSQy98gEUSS5kiEbSOIwhXkIMbOp8g'
+    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJmZWYwOWU1MC03Y2NkLTQ0NmQtOWIwYS1hZjFhZDlkZTcwMTIiLCJjb2duaXRvOmdyb3VwcyI6WyJjczEiXSwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJjb2duaXRvOnByZWZlcnJlZF9yb2xlIjoiYXJuOmF3czppYW06OjgzMjQzMTg2NDY2Njpyb2xlXC9kZXYtZWRkaWQtY29nbml0by1hZG1pbi1yb2xlIiwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLmFwLXNvdXRoZWFzdC0xLmFtYXpvbmF3cy5jb21cL2FwLXNvdXRoZWFzdC0xX3U5Zno3bHlvTiIsImNvZ25pdG86dXNlcm5hbWUiOiJjczFfb25lZGkiLCJnaXZlbl9uYW1lIjoidGlhbnlhbmciLCJjb2duaXRvOnJvbGVzIjpbImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSJdLCJhdWQiOiI1MTNqZmNrdHIxbTZldm9nZnF1N29zazdwYSIsImV2ZW50X2lkIjoiMWFiNWUyYWItNzU5My00Y2VlLWFlZDAtNjkxODY0ZWNlODk3IiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NjI4MDk5MDIsImV4cCI6MTU2MjgxMzUwMiwiaWF0IjoxNTYyODA5OTAyLCJmYW1pbHlfbmFtZSI6IndhbmciLCJlbWFpbCI6IjE1MDg5NTE0NjI2QHNpbmEuY24ifQ.VgHeNxKosgXvaS2uXKu9rtDiMFQCHsmq4PnPLpyN1LWCSfgpHR3WDOR7PkkPFh2By-pTcnvR2Hm7AY7mdtpxn3U_bUpmm3KjfrXUSybTJP-fTRpSYVzOU5Y4r2oapd_RGVVL5i1-dSuSJISLQtsgv9fofSHgrafMZTYadw6lhytT4P99Pe2JAEZLwkA8vud3lvkelWsZGYklHdPaHbOB_m2Km5rtFrVhDyQnvuK6KVGJ_sj3kENaoriUwsqVT_UxV4Dcg0yh6oNpNWlsz1wMhKevCtPGIZ6YizL6WVoKhhSMfaRk1vC5dc8EPv7H0smtLzVkaAb_yo-CU46YmmlU0A'
 }
 
 data = {
-    # "applicationFor": "individual",
-    "applicationFor": "joint",
+    "applicationFor": "individual",
+    # "applicationFor": "joint",
     # "accountType": ["securitiesCash"],
     "accountType": ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"],
-    "status" : "finish",
+    "status" : "reviewing",
     # "customerSource" : "app",
     "customerSource" : "crm",
     "client": [{
@@ -30,12 +30,12 @@ data = {
         "phoneAreaCode": "CHN",
         "phone": "322%s546" %(random.randint(1,10235)),
         "address": "465456456456",
-        # "nationality": "CHN",
-        "nationality": "HKG",
+        # "nationality": "HKG",
+        "nationality": "CHN",
         "idType": "2",
         "idNumber": "56%s56456" %(random.randint(1,102365)),
         # "idNumber": "568194956456",
-        "countryIssue": "HKG",
+        "countryIssue": "CHN",
         "birthday": 947001600000,
         "birthPlace": "CHN",
         "employment": "retired",

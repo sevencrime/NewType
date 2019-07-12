@@ -14,7 +14,6 @@ import time
 
 class Test_addApplyAllNotEmpty(addApplyTool):
 
-    @unittest.skip("暂时跳过")
     # 个人账户和联名账户, 必填项开户
     def test_apply_IndividualNotEmpty(self):
         # 用例: 个人账户--必填参数
