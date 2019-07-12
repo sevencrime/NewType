@@ -244,6 +244,7 @@ class addApplyTool(unittest.TestCase):
                     if kwargs['alert']:
                         alert_context = self.applypage.box_alert()
                         assert "「衍生权证、牛熊证及结构性产品」与主要账户持有人选择不一致" in alert_context 
+                        return alert_context
                 else:
                     buyProduct = self.applypage.buyProduct(num=0, linknum=0)
 
