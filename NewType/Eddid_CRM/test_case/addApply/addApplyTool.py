@@ -68,11 +68,12 @@ class addApplyTool(unittest.TestCase):
         mailLanguage = self.applypage.send_mailLanguage("中文(简体)")
         # 账户类别
         try:
+            import pdb; pdb.set_trace()
             if isinstance(kwargs['type'], list):
                 for t in kwargs['type']:
                     accountType = self.applypage.send_accountType(t)
             else:
-                accountType = self.applypage.send_accountType(t)
+                accountType = self.applypage.send_accountType(kwargs['type'])
         except Exception as e:
             print("账户类别输入有误")
             raise e
