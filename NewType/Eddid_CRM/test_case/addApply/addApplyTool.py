@@ -15,7 +15,6 @@ from PageElement import *
 from Interface import *
 import time
 
-
 class addApplyTool(unittest.TestCase):
 
     globals()["email"] = ""
@@ -183,7 +182,7 @@ class addApplyTool(unittest.TestCase):
     """
         #Apply 联名账户必填步骤
     """
-    def JoinRequiredField(self, *args, **kwargs):
+    def JointRequiredField(self, *args, **kwargs):
         # 进入联名账户
         # 联名账户- 称谓
         Jointtitle = self.applypage.send_title()

@@ -137,7 +137,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
 
             结果: 开户成功, 不会弹出提示框
     """
-    def test_apply_jointDerivativeProductsame(self):
+    def test_apply_jointDerivativeProductsameyes(self):
         # 个人账户, 衍生产品选择是
         self.RequiredField(applicationFor="联名账户",
                            way="亲临开户",
@@ -150,7 +150,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 点击提交按钮
         self.applySublime(Jump=False)
         # 填写联名账户
-        self.JoinRequiredField(buyProduct=True, num=0, linknum=0)
+        self.JointRequiredField(buyProduct=True, num=0, linknum=0)
         # 提交
         self.applySublime()
 
@@ -162,7 +162,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
 
             结果: 联名账户弹出提示, 个人账户和联名账户应保持一致
     """
-    def test_apply_jointDerivativeProductDiff(self):
+    def test_apply_jointDerivativeProductDiffyes(self):
         # 个人账户, 衍生产品选择是
         self.RequiredField(applicationFor="联名账户",
                            way="亲临开户",
@@ -176,7 +176,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 点击提交按钮
         self.applySublime(Jump=False)
         # 填写联名账户
-        self.JoinRequiredField(buyProduct=True, num=1, linknum=None)
+        self.JointRequiredField(buyProduct=True, num=1, linknum=None)
         # 提交
         self.applySublime()
 
@@ -188,7 +188,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
 
             结果: 开户成功, 不会弹出提示框
     """
-    def test_apply_jointDerivativeProductsame(self):
+    def test_apply_jointDerivativeProductsameno(self):
         # 个人账户, 衍生产品选择是
         self.RequiredField(applicationFor="联名账户",
                            way="亲临开户",
@@ -201,7 +201,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 点击提交按钮
         self.applySublime(Jump=False)
         # 填写联名账户
-        self.JoinRequiredField(buyProduct=True, num=1, linknum=None)
+        self.JointRequiredField(buyProduct=True, num=1, linknum=None)
         # 提交
         self.applySublime()
 
@@ -213,7 +213,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
 
             结果: 联名账户弹出提示, 个人账户和联名账户应保持一致
     """
-    def test_apply_jointDerivativeProductsame(self):
+    def test_apply_jointDerivativeProductDiffno(self):
         # 个人账户, 衍生产品选择是
         self.RequiredField(applicationFor="联名账户",
                            way="亲临开户",
@@ -227,7 +227,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 点击提交按钮
         self.applySublime(Jump=False)
         # 填写联名账户
-        self.JoinRequiredField(buyProduct=True, num=0, linknum=None)
+        self.JointRequiredField(buyProduct=True, num=0, linknum=None)
         # 提交
         self.applySublime()
 

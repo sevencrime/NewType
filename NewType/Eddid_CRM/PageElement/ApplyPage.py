@@ -479,10 +479,12 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(riskStatement)
         tag_text = self.get_select(num)
         if tag_text == "否":
-            messagebox = (
-                By.XPATH, "//div[@aria-label='提示']//div[@class='el-message-box__btns']/button")
-            self.find_element(*messagebox).click()
-
+            # messagebox = (
+            #     By.XPATH, "//div[@aria-label='提示']//div[@class='el-message-box__btns']/button")
+            # self.find_element(*messagebox).click()
+            
+            # 弹出提示框共用一个组件
+            return self.box_alert()
 
     def bankrupt(self, num=None):
         # 客户是否曾经宣告破产或被申请破产
@@ -920,7 +922,6 @@ class ApplyPage(BasePage.BasePage):
 
 
     def apply_error(self):
-        # import pdb; pdb.set_trace()
         errormsg_loc = (By.XPATH, '//div[@class="el-form-item__error"]/ancestor::span/preceding-sibling::div')
         errormsg2_loc = (By.XPATH, '//div[@class="el-form-item__error"]/ancestor::span/parent::div/preceding-sibling::div/div')
         try:

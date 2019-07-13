@@ -36,7 +36,7 @@ class Test_addApplyAllNotEmpty(addApplyTool):
         self.applySublime(Jump=False)
 
         # 进入联名账户表单
-        self.JoinRequiredField()
+        self.JointRequiredField()
         # 点击联名账户-提交
         self.applySublime()
 
