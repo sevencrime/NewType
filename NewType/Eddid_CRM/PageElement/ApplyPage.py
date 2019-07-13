@@ -463,7 +463,7 @@ class ApplyPage(BasePage.BasePage):
 
     def buyProduct(self, num=None, linkTag=True, linknum=None):
         # 客户是否申请开通买卖衍生权证、牛熊证及结构性等产品
-        if self.driver.page_source.find("买卖衍生") != -1:
+        if self.driver.page_source.find("买卖衍生权证") != -1:
             buyProduct = self.find_element(*self.get_input("买卖衍生", parent=True))
             self.scrollinto(buyProduct)
             tag_text = self.get_select(randox=num)

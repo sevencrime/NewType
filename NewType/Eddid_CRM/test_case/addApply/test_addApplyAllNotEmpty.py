@@ -19,18 +19,14 @@ class Test_addApplyAllNotEmpty(addApplyTool):
         # 用例: 个人账户--必填参数
 
         # 填写apply 必填项
-        self.RequiredField(applicationFor="个人账户",
-                           way="亲临开户",
-                           type="香港及环球期货账户(保证金)")
+        self.RequiredField(applicationFor="个人账户")
         # 点击提交按钮
         self.applySublime()
 
     def test_apply_JointNotEmpty(self):
         # 用例: 联名账户--必填参数
 
-        self.RequiredField(applicationFor="联名账户",
-                           way="亲临开户", 
-                           type="香港及环球期货账户(保证金)")
+        self.RequiredField(applicationFor="联名账户")
 
         # 点击个人账户-提交按钮
         self.applySublime(Jump=False)
@@ -38,6 +34,12 @@ class Test_addApplyAllNotEmpty(addApplyTool):
         # 进入联名账户表单
         self.JointRequiredField()
         # 点击联名账户-提交
+        self.applySublime()
+
+    def test_apply_IndividualAll(self):
+        # 用例: Apply开户表单全部字段, 随机输入
+        self.RequiredField(applicationFor="个人账户")
+        # 点击提交按钮
         self.applySublime()
 
 

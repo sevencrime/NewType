@@ -1,5 +1,6 @@
 CRM登录:
 	Test_Login.py
+
 CRM开户表单(addApply):
 	(常规输入, 不触发隐藏框)
 	1, 个人账户,填写所有必填参数, 校验是否可以创建成功 >> test_addApplyAllNotEmpty.py::Test_addApplyAllNotEmpty::test_apply_IndividualNotEmpty
@@ -42,6 +43,14 @@ CRM开户表单(addApply):
 		7, 衍生成功选择为"是",风险承受能力选择为"低", 校验是否会弹出提示 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BuyProductRiskToleranceLow
 		8, 衍生成功选择为"是",风险承受能力选择为"中", 校验是否会弹出提示 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BuyProductRiskToleranceMiddle
 		9, 衍生成功选择为"是",风险承受能力选择为"高", 校验是否可以创建成功 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BuyProductRiskToleranceHigh
+
+	从潜在客户获取:
+			
+	勾选证券账户后,配偶信息为必填:
+		勾选证券,校验
+		勾选非证券, 校验
+		勾选证券, 填写
+		勾选证券, 填一半
 
 
 CRM审核流程(ReviewProves):

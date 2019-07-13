@@ -67,7 +67,7 @@ class addApplyTool(unittest.TestCase):
         mailLanguage = self.applypage.send_mailLanguage("中文(简体)")
         # 账户类别
         try:
-            import pdb; pdb.set_trace()
+            # import pdb; pdb.set_trace()
             if isinstance(kwargs['type'], list):
                 for t in kwargs['type']:
                     accountType = self.applypage.send_accountType(t)
@@ -136,8 +136,7 @@ class addApplyTool(unittest.TestCase):
                     buyProduct = self.applypage.buyProduct(num=0, linknum=0)
 
         except Exception as e:
-            print("个人账户衍生产品隐藏框", e)
-            raise e
+            self.applypage.buyProduct()
             
         # 客户是否曾经宣告破产或被申请破产?
         bankrupt = self.applypage.bankrupt()
@@ -177,6 +176,24 @@ class addApplyTool(unittest.TestCase):
         acceptStatement = self.applypage.acceptStatement()
         # 个人资料之使用声明
         useStatement = self.applypage.useStatement()
+
+    """
+        #Apply 个人账户, 非必填项
+    """
+    def NonRequiredField(self):
+        # 推广人
+        # 曾用英文姓名
+        # 曾用中文姓名
+        # 邮寄地址
+        # 主要账户持有人证明资料--图片
+        # 客户全年总收入 -- 输入框
+        # 客户资产净值 -- 输入框
+        # 外汇
+        # 贵金属
+        # 自动程式交易
+        # 其他投资
+        # 配偶信息
+        # 推广编号
 
 
     """
