@@ -7,16 +7,38 @@ CRM开户表单:
 
 	校验衍生产品隐藏框:
 		(优先校验衍生产品是否必填)
-		1, 账户类别选择香港及环球证券账户(现金),衍生产品选择"否", 校验是否可以创建成功 >> test_addApplyDerivativeProduct::Test_addApplyDerivativeProduct::test_apply_CashNotDerivativeProduct
-		2, 账户类别选择香港及环球证券账户(现金),衍生产品选择"是", 风险声明披露不填, 校验风险声明披露是否必填 >> test_addApplyDerivativeProduct::Test_addApplyDerivativeProduct::test_apply_CashisDerivativeProductNone
-		3, 账户类别选择香港及环球证券账户(现金),衍生产品选择"是", 风险声明披露选 "是", 校验是否创建成功 >> test_addApplyDerivativeProduct::Test_addApplyDerivativeProduct::test_apply_CashisDerivativeProductyes
-		4, 账户类别选择香港及环球证券账户(现金),衍生产品选择"是", 风险声明披露选 "否", 校验是否会弹出提示框, 校验创建成功 >> test_addApplyDerivativeProduct::Test_addApplyDerivativeProduct::test_apply_CashisDerivativeProductNo
-		5, 账户类别选择香港及环球证券账户(现金),衍生产品选择"否", 校验是否可以创建成功 >> test_addApplyDerivativeProduct::Test_addApplyDerivativeProduct::test_apply_MarginNotDerivativeProduct
-		6, 账户类别选择香港及环球证券账户(现金),衍生产品选择"是", 风险声明披露不填, 校验风险声明披露是否必填 >> test_addApplyDerivativeProduct::Test_addApplyDerivativeProduct::test_apply_MarginisDerivativeProductNone
-		7, 账户类别选择香港及环球证券账户(现金),衍生产品选择"是", 风险声明披露选 "是", 校验是否创建成功 >> test_addApplyDerivativeProduct::Test_addApplyDerivativeProduct::test_apply_MarginisDerivativeProductyes
-		8, 账户类别选择香港及环球证券账户(现金),衍生产品选择"是", 风险声明披露选 "否", 校验是否会弹出提示框, 校验创建成功 >> test_addApplyDerivativeProduct::Test_addApplyDerivativeProduct::test_apply_MarginisDerivativeProductNo
-		9, 账户类别选择非外汇, 黄金, ,证券, 校验是否会触发衍生产品隐藏框 >> test_addApplyDerivativeProduct::Test_addApplyDerivativeProduct::test_apply_PassDerivativeProduct
-		10, 个人账户衍生产品选择"是", 风险声明披露选择"是", 联名账户衍生产品选择"是", 风险声明披露选择"是", 校验是否可以创建成功 >> test_addApplyDerivativeProduct::Test_addApplyDerivativeProduct::test_apply_jointDerivativeProductsameyes
-		11, 个人账户衍生产品选择"是", 风险声明披露选择"是", 联名账户衍生产品选择"否", 校验是否会弹出提示 >> test_addApplyDerivativeProduct::Test_addApplyDerivativeProduct::test_apply_jointDerivativeProductDiffyes
-		12, 个人账户衍生产品选择"否", 联名账户衍生产品选择"否", 校验是否可以创建成功 >> test_addApplyDerivativeProduct::Test_addApplyDerivativeProduct::test_apply_jointDerivativeProductsameno
-		13, 个人账户衍生产品选择"否", 联名账户衍生产品选择"是", 校验是否会弹出提示 >> test_addApplyDerivativeProduct::Test_addApplyDerivativeProduct::test_apply_jointDerivativeProductDiffno
+		1, 账户类别选择香港及环球证券账户(现金),衍生产品选择"否", 校验是否可以创建成功 >> test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_CashNotDerivativeProduct
+		2, 账户类别选择香港及环球证券账户(现金),衍生产品选择"是", 风险声明披露不填, 校验风险声明披露是否必填 >> test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_CashisDerivativeProductNone
+		3, 账户类别选择香港及环球证券账户(现金),衍生产品选择"是", 风险声明披露选 "是", 校验是否创建成功 >> test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_CashisDerivativeProductyes
+		4, 账户类别选择香港及环球证券账户(现金),衍生产品选择"是", 风险声明披露选 "否", 校验是否会弹出提示框, 校验创建成功 >> test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_CashisDerivativeProductNo
+		5, 账户类别选择香港及环球证券账户(现金),衍生产品选择"否", 校验是否可以创建成功 >> test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_MarginNotDerivativeProduct
+		6, 账户类别选择香港及环球证券账户(现金),衍生产品选择"是", 风险声明披露不填, 校验风险声明披露是否必填 >> test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_MarginisDerivativeProductNone
+		7, 账户类别选择香港及环球证券账户(现金),衍生产品选择"是", 风险声明披露选 "是", 校验是否创建成功 >> test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_MarginisDerivativeProductyes
+		8, 账户类别选择香港及环球证券账户(现金),衍生产品选择"是", 风险声明披露选 "否", 校验是否会弹出提示框, 校验创建成功 >> test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_MarginisDerivativeProductNo
+		9, 账户类别选择非外汇, 黄金, ,证券, 校验是否会触发衍生产品隐藏框 >> test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_PassDerivativeProduct
+		10, 个人账户衍生产品选择"是", 风险声明披露选择"是", 联名账户衍生产品选择"是", 风险声明披露选择"是", 校验是否可以创建成功 >> test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_jointDerivativeProductsameyes
+		11, 个人账户衍生产品选择"是", 风险声明披露选择"是", 联名账户衍生产品选择"否", 校验是否会弹出提示 >> test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_jointDerivativeProductDiffyes
+		12, 个人账户衍生产品选择"否", 联名账户衍生产品选择"否", 校验是否可以创建成功 >> test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_jointDerivativeProductsameno
+		13, 个人账户衍生产品选择"否", 联名账户衍生产品选择"是", 校验是否会弹出提示 >> test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_jointDerivativeProductDiffno
+
+	选择杠杆式外汇, 黄金, 结构性衍生产品后, 投资目标不能单独选利息/股息收入:
+		1, 账户类别选择金业账户, 投资目标单独选择利息/股息收入, 校验是否会弹出提示 >> test_addApplyInvestmentTarget.py::Test_addApplyInvestmentTarget::test_apply_BullionInvestmentTarget
+		2, 账户类别选择杠杆式外汇账户, 投资目标单独选择利息/股息收入, 校验是否会弹出提示 >> test_addApplyInvestmentTarget.py::Test_addApplyInvestmentTarget::test_apply_LeveragedInvestmentTarget
+		3, 衍生产品选择"是", 风险声明披露选择"是", 投资目标单独选择利息/股息收入, 校验是否会弹出提示 >> test_addApplyInvestmentTarget.py::Test_addApplyInvestmentTarget::test_apply_BuyProductInvestmentTarget
+
+	校验开户方式隐藏框是否必填	:
+		1, 开户方式选择手机应用程式身份认证--校验银行名称和银行账户号码是否必填 >> test_addApplyRequired.py::Test_addApplyRequired::test_apply_MobileAuthentication
+		2, 开户方式选择电子签名认证--校验电子签名证书栏位是否必填 >> test_addApplyRequired.py::Test_addApplyRequired::test_apply_certificateNb
+
+	选择开通黄金账户,杠杆式外汇账户,结构性衍生产品, 风险承受能力必须为高:
+		1, 账户类别选择黄金账户,风险承受能力选择为"低", 校验是否会弹出提示 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BullionRiskToleranceLow
+		2, 账户类别选择黄金账户,风险承受能力选择为"中", 校验是否会弹出提示 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BullionRiskToleranceMiddle
+		3, 账户类别选择黄金账户,风险承受能力选择为"高", 校验是否可以创建成功 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BullionRiskToleranceHigh
+		4, 账户类别选择杠杆式外汇账户,风险承受能力选择为"低", 校验是否会弹出提示 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_LeveragedRiskToleranceLow
+		5, 账户类别选择杠杆式外汇账户,风险承受能力选择为"中", 校验是否会弹出提示 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_LeveragedRiskToleranceMiddle
+		6, 账户类别选择杠杆式外汇账户,风险承受能力选择为"高", 校验是否可以创建成功 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_LeveragedRiskToleranceHigh
+		7, 衍生成功选择为"是",风险承受能力选择为"低", 校验是否会弹出提示 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BuyProductRiskToleranceLow
+		8, 衍生成功选择为"是",风险承受能力选择为"中", 校验是否会弹出提示 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BuyProductRiskToleranceMiddle
+		9, 衍生成功选择为"是",风险承受能力选择为"高", 校验是否可以创建成功 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BuyProductRiskToleranceHigh
+
+

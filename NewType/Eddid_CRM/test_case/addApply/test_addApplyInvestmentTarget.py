@@ -28,7 +28,7 @@ class Test_addApplyInvestmentTarget(addApplyTool):
     # 用例: 账户类别分别选择杠杆式外汇账户(保证金,校验投资目标为利息/股息收入是否校验
     """
     @addApplyTool.InvestmentTarget()
-    def test_apply_BullionInvestmentTarget(self):
+    def test_apply_LeveragedInvestmentTarget(self):
         # 填写Apply表单必填项
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户", 
@@ -41,7 +41,7 @@ class Test_addApplyInvestmentTarget(addApplyTool):
     # 用例: 选择衍生产品,校验投资目标为利息/股息收入是否校验
     """
     @addApplyTool.InvestmentTarget()
-    def test_apply_BullionInvestmentTarget(self):
+    def test_apply_BuyProductInvestmentTarget(self):
         # 填写Apply表单必填项
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户", 
