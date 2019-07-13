@@ -10,7 +10,7 @@ import unittest
 import pytest
 from ReviewProcessTool import ReviewProcessTool
 
-class reviewProcess10(ReviewProcessTool):
+class Test_reviewProcess10(ReviewProcessTool):
     # 外汇RO拒绝, CS2驳回给RO 
     globals()["status"] = ""
     gm = GlobalMap.GlobalMap()

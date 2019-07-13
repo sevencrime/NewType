@@ -11,7 +11,7 @@ import pytest
 from ReviewProcessTool import ReviewProcessTool
 
 
-class reviewProcess2(ReviewProcessTool):
+class Test_reviewProcess2(ReviewProcessTool):
 	# App来源正向审核: 待cs1--待cs2--待RO--待ops--success`
 	globals()["status"] = ""
 	gm = GlobalMap.GlobalMap()

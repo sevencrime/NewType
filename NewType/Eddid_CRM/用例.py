@@ -1,4 +1,6 @@
-CRM开户表单:
+CRM登录:
+	Test_Login.py
+CRM开户表单(addApply):
 	(常规输入, 不触发隐藏框)
 	1, 个人账户,填写所有必填参数, 校验是否可以创建成功 >> test_addApplyAllNotEmpty.py::Test_addApplyAllNotEmpty::test_apply_IndividualNotEmpty
 	2, 联名账户, 填写所有必填参数, 校验是否可以创建成功 >> test_addApplyAllNotEmpty.py::Test_addApplyAllNotEmpty::test_apply_JointNotEmpty
@@ -41,4 +43,20 @@ CRM开户表单:
 		8, 衍生成功选择为"是",风险承受能力选择为"中", 校验是否会弹出提示 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BuyProductRiskToleranceMiddle
 		9, 衍生成功选择为"是",风险承受能力选择为"高", 校验是否可以创建成功 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BuyProductRiskToleranceHigh
 
+
+CRM审核流程(ReviewProves):
+	1, CRM或apply_from来源数据, 审核步骤为:未处理--待cs2--待RO--待ops--success >> test_reviewProcess01.py::Test_reviewProcess1
+	2, App来源数据, 审核步骤为: 待cs1--待cs2--待RO--待ops--success` >> test_reviewProcess02.py::Test_reviewProcess2
+	3, App来源数据, 驳回操作, 步骤为: 待cs1--拒绝--CS1修改后重新提交给CS2--CS2拒绝 >> test_reviewProcess03.py::Test_reviewProcess3
+	4, CRM来源数据, 驳回操作, 步骤为: 未处理---待cs2--拒绝--sales修改给CS2 >> test_reviewProcess04.py::Test_reviewProcess4
+	5, 多角色RO, 全部RO一次性审核通过	>> test_reviewProcess14.py::Test_reviewProcess14
+	6, 多角色RO, 审核其中的一个或多个 >> test_reviewProcess05.py::Test_reviewProcess5
+	7, 证券RO拒绝, CS2驳回给证券RO >> test_reviewProcess06.py::Test_reviewProcess6
+	8, 证券RO拒绝, CS2确定拒绝 >> test_reviewProcess07.py::Test_reviewProcess7
+	9, 期货RO拒绝, CS2驳回给证券RO >> test_reviewProcess08.py::Test_reviewProcess8
+	10, 期货RO拒绝, CS2确定拒绝 >> test_reviewProcess09.py::Test_reviewProcess9
+	11, 外汇RO拒绝, CS2驳回给证券RO >> test_reviewProcess10.py::Test_reviewProcess10
+	12, 外汇RO拒绝, CS2确定拒绝 >> test_reviewProcess11.py::Test_reviewProcess11
+	13, 黄金RO拒绝, CS2驳回给证券RO >> test_reviewProcess12.py::Test_reviewProcess12
+	14, 黄金RO拒绝, CS2确定拒绝 >> test_reviewProcess13.py::Test_reviewProcess13
 

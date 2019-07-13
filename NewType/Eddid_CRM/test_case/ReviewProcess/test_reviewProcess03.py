@@ -11,7 +11,7 @@ import pytest
 from ReviewProcessTool import ReviewProcessTool
 
 
-class reviewProcess3(ReviewProcessTool):
+class Test_reviewProcess3(ReviewProcessTool):
 	# App来源驳回流程: 待cs1--拒绝--CS1修改后重新提交给CS2--CS2拒绝
 	globals()["status"] = ""
 	gm = GlobalMap.GlobalMap()
