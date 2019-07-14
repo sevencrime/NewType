@@ -39,7 +39,22 @@ class Test_addApplyAllNotEmpty(addApplyTool):
     def test_apply_IndividualAll(self):
         # 用例: Apply开户表单全部字段, 随机输入
         self.RequiredField(applicationFor="个人账户")
+        self.NonRequiredField()
         # 点击提交按钮
+        self.applySublime()
+
+    def test_apply_JointNotEmpty(self):
+        # 用例: 联名账户--全部字段随机输入
+
+        self.RequiredField(applicationFor="联名账户")
+        self.NonRequiredField()
+        # 点击个人账户-提交按钮
+        self.applySublime(Jump=False)
+
+        # 进入联名账户表单
+        self.JointRequiredField()
+        self.NonJointRequiredField()
+        # 点击联名账户-提交
         self.applySublime()
 
 

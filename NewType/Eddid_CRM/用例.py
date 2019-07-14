@@ -5,8 +5,8 @@ CRM开户表单(addApply):
 	(常规输入, 不触发隐藏框)
 	1, 个人账户,填写所有必填参数, 校验是否可以创建成功 >> test_addApplyAllNotEmpty.py::Test_addApplyAllNotEmpty::test_apply_IndividualNotEmpty
 	2, 联名账户, 填写所有必填参数, 校验是否可以创建成功 >> test_addApplyAllNotEmpty.py::Test_addApplyAllNotEmpty::test_apply_JointNotEmpty
-	3, 个人账户, 填写全部字段,校验是否可以创建成功
-	4, 联名账户, 填写全部字段, 校验是否可以创建成功
+	3, 个人账户, 填写全部字段,校验是否可以创建成功 >> test_addApplyAllNotEmpty.py::Test_addApplyAllNotEmpty::test_apply_IndividualAll
+	4, 联名账户, 填写全部字段, 校验是否可以创建成功 >> test_addApplyAllNotEmpty.py::Test_addApplyAllNotEmpty::test_apply_JointNotEmpty
 
 	校验衍生产品隐藏框:
 		(优先校验衍生产品是否必填)

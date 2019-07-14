@@ -182,18 +182,37 @@ class addApplyTool(unittest.TestCase):
     """
     def NonRequiredField(self):
         # 推广人
+        promoter = self.applypage.send_promoter()
         # 曾用英文姓名
+        oldEnglishName = self.applypage.send_oldEnglishName()
         # 曾用中文姓名
+        oldChineseName = self.applypage.send_oldChineseName()
         # 邮寄地址
+        addressMail = self.applypage.send_addressMail()
         # 主要账户持有人证明资料--图片
-        # 客户全年总收入 -- 输入框
-        # 客户资产净值 -- 输入框
+        self.applypage.passport()
+        self.applypage.addressProof()
+        self.applypage.statementFile()
+        self.applypage.writtenMaterial()
+        self.applypage.ProofIncome()
+        self.applypage.otherFile()
+
         # 外汇
+        foreignExchange = self.applypage.foreignExchange()
         # 贵金属
+        bullion = self.applypage.bullion()
         # 自动程式交易
+        automatic = self.applypage.automatic()
         # 其他投资
+        otherInvestmentText = self.applypage.otherInvestmentText()
         # 配偶信息
+        spouseMarginAccount = self.applypage.spouseMarginAccount()
+        spouseDiscretion = self.applypage.spouseDiscretion()
+        spouseCompanyAccounts = self.applypage.spouseCompanyAccounts()
         # 推广编号
+        promoCode = self.applypage.promoCode()
+        # 其他投资-隐藏框
+        linkotherInvestmentText = self.applypage.linkotherInvestmentText()
 
 
     """
@@ -287,6 +306,27 @@ class addApplyTool(unittest.TestCase):
         # 联名账户- 本人确认并同意主要账户持有人之风险承受能力选择？
         self.applypage.jointRiskTolerance()
 
+    """
+        #Apply 联名账户 非必填项
+    """
+    def NonJointRequiredField(self):
+        # 曾用英文姓名
+        oldEnglishName = self.applypage.send_oldEnglishName()
+        # 曾用中文姓名
+        oldChineseName = self.applypage.send_oldChineseName()
+        # 邮寄地址
+        addressMail = self.applypage.send_addressMail()
+        # 其他投资
+        otherInvestmentText = self.applypage.otherInvestmentText()
+        # 外汇
+        foreignExchange = self.applypage.foreignExchange()
+        # 贵金属
+        bullion = self.applypage.bullion()
+        # 自动程式交易
+        automatic = self.applypage.automatic()
+        # 其他投资-隐藏框
+        linkotherInvestmentText = self.applypage.linkotherInvestmentText()
+        
 
     """
         #提交表单按钮
