@@ -15,7 +15,6 @@ from PageElement import *
 from Interface import *
 import time
 
-
 class addApplyTool(unittest.TestCase):
 
     globals()["email"] = ""
@@ -68,7 +67,7 @@ class addApplyTool(unittest.TestCase):
         mailLanguage = self.applypage.send_mailLanguage("中文(简体)")
         # 账户类别
         try:
-            import pdb; pdb.set_trace()
+            # import pdb; pdb.set_trace()
             if isinstance(kwargs['type'], list):
                 for t in kwargs['type']:
                     accountType = self.applypage.send_accountType(t)
@@ -137,8 +136,7 @@ class addApplyTool(unittest.TestCase):
                     buyProduct = self.applypage.buyProduct(num=0, linknum=0)
 
         except Exception as e:
-            print("个人账户衍生产品隐藏框", e)
-            raise e
+            self.applypage.buyProduct()
             
         # 客户是否曾经宣告破产或被申请破产?
         bankrupt = self.applypage.bankrupt()
@@ -179,11 +177,48 @@ class addApplyTool(unittest.TestCase):
         # 个人资料之使用声明
         useStatement = self.applypage.useStatement()
 
+    """
+        #Apply 个人账户, 非必填项
+    """
+    def NonRequiredField(self):
+        # 推广人
+        promoter = self.applypage.send_promoter()
+        # 曾用英文姓名
+        oldEnglishName = self.applypage.send_oldEnglishName()
+        # 曾用中文姓名
+        oldChineseName = self.applypage.send_oldChineseName()
+        # 邮寄地址
+        addressMail = self.applypage.send_addressMail()
+        # 主要账户持有人证明资料--图片
+        self.applypage.passport()
+        self.applypage.addressProof()
+        self.applypage.statementFile()
+        self.applypage.writtenMaterial()
+        self.applypage.ProofIncome()
+        self.applypage.otherFile()
+
+        # 外汇
+        foreignExchange = self.applypage.foreignExchange()
+        # 贵金属
+        bullion = self.applypage.bullion()
+        # 自动程式交易
+        automatic = self.applypage.automatic()
+        # 其他投资
+        otherInvestmentText = self.applypage.otherInvestmentText()
+        # 配偶信息
+        spouseMarginAccount = self.applypage.spouseMarginAccount()
+        spouseDiscretion = self.applypage.spouseDiscretion()
+        spouseCompanyAccounts = self.applypage.spouseCompanyAccounts()
+        # 推广编号
+        promoCode = self.applypage.promoCode()
+        # 其他投资-隐藏框
+        linkotherInvestmentText = self.applypage.linkotherInvestmentText()
+
 
     """
         #Apply 联名账户必填步骤
     """
-    def JoinRequiredField(self, *args, **kwargs):
+    def JointRequiredField(self, *args, **kwargs):
         # 进入联名账户
         # 联名账户- 称谓
         Jointtitle = self.applypage.send_title()
@@ -244,6 +279,7 @@ class addApplyTool(unittest.TestCase):
                     if kwargs['alert']:
                         alert_context = self.applypage.box_alert()
                         assert "「衍生权证、牛熊证及结构性产品」与主要账户持有人选择不一致" in alert_context 
+                        return alert_context
                 else:
                     buyProduct = self.applypage.buyProduct(num=0, linknum=0)
 
@@ -270,6 +306,27 @@ class addApplyTool(unittest.TestCase):
         # 联名账户- 本人确认并同意主要账户持有人之风险承受能力选择？
         self.applypage.jointRiskTolerance()
 
+    """
+        #Apply 联名账户 非必填项
+    """
+    def NonJointRequiredField(self):
+        # 曾用英文姓名
+        oldEnglishName = self.applypage.send_oldEnglishName()
+        # 曾用中文姓名
+        oldChineseName = self.applypage.send_oldChineseName()
+        # 邮寄地址
+        addressMail = self.applypage.send_addressMail()
+        # 其他投资
+        otherInvestmentText = self.applypage.otherInvestmentText()
+        # 外汇
+        foreignExchange = self.applypage.foreignExchange()
+        # 贵金属
+        bullion = self.applypage.bullion()
+        # 自动程式交易
+        automatic = self.applypage.automatic()
+        # 其他投资-隐藏框
+        linkotherInvestmentText = self.applypage.linkotherInvestmentText()
+        
 
     """
         #提交表单按钮

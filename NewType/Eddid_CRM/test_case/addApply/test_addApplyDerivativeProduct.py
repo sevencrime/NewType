@@ -128,10 +128,16 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 点击提交按钮
         self.applySublime()
 
+
     """
-    # 用例: 联名账户.个人是, 联名是
+    # 用例: 个人账户 >>  客户是否申请开通买卖衍生权证、牛熊证及结构性等产品选择"是"
+                        结构性产品相关风险声明披露选择"是"
+    #       联名账户 >>  客户是否申请开通买卖衍生权证、牛熊证及结构性等产品选择"是"
+                        结构性产品相关风险声明披露选择"是"
+
+            结果: 开户成功, 不会弹出提示框
     """
-    def test_apply_jointDerivativeProductsame(self):
+    def test_apply_jointDerivativeProductsameyes(self):
         # 个人账户, 衍生产品选择是
         self.RequiredField(applicationFor="联名账户",
                            way="亲临开户",
@@ -144,15 +150,19 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 点击提交按钮
         self.applySublime(Jump=False)
         # 填写联名账户
-        self.JoinRequiredField(buyProduct=True, num=0, linknum=0)
+        self.JointRequiredField(buyProduct=True, num=0, linknum=0)
         # 提交
         self.applySublime()
 
 
     """
-    # 用例: 联名账户.个人是, 联名否
+    # 用例: 个人账户 >>  客户是否申请开通买卖衍生权证、牛熊证及结构性等产品选择"是"
+                        结构性产品相关风险声明披露选择"是"
+    #       联名账户 >>  客户是否申请开通买卖衍生权证、牛熊证及结构性等产品选择"否"
+
+            结果: 联名账户弹出提示, 个人账户和联名账户应保持一致
     """
-    def test_apply_jointDerivativeProductsame(self):
+    def test_apply_jointDerivativeProductDiffyes(self):
         # 个人账户, 衍生产品选择是
         self.RequiredField(applicationFor="联名账户",
                            way="亲临开户",
@@ -166,15 +176,19 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 点击提交按钮
         self.applySublime(Jump=False)
         # 填写联名账户
-        self.JoinRequiredField(buyProduct=True, num=1, linknum=None)
+        self.JointRequiredField(buyProduct=True, num=1, linknum=None)
         # 提交
         self.applySublime()
 
 
     """
-    # 用例: 联名账户.个人否, 联名否
+    # 用例: 个人账户 >>  客户是否申请开通买卖衍生权证、牛熊证及结构性等产品选择"否"
+                        结构性产品相关风险声明披露 不触发
+    #       联名账户 >>  客户是否申请开通买卖衍生权证、牛熊证及结构性等产品选择"否"
+
+            结果: 开户成功, 不会弹出提示框
     """
-    def test_apply_jointDerivativeProductsame(self):
+    def test_apply_jointDerivativeProductsameno(self):
         # 个人账户, 衍生产品选择是
         self.RequiredField(applicationFor="联名账户",
                            way="亲临开户",
@@ -187,15 +201,19 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 点击提交按钮
         self.applySublime(Jump=False)
         # 填写联名账户
-        self.JoinRequiredField(buyProduct=True, num=1, linknum=None)
+        self.JointRequiredField(buyProduct=True, num=1, linknum=None)
         # 提交
         self.applySublime()
 
 
     """
-    # 用例: 联名账户.个人否, 联名是
+    # 用例: 个人账户 >>  客户是否申请开通买卖衍生权证、牛熊证及结构性等产品选择"否"
+                        结构性产品相关风险声明披露 不触发
+    #       联名账户 >>  客户是否申请开通买卖衍生权证、牛熊证及结构性等产品选择"是"
+
+            结果: 联名账户弹出提示, 个人账户和联名账户应保持一致
     """
-    def test_apply_jointDerivativeProductsame(self):
+    def test_apply_jointDerivativeProductDiffno(self):
         # 个人账户, 衍生产品选择是
         self.RequiredField(applicationFor="联名账户",
                            way="亲临开户",
@@ -209,15 +227,9 @@ class Test_addApplyDerivativeProduct(addApplyTool):
         # 点击提交按钮
         self.applySublime(Jump=False)
         # 填写联名账户
-        self.JoinRequiredField(buyProduct=True, num=0, linknum=0)
+        self.JointRequiredField(buyProduct=True, num=0, linknum=None)
         # 提交
         self.applySublime()
-
-
-
-
-
-
 
 
 

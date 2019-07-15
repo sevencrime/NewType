@@ -7,7 +7,7 @@ import pytest
 from ReviewProcessTool import ReviewProcessTool
 
 
-class reviewProcess4(ReviewProcessTool):
+class Test_reviewProcess4(ReviewProcessTool):
 	# CRM来源驳回流程: 未处理---待cs2--拒绝--sales修改给CS2
     globals()["status"] = ""
     gm = GlobalMap.GlobalMap()

@@ -150,6 +150,13 @@ class ApplyPage(BasePage.BasePage):
         assert mailLanguage.get_attribute("value") != ''
         return mailLanguage.get_attribute("value")
 
+    def send_promoter(self):
+        # 推广人
+        promoter = self.find_element(*self.get_input('推广人'))
+        promoter.send_keys("promoter")
+        assert promoter.get_attribute("value") != ''
+        return promoter.get_attribute("value")
+
     def send_accountType(self, text):
         # 账户类别
         self.find_element(*self.get_checkbox(text)).click()
@@ -187,6 +194,21 @@ class ApplyPage(BasePage.BasePage):
         chineseName.send_keys("郑某人")
         assert chineseName.get_attribute("value") != ''
         return chineseName.get_attribute("value")
+
+    def send_oldEnglishName(self):
+        # 曾用英文姓名
+        oldEnglishName = self.find_element(*self.get_input('曾用英文姓名'))
+        oldEnglishName.send_keys("曾用英文姓名")
+        assert oldEnglishName.get_attribute("value") != ''
+        return oldEnglishName.get_attribute("value")
+
+    def send_oldChineseName(self):
+        # 曾用中文姓名
+        oldChineseName = self.find_element(*self.get_input('曾用中文姓名'))
+        oldChineseName.send_keys("曾用中文姓名")
+        assert oldChineseName.get_attribute("value") != ''
+        return oldChineseName.get_attribute("value")
+
 
     def send_emali(self):
         # 电邮
@@ -226,6 +248,7 @@ class ApplyPage(BasePage.BasePage):
 
         assert addressMail.get_attribute("value") != ''
         return addressMail.get_attribute("value")
+
 
     def send_nationality(self):
         # 国籍
@@ -324,10 +347,72 @@ class ApplyPage(BasePage.BasePage):
             assert employment.get_attribute("value") != ''
             return employment
 
-    def uploadImage(self):
-        # 上传图片
-        # self.modify_displys(display='block')
-        pass
+    def passport(self):
+        # 上传图片-- 个人(及联名)账户持有人的身份证或护照副本
+        self.modify_displys(display='block')
+        self.find_element(*self.get_input("账户持有人的身份证或护照副本")).send_keys(random.sample(self.mob, 1))
+        self.modify_displys()
+
+        loading_loc = (
+            By.XPATH, "//div[contains(text(), '账户持有人的身份证或护照副本')]/following-sibling::span//i[@class='el-icon-loading']")
+        WebDriverWait(self.driver, 20).until_not(
+            EC.presence_of_element_located(loading_loc))
+
+    def addressProof(self):
+        # 上传图片-- 最近3个月的银行结单或公共服务单据副本作为提供住址证明
+        self.modify_displys(display='block')
+        self.find_element(*self.get_input("住址证明")).send_keys(random.sample(self.mob, 1))
+        self.modify_displys()
+
+        loading_loc = (
+            By.XPATH, "//div[contains(text(), '住址证明')]/following-sibling::span//i[@class='el-icon-loading']")
+        WebDriverWait(self.driver, 20).until_not(
+            EC.presence_of_element_located(loading_loc))
+
+    def statementFile(self):
+        # 上传图片-- 香港银行账户明文件(包含账户持有人全名及账户号码),若指定银行为香港以外银行账户,请提供最近3个月的结单副本
+        self.modify_displys(display='block')
+        self.find_element(*self.get_input("结单副本")).send_keys(random.sample(self.mob, 1))
+        self.modify_displys()
+
+        loading_loc = (
+            By.XPATH, "//div[contains(text(), '结单副本')]/following-sibling::span//i[@class='el-icon-loading']")
+        WebDriverWait(self.driver, 20).until_not(
+            EC.presence_of_element_located(loading_loc))
+
+    def writtenMaterial(self):
+        # 上传图片-- 书面申请材料
+        self.modify_displys(display='block')
+        self.find_element(*self.get_input("书面申请材料")).send_keys(random.sample(self.mob, 1))
+        self.modify_displys()
+
+        loading_loc = (
+            By.XPATH, "//div[contains(text(), '书面申请材料')]/following-sibling::span//i[@class='el-icon-loading']")
+        WebDriverWait(self.driver, 20).until_not(
+            EC.presence_of_element_located(loading_loc))
+
+    def ProofIncome(self):
+        # 上传图片-- 收入证明材料
+        self.modify_displys(display='block')
+        self.find_element(*self.get_input("收入证明材料")).send_keys(random.sample(self.mob, 1))
+        self.modify_displys()
+
+        loading_loc = (
+            By.XPATH, "//div[contains(text(), '收入证明材料')]/following-sibling::span//i[@class='el-icon-loading']")
+        WebDriverWait(self.driver, 20).until_not(
+            EC.presence_of_element_located(loading_loc))
+
+    def otherFile(self):
+        # 上传图片-- 其他资料
+        self.modify_displys(display='block')
+        self.find_element(*self.get_input("其他资料")).send_keys(random.sample(self.mob, 1))
+        self.modify_displys()
+
+        loading_loc = (
+            By.XPATH, "//div[contains(text(), '其他资料')]/following-sibling::span//i[@class='el-icon-loading']")
+        WebDriverWait(self.driver, 20).until_not(
+            EC.presence_of_element_located(loading_loc))
+
 
     def totalAnnualCustomerRevenueHK(self):
         # 客户全年总收入为(港元)
@@ -429,11 +514,12 @@ class ApplyPage(BasePage.BasePage):
     def otherInvestmentText(self):
         # 客户投资经验及曾买卖产品>其他投资
         self.find_element(*self.get_input("其他投资")).send_keys("otherInvest")
-        # self.get_action("其他投资")
-        # time.sleep(5)
-        # parent_loc = (By.XPATH, "//div[contains(text(), '其他投资')]/parent::*/parent::span/following-sibling::*//input")
-        # self.find_element(parent_loc).click()
-        # self.find_element(*self.get_select()).click()
+
+    def linkotherInvestmentText(self):
+        linkotherInvestmentText_loc = (By.XPATH, "//div[contains(text(), '其他投资')]/parent::*/parent::span/following-sibling::*//input")
+        linkotherInvestmentText = self.find_element(*linkotherInvestmentText_loc)
+        self.scrollinto(linkotherInvestmentText)
+        tag_text = self.get_select()
 
     def derivativeCourse(self, num=None):
         # 客户是否曾接受有关衍生产品性质和风险的一般知识培训或修读相关课程
@@ -463,7 +549,7 @@ class ApplyPage(BasePage.BasePage):
 
     def buyProduct(self, num=None, linkTag=True, linknum=None):
         # 客户是否申请开通买卖衍生权证、牛熊证及结构性等产品
-        if self.driver.page_source.find("买卖衍生") != -1:
+        if self.driver.page_source.find("买卖衍生权证") != -1:
             buyProduct = self.find_element(*self.get_input("买卖衍生", parent=True))
             self.scrollinto(buyProduct)
             tag_text = self.get_select(randox=num)
@@ -479,10 +565,12 @@ class ApplyPage(BasePage.BasePage):
         self.scrollinto(riskStatement)
         tag_text = self.get_select(num)
         if tag_text == "否":
-            messagebox = (
-                By.XPATH, "//div[@aria-label='提示']//div[@class='el-message-box__btns']/button")
-            self.find_element(*messagebox).click()
-
+            # messagebox = (
+            #     By.XPATH, "//div[@aria-label='提示']//div[@class='el-message-box__btns']/button")
+            # self.find_element(*messagebox).click()
+            
+            # 弹出提示框共用一个组件
+            return self.box_alert()
 
     def bankrupt(self, num=None):
         # 客户是否曾经宣告破产或被申请破产
@@ -495,8 +583,8 @@ class ApplyPage(BasePage.BasePage):
             self.find_element(*self.get_input("破产日期")).send_keys(Keys.ENTER)
 
             # 破产证明书
-            imgli_loc = (
-                By.XPATH, "//div[contains(text(), '破产解除证明书')]/following-sibling::span//li")
+            # imgli_loc = (
+            #     By.XPATH, "//div[contains(text(), '破产解除证明书')]/following-sibling::span//li")
 
             self.modify_displys(display='block')
             # import pdb; pdb.set_trace()
@@ -569,8 +657,8 @@ class ApplyPage(BasePage.BasePage):
                                               parent=True)).send_keys("HKEX")
 
             # 请提供雇主同意书
-            imgli_loc = (
-                By.XPATH, "//div[contains(text(), '请提供雇主同意书')]/parent::div/following-sibling::*//li")
+            # imgli_loc = (
+            #     By.XPATH, "//div[contains(text(), '请提供雇主同意书')]/parent::div/following-sibling::*//li")
 
             self.modify_displys(display='block')
             self.find_element(*self.get_input("请提供雇主同意书", parent=True)
@@ -690,7 +778,7 @@ class ApplyPage(BasePage.BasePage):
             for bankInput in bankAccount:
                 bankInput.send_keys("bankAccount")
 
-    def marginAccount(self, num=None):
+    def spouseMarginAccount(self, num=None):
         # 1.客户的配偶是否持有艾德证券任何相关的保证金账户?
         marginAccount = self.find_element(
             *self.get_input("客户的配偶", parent=True))
@@ -703,7 +791,7 @@ class ApplyPage(BasePage.BasePage):
             for inputs in el_inputs:
                 inputs.send_keys("name")
 
-    def discretion(self, num=None):
+    def spouseDiscretion(self, num=None):
         # 2.客户及/或其配偶是否单独或共同控制艾德证券之其他保证金账户35%或以上之表决权?
         discretion = self.find_element(
             *self.get_input("保证金账户35%或以上之表决权", parent=True))
@@ -720,8 +808,8 @@ class ApplyPage(BasePage.BasePage):
         assert discretion.get_attribute("value") != ''
         return discretion.get_attribute("value")
 
-    def companyAccounts(self, num=None):
-        # 客户是否有以客户的同一集团公司旗下之公司开立保证金账户？
+    def spouseCompanyAccounts(self, num=None):
+        # 3, 客户是否有以客户的同一集团公司旗下之公司开立保证金账户？
         companyAccounts = self.find_element(
             *self.get_input("同一集团公司旗下", parent=True))
         self.scrollinto(companyAccounts)
@@ -758,6 +846,13 @@ class ApplyPage(BasePage.BasePage):
 
         assert beneficial.get_attribute("value") != ''
         return beneficial.get_attribute("value")
+
+    def promoCode(self):
+        # 推广编号
+        promoCode = self.find_element(*self.get_input("推广编号", parent=True))
+        promoCode.send_keys("EAGE")
+        assert promoCode.get_attribute("value") != ''
+        return promoCode.get_attribute("value")
 
     def Othed_People(self, num=None):
         # 身份声明>>2.客户是否最终负责下单的人?
@@ -920,7 +1015,6 @@ class ApplyPage(BasePage.BasePage):
 
 
     def apply_error(self):
-        # import pdb; pdb.set_trace()
         errormsg_loc = (By.XPATH, '//div[@class="el-form-item__error"]/ancestor::span/preceding-sibling::div')
         errormsg2_loc = (By.XPATH, '//div[@class="el-form-item__error"]/ancestor::span/parent::div/preceding-sibling::div/div')
         try:
