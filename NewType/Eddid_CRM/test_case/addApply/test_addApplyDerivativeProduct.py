@@ -228,4 +228,4 @@ if __name__ == '__main__':
     # suite.addTests(unittest.TestLoader().loadTestsFromTestCase(addApplyDerivativeProduct))
     # runner = unittest.TextTestRunner(verbosity=2)
     # runner.run(suite)
-    pytest.main("-v -s test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_PassDerivativeProduct")
+    pytest.main("-v -s test_addApplyDerivativeProduct.py::Test_addApplyDerivativeProduct::test_apply_jointDerivativeProductsame")
