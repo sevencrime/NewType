@@ -45,6 +45,8 @@ CRM开户表单(addApply):
 		9, 衍生成功选择为"是",风险承受能力选择为"高", 校验是否可以创建成功 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BuyProductRiskToleranceHigh
 
 	从潜在客户获取:
+
+
 			
 	勾选证券账户后,配偶信息为必填:
 		勾选证券,校验
@@ -69,3 +71,13 @@ CRM审核流程(ReviewProves):
 	13, 黄金RO拒绝, CS2驳回给证券RO >> test_reviewProcess12.py::Test_reviewProcess12
 	14, 黄金RO拒绝, CS2确定拒绝 >> test_reviewProcess13.py::Test_reviewProcess13
 
+
+修改数据
+	1, sales修改, 修改全部
+	2, CS1修改, 修改图片
+	3, CS2修改, 修改图片, 推荐人-推广编号
+	4, OPS修改, 图片
+
+
+CRM创建活动:
+	

@@ -5,18 +5,19 @@
 # @Link    : localhost
 # @Version : $Id$
 
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
-from Commons import *
+
 import os
 import sys
 import time
 import random
 import glob
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+from Commons import *
 
 
 class ApplyPage(BasePage.BasePage):
@@ -1119,3 +1120,6 @@ class ApplyPage(BasePage.BasePage):
             By.XPATH, "//span[text()='确定']//parent::button")
         self.find_element(*sublime_popwindow_loc).click()
 
+# if __name__ == '__main__':
+#     mob = glob.glob(os.path.abspath(os.path.dirname(os.getcwd()))+r'\image\*')
+#     print(mob)

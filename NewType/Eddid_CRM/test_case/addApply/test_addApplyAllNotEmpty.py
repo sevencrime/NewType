@@ -48,7 +48,6 @@ class Test_addApplyAllNotEmpty(addApplyTool):
 
     def test_apply_JointNotEmpty(self):
         # 用例: 联名账户--全部字段随机输入
-
         self.RequiredField(applicationFor = "联名账户",
                            type = ["香港及环球证券账户(现金)", "香港及环球期货账户(保证金)", "杠杆式外汇账户(保证金)", "艾德金业现货黄金账户(保证金)"],
                            buyProduct = True)
