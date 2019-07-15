@@ -80,4 +80,6 @@ CRM审核流程(ReviewProves):
 
 
 CRM创建活动:
-	
+	1, 创建活动,全字段 >> test_createActivity.py::Test_createActivity::test_AllCreateActivity
+	2, 创建活动,必要字段 >> test_createActivity.py::Test_createActivity::test_RequiredCreate
+	3, 非空校验 >> test_createActivity.py::Test_createActivity::test_NonCreateActivity
