@@ -130,9 +130,11 @@ class addApplyTool(unittest.TestCase):
         # 隐藏框, 衍生产品
         try:
             if kwargs["buyProduct"]:
-                if kwargs['num'] and kwargs['linknum']:
-                    buyProduct = self.applypage.buyProduct(num=kwargs['num'], linknum=kwargs['linknum'])
-                else:
+                try:
+                    if kwargs['num'] and kwargs['linknum']:
+                        buyProduct = self.applypage.buyProduct(num=kwargs['num'], linknum=kwargs['linknum'])
+
+                except Exception as e:
                     buyProduct = self.applypage.buyProduct(num=0, linknum=0)
 
         except Exception as e:
@@ -272,23 +274,24 @@ class addApplyTool(unittest.TestCase):
         # 联名账户- 客户是否从现时或过去拥有与衍生产品有关的工作经验?
         JointderivativeJobs = self.applypage.derivativeJobs()
         # 联名账户- 客户是否于过去3年曾执行 5次或以上有关衍生产品的交易，例如：衍生权证、牛熊证、股票期权、期货及期权、商品、结构性产品及交易所买卖基金等?
+        jointtradingFund = self.applypage.tradingFund()
+        # 隐藏框, 衍生产品
         try:
             if kwargs["buyProduct"]:
-                if kwargs['num'] and kwargs['linknum']:
-                    buyProduct = self.applypage.buyProduct(num=kwargs['num'], linknum=kwargs['linknum'])
-                    if kwargs['alert']:
-                        alert_context = self.applypage.box_alert()
-                        assert "「衍生权证、牛熊证及结构性产品」与主要账户持有人选择不一致" in alert_context 
-                        return alert_context
-                else:
+                try:
+                    if kwargs['num'] and kwargs['linknum']:
+                        buyProduct = self.applypage.buyProduct(num=kwargs['num'], linknum=kwargs['linknum'])
+                        if kwargs['alert']:
+                            alert_context = self.applypage.box_alert()
+                            assert "「衍生权证、牛熊证及结构性产品」与主要账户持有人选择不一致" in alert_context 
+                            return alert_context
+                            
+                except Exception as e:
                     buyProduct = self.applypage.buyProduct(num=0, linknum=0)
 
         except Exception as e:
-            print("个人账户衍生产品隐藏框", e)
-            raise e
-            
+            self.applypage.buyProduct()
 
-        JointtradingFund = self.applypage.tradingFund()
         # 联名账户- 客户是否曾经宣告破产或被申请破产?
         Jointbankrupt = self.applypage.bankrupt()
         # 联名账户- 客户是否艾德证券及/或艾德金业的雇员或任何其客户的亲属?

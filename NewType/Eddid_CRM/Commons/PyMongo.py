@@ -44,7 +44,6 @@ class Database:
         for item in expectedTotal:  #输出删除总数
             self.log.info("%s 表预计删除 %d 条记录" %(item, self.expectedRemoveTotal.count(item)))
 
-
         actualTotal = set(self.actualRemoveTotal)
         for actual in actualTotal:
             self.log.info("%s 表实际删除 %d 条记录" %(actual, self.actualRemoveTotal.count(actual)))
