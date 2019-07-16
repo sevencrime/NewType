@@ -9,6 +9,7 @@ from test_case.Test_Login import *
 import unittest
 import pytest
 from ReviewProcessTool import ReviewProcessTool
+from test_case.public.publicTool import publicTool
 
 class Test_reviewProcess12(ReviewProcessTool):
     # 黄金RO拒绝, CS2驳回给RO 
@@ -20,7 +21,7 @@ class Test_reviewProcess12(ReviewProcessTool):
     # @reviewProcessTool.skipIf(status = "待证券RO审批")
     def test_01_Process12_gold(self):
         # cliff审核
-        Test_Login.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
+        publicTool.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
         globals()["status"] = self.reviewRefuse(email=self.gm.get_value("email"), statusSel="待RO审批")
 
 
@@ -28,7 +29,7 @@ class Test_reviewProcess12(ReviewProcessTool):
         if globals()["status"].find("黄金RO拒绝") == -1 :
             pytest.xfail("数据状态是 {}".format(globals()["status"]))
 
-        Test_Login.LoginCRM(self, user='cs_t1')
+        publicTool.LoginCRM(self, user='cs_t1')
         globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批", btn_text="信息无误")
         
 

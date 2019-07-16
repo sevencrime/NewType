@@ -9,6 +9,7 @@ from test_case.Test_Login import *
 import unittest
 import pytest
 from ReviewProcessTool import ReviewProcessTool
+from test_case.public.publicTool import publicTool
 
 class Test_reviewProcess1(ReviewProcessTool):
 	# CRM and apply_form正向审核: 未处理--待cs2--待RO--待ops--success
@@ -21,7 +22,7 @@ class Test_reviewProcess1(ReviewProcessTool):
 	# @reviewProcessTool.skipIf(status = "未处理")
 	def test01_Process1_sales_to_cs2(self):
 		# sales--cs2
-		Test_Login.LoginCRM(self, user='sales_t1')
+		publicTool.LoginCRM(self, user='sales_t1')
 		globals()["status"] = self.submitReview(email=self.gm.get_value("email"), statusSel="未处理")
 		
 	# @reviewProcessTool.skipIf(status = "CS2")
@@ -31,7 +32,7 @@ class Test_reviewProcess1(ReviewProcessTool):
 		if globals()["status"].find("待CS2审批") == -1:
 			pytest.xfail("数据状态是 {}".format(globals()["status"]))
 
-		Test_Login.LoginCRM(self, user='cs_t1')
+		publicTool.LoginCRM(self, user='cs_t1')
 		globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待CS2审批")
 
 
@@ -41,7 +42,7 @@ class Test_reviewProcess1(ReviewProcessTool):
 		if globals()["status"].find("待证券RO审批") == -1 :
 			pytest.xfail("数据状态是 {}".format(globals()["status"]))
 			
-		Test_Login.LoginCRM(self, user='ro1_cliff', psw="Abcd1234")
+		publicTool.LoginCRM(self, user='ro1_cliff', psw="Abcd1234")
 		globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")
 
 	# @reviewProcessTool.skipIf(status = "待期货RO审批")
@@ -50,7 +51,7 @@ class Test_reviewProcess1(ReviewProcessTool):
 		if globals()["status"].find("待期货RO审批") == -1 :
 			pytest.xfail("数据状态是 {}".format(globals()["status"]))
 			
-		Test_Login.LoginCRM(self, user='ro1_don', psw='Abcd1234')
+		publicTool.LoginCRM(self, user='ro1_don', psw='Abcd1234')
 		globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")
 
 	# @reviewProcessTool.skipIf(status = "待外汇RO审批")
@@ -59,7 +60,7 @@ class Test_reviewProcess1(ReviewProcessTool):
 		if globals()["status"].find("待外汇RO审批") == -1 :
 			pytest.xfail("数据状态是 {}".format(globals()["status"]))
 			
-		Test_Login.LoginCRM(self, user='aaron_chan')
+		publicTool.LoginCRM(self, user='aaron_chan')
 		globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")
 
 	# @reviewProcessTool.skipIf(status = "待黄金RO审批")
@@ -68,7 +69,7 @@ class Test_reviewProcess1(ReviewProcessTool):
 		if globals()["status"].find("待黄金RO审批") == -1 :
 			pytest.xfail("数据状态是 {}".format(globals()["status"]))
 		
-		Test_Login.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
+		publicTool.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
 		globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")
 
 
@@ -78,13 +79,14 @@ class Test_reviewProcess1(ReviewProcessTool):
 		if globals()["status"].find("待结算审批") == -1 :
 			pytest.xfail("数据状态是 {}".format(globals()["status"]))
 			
-		Test_Login.LoginCRM(self, user='ops_t1')
+		publicTool.LoginCRM(self, user='ops_t1')
 		globals()["status"] = self.reviewFinish(email=self.gm.get_value("email"), statusSel="待结算审批")
 
 
 if __name__ == "__main__":
 	# pytest.main()
-	suite = unittest.TestSuite()
-	suite.addTests(unittest.TestLoader().loadTestsFromTestCase(reviewProcess1))
-	runner = unittest.TextTestRunner(verbosity=2)
-	runner.run(suite)
+	# suite = unittest.TestSuite()
+	# suite.addTests(unittest.TestLoader().loadTestsFromTestCase(reviewProcess1))
+	# runner = unittest.TextTestRunner(verbosity=2)
+	# runner.run(suite)
+	pytest.main("-s -v test_reviewProcess01.py::Test_reviewProcess1")

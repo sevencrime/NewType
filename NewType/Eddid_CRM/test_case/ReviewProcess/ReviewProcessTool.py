@@ -13,6 +13,7 @@ import unittest
 from selenium import webdriver
 import time
 import pytest
+from test_case.public.publicTool import publicTool
 
 class ReviewProcessTool(unittest.TestCase):
 
@@ -42,7 +43,6 @@ class ReviewProcessTool(unittest.TestCase):
 		self.driver.set_script_timeout(20)
 		self.url = 'http://eddid-bos-uat.ntdev.be'
 
-		self.MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
 		self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
 		self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
 
@@ -62,16 +62,16 @@ class ReviewProcessTool(unittest.TestCase):
 		statusSel : 筛选状态select框
 	"""
 	def reviewPass(self, email, statusSel, *args, **kwarsg):
-		self.MenuListPage.click_menulist("开户管理", "开户列表")
-		self.mainpage.wait_LoadingModal()
+		publicTool.click_menulist(self, "开户管理", "开户列表")
+		publicTool.wait_LoadingModal(self)
 
 		# 下拉列表选择待CS2审批
 		self.mainpage.click_StatusSelect(statusSel)
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 
 		# 双击进入apply表单
 		self.mainpage.get_apply(email=email)
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
 		try:
@@ -81,7 +81,7 @@ class ReviewProcessTool(unittest.TestCase):
 			self.applypage.click_sublimeApply("通过")
 
 		self.applypage.click_popWindow("确定")
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
 		return self.mainpage.get_status(email)
@@ -98,18 +98,18 @@ class ReviewProcessTool(unittest.TestCase):
 		statusSel : 筛选状态select框
 	"""
 	def submitReview(self, email, statusSel, *args, **kwarsg):
-		self.MenuListPage.click_menulist("开户管理", "开户列表")
-		self.mainpage.wait_LoadingModal()
+		publicTool.click_menulist(self, "开户管理", "开户列表")
+		publicTool.wait_LoadingModal(self)
 
 		# 下拉列表选择未处理
 		self.mainpage.click_StatusSelect(statusSel)
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 
 		# 判断状态校验功能是否正常,选择编号
 		self.mainpage.click_checkbox(email=email)	
 		self.mainpage.click_submitreview()
 		self.applypage.click_popWindow("确定")
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 
 		self.assertIsNot("待CS2审批", self.mainpage.get_status(email), "状态没有改变")
 		# globals()["status"] = self.mainpage.get_status(self.gm.get_value("email"))
@@ -127,14 +127,14 @@ class ReviewProcessTool(unittest.TestCase):
 		statusSel : 筛选状态select框
 	"""
 	def reviewRefuse(self, email, statusSel, *args, **kwarsg):
-		self.MenuListPage.click_menulist("开户管理", "开户列表")
-		self.mainpage.wait_LoadingModal()
+		publicTool.click_menulist(self, "开户管理", "开户列表")
+		publicTool.wait_LoadingModal(self)
 		# 下拉列表选择待CS2审批
 		self.mainpage.click_StatusSelect(statusSel)
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 
 		self.mainpage.get_apply(email=email)
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 		try:
 			if kwarsg['btn_text']:
@@ -144,7 +144,7 @@ class ReviewProcessTool(unittest.TestCase):
 			
 		# 选择拒绝原因
 		self.applypage.rejectReason("确定")
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
 		# self.assertIsNot("拒绝", self.mainpage.get_status(self.gm.get_value("email")), "状态没有改变")
@@ -162,28 +162,28 @@ class ReviewProcessTool(unittest.TestCase):
 		statusSel : 筛选状态select框
 	"""
 	def reviewFinish(self, email, statusSel, *args, **kwarsg):
-		self.MenuListPage.click_menulist("开户管理", "开户列表")
-		self.mainpage.wait_LoadingModal()
+		publicTool.click_menulist(self, "开户管理", "开户列表")
+		publicTool.wait_LoadingModal(self)
 
 		self.mainpage.click_StatusSelect(statusSel)
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 
 		self.mainpage.get_apply(email=email)
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-detail', '不能进入Apply详情页')
 
 		self.applypage.click_sublimeApply("完成")
 		# self.applypage.send_accountNumber(randox=1)
 		# 自动生成客户编号
 		self.applypage.autoCreateAccountNO()
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 		# 点击确认按钮,生成账户号
 		self.applypage.createTradeAccount()
 		# 选择优惠码
 		self.applypage.send_promoCode()
 		# 点击确认按钮
 		self.applypage.ops_createNO()
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
 		self.assertEqual("成功", self.mainpage.get_status(email), "状态没有改变")
@@ -202,21 +202,21 @@ class ReviewProcessTool(unittest.TestCase):
 	"""
 	def reviewUpdate(self, email, statusSel, *args, **kwarsg):
 
-		self.MenuListPage.click_menulist("开户管理", "开户列表")
-		self.mainpage.wait_LoadingModal()
+		publicTool.click_menulist(self, "开户管理", "开户列表")
+		publicTool.wait_LoadingModal(self)
 		# 下拉列表选择待CS2审批
 		self.mainpage.click_StatusSelect(statusSel)
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 
 		self.mainpage.click_checkbox(email=email)	#选择多选框
 		self.mainpage.click_update()	#点击修改按钮
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-update', '不能进入Apply详情页')
 
 		self.applypage.click_sublimeApply("提交")
 		# 选择拒绝原因
 		self.applypage.click_popWindow("确定")
-		self.mainpage.wait_LoadingModal()
+		publicTool.wait_LoadingModal(self)
 
 		self.assertEqual(self.driver.current_url, 'http://eddid-bos-uat.ntdev.be/main/apply-list', "页面没有从Apply详情页跳转到list页面")
 

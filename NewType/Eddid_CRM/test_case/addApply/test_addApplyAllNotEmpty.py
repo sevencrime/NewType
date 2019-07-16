@@ -69,4 +69,4 @@ if __name__ == '__main__':
     # runner = unittest.TextTestRunner(verbosity=2)
     # runner.run(suite)
 
-    pytest.main("-s -v --pdb test_addApplyAllNotEmpty.py::Test_addApplyAllNotEmpty::test_apply_JointNotEmpty")
+    pytest.main("-s -v --pdb test_addApplyAllNotEmpty.py::Test_addApplyAllNotEmpty::test_apply_IndividualNotEmpty")

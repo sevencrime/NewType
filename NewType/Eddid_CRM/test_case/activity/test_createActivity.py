@@ -16,13 +16,14 @@ import unittest, pytest
 from test_case.Test_Login import *
 from Commons import *
 from PageElement import *
+from test_case.public.publicTool import publicTool
 
 class Test_createActivity:
 
     log = Logging.Logs()
 
     def setup(self):
-        self.driver = webdriver.Chrome(executable_path='chromedriver')
+        self.driver = webdriver.Chrome(executable_path='chromedriver') 
         # self.driver = webdriver.Firefox(executable_path = 'geckodriver')
         # self.driver.implicitly_wait(30)
         self.driver.set_page_load_timeout(30)
@@ -30,14 +31,12 @@ class Test_createActivity:
         self.url = 'http://eddid-bos-uat.ntdev.be'
 
         self.activity = ActivityPage.ActivityPage(self.driver, self.url, "Eddid")
-        self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
-        self.MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
-        self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
 
-        Test_Login.LoginCRM(self)
-        self.MenuListPage.click_menulist("活动管理", "创建讲座")
+        publicTool.LoginCRM(self)
+        
+        publicTool.click_menulist(self, "活动管理", "创建讲座")
         # 等待
-        self.mainpage.wait_LoadingModal()
+        publicTool.wait_LoadingModal(self)
 
     def teardown(self):
         print("用例执行完成")
@@ -67,8 +66,8 @@ class Test_createActivity:
         # 保存
         self.activity.primary()
 
-        self.applypage.box_alert()
-        self.mainpage.wait_LoadingModal()
+        publicTool.box_alert(self)
+        publicTool.wait_LoadingModal(self)
         assert self.driver.current_url in "http://eddid-bos-uat.ntdev.be/main/activity-list", "创建活动失败"
 
     def test_RequiredCreate(self):
@@ -79,9 +78,10 @@ class Test_createActivity:
         self.activity.send_activityOpenTime()
         # 讲题
         self.activity.send_activityTopic()
-
-        self.applypage.box_alert()
-        self.mainpage.wait_LoadingModal()
+        # 保存提交
+        self.activity.primary()
+        publicTool.box_alert(self)
+        publicTool.wait_LoadingModal(self)
         assert self.driver.current_url in "http://eddid-bos-uat.ntdev.be/main/activity-list", "创建活动失败"
 
     def test_NonCreateActivity(self):
@@ -90,4 +90,4 @@ class Test_createActivity:
         assert self.driver.current_url in "http://eddid-bos-uat.ntdev.be/main/seminar-create", "创建讲座空字段可以提交成功"
 
 if __name__ == '__main__':
-    pytest.main("-s -v --pdb test_createActivity.py::Test_createActivity::test_NoncreateActivity")
+    pytest.main("-s -v --pdb test_createActivity.py::Test_createActivity::test_AllCreateActivity")

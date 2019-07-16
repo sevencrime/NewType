@@ -5,6 +5,7 @@ from test_case.Test_Login import *
 import unittest
 import pytest
 from ReviewProcessTool import ReviewProcessTool
+from test_case.public.publicTool import publicTool
 
 class Test_reviewProcess5(ReviewProcessTool):
     # 多角色RO
@@ -15,7 +16,7 @@ class Test_reviewProcess5(ReviewProcessTool):
 
     def test_01_Process5_aaron(self):
         # aaron 通过
-        Test_Login.LoginCRM(self, user='aaron_chan')
+        publicTool.LoginCRM(self, user='aaron_chan')
         globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")
 
 
@@ -24,7 +25,7 @@ class Test_reviewProcess5(ReviewProcessTool):
         if globals()["status"].find("待外汇RO审批") != -1:
             pytest.xfail("数据状态是 {}".format(globals()["status"]))
 
-        Test_Login.LoginCRM(self, user='onedi.admin', psw="Abcd1234")      #先登录
+        publicTool.LoginCRM(self, user='onedi.admin', psw="Abcd1234")      #先登录
         globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")
 
         self.assertEqual("待结算审批", globals()["status"], "onedi.admin审核后状态没有改变")

@@ -9,6 +9,7 @@ from test_case.Test_Login import *
 import unittest
 import pytest
 from ReviewProcessTool import ReviewProcessTool
+from test_case.public.publicTool import publicTool
 
 class Test_reviewProcess13(ReviewProcessTool):
     #  黄金RO拒绝, CS2 确定拒绝
@@ -21,7 +22,7 @@ class Test_reviewProcess13(ReviewProcessTool):
     def test_01_Process13_gold(self):
         # print(self.gm.get_value("email"))
         # cliff审核
-        Test_Login.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
+        publicTool.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
         globals()["status"] = self.reviewRefuse(email = self.gm.get_value("email"), statusSel="待RO审批")
 
 
@@ -31,7 +32,7 @@ class Test_reviewProcess13(ReviewProcessTool):
         if globals()["status"].find("黄金RO拒绝") == -1 :
             pytest.xfail("数据状态是 {}".format(globals()["status"]))
 
-        Test_Login.LoginCRM(self, user='cs_t1')
+        publicTool.LoginCRM(self, user='cs_t1')
         globals()["status"] = self.reviewPass(email = self.gm.get_value("email"), statusSel="待RO审批", btn_text="确定拒绝")
         
 

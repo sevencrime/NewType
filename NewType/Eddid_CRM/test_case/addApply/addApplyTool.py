@@ -14,6 +14,7 @@ from Commons import *
 from PageElement import *
 from Interface import *
 import time
+from test_case.public.publicTool import publicTool
 
 class addApplyTool(unittest.TestCase):
 
@@ -29,14 +30,12 @@ class addApplyTool(unittest.TestCase):
         self.driver.set_script_timeout(3)
         self.url = 'http://eddid-bos-uat.ntdev.be'
 
-        self.MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
-        self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
         self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
-        Test_Login.LoginCRM(self)
+        publicTool.LoginCRM(self)
 
-        self.MenuListPage.click_menulist("开户管理", "开户列表")
+        publicTool.click_menulist(self, "开户管理", "开户列表")
         # 等待
-        self.mainpage.wait_LoadingModal()
+        publicTool.wait_LoadingModal(self)
         # 点击新增按钮
         self.mainpage.click_add()
 
@@ -82,7 +81,7 @@ class addApplyTool(unittest.TestCase):
         firstName = self.applypage.send_firstName()
         # 姓氏
         lastName = self.applypage.send_lastName()
-        self.mainpage.wait_LoadingModal()  # 这里校验姓名是否重复
+        publicTool.wait_LoadingModal(self)  # 这里校验姓名是否重复
         # 中文姓名
         chineseName = self.applypage.send_chineseName()
         # 电邮
@@ -230,7 +229,7 @@ class addApplyTool(unittest.TestCase):
         JointfirstName = self.applypage.send_firstName()
         # 联名账户- 姓氏
         JointlastName = self.applypage.send_lastName()
-        self.mainpage.wait_LoadingModal()  # 这里校验姓名是否重复
+        publicTool.wait_LoadingModal(self)  # 这里校验姓名是否重复
         # 联名账户-中文姓名
         JointchineseName = self.applypage.send_chineseName()
         # 联名账户- 电邮
@@ -338,7 +337,7 @@ class addApplyTool(unittest.TestCase):
     def applySublime(self, Jump=True):
         # 点击提交按钮
         self.applypage.click_sublimeApply("提交")
-        self.mainpage.wait_LoadingModal()  # loading
+        publicTool.wait_LoadingModal(self)  # loading
         try:
             if Jump == True:
                 self.assertEqual(
@@ -411,7 +410,7 @@ class addApplyTool(unittest.TestCase):
                     self.applypage.buyProduct(num, linkTag, linknum)
                     try:
                         self.applypage.click_sublimeApply("提交")
-                        self.mainpage.wait_LoadingModal()  # loading
+                        publicTool.wait_LoadingModal(self)  # loading
                         # 下拉选择是, 隐藏框填写
                         if linkTag == False and num == 0:
                             self.assertEqual(
