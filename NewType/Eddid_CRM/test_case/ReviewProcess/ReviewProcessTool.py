@@ -1,19 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os,sys
-curPath = os.path.abspath(os.path.dirname(__file__))
-rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
-sys.path.append(rootPath)
-from PageElement import *
-from Commons import *
-from Interface import *
-from test_case.Test_Login import *
+import os
+import sys
+
+from Commons import Logging, GlobalMap, PyMongo
+from Interface import apply_create
 import unittest
 from selenium import webdriver
-import time
-import pytest
+
+from PageElement import MainPage, ApplyPage
 from test_case.public.publicTool import publicTool
+from Commons import Logging, GlobalMap
+
 
 class ReviewProcessTool(unittest.TestCase):
 

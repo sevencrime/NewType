@@ -1,11 +1,12 @@
 # usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import pytest
 import unittest
-from addApplyTool import addApplyTool
-import time
+
+
+
 # import addApplyTool
+from test_case.addApply.addApplyTool import addApplyTool
 
 
 class Test_addApplyRequired(addApplyTool):

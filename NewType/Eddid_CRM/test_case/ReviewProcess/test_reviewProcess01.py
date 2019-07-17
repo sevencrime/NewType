@@ -1,15 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os,sys
-curPath = os.path.abspath(os.path.dirname(__file__))
-rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
-sys.path.append(rootPath)
-from test_case.Test_Login import *
-import unittest
 import pytest
-from ReviewProcessTool import ReviewProcessTool
+
+from test_case.ReviewProcess.ReviewProcessTool import ReviewProcessTool
 from test_case.public.publicTool import publicTool
+from Commons import GlobalMap
+
 
 class Test_reviewProcess1(ReviewProcessTool):
 	# CRM and apply_form正向审核: 未处理--待cs2--待RO--待ops--success
@@ -89,4 +86,4 @@ if __name__ == "__main__":
 	# suite.addTests(unittest.TestLoader().loadTestsFromTestCase(reviewProcess1))
 	# runner = unittest.TextTestRunner(verbosity=2)
 	# runner.run(suite)
-	pytest.main("-s -v test_reviewProcess01.py::Test_reviewProcess1")
+	pytest.main("-s -v --pdb test_reviewProcess01.py::Test_reviewProcess1")

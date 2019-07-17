@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os,sys
+import os
+import sys
+
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
 sys.path.append(rootPath)

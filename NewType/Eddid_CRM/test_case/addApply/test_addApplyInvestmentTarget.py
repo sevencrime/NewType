@@ -2,24 +2,23 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-import unittest
-from addApplyTool import addApplyTool
-import time
-# import addApplyTool
+
+from test_case.addApply.addApplyTool import addApplyTool
 
 
 class Test_addApplyInvestmentTarget(addApplyTool):
     # 校验投资目标: 选择杠杆式外汇, 黄金, 结构性衍生产品后, 投资目标不能单独选利息/股息收入
 
+
     """
     # 用例: 账户类别分别选择金业,校验投资目标为利息/股息收入是否校验
     """
-    @addApplyTool.InvestmentTarget()
+    @addApplyTool.InvestmentTarget
     def test_apply_BullionInvestmentTarget(self):
         # 填写Apply表单必填项
         self.RequiredField(applicationFor="个人账户",
-                           way="亲临开户", 
-                           type="艾德金业现货黄金账户(保证金)", 
+                           way="亲临开户",
+                           type="艾德金业现货黄金账户(保证金)",
                            investmentTarget="利息/股息收入")
         # 点击提交按钮
         self.applySublime()
@@ -27,7 +26,7 @@ class Test_addApplyInvestmentTarget(addApplyTool):
     """
     # 用例: 账户类别分别选择杠杆式外汇账户(保证金,校验投资目标为利息/股息收入是否校验
     """
-    @addApplyTool.InvestmentTarget()
+    @addApplyTool.InvestmentTarget
     def test_apply_LeveragedInvestmentTarget(self):
         # 填写Apply表单必填项
         self.RequiredField(applicationFor="个人账户",
@@ -37,10 +36,10 @@ class Test_addApplyInvestmentTarget(addApplyTool):
         # 点击提交按钮
         self.applySublime()
 
-   """
+    """
     # 用例: 选择衍生产品,校验投资目标为利息/股息收入是否校验
     """
-    @addApplyTool.InvestmentTarget()
+    @addApplyTool.InvestmentTarget
     def test_apply_BuyProductInvestmentTarget(self):
         # 填写Apply表单必填项
         self.RequiredField(applicationFor="个人账户",

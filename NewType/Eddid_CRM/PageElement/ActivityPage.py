@@ -7,16 +7,16 @@
 
 # main/apply-list页面
 
-import os, sys
+import os
+import sys
+
+from Commons import BasePage
+
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
 sys.path.append(rootPath)
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
-from Commons import *
 import random
 import datetime
 

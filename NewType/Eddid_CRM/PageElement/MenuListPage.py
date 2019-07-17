@@ -7,9 +7,12 @@
 
 #CRM侧边栏
 
-import os,sys
+import os
+import sys
+
+from Commons import BasePage
+
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
-from Commons import *
 from selenium.webdriver.common.by import By
 
 

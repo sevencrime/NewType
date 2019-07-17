@@ -2,15 +2,14 @@
 # -*- coding: utf-8 -*-
 
 
-import os, sys
-curPath = os.path.abspath(os.path.dirname(__file__))
-rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
-sys.path.append(rootPath)
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from Commons import *
-from PageElement import *
+
+from Commons import BasePage
+from PageElement import LoginPage, MenuListPage, ApplyPage
+
 
 class publicTool(BasePage.BasePage):
 

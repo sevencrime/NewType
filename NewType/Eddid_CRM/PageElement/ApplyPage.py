@@ -4,20 +4,18 @@
 # @Author  : onedi (onedi@qq.com)
 # @Link    : localhost
 # @Version : $Id$
-
-
-import os
-import sys
-import time
-import random
 import glob
+import os
+import random
+import sys
+
+from Commons import BasePage
+
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from Commons import *
 
 
 class ApplyPage(BasePage.BasePage):
@@ -37,7 +35,7 @@ class ApplyPage(BasePage.BasePage):
 
     def get_checkbox(self, text):
         checkbox_loc = (
-            By.XPATH, "//span[contains(text(), '%s')]/preceding-sibling::span" % text)
+            By.XPATH, "//span[contains(text(), '%s')]/preceding-sibling::span" %text)
         return checkbox_loc
 
     def get_select(self, text=False, randox=None):

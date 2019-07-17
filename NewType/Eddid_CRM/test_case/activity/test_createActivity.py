@@ -6,17 +6,14 @@
 # @Version : $Id$
 
 
-import os, sys
-curPath = os.path.abspath(os.path.dirname(__file__))
-rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
-sys.path.append(rootPath)
 
-from selenium import webdriver
-import unittest, pytest
-from test_case.Test_Login import *
-from Commons import *
-from PageElement import *
+import pytest
+
+from Commons import Logging
+from PageElement import ActivityPage
+from test_case.test_Login import *
 from test_case.public.publicTool import publicTool
+
 
 class Test_createActivity:
 

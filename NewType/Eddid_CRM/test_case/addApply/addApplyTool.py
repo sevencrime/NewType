@@ -1,20 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from Commons import Logging, PyMongo
+from test_case.test_Login import *
+import test_case.public.publicTool
+from PageElement import ApplyPage, MainPage
 
-
-import os, sys
-curPath = os.path.abspath(os.path.dirname(__file__))
-rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
-sys.path.append(rootPath)
-
-from selenium import webdriver
-import unittest
-from test_case.Test_Login import *
-from Commons import *
-from PageElement import *
-from Interface import *
-import time
-from test_case.public.publicTool import publicTool
 
 class addApplyTool(unittest.TestCase):
 
@@ -31,11 +21,12 @@ class addApplyTool(unittest.TestCase):
         self.url = 'http://eddid-bos-uat.ntdev.be'
 
         self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
-        publicTool.LoginCRM(self)
+        self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
+        test_case.public.publicTool.publicTool.LoginCRM(self)
 
-        publicTool.click_menulist(self, "开户管理", "开户列表")
+        test_case.public.publicTool.publicTool.click_menulist(self, "开户管理", "开户列表")
         # 等待
-        publicTool.wait_LoadingModal(self)
+        test_case.public.publicTool.publicTool.wait_LoadingModal(self)
         # 点击新增按钮
         self.mainpage.click_add()
 
@@ -81,7 +72,7 @@ class addApplyTool(unittest.TestCase):
         firstName = self.applypage.send_firstName()
         # 姓氏
         lastName = self.applypage.send_lastName()
-        publicTool.wait_LoadingModal(self)  # 这里校验姓名是否重复
+        test_case.public.publicTool.publicTool.wait_LoadingModal(self)  # 这里校验姓名是否重复
         # 中文姓名
         chineseName = self.applypage.send_chineseName()
         # 电邮
@@ -229,7 +220,7 @@ class addApplyTool(unittest.TestCase):
         JointfirstName = self.applypage.send_firstName()
         # 联名账户- 姓氏
         JointlastName = self.applypage.send_lastName()
-        publicTool.wait_LoadingModal(self)  # 这里校验姓名是否重复
+        test_case.public.publicTool.publicTool.wait_LoadingModal(self)  # 这里校验姓名是否重复
         # 联名账户-中文姓名
         JointchineseName = self.applypage.send_chineseName()
         # 联名账户- 电邮
@@ -337,7 +328,7 @@ class addApplyTool(unittest.TestCase):
     def applySublime(self, Jump=True):
         # 点击提交按钮
         self.applypage.click_sublimeApply("提交")
-        publicTool.wait_LoadingModal(self)  # loading
+        test_case.public.publicTool.publicTool.wait_LoadingModal(self)  # loading
         try:
             if Jump == True:
                 self.assertEqual(
@@ -410,7 +401,7 @@ class addApplyTool(unittest.TestCase):
                     self.applypage.buyProduct(num, linkTag, linknum)
                     try:
                         self.applypage.click_sublimeApply("提交")
-                        publicTool.wait_LoadingModal(self)  # loading
+                        test_case.public.publicTool.publicTool.wait_LoadingModal(self)  # loading
                         # 下拉选择是, 隐藏框填写
                         if linkTag == False and num == 0:
                             self.assertEqual(

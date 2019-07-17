@@ -7,14 +7,14 @@
 
 # main/apply-list页面
 
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
-from Commons import *
 import os
 import sys
-import time
+
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
+
+from Commons import BasePage
+
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 
 

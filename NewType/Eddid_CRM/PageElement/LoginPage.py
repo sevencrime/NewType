@@ -6,12 +6,13 @@
 # @Version : $Id$
 
 # login 登录页面元素
-import os,sys
+import os
+import sys
+
+from Commons import BasePage
+
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
-from Commons import *
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 
 class LoginPage(BasePage.BasePage):

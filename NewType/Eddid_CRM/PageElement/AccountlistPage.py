@@ -5,12 +5,13 @@
 # @Link    : ${link}
 # @Version : $Id$
 
-import os,sys,time
+import os
+import sys
+
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 from Commons import *
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
 
 class AccountlistPage(BasePage.BasePage):
     # log = Logging.Logs()

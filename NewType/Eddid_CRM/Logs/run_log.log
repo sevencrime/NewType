@@ -1,27 +1,11 @@
-2019-07-16 16:28:18,295 ReviewProcessTool.py INFO [line:25] 调用apply的create接口创建测试数据
-2019-07-16 16:28:18,295 ReviewProcessTool.py INFO [line:25] 调用apply的create接口创建测试数据
-2019-07-16 16:28:18,295 ReviewProcessTool.py INFO [line:25] 调用apply的create接口创建测试数据
-2019-07-16 16:28:20,118 apply_create.py INFO [line:117] /apply/create: 
-2019-07-16 16:28:20,118 apply_create.py INFO [line:117] /apply/create: 
-2019-07-16 16:28:20,118 apply_create.py INFO [line:117] /apply/create: 
-2019-07-16 16:28:20,118 apply_create.py INFO [line:117] /apply/create: 
-2019-07-16 16:28:20,118 apply_create.py INFO [line:119] 新创建数据的[email]为: 5738onedi708154@qq.com
-2019-07-16 16:28:20,118 apply_create.py INFO [line:119] 新创建数据的[email]为: 5738onedi708154@qq.com
-2019-07-16 16:28:20,118 apply_create.py INFO [line:119] 新创建数据的[email]为: 5738onedi708154@qq.com
-2019-07-16 16:28:20,118 apply_create.py INFO [line:119] 新创建数据的[email]为: 5738onedi708154@qq.com
-2019-07-16 16:28:44,958 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:28:44,958 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:28:44,958 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:28:44,958 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:29:11,958 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:29:11,958 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:29:11,958 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:29:11,958 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:29:16,393 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:29:16,393 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:29:16,393 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:29:16,393 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:29:20,821 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:29:20,821 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:29:20,821 ReviewProcessTool.py INFO [line:50] 结束driver
-2019-07-16 16:29:20,821 ReviewProcessTool.py INFO [line:50] 结束driver
+2019-07-17 18:18:35,952 ReviewProcessTool.py INFO [line:24] 调用apply的create接口创建测试数据
+2019-07-17 18:18:35,952 ReviewProcessTool.py INFO [line:24] 调用apply的create接口创建测试数据
+2019-07-17 18:18:35,952 ReviewProcessTool.py INFO [line:24] 调用apply的create接口创建测试数据
+2019-07-17 18:18:35,952 apply_create.py INFO [line:112] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-17 18:18:35,952 apply_create.py INFO [line:112] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-17 18:18:35,952 apply_create.py INFO [line:112] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-17 18:18:35,952 apply_create.py INFO [line:112] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-17 18:18:35,953 apply_create.py INFO [line:113] apiStatus == unprocessed
+2019-07-17 18:18:35,953 apply_create.py INFO [line:113] apiStatus == unprocessed
+2019-07-17 18:18:35,953 apply_create.py INFO [line:113] apiStatus == unprocessed
+2019-07-17 18:18:35,953 apply_create.py INFO [line:113] apiStatus == unprocessed

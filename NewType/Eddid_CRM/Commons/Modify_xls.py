@@ -5,10 +5,10 @@
 # @Link    : ${link}
 # @Version : $Id$
 
-from openpyxl import load_workbook
-from xlutils.copy import copy
 import os
 import random
+
+from openpyxl import load_workbook
 
 class Modifyxls():
 

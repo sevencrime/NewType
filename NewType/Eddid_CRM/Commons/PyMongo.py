@@ -5,11 +5,12 @@
 # @Link    : ${link}
 # @Version : $Id$
 
-import os,sys
+import os
+import sys
+
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 import pymongo
 from bson.objectid import ObjectId
-from collections import Counter
 from Commons import Logging
 
 class Database:
@@ -153,7 +154,7 @@ if __name__ == '__main__':
     host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
     # host = 'localhost:27017'
     database = 'uat'    #查询的数据库
-    Database(host, database).del_linked("client_info", {"email":"15089514626@sina.cn"}) # 传入需要查询的表和查询条件
+    Database(database).del_linked("client_info", {"email":"15089514626@sina.cn"}) # 传入需要查询的表和查询条件
 
     # Database(host, database).del_linked("apply_info", {'email':{"$regex" : ".*onedi.*"}})
     

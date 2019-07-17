@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from test_case.Test_Login import *
 import unittest
+
 import pytest
-from ReviewProcessTool import ReviewProcessTool
+
+from test_case.ReviewProcess.ReviewProcessTool import ReviewProcessTool
 from test_case.public.publicTool import publicTool
+from Commons import Logging, GlobalMap
 
 
 class Test_reviewProcess4(ReviewProcessTool):

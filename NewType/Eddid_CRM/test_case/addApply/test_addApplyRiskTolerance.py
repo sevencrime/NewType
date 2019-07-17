@@ -2,10 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-import unittest
-from addApplyTool import addApplyTool
-import time
-# import addApplyTool
+
+from test_case.addApply.addApplyTool import addApplyTool
 
 
 class Test_addApplyRiskTolerance(addApplyTool):
@@ -19,7 +17,7 @@ class Test_addApplyRiskTolerance(addApplyTool):
     def test_apply_BullionRiskToleranceLow(self):
 
         self.RequiredField(applicationFor="个人账户",
-                           way="亲临开户", 
+                           way="亲临开户",
                            type="艾德金业现货黄金账户(保证金)")
         self.applySublime()
 
@@ -31,7 +29,7 @@ class Test_addApplyRiskTolerance(addApplyTool):
     def test_apply_BullionRiskToleranceMiddle(self):
 
         self.RequiredField(applicationFor="个人账户",
-                           way="亲临开户", 
+                           way="亲临开户",
                            type="艾德金业现货黄金账户(保证金)")
         self.applySublime()
 
@@ -43,7 +41,7 @@ class Test_addApplyRiskTolerance(addApplyTool):
     def test_apply_BullionRiskToleranceHigh(self):
 
         self.RequiredField(applicationFor="个人账户",
-                           way="亲临开户", 
+                           way="亲临开户",
                            type="艾德金业现货黄金账户(保证金)")
         self.applySublime()
 

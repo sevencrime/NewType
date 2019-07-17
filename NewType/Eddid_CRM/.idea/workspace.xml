@@ -1,0 +1,960 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a3224326-0b90-4fa8-b674-09662adfb143" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Commons/BasePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Commons/BasePage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Commons/GlobalMap.py" beforeDir="false" afterPath="$PROJECT_DIR$/Commons/GlobalMap.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Commons/Logging.py" beforeDir="false" afterPath="$PROJECT_DIR$/Commons/Logging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Commons/Modify_xls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Commons/Modify_xls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Commons/PyMongo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Commons/PyMongo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Commons/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Commons/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interface/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Interface/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interface/apply_create.py" beforeDir="false" afterPath="$PROJECT_DIR$/Interface/apply_create.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/run_log.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/run_log.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PageElement/AccountlistPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/PageElement/AccountlistPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PageElement/ActivityPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/PageElement/ActivityPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PageElement/ApplyPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/PageElement/ApplyPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PageElement/LoginPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/PageElement/LoginPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PageElement/MainPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/PageElement/MainPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PageElement/MenuListPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/PageElement/MenuListPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PageElement/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/PageElement/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/ReviewProcessTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/ReviewProcessTool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess01.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess01.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess02.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess02.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess03.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess03.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess04.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess04.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess05.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess05.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess06.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess06.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess07.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess07.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess08.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess08.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess09.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess09.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess10.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess10.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess11.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess11.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess12.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess12.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess13.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess13.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess14.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess14.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/Test_Login.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/Test_importAyers.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/Test_importAyers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/Test_searchInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/Test_searchInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/activity/test_createActivity.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/activity/test_createActivity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/addApply/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/addApply/addApplyTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/addApplyTool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/addApply/test_addApplyAllNotEmpty.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/test_addApplyAllNotEmpty.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/addApply/test_addApplyDerivativeProduct.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/test_addApplyDerivativeProduct.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/addApply/test_addApplyInvestmentTarget.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/test_addApplyInvestmentTarget.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/addApply/test_addApplyRequired.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/test_addApplyRequired.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/addApply/test_addApplyRiskTolerance.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/test_addApplyRiskTolerance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/public/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/public/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/public/publicTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/public/publicTool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/test_Login.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/test_Login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../script/mongo_del_linked_data/del_mongo.py" beforeDir="false" afterPath="$PROJECT_DIR$/../script/mongo_del_linked_data/del_mongo.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="8" column="26" lean-forward="true" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Logs/run_log.log">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_case/test_Login.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="646">
+              <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+              <folding>
+                <element signature="e#46#57#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess01.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="88" column="18" lean-forward="true" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
+              <folding>
+                <element signature="e#47#60#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess03.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="304">
+              <caret line="22" column="13" lean-forward="true" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+              <folding>
+                <element signature="e#47#62#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_case/addApply/addApplyTool.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1121">
+              <caret line="62" column="65" selection-start-line="62" selection-start-column="49" selection-end-line="62" selection-end-column="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyAllNotEmpty.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-591">
+              <caret line="16" column="44" lean-forward="true" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+              <folding>
+                <element signature="e#152#165#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/ReviewProcessTool.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="211">
+              <caret line="24" column="54" selection-start-line="24" selection-start-column="54" selection-end-line="24" selection-end-column="54" />
+              <folding>
+                <element signature="e#47#56#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Interface/apply_create.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="113" selection-start-line="113" selection-end-line="113" />
+              <folding>
+                <element signature="e#48#86#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PageElement/MainPage.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="50" column="14" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="14" />
+              <folding>
+                <element signature="e#174#183#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>mainpage</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyRequired.py" />
+        <option value="$PROJECT_DIR$/test_case/Test_importAyers.py" />
+        <option value="$PROJECT_DIR$/Commons/Modify_xls.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess03.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess04.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess05.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess06.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess07.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess09.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess08.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess10.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess11.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess12.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess13.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess14.py" />
+        <option value="$PROJECT_DIR$/PageElement/LoginPage.py" />
+        <option value="$PROJECT_DIR$/test_case/public/publicTool.py" />
+        <option value="$PROJECT_DIR$/PageElement/MenuListPage.py" />
+        <option value="$PROJECT_DIR$/PageElement/MainPage.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/ReviewProcessTool.py" />
+        <option value="$PROJECT_DIR$/test_case/activity/test_createActivity.py" />
+        <option value="$PROJECT_DIR$/test_case/addApply/addApplyTool.py" />
+        <option value="$PROJECT_DIR$/PageElement/ApplyPage.py" />
+        <option value="$PROJECT_DIR$/PageElement/ActivityPage.py" />
+        <option value="$PROJECT_DIR$/Commons/PyMongo.py" />
+        <option value="$PROJECT_DIR$/test_case/Test_Login.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess01.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess02.py" />
+        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyRiskTolerance.py" />
+        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyInvestmentTarget.py" />
+        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyDerivativeProduct.py" />
+        <option value="$PROJECT_DIR$/test_case/test_Login.py" />
+        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyAllNotEmpty.py" />
+        <option value="$PROJECT_DIR$/run_test.py" />
+        <option value="$PROJECT_DIR$/Logs/run_log.log" />
+        <option value="$PROJECT_DIR$/Interface/apply_create.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/Eddid_CRM.iml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/.idea/vagrant.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1818" />
+    <option name="y" value="220" />
+    <option name="width" value="1750" />
+    <option name="height" value="980" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Eddid_CRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Eddid_CRM" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Eddid_CRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Eddid_CRM" type="462c0819:PsiDirectoryNode" />
+              <item name="Interface" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Eddid_CRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Eddid_CRM" type="462c0819:PsiDirectoryNode" />
+              <item name="Logs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Eddid_CRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Eddid_CRM" type="462c0819:PsiDirectoryNode" />
+              <item name="PageElement" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Eddid_CRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Eddid_CRM" type="462c0819:PsiDirectoryNode" />
+              <item name="test_case" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Eddid_CRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Eddid_CRM" type="462c0819:PsiDirectoryNode" />
+              <item name="test_case" type="462c0819:PsiDirectoryNode" />
+              <item name="activity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Eddid_CRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Eddid_CRM" type="462c0819:PsiDirectoryNode" />
+              <item name="test_case" type="462c0819:PsiDirectoryNode" />
+              <item name="addApply" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Eddid_CRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Eddid_CRM" type="462c0819:PsiDirectoryNode" />
+              <item name="test_case" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Eddid_CRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Eddid_CRM" type="462c0819:PsiDirectoryNode" />
+              <item name="test_case" type="462c0819:PsiDirectoryNode" />
+              <item name="ReviewProcess" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/run_test.py" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python测试.单元测试 in test_reviewProcess01.py">
+    <configuration name="PyMongo" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Eddid_CRM" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Commons" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Commons/PyMongo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="apply_create" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Eddid_CRM" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Interface" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Interface/apply_create.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="run_test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Eddid_CRM" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="单元测试 for test_case.test_Login.Test_Login.test_login" type="tests" factoryName="单元测试" temporary="true" nameIsGenerated="true">
+      <module name="Eddid_CRM" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test_case" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_case.test_Login.Test_Login.test_login&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="单元测试 in test_Login.py" type="tests" factoryName="单元测试" temporary="true" nameIsGenerated="true">
+      <module name="Eddid_CRM" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test_case" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test_case/test_Login.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="单元测试 in test_reviewProcess01.py" type="tests" factoryName="单元测试" temporary="true" nameIsGenerated="true">
+      <module name="Eddid_CRM" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test_case/ReviewProcess" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess01.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python测试.单元测试 in test_reviewProcess01.py" />
+        <item itemvalue="Python测试.单元测试 in test_Login.py" />
+        <item itemvalue="Python测试.单元测试 for test_case.test_Login.Test_Login.test_login" />
+        <item itemvalue="Python.apply_create" />
+        <item itemvalue="Python.PyMongo" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a3224326-0b90-4fa8-b674-09662adfb143" name="Default Changelist" comment="" />
+      <created>1563269393650</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1563269393650</updated>
+      <workItem from="1563269394957" duration="968000" />
+      <workItem from="1563270585075" duration="2143000" />
+      <workItem from="1563327328998" duration="19441000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="单元测试_in_Test_Login_py - 2019.07.17 at 17h 28m 19s.xml">
+      <configuration name="单元测试 in Test_Login.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="单元测试_in_test_reviewProcess01_py - 2019.07.17 at 17h 34m 38s.xml">
+      <configuration name="单元测试 in test_reviewProcess01.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="单元测试_for_Test_Login_Test_Login_test_login - 2019.07.17 at 17h 36m 51s.xml">
+      <configuration name="单元测试 for Test_Login.Test_Login.test_login" configurationId="tests" />
+    </history-entry>
+    <history-entry file="单元测试_in_test_Login_py - 2019.07.17 at 17h 41m 29s.xml">
+      <configuration name="单元测试 in test_Login.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="单元测试_in_test_Login_py - 2019.07.17 at 17h 43m 47s.xml">
+      <configuration name="单元测试 in test_Login.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="单元测试_in_test_Login_py - 2019.07.17 at 17h 51m 03s.xml">
+      <configuration name="单元测试 in test_Login.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="单元测试_in_test_Login_py - 2019.07.17 at 17h 52m 35s.xml">
+      <configuration name="单元测试 in test_Login.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="单元测试_in_test_Login_py - 2019.07.17 at 17h 56m 49s.xml">
+      <configuration name="单元测试 in test_Login.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="单元测试_in_test_reviewProcess01_py - 2019.07.17 at 18h 18m 21s.xml">
+      <configuration name="单元测试 in test_reviewProcess01.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="单元测试_in_test_reviewProcess01_py - 2019.07.17 at 18h 18m 45s.xml">
+      <configuration name="单元测试 in test_reviewProcess01.py" configurationId="tests" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="22552000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21268657" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29175705" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.3991323" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.22017354" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.329718" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Eddid_CRM$apply_create.coverage" NAME="apply_create Coverage Results" MODIFIED="1563354035379" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Interface" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$Eddid_CRM.coverage" NAME="run_test Coverage Results" MODIFIED="1563271504202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$Modify_xls.coverage" NAME="Modify_xls Coverage Results" MODIFIED="1563330088510" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Commons" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$run_test.coverage" NAME="run_test Coverage Results" MODIFIED="1563358498500" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$_in_test_reviewProcess01_py.coverage" NAME="单元测试 in test_reviewProcess01.py Coverage Results" MODIFIED="1563358713928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case/ReviewProcess" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$_in_test_addApplyInvestmentTarget_py.coverage" NAME="单元测试 in test_addApplyInvestmentTarget.py Coverage Results" MODIFIED="1563334883163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case/addApply" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$_in_Test_Login_py.coverage" NAME="单元测试 in test_Login.py Coverage Results" MODIFIED="1563357382366" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$_for_test_addApplyInvestmentTarget_Test_addApplyInvestmentTarget_test_apply_BullionInvestmentTarget.coverage" NAME="单元测试 for test_addApplyInvestmentTarget.Test_addApplyInvestmentTarget.test_apply_BullionInvestmentTarget Coverage Results" MODIFIED="1563333120068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case/addApply" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$_for_Test_Login_Test_Login_test_login.coverage" NAME="单元测试 for Test_Login.Test_Login.test_login Coverage Results" MODIFIED="1563356201268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$PyMongo.coverage" NAME="PyMongo Coverage Results" MODIFIED="1563353375361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Commons" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/test_case/Test_searchInfo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#154#163#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/Test_importAyers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="28" column="52" lean-forward="true" selection-start-line="28" selection-start-column="52" selection-end-line="28" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Commons/Modify_xls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#153#162#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess04.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#47#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess05.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="e#47#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess07.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#48#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess08.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#47#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess09.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#48#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess10.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#48#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess11.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#48#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess12.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#48#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess13.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#48#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess14.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#49#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PageElement/LoginPage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12">
+          <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding>
+            <element signature="e#168#177#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PageElement/MenuListPage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="23" column="44" lean-forward="true" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+          <folding>
+            <element signature="e#162#171#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PageElement/ApplyPage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="871" column="60" lean-forward="true" selection-start-line="871" selection-start-column="60" selection-end-line="871" selection-end-column="60" />
+          <folding>
+            <element signature="e#154#165#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PageElement/ActivityPage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+          <folding>
+            <element signature="e#174#183#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/report.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-228">
+          <caret line="9" column="37" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Commons/PyMongo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="149" column="61" selection-start-line="149" selection-start-column="61" selection-end-line="149" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/activity/test_createActivity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+          <folding>
+            <element signature="e#155#168#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/用例.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/public/publicTool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="23" column="16" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="16" />
+          <folding>
+            <element signature="e#49#92#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Commons/GlobalMap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess06.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#48#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Python3.6/Lib/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="600" selection-start-line="600" selection-end-line="600" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess02.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="49" lean-forward="true" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="49" />
+          <folding>
+            <element signature="e#48#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyRiskTolerance.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="21" column="27" lean-forward="true" selection-start-line="15" selection-start-column="38" selection-end-line="21" selection-end-column="27" />
+          <folding>
+            <element signature="e#46#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyRequired.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-38">
+          <caret line="19" column="46" lean-forward="true" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+          <folding>
+            <element signature="e#46#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyInvestmentTarget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyDerivativeProduct.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="123" column="56" lean-forward="true" selection-start-line="123" selection-start-column="56" selection-end-line="123" selection-end-column="75" />
+          <folding>
+            <element signature="e#46#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/addApply/addApplyTool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1121">
+          <caret line="62" column="65" selection-start-line="62" selection-start-column="49" selection-end-line="62" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess03.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="22" column="13" lean-forward="true" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding>
+            <element signature="e#47#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyAllNotEmpty.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-591">
+          <caret line="16" column="44" lean-forward="true" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+          <folding>
+            <element signature="e#152#165#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Commons/BasePage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="117" column="27" selection-start-line="117" selection-start-column="27" selection-end-line="117" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PageElement/MainPage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="50" column="14" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="14" />
+          <folding>
+            <element signature="e#174#183#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/test_Login.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+          <folding>
+            <element signature="e#46#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="26" lean-forward="true" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/ReviewProcessTool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="24" column="54" selection-start-line="24" selection-start-column="54" selection-end-line="24" selection-end-column="54" />
+          <folding>
+            <element signature="e#47#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Logs/run_log.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess01.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="88" column="18" lean-forward="true" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
+          <folding>
+            <element signature="e#47#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Interface/apply_create.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="113" selection-start-line="113" selection-end-line="113" />
+          <folding>
+            <element signature="e#48#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

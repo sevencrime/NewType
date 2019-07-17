@@ -6,15 +6,14 @@
 # @Version : $Id$
 
 
-import os,sys,time
+import os
+import sys
+import time
+
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 import unittest
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from PageElement import *
-from Commons import *
+
 
 class Test_searchInfo(unittest.TestCase):
 

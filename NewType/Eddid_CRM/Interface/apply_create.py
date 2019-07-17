@@ -1,15 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os,sys
-curPath = os.path.abspath(os.path.dirname(__file__))
-rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
-sys.path.append(rootPath)
+
+from Commons import GlobalMap, Logging
+
 import requests 
 import json
 import random
 from requests.packages import urllib3
-from Commons import *
+
 
 def apply_create_api():
 
@@ -20,8 +19,7 @@ def apply_create_api():
 
     headers = {
         'Content-Type' : 'application/json' ,
-        'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoidGVzdCIsImNvZ25pdG86cm9sZXMiOlsiYXJuOmF3czppYW06OjgzMjQzMTg2NDY2Njpyb2xlXC9kZXYtZWRkaWQtY29nbml0by1hZG1pbi1yb2xlIl0sImF1ZCI6IjUxM2pmY2t0cjFtNmV2b2dmcXU3b3NrN3BhIiwiZXZlbnRfaWQiOiI5YTYyNTc2NC0wZDg3LTRlM2UtYjI1Ny0wZmE4ZDRlMGU3NDQiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU2MzI2MzE5MywiZXhwIjoxNTYzMjY2NzkzLCJpYXQiOjE1NjMyNjMxOTMsImZhbWlseV9uYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluMTIzNEAxNjMuY29tIn0.UEuRsLYzR8Ri3MNZfHen8nHT1zVAZMbQ0QAjXPwg13FaYpCZdRGu0_HUzvTyBEyCNZfNu9WbqlMgKXU3h2scL_i71iLmXb1tXH0LfPSi-JGPaKaafP5B_47WwJjiwFC5xbrpAXSXn8ndb2exDiJ61zJ5e8jL3sEFYbZcBvipNtoxhIFdSi2ag4EVVZVV1l0JEiGm7PZicS662Foc3AWcl770DecCkMNMWhZ6SfOhir4fO01M-34RHK4SIXukutl8xA-MnCwOSVuounlaUW_3OVRoU5WfxmQGLRrJO9VXT5TKeNZWyYTRHrnqm8LbJjQbiU7h9ztaPd_H-in-u99P2g'
-
+        'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI2NTIxNGJhYi1jMDFlLTRiNmItYmNkZS02ODMxNDdmN2NjYTgiLCJjb2duaXRvOmdyb3VwcyI6WyJzYWxlcyJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoic2FsZXNfdDEiLCJnaXZlbl9uYW1lIjoiTWkiLCJjb2duaXRvOnJvbGVzIjpbImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSJdLCJhdWQiOiI1MTNqZmNrdHIxbTZldm9nZnF1N29zazdwYSIsImV2ZW50X2lkIjoiMjhkYTBmMzUtMDc3Mi00MWEwLTg3NTMtNTgzYTRhMzRkM2Y1IiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NjMzNTc0NTMsImV4cCI6MTU2MzM2MTA1MywiaWF0IjoxNTYzMzU3NDUzLCJmYW1pbHlfbmFtZSI6IlhpYW8iLCJlbWFpbCI6ImNhcHMuY2hlbkBuZXd0eXBlLmlvIn0.b8v_QwKxURRi5KdBHiaUJ013W9V17sY6ssUSivW_RjkP2kN0Ks3RJpRq9_3hXA7YkCwH8c6LdKPHseQTAhxXVMstJykrbg6VyqHAeZIlo8uKLRVFdYx5xIxX-H7XsPlymuvEamIlGQn8U8nGL1QqzESIlbtie9DUHp0eSkMwe5N4Jonl92zuob7krSfuU1lcLTsBoy-IegNsg-aSWPhspcTBd1tTv7DPdGY-1BjO83QtU0wTg-G5g21oB63cEIVoOrcxwvcDNZd2OcpBTdDImhYcmVkn0Hu9RVO2q52OnkLoKPKiqVodZ3tfXeABQte2R-iVgpTD0tnXvh1n35eUUw'
     }
 
     data = {
@@ -30,7 +28,7 @@ def apply_create_api():
         "accountType": gm.get_value("accountType"),
         # "accountType": ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"],
         # "status" : "finish",
-        "status" : gm.get_value("apiStatus"),
+        "status": gm.get_value("apiStatus"),
         # "customerSource" : "app",
         "customerSource" : "crm",
         "client": [{
@@ -111,10 +109,13 @@ def apply_create_api():
 
     # 失败重新请求三次
     for i in range(3):
-
+        log.info("accountType == {}".format(gm.get_value("accountType")))
+        log.info("apiStatus == {}".format(gm.get_value("apiStatus")))
         urllib3.disable_warnings()
         resp = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
-        log.info("/apply/create: ", resp.json())
+        # print(resp.json())
+        # print(resp.status_code)
+        log.info("/apply/create: 創建的數據為:{}".format(resp.json()))
         if resp.status_code == 200:
             log.info("新创建数据的[email]为: {}".format(data['client'][0]['email']))
             return data['client'][0]['email']
