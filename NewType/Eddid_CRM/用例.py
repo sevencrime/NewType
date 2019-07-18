@@ -83,3 +83,12 @@ CRM创建活动:
 	1, 创建活动,全字段 >> test_createActivity.py::Test_createActivity::test_AllCreateActivity
 	2, 创建活动,必要字段 >> test_createActivity.py::Test_createActivity::test_RequiredCreate
 	3, 非空校验 >> test_createActivity.py::Test_createActivity::test_NonCreateActivity
+
+登記講座:
+	1, 不勾选讲座
+	2, 不填资料
+	3, 填写错误邮箱
+	4, 不选择来源
+	5, 不勾选
+	5, 选择人数
+

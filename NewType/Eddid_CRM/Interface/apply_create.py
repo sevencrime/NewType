@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import urllib3
 
 from Commons import GlobalMap, Logging
 
 import requests 
 import json
 import random
-from requests.packages import urllib3
 
 
 def apply_create_api():
@@ -19,7 +18,7 @@ def apply_create_api():
 
     headers = {
         'Content-Type' : 'application/json' ,
-        'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI2NTIxNGJhYi1jMDFlLTRiNmItYmNkZS02ODMxNDdmN2NjYTgiLCJjb2duaXRvOmdyb3VwcyI6WyJzYWxlcyJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoic2FsZXNfdDEiLCJnaXZlbl9uYW1lIjoiTWkiLCJjb2duaXRvOnJvbGVzIjpbImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSJdLCJhdWQiOiI1MTNqZmNrdHIxbTZldm9nZnF1N29zazdwYSIsImV2ZW50X2lkIjoiMjhkYTBmMzUtMDc3Mi00MWEwLTg3NTMtNTgzYTRhMzRkM2Y1IiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NjMzNTc0NTMsImV4cCI6MTU2MzM2MTA1MywiaWF0IjoxNTYzMzU3NDUzLCJmYW1pbHlfbmFtZSI6IlhpYW8iLCJlbWFpbCI6ImNhcHMuY2hlbkBuZXd0eXBlLmlvIn0.b8v_QwKxURRi5KdBHiaUJ013W9V17sY6ssUSivW_RjkP2kN0Ks3RJpRq9_3hXA7YkCwH8c6LdKPHseQTAhxXVMstJykrbg6VyqHAeZIlo8uKLRVFdYx5xIxX-H7XsPlymuvEamIlGQn8U8nGL1QqzESIlbtie9DUHp0eSkMwe5N4Jonl92zuob7krSfuU1lcLTsBoy-IegNsg-aSWPhspcTBd1tTv7DPdGY-1BjO83QtU0wTg-G5g21oB63cEIVoOrcxwvcDNZd2OcpBTdDImhYcmVkn0Hu9RVO2q52OnkLoKPKiqVodZ3tfXeABQte2R-iVgpTD0tnXvh1n35eUUw'
+        'X-Token' : gm.get_value("token")
     }
 
     data = {

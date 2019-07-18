@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-
+import inspect
 from Commons import Logging, GlobalMap, PyMongo
 from Interface import apply_create
 import unittest
@@ -21,7 +19,7 @@ class ReviewProcessTool(unittest.TestCase):
 
 	@classmethod
 	def setUpClass(cls):
-		cls.log.info("调用apply的create接口创建测试数据")
+		cls.log.info("{} 调用apply.create接口创建数据".format(cls.__class__.__name__, inspect.stack()[1][3]))
 		cls.gm.set_value(email = apply_create.apply_create_api())
 
 	# 所有case执行之后清理环境

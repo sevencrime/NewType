@@ -1,11 +1,94 @@
-2019-07-17 18:18:35,952 ReviewProcessTool.py INFO [line:24] 调用apply的create接口创建测试数据
-2019-07-17 18:18:35,952 ReviewProcessTool.py INFO [line:24] 调用apply的create接口创建测试数据
-2019-07-17 18:18:35,952 ReviewProcessTool.py INFO [line:24] 调用apply的create接口创建测试数据
-2019-07-17 18:18:35,952 apply_create.py INFO [line:112] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
-2019-07-17 18:18:35,952 apply_create.py INFO [line:112] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
-2019-07-17 18:18:35,952 apply_create.py INFO [line:112] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
-2019-07-17 18:18:35,952 apply_create.py INFO [line:112] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
-2019-07-17 18:18:35,953 apply_create.py INFO [line:113] apiStatus == unprocessed
-2019-07-17 18:18:35,953 apply_create.py INFO [line:113] apiStatus == unprocessed
-2019-07-17 18:18:35,953 apply_create.py INFO [line:113] apiStatus == unprocessed
-2019-07-17 18:18:35,953 apply_create.py INFO [line:113] apiStatus == unprocessed
+2019-07-18 17:26:07,852 ReviewProcessTool.py INFO [line:22] type 调用apply.create接口创建数据
+2019-07-18 17:26:07,852 ReviewProcessTool.py INFO [line:22] type 调用apply.create接口创建数据
+2019-07-18 17:26:07,852 ReviewProcessTool.py INFO [line:22] type 调用apply.create接口创建数据
+2019-07-18 17:26:07,852 ReviewProcessTool.py INFO [line:22] type 调用apply.create接口创建数据
+2019-07-18 17:26:07,853 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:07,853 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:07,853 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:07,853 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:07,853 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:07,861 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:07,861 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:07,861 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:07,861 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:07,861 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:09,381 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:09,381 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:09,381 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:09,381 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:09,381 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:09,381 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:09,381 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:09,381 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:09,381 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:09,381 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:09,381 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:09,381 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:09,381 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:09,381 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:09,381 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:09,606 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:09,606 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:09,606 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:09,606 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:09,606 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:09,606 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:09,606 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:09,606 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:09,606 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:09,606 apply_create.py INFO [line:111] accountType == ['bullionMargin', 'leveragedForeignExchangeAccountMargin', 'securitiesCash', 'futuresMargin']
+2019-07-18 17:26:09,606 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:09,606 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:09,606 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:09,606 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:09,606 apply_create.py INFO [line:112] apiStatus == reviewing
+2019-07-18 17:26:09,829 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:09,829 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:09,829 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:09,829 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:09,829 apply_create.py INFO [line:117] /apply/create: 創建的數據為:{'message': 'The incoming token has expired'}
+2019-07-18 17:26:44,828 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:44,828 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:44,828 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:44,828 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:44,828 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:49,106 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:49,106 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:49,106 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:49,106 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:49,106 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:53,458 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:53,458 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:53,458 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:53,458 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:53,458 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:57,831 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:57,831 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:57,831 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:57,831 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:26:57,831 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:02,173 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:02,173 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:02,173 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:02,173 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:02,173 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:06,458 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:06,458 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:06,458 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:06,458 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:06,458 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:10,775 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:10,775 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:10,775 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:10,775 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:10,775 ReviewProcessTool.py INFO [line:47] 结束driver
+2019-07-18 17:27:12,898 ReviewProcessTool.py INFO [line:28] 删除数据
+2019-07-18 17:27:12,898 ReviewProcessTool.py INFO [line:28] 删除数据
+2019-07-18 17:27:12,898 ReviewProcessTool.py INFO [line:28] 删除数据
+2019-07-18 17:27:12,898 ReviewProcessTool.py INFO [line:28] 删除数据
+2019-07-18 17:27:12,898 ReviewProcessTool.py INFO [line:28] 删除数据
+2019-07-18 17:27:12,898 PyMongo.py INFO [line:35] 连接数据库uat
+2019-07-18 17:27:12,898 PyMongo.py INFO [line:35] 连接数据库uat
+2019-07-18 17:27:12,898 PyMongo.py INFO [line:35] 连接数据库uat
+2019-07-18 17:27:12,898 PyMongo.py INFO [line:35] 连接数据库uat
+2019-07-18 17:27:12,898 PyMongo.py INFO [line:35] 连接数据库uat

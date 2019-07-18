@@ -20,8 +20,8 @@ def Logs():
         rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
         if os.path.exists(rootPath+"Logs") is False:
             os.makedirs(rootPath+"Logs")
-        # print(rootPath)
-        url_log = rootPath + 'Logs/run_log.log' 
+
+        url_log = rootPath + 'Logs/run_log.log'
         # url_log = os.path.abspath(os.path.dirname(os.getcwd())) + '/logs/run_result_%s.log' %t
         # url_log = "D:/Python_Demo/NewType/Eddid_CRM/Logs/run_result.log"
         # 获取logger对象，设置日志级别

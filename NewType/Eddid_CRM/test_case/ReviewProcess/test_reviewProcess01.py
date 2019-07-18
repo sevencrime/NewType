@@ -5,14 +5,16 @@ import pytest
 
 from test_case.ReviewProcess.ReviewProcessTool import ReviewProcessTool
 from test_case.public.publicTool import publicTool
-from Commons import GlobalMap
+from Commons import GlobalMap, Logging
 
 
-class Test_reviewProcess1(ReviewProcessTool):
+class Test_reviewProcess01(ReviewProcessTool):
 	# CRM and apply_form正向审核: 未处理--待cs2--待RO--待ops--success
-	globals()["status"] = ""
 	gm = GlobalMap.GlobalMap()
+	log = Logging.Logs()
+	globals()["status"] = ""
 	gm.set_value(apiStatus="unprocessed")
+	log.info("类{}所创建的apistatuc的值为: {}".format("Test_reviewProcess01", gm.get_value("apiStatus")))
 	gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
 
 
