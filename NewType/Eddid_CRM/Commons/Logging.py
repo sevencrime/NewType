@@ -26,6 +26,8 @@ def Logs():
         # url_log = "D:/Python_Demo/NewType/Eddid_CRM/Logs/run_result.log"
         # 获取logger对象，设置日志级别
         logger = logging.getLogger(__name__)
+        # 每次被调用后，清空已经存在handler,防止重复打印日志
+        logger.handlers.clear()
         logger.setLevel(level=logging.INFO)
 
         # 获取文件处理器，并设置级别
@@ -36,9 +38,7 @@ def Logs():
         
 
     # handler = logging.FileHandler("./logs/log.csv")
-    handler.setLevel(logging.INFO)
-
-    # 获取并设置文件处理器的日志格式
+    handler.setLevel(logging.DEBUG)    # 获取并设置文件处理器的日志格式
     formatter = logging.Formatter(
         '%(asctime)s %(filename)s %(levelname)s [line:%(lineno)d] %(message)s')
     handler.setFormatter(formatter)
@@ -49,5 +49,6 @@ def Logs():
     return logger
 
 if __name__ == '__main__':
-    lg = Logs()
-    lg.info("1111")
+    Logs().info("1111")
+    Logs().info("2222")
+    Logs().info("3333")
