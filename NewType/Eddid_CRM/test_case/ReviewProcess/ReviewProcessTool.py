@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import inspect
+
+import pytest
+
 from Commons import Logging, GlobalMap, PyMongo
 from Interface import apply_create
 import unittest
@@ -17,9 +20,15 @@ class ReviewProcessTool(unittest.TestCase):
 	gm = GlobalMap.GlobalMap()
 	log = Logging.Logs()
 
+	@pytest.fixture()
+	def applyCreateApi(self):
+		self.gm.set_value(apiStatus="processing")
+		self.gm.set_List("accountType", ["securitiesCash"])
+		self.gm.set_value(email = apply_create.apply_create_api())
+
 	@classmethod
 	def setUpClass(cls):
-		cls.log.info("{} 调用apply.create接口创建数据".format(cls.__class__.__name__, inspect.stack()[1][3]))
+		cls.log.info("{cls}类的{func}方法调用apply.create接口创建数据".format(cls=cls.__class__.__name__, func=inspect.stack()[0][3]))
 		cls.gm.set_value(email = apply_create.apply_create_api())
 
 	# 所有case执行之后清理环境
@@ -219,6 +228,6 @@ class ReviewProcessTool(unittest.TestCase):
 
 
 if __name__ == '__main__':
-	print("1")
+	print("1111111111111111")
 
 
