@@ -3,6 +3,7 @@
 
 import pytest
 
+from Interface import apply_create
 from test_case.ReviewProcess.ReviewProcessTool import ReviewProcessTool
 from test_case.public.publicTool import publicTool
 from Commons import GlobalMap, Logging
@@ -10,17 +11,15 @@ from Commons import GlobalMap, Logging
 
 class Test_reviewProcess01(ReviewProcessTool):
 	# CRM and apply_form正向审核: 未处理--待cs2--待RO--待ops--success
-	gm = GlobalMap.GlobalMap()
-	log = Logging.Logs()
 	globals()["status"] = ""
-	gm.set_value(apiStatus="unprocessed")
-	log.info("类{}所创建的apistatuc的值为: {}".format("Test_reviewProcess01", gm.get_value("apiStatus")))
-	gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
-
 
 	# @reviewProcessTool.skipIf(status = "未处理")
 	def test01_Process1_sales_to_cs2(self):
 		# sales--cs2
+		self.gm.set_value(apiStatus="unprocessed")
+		self.log.info("类{}所创建的apistatuc的值为: {}".format("Test_reviewProcess01", self.gm.get_value("apiStatus")))
+		self.gm.set_List("accountType",["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
+		self.gm.set_value(email=apply_create.apply_create_api())
 		publicTool.LoginCRM(self, user='sales_t1')
 		globals()["status"] = self.submitReview(email=self.gm.get_value("email"), statusSel="未处理")
 		
@@ -88,4 +87,9 @@ if __name__ == "__main__":
 	# suite.addTests(unittest.TestLoader().loadTestsFromTestCase(reviewProcess1))
 	# runner = unittest.TextTestRunner(verbosity=2)
 	# runner.run(suite)
-	pytest.main("-s -v --pdb test_reviewProcess01.py::Test_reviewProcess1")
+	pytest.main("-s -v --pdb test_reviewProcess01.py::Test_reviewProcess01")
+
+
+
+
+

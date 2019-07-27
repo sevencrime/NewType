@@ -6,69 +6,69 @@
 # @Version : $Id$
 
 
-import os
-import sys
-import time
-
-sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
-import unittest
-from selenium import webdriver
-
-
-class Test_searchInfo(unittest.TestCase):
-
-    # log = Logging.Logs()
-
-    def setUp(self):
-        # self.log.info("正在执行Test_Login")
-
-        self.driver = webdriver.Chrome(executable_path = 'chromedriver')
-        # self.driver = webdriver.Firefox(executable_path = 'geckodriver')
-        # self.driver.implicitly_wait(30)
-        self.driver.set_page_load_timeout(30)
-        self.driver.set_script_timeout(30)
-        self.url = 'http://eddid-bos-feature.ntdev.be'
-
-        #在这里先登录
-        login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
-        login_page.open()
-        login_page.input_username("admin")
-        login_page.input_password("abcd1234")
-        login_page.click_submit()
-        self.assertEqual("admin", login_page.show_userid(), "userid与登录账户不一致")
-
-    def tearDown(self):
-        time.sleep(10)
-        print("结束driver")
-        self.driver.quit()
-
-        
-    @unittest.skip("废弃用例,跳过")
-    def test_searchInfo(self):
-        MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
-        mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
-
-        #点击开户管理，判断
-        MenuListPage.click_apply_manager()
-        #点击开户列表，判断
-        MenuListPage.click_applylist()
-
-        #等待CSS.Loading-Modal加载完成
-        mainpage.wait_LoadingModal()
-        #点击下拉
-        mainpage.click_StatusSelect()
-
-        #选择下拉内容
-        # mainpage.click_StatusOption()
-        op = self.driver.find_elements_by_css_selector('.el-select-dropdown.el-popper')
-        self.driver.execute_script('arguments[0].style.display="block";', op[2])
-        self.log.info(op[2].text)
-        op[2].click()
-
-
-
-if __name__ == '__main__':
-    unittest.main()
-
-
+# import os
+# import sys
+# import time
+#
+# sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
+# import unittest
+# from selenium import webdriver
+#
+#
+# class Test_searchInfo(unittest.TestCase):
+#
+#     # log = Logging.Logs()
+#
+#     def setUp(self):
+#         # self.log.info("正在执行Test_Login")
+#
+#         self.driver = webdriver.Chrome(executable_path = 'chromedriver')
+#         # self.driver = webdriver.Firefox(executable_path = 'geckodriver')
+#         # self.driver.implicitly_wait(30)
+#         self.driver.set_page_load_timeout(30)
+#         self.driver.set_script_timeout(30)
+#         self.url = 'http://eddid-bos-feature.ntdev.be'
+#
+#         #在这里先登录
+#         login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
+#         login_page.open()
+#         login_page.input_username("admin")
+#         login_page.input_password("abcd1234")
+#         login_page.click_submit()
+#         self.assertEqual("admin", login_page.show_userid(), "userid与登录账户不一致")
+#
+#     def tearDown(self):
+#         time.sleep(10)
+#         print("结束driver")
+#         self.driver.quit()
+#
+#
+#     @unittest.skip("废弃用例,跳过")
+#     def test_searchInfo(self):
+#         MenuListPage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
+#         mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
+#
+#         #点击开户管理，判断
+#         MenuListPage.click_apply_manager()
+#         #点击开户列表，判断
+#         MenuListPage.click_applylist()
+#
+#         #等待CSS.Loading-Modal加载完成
+#         mainpage.wait_LoadingModal()
+#         #点击下拉
+#         mainpage.click_StatusSelect()
+#
+#         #选择下拉内容
+#         # mainpage.click_StatusOption()
+#         op = self.driver.find_elements_by_css_selector('.el-select-dropdown.el-popper')
+#         self.driver.execute_script('arguments[0].style.display="block";', op[2])
+#         self.log.info(op[2].text)
+#         op[2].click()
+#
+#
+#
+# if __name__ == '__main__':
+#     unittest.main()
+#
+#
 

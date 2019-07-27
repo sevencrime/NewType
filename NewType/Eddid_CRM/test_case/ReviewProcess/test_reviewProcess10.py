@@ -6,6 +6,7 @@ import unittest
 
 import pytest
 
+from Interface import apply_create
 from test_case.ReviewProcess.ReviewProcessTool import ReviewProcessTool
 from test_case.public.publicTool import publicTool
 from Commons import Logging, GlobalMap
@@ -14,13 +15,13 @@ from Commons import Logging, GlobalMap
 class Test_reviewProcess10(ReviewProcessTool):
     # 外汇RO拒绝, CS2驳回给RO 
     globals()["status"] = ""
-    gm = GlobalMap.GlobalMap()
-    gm.set_value(apiStatus="processing")
-    gm.set_List("accountType", ["leveragedForeignExchangeAccountMargin"])
 
     # @reviewProcessTool.skipIf(status = "待证券RO审批")
     def test_01_Process10_aaron(self):
         # cliff审核
+        self.gm.set_value(apiStatus="processing")
+        self.gm.set_List("accountType", ["leveragedForeignExchangeAccountMargin"])
+        self.gm.set_value(email=apply_create.apply_create_api())
         publicTool.LoginCRM(self, user='aaron_chan')
         globals()["status"] = self.reviewRefuse(email=self.gm.get_value("email"), statusSel="待RO审批")
 

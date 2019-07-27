@@ -5,6 +5,7 @@ import unittest
 
 import pytest
 
+from Interface import apply_create
 from test_case.ReviewProcess.ReviewProcessTool import ReviewProcessTool
 from test_case.public.publicTool import publicTool
 from Commons import Logging, GlobalMap
@@ -13,13 +14,13 @@ from Commons import Logging, GlobalMap
 class Test_reviewProcess3(ReviewProcessTool):
 	# App来源驳回流程: 待cs1--拒绝--CS1修改后重新提交给CS2--CS2拒绝
 	globals()["status"] = ""
-	gm = GlobalMap.GlobalMap()
-	gm.set_value(apiStatus="reviewing")
-	gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
 
 	# @skipIf("CS1")
 	def test_01_Process3_cs1torefuse(self):
 		# CS1---Refuse
+		self.gm.set_value(apiStatus="reviewing")
+		self.gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
+		self.gm.set_value(email=apply_create.apply_create_api())
 		publicTool.LoginCRM(self, user='cs1_onedi', psw="Abcd1234")		#先登录
 		globals()["status"] = self.reviewRefuse(email=self.gm.get_value("email"), statusSel="待CS1审批")
 		

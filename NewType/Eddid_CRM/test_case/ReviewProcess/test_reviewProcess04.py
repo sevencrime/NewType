@@ -5,26 +5,23 @@ import unittest
 
 import pytest
 
+from Interface import apply_create
 from test_case.ReviewProcess.ReviewProcessTool import ReviewProcessTool
 from test_case.public.publicTool import publicTool
 from Commons import Logging, GlobalMap
 
 
 class Test_reviewProcess4(ReviewProcessTool):
-	# CRM来源驳回流程: 未处理---待cs2--拒绝--sales修改给CS2
+	# CRM来源驳回流程: 待cs2--拒绝--sales修改给CS2
 	globals()["status"] = ""
-	gm = GlobalMap.GlobalMap()
-	gm.set_value(apiStatus="unprocessed")
-	gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
 
 	def test_01_Process4_cs2torefuse(self):
 		# CS1---Refuse
-		#先判断状态是否正确
-		if globals()["status"].find("待CS2审批") == -1:
-			pytest.xfail("数据状态是 {}".format(globals()["status"]))
-
+		self.gm.set_value(apiStatus="csApproval")
+		self.gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
+		self.gm.set_value(email=apply_create.apply_create_api())
 		publicTool.LoginCRM(self, user='cs_t1')		#先登录
-		globals()["status"] = self.reviewRefuse(email=self.gm.get_value("email"), statusSel="待CS2审批")		
+		globals()["status"] = self.reviewRefuse(email=self.gm.get_value("email"), statusSel="待CS2审批")
 
 
 	# @unittest.skipUnless(globals()["status"].find("拒绝") != -1, "状态不是拒绝")

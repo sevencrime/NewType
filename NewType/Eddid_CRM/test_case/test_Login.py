@@ -16,8 +16,8 @@ class Test_Login(unittest.TestCase):
         # self.log.info("正在执行Test_Login")
         self.driver = webdriver.Chrome()
         # self.driver.implicitly_wait(30)
-        self.driver.set_page_load_timeout(20)
-        self.driver.set_script_timeout(20)
+        self.driver.set_page_load_timeout(5)
+        self.driver.set_script_timeout(5)
         self.url = 'http://eddid-bos-uat.ntdev.be'
 
     def tearDown(self):
