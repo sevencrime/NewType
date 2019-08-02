@@ -16,7 +16,7 @@ class Test_reviewProcess5(ReviewProcessTool):
     def test_01_Process5_aaron(self):
         # aaron 通过
         self.gm.set_value(apiStatus="processing")
-        self.gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
+        self.gm.set_List("accountType", ["leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
         self.gm.set_value(email=apply_create.apply_create_api())
         publicTool.LoginCRM(self, user='aaron_chan')
         globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")

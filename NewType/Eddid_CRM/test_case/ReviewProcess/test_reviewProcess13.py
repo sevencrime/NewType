@@ -11,7 +11,7 @@ from test_case.ReviewProcess.ReviewProcessTool import ReviewProcessTool
 from test_case.public.publicTool import publicTool
 from Commons import Logging, GlobalMap
 
-
+pytest.mark.skip(reason="隐藏黄金,跳过")
 class Test_reviewProcess13(ReviewProcessTool):
     #  黄金RO拒绝, CS2 确定拒绝
     globals()["status"] = ""

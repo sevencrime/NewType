@@ -10,7 +10,7 @@ import os
 import time
 
 
-def Logs():
+def Logs(logname=None):
 
     try:
         t = time.strftime('%Y%m%d_%H%M', time.localtime(time.time()))
@@ -20,8 +20,10 @@ def Logs():
         rootPath = curPath[:curPath.find("Eddid_CRM\\")+len("Eddid_CRM\\")]
         if os.path.exists(rootPath+"Logs") is False:
             os.makedirs(rootPath+"Logs")
-
-        url_log = rootPath + 'Logs/run_log.log'
+        if logname == None:
+            url_log = rootPath + 'Logs/run_log.log'
+        else:
+            url_log = rootPath + 'Logs/{}.log'.format(logname)
         # url_log = os.path.abspath(os.path.dirname(os.getcwd())) + '/logs/run_result_%s.log' %t
         # url_log = "D:/Python_Demo/NewType/Eddid_CRM/Logs/run_result.log"
         # 获取logger对象，设置日志级别
@@ -52,3 +54,6 @@ if __name__ == '__main__':
     Logs().info("1111")
     Logs().info("2222")
     Logs().info("3333")
+    l = Logs(logname= "submit")
+    l.info("44444444")
+    l.info("555")

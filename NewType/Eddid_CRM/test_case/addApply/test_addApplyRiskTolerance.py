@@ -13,37 +13,37 @@ class Test_addApplyRiskTolerance(addApplyTool):
     # 用例: 账户类别分别选择金业,校验风险提示.
     #       风险提示选择 "低"
     """
-    @addApplyTool.RiskTolerance(num=2)
-    def test_apply_BullionRiskToleranceLow(self):
-
-        self.RequiredField(applicationFor="个人账户",
-                           way="亲临开户",
-                           type="艾德金业现货黄金账户(保证金)")
-        self.applySublime()
+    # @addApplyTool.RiskTolerance(num=2)
+    # def test_apply_BullionRiskToleranceLow(self):
+    #
+    #     self.RequiredField(applicationFor="个人账户",
+    #                        way="亲临开户",
+    #                        type="艾德金业现货黄金账户(保证金)")
+    #     self.applySublime()
 
     """
     # 用例: 账户类别选择黄金账户,校验风险提示.
     #       风险提示选择 "中"
     """
-    @addApplyTool.RiskTolerance(num=1)
-    def test_apply_BullionRiskToleranceMiddle(self):
-
-        self.RequiredField(applicationFor="个人账户",
-                           way="亲临开户",
-                           type="艾德金业现货黄金账户(保证金)")
-        self.applySublime()
+    # @addApplyTool.RiskTolerance(num=1)
+    # def test_apply_BullionRiskToleranceMiddle(self):
+    #
+    #     self.RequiredField(applicationFor="个人账户",
+    #                        way="亲临开户",
+    #                        type="艾德金业现货黄金账户(保证金)")
+    #     self.applySublime()
 
     """
     # 用例: 账户类别选择黄金账户,校验风险提示.
     #       风险提示选择 "高"
     """
-    @addApplyTool.RiskTolerance(num=0)
-    def test_apply_BullionRiskToleranceHigh(self):
-
-        self.RequiredField(applicationFor="个人账户",
-                           way="亲临开户",
-                           type="艾德金业现货黄金账户(保证金)")
-        self.applySublime()
+    # @addApplyTool.RiskTolerance(num=0)
+    # def test_apply_BullionRiskToleranceHigh(self):
+    #
+    #     self.RequiredField(applicationFor="个人账户",
+    #                        way="亲临开户",
+    #                        type="艾德金业现货黄金账户(保证金)")
+    #     self.applySublime()
 
     """
     # 用例: 账户类别分别选择杠杆式外汇账户(保证金),校验风险提示.
@@ -51,6 +51,7 @@ class Test_addApplyRiskTolerance(addApplyTool):
     """
     @addApplyTool.RiskTolerance(num=2)
     def test_apply_LeveragedRiskToleranceLow(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户", 
@@ -63,6 +64,7 @@ class Test_addApplyRiskTolerance(addApplyTool):
     """
     @addApplyTool.RiskTolerance(num=1)
     def test_apply_LeveragedRiskToleranceMiddle(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户", 
@@ -75,6 +77,7 @@ class Test_addApplyRiskTolerance(addApplyTool):
     """
     @addApplyTool.RiskTolerance(num=0)
     def test_apply_LeveragedRiskToleranceHigh(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户", 
@@ -87,6 +90,7 @@ class Test_addApplyRiskTolerance(addApplyTool):
     """
     @addApplyTool.RiskTolerance(num=2)
     def test_apply_BuyProductRiskToleranceLow(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户", 
@@ -100,6 +104,7 @@ class Test_addApplyRiskTolerance(addApplyTool):
     """
     @addApplyTool.RiskTolerance(num=1)
     def test_apply_BuyProductRiskToleranceMiddle(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户", 
@@ -113,12 +118,56 @@ class Test_addApplyRiskTolerance(addApplyTool):
     """
     @addApplyTool.RiskTolerance(num=0)
     def test_apply_BuyProductRiskToleranceHigh(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户", 
                            type="香港及环球证券账户(现金)",
                            buyProduct=True)
         self.applySublime()
+
+
+    """
+    # 用例: 账户类别分别选择香港及环球期货账户(保证金),校验风险提示.
+    #       风险提示选择 "低"
+    """
+    @addApplyTool.RiskTolerance(num=2)
+    def test_apply_futuresRiskToleranceLow(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
+
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户",
+                           type="香港及环球期货账户(保证金)")
+        self.applySublime()
+
+    """
+    # 用例: 账户类别分别选择香港及环球期货账户(保证金),校验风险提示.
+    #       风险提示选择 "低"
+    """
+    @addApplyTool.RiskTolerance(num=1)
+    def test_apply_futuresRiskToleranceMiddle(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
+
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户",
+                           type="香港及环球期货账户(保证金)")
+        self.applySublime()
+
+    """
+    # 用例: 账户类别分别选择香港及环球期货账户(保证金),校验风险提示.
+    #       风险提示选择 "低"
+    """
+    @addApplyTool.RiskTolerance(num=0)
+    def test_apply_futuresRiskToleranceHigh(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
+
+        self.RequiredField(applicationFor="个人账户",
+                           way="亲临开户",
+                           type="香港及环球期货账户(保证金)")
+        self.applySublime()
+
+
+
 
 
 if __name__ == '__main__':

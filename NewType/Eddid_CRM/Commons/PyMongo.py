@@ -15,7 +15,7 @@ from Commons import Logging
 
 class Database:
     
-    log = Logging.Logs()
+    log = Logging.Logs("del_Monogo_database")
     collectionsId = set()       #存放已经遍历过的数据库表的id
     expectedRemoveTotal = []        #预期删除总数
     actualRemoveTotal = []      #实际删除总数

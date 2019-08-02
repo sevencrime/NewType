@@ -28,8 +28,9 @@ CRM开户表单(addApply):
 		1, 账户类别选择金业账户, 投资目标单独选择利息/股息收入, 校验是否会弹出提示 >> test_addApplyInvestmentTarget.py::Test_addApplyInvestmentTarget::test_apply_BullionInvestmentTarget
 		2, 账户类别选择杠杆式外汇账户, 投资目标单独选择利息/股息收入, 校验是否会弹出提示 >> test_addApplyInvestmentTarget.py::Test_addApplyInvestmentTarget::test_apply_LeveragedInvestmentTarget
 		3, 衍生产品选择"是", 风险声明披露选择"是", 投资目标单独选择利息/股息收入, 校验是否会弹出提示 >> test_addApplyInvestmentTarget.py::Test_addApplyInvestmentTarget::test_apply_BuyProductInvestmentTarget
+		4, 账户类别选择期货账户, 投资目标单独选择利息 / 股息收入, 校验是否会弹出提示 >> test_addApplyInvestmentTarget.py::Test_addApplyInvestmentTarget::test_apply_futuresInvestmentTarget
 
-	校验开户方式隐藏框是否必填	:
+校验开户方式隐藏框是否必填	:
 		1, 开户方式选择手机应用程式身份认证--校验银行名称和银行账户号码是否必填 >> test_addApplyRequired.py::Test_addApplyRequired::test_apply_MobileAuthentication
 		2, 开户方式选择电子签名认证--校验电子签名证书栏位是否必填 >> test_addApplyRequired.py::Test_addApplyRequired::test_apply_certificateNb
 
@@ -43,6 +44,10 @@ CRM开户表单(addApply):
 		7, 衍生成功选择为"是",风险承受能力选择为"低", 校验是否会弹出提示 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BuyProductRiskToleranceLow
 		8, 衍生成功选择为"是",风险承受能力选择为"中", 校验是否会弹出提示 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BuyProductRiskToleranceMiddle
 		9, 衍生成功选择为"是",风险承受能力选择为"高", 校验是否可以创建成功 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_BuyProductRiskToleranceHigh
+		1, 账户类别选择期货账户, 风险承受能力选择为"低", 校验是否会弹出提示 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_futuresRiskToleranceLow
+		2, 账户类别选择期货账户, 风险承受能力选择为"中", 校验是否会弹出提示 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_futuresRiskToleranceMiddle
+		3, 账户类别选择期货账户, 风险承受能力选择为"高", 校验是否可以创建成功 >> test_addApplyRiskTolerance.py::Test_addApplyRiskTolerance::test_apply_futuresRiskToleranceHigh
+
 
 	从潜在客户获取:
 

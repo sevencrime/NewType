@@ -20,7 +20,7 @@ class Test_reviewProcess2(ReviewProcessTool):
 	def test1_Process2_cs1tocs2(self):
 		# CS1---CS2
 		self.gm.set_value(apiStatus="reviewing")
-		self.gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
+		self.gm.set_List("accountType", ["securitiesCash", "futuresMargin"])
 		self.gm.set_value(email=apply_create.apply_create_api())
 		publicTool.LoginCRM(self, user='cs1_onedi', psw="Abcd1234")
 		globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待CS1审批")
@@ -58,25 +58,25 @@ class Test_reviewProcess2(ReviewProcessTool):
 		publicTool.LoginCRM(self, user='ro1_don', psw='Abcd1234')
 		globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")
 
-	# @skipIf(status = "待外汇RO审批")
-	def test5_Process2_aaron(self):
-		# aaron审核
-		#先判断状态是否正确
-		if globals()["status"].find("待外汇RO审批") == -1 :
-			pytest.xfail("数据状态是 {}".format(globals()["status"]))
+	# # @skipIf(status = "待外汇RO审批")
+	# def test5_Process2_aaron(self):
+	# 	# aaron审核
+	# 	#先判断状态是否正确
+	# 	if globals()["status"].find("待外汇RO审批") == -1 :
+	# 		pytest.xfail("数据状态是 {}".format(globals()["status"]))
+	#
+	# 	publicTool.LoginCRM(self, user='aaron_chan')
+	# 	globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")
 
-		publicTool.LoginCRM(self, user='aaron_chan')
-		globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")
-
-	# @skipIf(status = "待黄金RO审批")
-	def test6_Process2_gold(self):
-		# gold 审核
-		#先判断状态是否正确
-		if globals()["status"].find("待黄金RO审批") == -1 :
-			pytest.xfail("数据状态是 {}".format(globals()["status"]))
-
-		publicTool.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
-		globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")
+	# # @skipIf(status = "待黄金RO审批")
+	# def test6_Process2_gold(self):
+	# 	# gold 审核
+	# 	#先判断状态是否正确
+	# 	if globals()["status"].find("待黄金RO审批") == -1 :
+	# 		pytest.xfail("数据状态是 {}".format(globals()["status"]))
+    #
+	# 	publicTool.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
+	# 	globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")
 
 	# @skipIf(status = "结算")
 	def test7_Process2_opstosuccess(self):

@@ -19,7 +19,7 @@ class Test_reviewProcess3(ReviewProcessTool):
 	def test_01_Process3_cs1torefuse(self):
 		# CS1---Refuse
 		self.gm.set_value(apiStatus="reviewing")
-		self.gm.set_List("accountType", ["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
+		self.gm.set_List("accountType", ["leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
 		self.gm.set_value(email=apply_create.apply_create_api())
 		publicTool.LoginCRM(self, user='cs1_onedi', psw="Abcd1234")		#先登录
 		globals()["status"] = self.reviewRefuse(email=self.gm.get_value("email"), statusSel="待CS1审批")

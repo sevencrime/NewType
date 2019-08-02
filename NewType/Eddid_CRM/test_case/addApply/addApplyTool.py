@@ -9,7 +9,7 @@ from PageElement import ApplyPage, MainPage
 class addApplyTool(unittest.TestCase):
 
     globals()["email"] = ""
-    log = Logging.Logs()
+    log = Logging.Logs("addApply")
 
     def setUp(self):
         globals()["email"] = ""
@@ -22,26 +22,32 @@ class addApplyTool(unittest.TestCase):
 
         self.applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
         self.mainpage = MainPage.MainPage(self.driver, self.url, "Eddid")
+        self.log.info("登录CRM")
         test_case.public.publicTool.publicTool.LoginCRM(self)
-
+        self.log.info("点击开户列表")
         test_case.public.publicTool.publicTool.click_menulist(self, "开户管理", "开户列表")
         # 等待
         test_case.public.publicTool.publicTool.wait_LoadingModal(self)
         # 点击新增按钮
+        self.log.info("点击新增按钮")
         self.mainpage.click_add()
 
     def tearDown(self):
-        print("用例执行完成")
+        self.log.info("用例执行完成, 关闭quit")
         self.driver.quit()
         # 删除数据
-        # print(globals()["email"])
+
         if globals()["email"] != "":
+            self.log.info(globals()["email"])
             PyMongo.Database().del_linked("apply_info", {"email": globals()["email"]})
 
     """
         #Apply 个人账户必填步骤
     """
     def RequiredField(self, *args, **kwargs):
+
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
+
         # 账户类型
         applicationFor = self.applypage.send_applicationFor(kwargs["applicationFor"])
         # 开户方法
@@ -173,6 +179,7 @@ class addApplyTool(unittest.TestCase):
         #Apply 个人账户, 非必填项
     """
     def NonRequiredField(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
         # 推广人
         promoter = self.applypage.send_promoter()
         # 曾用英文姓名
@@ -211,6 +218,7 @@ class addApplyTool(unittest.TestCase):
         #Apply 联名账户必填步骤
     """
     def JointRequiredField(self, *args, **kwargs):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
         # 进入联名账户
         # 联名账户- 称谓
         Jointtitle = self.applypage.send_title()
@@ -303,6 +311,7 @@ class addApplyTool(unittest.TestCase):
         #Apply 联名账户 非必填项
     """
     def NonJointRequiredField(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
         # 曾用英文姓名
         oldEnglishName = self.applypage.send_oldEnglishName()
         # 曾用中文姓名
@@ -326,6 +335,7 @@ class addApplyTool(unittest.TestCase):
         # Jump = True : 表单提交成功
     """
     def applySublime(self, Jump=True):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
         # 点击提交按钮
         self.applypage.click_sublimeApply("提交")
         test_case.public.publicTool.publicTool.wait_LoadingModal(self)  # loading

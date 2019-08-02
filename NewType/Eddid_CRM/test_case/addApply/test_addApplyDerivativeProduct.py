@@ -17,6 +17,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=1)
     def test_apply_CashNotDerivativeProduct(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户",
@@ -30,6 +31,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=0, linkTag=False)
     def test_apply_CashisDerivativeProductNone(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户",
@@ -43,6 +45,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=0, linknum=0)
     def test_apply_CashisDerivativeProductyes(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户",
@@ -56,6 +59,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=0, linknum=1)
     def test_apply_CashisDerivativeProductNo(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户",
@@ -69,6 +73,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=1)
     def test_apply_MarginNotDerivativeProduct(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户",
@@ -82,6 +87,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=0, linkTag=False)
     def test_apply_MarginisDerivativeProductNone(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户",
@@ -95,6 +101,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=0, linknum=0)
     def test_apply_MarginisDerivativeProductyes(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户",
@@ -108,6 +115,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     """
     @addApplyTool.DerivativeProduct(num=0, linknum=1)
     def test_apply_MarginisDerivativeProductNo(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户",
@@ -119,9 +127,9 @@ class Test_addApplyDerivativeProduct(addApplyTool):
     # 用例: 选择非外汇, 黄金, 不触发衍生产品 ,校验衍生产品是否必填.
     """
     def test_apply_PassDerivativeProduct(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
 
-        accounttype = ["香港股票期权账户(现金)", "香港及环球期货账户(保证金)",
-                       "香港期货即日买卖账户(保证金)", "杠杆式外汇账户(保证金)", "艾德金业现货黄金账户(保证金)"]
+        accounttype = ["香港股票期权账户(现金)", "香港及环球期货账户(保证金)","香港期货即日买卖账户(保证金)"]
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户",
                            type=accounttype)
@@ -138,6 +146,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
             结果: 开户成功, 不会弹出提示框
     """
     def test_apply_jointDerivativeProductsameyes(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
         # 个人账户, 衍生产品选择是
         self.RequiredField(applicationFor="联名账户",
                            way="亲临开户",
@@ -163,6 +172,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
             结果: 联名账户弹出提示, 个人账户和联名账户应保持一致
     """
     def test_apply_jointDerivativeProductDiffyes(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
         # 个人账户, 衍生产品选择是
         self.RequiredField(applicationFor="联名账户",
                            way="亲临开户",
@@ -189,6 +199,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
             结果: 开户成功, 不会弹出提示框
     """
     def test_apply_jointDerivativeProductsameno(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
         # 个人账户, 衍生产品选择是
         self.RequiredField(applicationFor="联名账户",
                            way="亲临开户",
@@ -214,6 +225,7 @@ class Test_addApplyDerivativeProduct(addApplyTool):
             结果: 联名账户弹出提示, 个人账户和联名账户应保持一致
     """
     def test_apply_jointDerivativeProductDiffno(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
         # 个人账户, 衍生产品选择是
         self.RequiredField(applicationFor="联名账户",
                            way="亲临开户",

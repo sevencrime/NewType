@@ -18,7 +18,7 @@ class Test_reviewProcess01(ReviewProcessTool):
 		# sales--cs2
 		self.gm.set_value(apiStatus="unprocessed")
 		self.log.info("类{}所创建的apistatuc的值为: {}".format("Test_reviewProcess01", self.gm.get_value("apiStatus")))
-		self.gm.set_List("accountType",["bullionMargin", "leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
+		self.gm.set_List("accountType",["leveragedForeignExchangeAccountMargin", "securitiesCash", "futuresMargin"])
 		self.gm.set_value(email=apply_create.apply_create_api())
 		publicTool.LoginCRM(self, user='sales_t1')
 		globals()["status"] = self.submitReview(email=self.gm.get_value("email"), statusSel="未处理")
@@ -61,14 +61,14 @@ class Test_reviewProcess01(ReviewProcessTool):
 		publicTool.LoginCRM(self, user='aaron_chan')
 		globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")
 
-	# @reviewProcessTool.skipIf(status = "待黄金RO审批")
-	def test6_Process1_gold(self):
-		# gold 审核
-		if globals()["status"].find("待黄金RO审批") == -1 :
-			pytest.xfail("数据状态是 {}".format(globals()["status"]))
-		
-		publicTool.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
-		globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")
+	# # @reviewProcessTool.skipIf(status = "待黄金RO审批")
+	# def test6_Process1_gold(self):
+	# 	# gold 审核
+	# 	if globals()["status"].find("待黄金RO审批") == -1 :
+	# 		pytest.xfail("数据状态是 {}".format(globals()["status"]))
+	#
+	# 	publicTool.LoginCRM(self, user='gold_onedi', psw="Abcd1234")
+	# 	globals()["status"] = self.reviewPass(email=self.gm.get_value("email"), statusSel="待RO审批")
 
 
 	# @reviewProcessTool.skipIf(status = "结算")

@@ -5,11 +5,11 @@ import json
 import random
 from requests.packages import urllib3
 
-url = 'https://eddid-api.ntdev.be/eddid-api-uat/apply/create'
+url = 'https://eddid-api.ntdev.be/eddid-api-feature/apply/create'
 
 headers = {
     'Content-Type' : 'application/json' ,
-    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoidGVzdCIsImNvZ25pdG86cm9sZXMiOlsiYXJuOmF3czppYW06OjgzMjQzMTg2NDY2Njpyb2xlXC9kZXYtZWRkaWQtY29nbml0by1hZG1pbi1yb2xlIl0sImF1ZCI6IjUxM2pmY2t0cjFtNmV2b2dmcXU3b3NrN3BhIiwiZXZlbnRfaWQiOiJmMzg5NmIyYy1kYmViLTQyNWEtOGU0Mi1iODc3NTQ0N2UyNGUiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU2MzI2MjQ1MywiZXhwIjoxNTYzMjY2MDUzLCJpYXQiOjE1NjMyNjI0NTMsImZhbWlseV9uYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluMTIzNEAxNjMuY29tIn0.Phfwd3JMSz02A1w6Q7-OVSVtKs7kbrCrbiM89Fk8gvG5Mz_fFvXwQlIOQp5NJEF5CL9ZyX-o2UxEb4UQvPjnNbp-fWJB9UfrPExoWul2plmAJlpC0Y8W0WelUDqSkaML-v7rwyf_d0FH0linA1BTZiJMcVLpndKEi5A-WWmXBsyt3G8QKJT6FeFZDdqgNJm6AXz3OPvuGp1gmXqjyuZM8sQJtaGpILzCGqR5cCNYQKPUFcpil3pRuF7PrXgzWHreiF7CYChINpNaMCSaaJ-Z4labUgZ70gnHpdna_g46G4VQQFLNVhXiODD88nxJrtHgE0xUQb3LvEP-CbCyeY4xig'
+    'X-Token' : 'eyJraWQiOiJSejNcLzBrMzY0alZZK2NVVUQ4bWpjdEhYdHgrWTNROENNXC9FcG52OGhXbkE9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3YWYzYWRhOS0yZmY5LTQ1MWQtODdkNy0xNjI5ZWVjZWQyNDMiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzpwcmVmZXJyZWRfcm9sZSI6ImFybjphd3M6aWFtOjo4MzI0MzE4NjQ2NjY6cm9sZVwvZGV2LWVkZGlkLWNvZ25pdG8tYWRtaW4tcm9sZSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV91OWZ6N2x5b04iLCJjb2duaXRvOnVzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoidGVzdCIsImNvZ25pdG86cm9sZXMiOlsiYXJuOmF3czppYW06OjgzMjQzMTg2NDY2Njpyb2xlXC9kZXYtZWRkaWQtY29nbml0by1hZG1pbi1yb2xlIl0sImF1ZCI6IjUxM2pmY2t0cjFtNmV2b2dmcXU3b3NrN3BhIiwiZXZlbnRfaWQiOiJkZTcwOGRlMi03MTUxLTQ4NmMtYmJiOC02NDZjMzE2ZjU2NzMiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU2NDY1NTQyMSwiZXhwIjoxNTY0NzI4MjUwLCJpYXQiOjE1NjQ3MjQ2NTAsImZhbWlseV9uYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluMTIzNEAxNjMuY29tIn0.Aem9TSA7KUJJgkndiQsxSuKotG1adqZIxH_cNtYgtrgX4drKczQyCHTyUxcYf2qVRYpXvv0jZuD8Kohll9rn5G7ciIgkD1RL96xzBw4U6wd_ODJ2ib_KDc49rjpWuaqLcKmuSwOa1kCpUJ-q61NRy9JVY9pbEaiSCUE7BkFPwmQ7I5metfIrFkI-5966CowzQw68Gn-eA4neANdYdTVP08WMI_AyoiQdGdyJkuSfKajfg2P0WikRMcMcdmTfZ9lIMG6U0b0ClXTnVKcRHaFqE0QlJFav294qEdsjhem_8Gi-S60b8UPU179INJs4Ya9VZXaRM8UaYwJWyQ749vGzwA'
 }
 
 data = {
@@ -24,11 +24,12 @@ data = {
         "title": "mr",
         "firstName": "名",
         "lastName": "姓",
-        "chineseName": "oneditesss",
-        "email": "%sonedi%s@qq.com" %(random.randint(1,10235), random.randint(1,1562535)),
-        # "email": "carl.e@newtype.io", 
+        "chineseName": "bruce",
+        # "email": "%sonedi%s@qq.com" %(random.randint(1,10235), random.randint(1,1562535)),
+        "email": "bruce.xu@newtype.io", 
         "phoneAreaCode": "CHN",
-        "phone": "322%s546" %(random.randint(1,10235)),
+        # "phone": "322%s546" %(random.randint(1,10235)),
+        "phone": "18406666955",
         "address": "465456456456",
         # "nationality": "HKG",
         "nationality": "CHN",

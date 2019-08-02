@@ -13,21 +13,37 @@ class Test_addApplyInvestmentTarget(addApplyTool):
     """
     # 用例: 账户类别分别选择金业,校验投资目标为利息/股息收入是否校验
     """
+    # @addApplyTool.InvestmentTarget
+    # def test_apply_BullionInvestmentTarget(self):
+    #     # 填写Apply表单必填项
+    #     self.RequiredField(applicationFor="个人账户",
+    #                        way="亲临开户",
+    #                        type="艾德金业现货黄金账户(保证金)",
+    #                        investmentTarget="利息/股息收入")
+    #     # 点击提交按钮
+    #     self.applySublime()
+
+    """
+    # 用例: 账户类别分别选择金业,校验投资目标为利息/股息收入是否校验
+    """
     @addApplyTool.InvestmentTarget
-    def test_apply_BullionInvestmentTarget(self):
+    def test_apply_futuresInvestmentTarget(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
         # 填写Apply表单必填项
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户",
-                           type="艾德金业现货黄金账户(保证金)",
+                           type="香港及环球期货账户(保证金)",
                            investmentTarget="利息/股息收入")
         # 点击提交按钮
         self.applySublime()
+
 
     """
     # 用例: 账户类别分别选择杠杆式外汇账户(保证金,校验投资目标为利息/股息收入是否校验
     """
     @addApplyTool.InvestmentTarget
     def test_apply_LeveragedInvestmentTarget(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
         # 填写Apply表单必填项
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户", 
@@ -41,6 +57,7 @@ class Test_addApplyInvestmentTarget(addApplyTool):
     """
     @addApplyTool.InvestmentTarget
     def test_apply_BuyProductInvestmentTarget(self):
+        self.log.info("正在执行{}函数".format(sys._getframe().f_code.co_name))
         # 填写Apply表单必填项
         self.RequiredField(applicationFor="个人账户",
                            way="亲临开户", 

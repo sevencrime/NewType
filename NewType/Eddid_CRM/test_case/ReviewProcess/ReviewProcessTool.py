@@ -18,7 +18,7 @@ from Commons import Logging, GlobalMap
 class ReviewProcessTool(unittest.TestCase):
 
 	gm = GlobalMap.GlobalMap()
-	log = Logging.Logs()
+	log = Logging.Logs("ReviewProcess")
 
 	# @pytest.fixture()
 	# def applyCreateApi(self):
@@ -34,6 +34,7 @@ class ReviewProcessTool(unittest.TestCase):
 	# 所有case执行之后清理环境
 	@classmethod
 	def tearDownClass(cls):
+        # cls.log.info("email的值为{}".format(cls.gm.get_value("email")))
 		cls.log.info("删除数据")
 		if cls.gm.get_value("email") != "" or cls.gm.get_value("email") == None:
 			PyMongo.Database().del_linked("client_info", {"email": cls.gm.get_value("email")})

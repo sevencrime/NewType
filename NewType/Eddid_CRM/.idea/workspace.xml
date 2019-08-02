@@ -2,29 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3224326-0b90-4fa8-b674-09662adfb143" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/NewType.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_case/ReviewProcess/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Eddid_CRM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Eddid_CRM.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../NewType Interface/eddid-bos/Apply/create.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../NewType Interface/eddid-bos/Apply/create.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../NewType Interface/eddid-bos/lead/assetManagement.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../NewType Interface/eddid-bos/lead/assetManagement.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/run_log.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/run_log.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Commons/Logging.py" beforeDir="false" afterPath="$PROJECT_DIR$/Commons/Logging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Commons/PyMongo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Commons/PyMongo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/run_log.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/ReviewProcessTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/ReviewProcessTool.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess01.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess01.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess02.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess02.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess03.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess03.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess04.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess04.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess05.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess05.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess06.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess06.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess07.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess07.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess08.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess08.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess09.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess09.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess10.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess10.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess11.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess11.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess12.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess12.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess13.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess13.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess14.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess14.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_case/Test_searchInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/Test_searchInfo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_case/test_Login.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/test_Login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/addApply/addApplyTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/addApplyTool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/addApply/test_addApplyAllNotEmpty.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/test_addApplyAllNotEmpty.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/addApply/test_addApplyDerivativeProduct.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/test_addApplyDerivativeProduct.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/addApply/test_addApplyInvestmentTarget.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/test_addApplyInvestmentTarget.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/addApply/test_addApplyRequired.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/test_addApplyRequired.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_case/addApply/test_addApplyRiskTolerance.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/test_addApplyRiskTolerance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/用例.py" beforeDir="false" afterPath="$PROJECT_DIR$/用例.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,11 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="41" lean-forward="true" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
+            <state relative-caret-position="228">
+              <caret line="12" column="73" selection-start-line="12" selection-start-column="73" selection-end-line="12" selection-end-column="73" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
               </folding>
@@ -47,34 +46,29 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess01.py">
+        <entry file="file://$PROJECT_DIR$/Logs/run_log.log">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-34">
-              <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-              <folding>
-                <element signature="e#47#60#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-2584">
+              <caret line="11" column="58" lean-forward="true" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess02.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
-              <folding>
-                <element signature="e#48#63#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/Logs/ReviewProcess.log">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Logs/del_Monogo_database.log">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess03.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="26" column="19" lean-forward="true" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+            <state relative-caret-position="589">
+              <caret line="41" column="52" lean-forward="true" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
               <folding>
                 <element signature="e#47#62#0" expanded="true" />
               </folding>
@@ -85,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess04.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
+            <state relative-caret-position="247">
+              <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
               <folding>
                 <element signature="e#47#62#0" expanded="true" />
               </folding>
@@ -95,46 +89,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Interface/apply_create.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="79">
-              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-              <folding>
-                <element signature="e#46#60#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Logs/run_log.log">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="43">
-              <caret line="22" column="89" lean-forward="true" selection-start-line="22" selection-start-column="89" selection-end-line="22" selection-end-column="89" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/conftest.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" lean-forward="true" selection-end-line="8" />
-              <folding>
-                <element signature="e#47#60#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/ReviewProcessTool.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="31" column="28" selection-start-line="28" selection-start-column="18" selection-end-line="31" selection-end-column="28" />
+            <state relative-caret-position="155">
+              <caret line="36" column="46" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="46" />
               <folding>
                 <element signature="e#47#61#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess12.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_case/activity/test_createLead.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -157,7 +136,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyRequired.py" />
         <option value="$PROJECT_DIR$/test_case/Test_importAyers.py" />
         <option value="$PROJECT_DIR$/Commons/Modify_xls.py" />
         <option value="$PROJECT_DIR$/PageElement/LoginPage.py" />
@@ -165,41 +143,42 @@
         <option value="$PROJECT_DIR$/PageElement/MenuListPage.py" />
         <option value="$PROJECT_DIR$/PageElement/MainPage.py" />
         <option value="$PROJECT_DIR$/test_case/activity/test_createActivity.py" />
-        <option value="$PROJECT_DIR$/test_case/addApply/addApplyTool.py" />
         <option value="$PROJECT_DIR$/PageElement/ApplyPage.py" />
         <option value="$PROJECT_DIR$/PageElement/ActivityPage.py" />
-        <option value="$PROJECT_DIR$/Commons/PyMongo.py" />
         <option value="$PROJECT_DIR$/test_case/Test_Login.py" />
-        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyRiskTolerance.py" />
-        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyInvestmentTarget.py" />
-        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyDerivativeProduct.py" />
-        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyAllNotEmpty.py" />
-        <option value="$PROJECT_DIR$/用例.py" />
         <option value="$PROJECT_DIR$/PageElement/LeadFormPage.py" />
         <option value="$PROJECT_DIR$/test_case/activity/test_createLead.py" />
         <option value="$PROJECT_DIR$/Logs/run_log20190718_1620.log" />
         <option value="$PROJECT_DIR$/Interface/apply_create.py" />
-        <option value="$PROJECT_DIR$/Commons/Logging.py" />
-        <option value="$PROJECT_DIR$/run_test.py" />
         <option value="$PROJECT_DIR$/test_case/Test_searchInfo.py" />
         <option value="$PROJECT_DIR$/test_case/test_Login.py" />
-        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess02.py" />
-        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess03.py" />
-        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess04.py" />
-        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess05.py" />
         <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess06.py" />
         <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess07.py" />
         <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess08.py" />
         <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess09.py" />
         <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess10.py" />
         <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess11.py" />
-        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess12.py" />
-        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess13.py" />
         <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess14.py" />
         <option value="$PROJECT_DIR$/test_case/ReviewProcess/conftest.py" />
-        <option value="$PROJECT_DIR$/test_case/ReviewProcess/ReviewProcessTool.py" />
+        <option value="$PROJECT_DIR$/用例.py" />
         <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess01.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess03.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess04.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess05.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess12.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess13.py" />
         <option value="$PROJECT_DIR$/Logs/run_log.log" />
+        <option value="$PROJECT_DIR$/Commons/Logging.py" />
+        <option value="$PROJECT_DIR$/Commons/PyMongo.py" />
+        <option value="$PROJECT_DIR$/test_case/addApply/addApplyTool.py" />
+        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyAllNotEmpty.py" />
+        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyDerivativeProduct.py" />
+        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyInvestmentTarget.py" />
+        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyRequired.py" />
+        <option value="$PROJECT_DIR$/test_case/addApply/test_addApplyRiskTolerance.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess02.py" />
+        <option value="$PROJECT_DIR$/run_test.py" />
+        <option value="$PROJECT_DIR$/test_case/ReviewProcess/ReviewProcessTool.py" />
       </list>
     </option>
   </component>
@@ -215,6 +194,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -241,22 +221,24 @@
               <item name="Eddid_CRM" type="b2602c69:ProjectViewProjectNode" />
               <item name="Eddid_CRM" type="462c0819:PsiDirectoryNode" />
               <item name="test_case" type="462c0819:PsiDirectoryNode" />
+              <item name="addApply" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Eddid_CRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Eddid_CRM" type="462c0819:PsiDirectoryNode" />
+              <item name="test_case" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Eddid_CRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Eddid_CRM" type="462c0819:PsiDirectoryNode" />
+              <item name="test_case" type="462c0819:PsiDirectoryNode" />
               <item name="ReviewProcess" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Eddid_CRM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-            </path>
-            <path>
-              <item name="Eddid_CRM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -289,9 +271,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="D:\Test\NewType\NewType\Eddid_CRM\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Commons" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -311,9 +293,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="D:\Test\NewType\NewType\Eddid_CRM\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -403,10 +385,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Logging" />
         <item itemvalue="Python.test_reviewProcess01" />
         <item itemvalue="Python测试.单元测试 in test_reviewProcess01.py" />
         <item itemvalue="Python测试.单元测试 in ReviewProcessTool.py" />
-        <item itemvalue="Python.Logging" />
         <item itemvalue="Python测试.单元测试 in test_reviewProcess02.py" />
       </list>
     </recent_temporary>
@@ -427,6 +409,7 @@
       <workItem from="1563417440035" duration="13845000" />
       <workItem from="1563803777793" duration="5736000" />
       <workItem from="1564237219034" duration="3577000" />
+      <workItem from="1564649642933" duration="14799000" />
     </task>
     <task id="LOCAL-00001" summary="pycharm优化导入">
       <created>1563359002995</created>
@@ -485,7 +468,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46106000" />
+    <option name="totallyTimeSpent" value="60905000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -497,15 +480,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22050938" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2228145" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.35900217" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932975" visible="true" weight="0.40934843" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.18980478" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932975" visible="true" weight="0.4088937" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.398017" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -573,52 +556,22 @@
     <option name="LAST_COMMIT_MESSAGE" value="增加fixture,未测试" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Eddid_CRM$_for_test_addApplyInvestmentTarget_Test_addApplyInvestmentTarget_test_apply_BullionInvestmentTarget.coverage" NAME="单元测试 for test_addApplyInvestmentTarget.Test_addApplyInvestmentTarget.test_apply_BullionInvestmentTarget Coverage Results" MODIFIED="1563333120068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case/addApply" />
-    <SUITE FILE_PATH="coverage/Eddid_CRM$apply_create.coverage" NAME="apply_create Coverage Results" MODIFIED="1563354035379" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Interface" />
     <SUITE FILE_PATH="coverage/Eddid_CRM$Eddid_CRM.coverage" NAME="run_test Coverage Results" MODIFIED="1563271504202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Eddid_CRM$run_test.coverage" NAME="run_test Coverage Results" MODIFIED="1564240684602" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Eddid_CRM$Logging.coverage" NAME="Logging Coverage Results" MODIFIED="1563894090650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Commons" />
-    <SUITE FILE_PATH="coverage/Eddid_CRM$Modify_xls.coverage" NAME="Modify_xls Coverage Results" MODIFIED="1563330088510" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Commons" />
-    <SUITE FILE_PATH="coverage/Eddid_CRM$test_reviewProcess01.coverage" NAME="test_reviewProcess01 Coverage Results" MODIFIED="1564240622863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case/ReviewProcess" />
-    <SUITE FILE_PATH="coverage/Eddid_CRM$PyMongo.coverage" NAME="PyMongo Coverage Results" MODIFIED="1563353375361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Commons" />
-    <SUITE FILE_PATH="coverage/Eddid_CRM$_in_Test_Login_py.coverage" NAME="单元测试 in test_Login.py Coverage Results" MODIFIED="1563357382366" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case" />
-    <SUITE FILE_PATH="coverage/Eddid_CRM$_in_test_reviewProcess01_py.coverage" NAME="单元测试 in test_reviewProcess01.py Coverage Results" MODIFIED="1563896605199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case/ReviewProcess" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$run_test.coverage" NAME="run_test Coverage Results" MODIFIED="1564732450156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Eddid_CRM$_in_test_addApplyInvestmentTarget_py.coverage" NAME="单元测试 in test_addApplyInvestmentTarget.py Coverage Results" MODIFIED="1563334883163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case/addApply" />
-    <SUITE FILE_PATH="coverage/Eddid_CRM$_in_ReviewProcessTool_py.coverage" NAME="单元测试 in ReviewProcessTool.py Coverage Results" MODIFIED="1563895842920" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case/ReviewProcess" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$_for_test_addApplyInvestmentTarget_Test_addApplyInvestmentTarget_test_apply_BullionInvestmentTarget.coverage" NAME="单元测试 for test_addApplyInvestmentTarget.Test_addApplyInvestmentTarget.test_apply_BullionInvestmentTarget Coverage Results" MODIFIED="1563333120068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case/addApply" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$Logging.coverage" NAME="Logging Coverage Results" MODIFIED="1564715668148" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Commons" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$PyMongo.coverage" NAME="PyMongo Coverage Results" MODIFIED="1563353375361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Commons" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$apply_create.coverage" NAME="apply_create Coverage Results" MODIFIED="1563354035379" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Interface" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$test_reviewProcess01.coverage" NAME="test_reviewProcess01 Coverage Results" MODIFIED="1564240622863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case/ReviewProcess" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$Modify_xls.coverage" NAME="Modify_xls Coverage Results" MODIFIED="1563330088510" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Commons" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$_in_test_reviewProcess01_py.coverage" NAME="单元测试 in test_reviewProcess01.py Coverage Results" MODIFIED="1563896605199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case/ReviewProcess" />
     <SUITE FILE_PATH="coverage/Eddid_CRM$_in_test_reviewProcess02_py.coverage" NAME="单元测试 in test_reviewProcess02.py Coverage Results" MODIFIED="1563441967014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case/ReviewProcess" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$_in_ReviewProcessTool_py.coverage" NAME="单元测试 in ReviewProcessTool.py Coverage Results" MODIFIED="1563895842920" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case/ReviewProcess" />
+    <SUITE FILE_PATH="coverage/Eddid_CRM$_in_Test_Login_py.coverage" NAME="单元测试 in test_Login.py Coverage Results" MODIFIED="1563357382366" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case" />
     <SUITE FILE_PATH="coverage/Eddid_CRM$_for_Test_Login_Test_Login_test_login.coverage" NAME="单元测试 for Test_Login.Test_Login.test_login Coverage Results" MODIFIED="1563356201268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_case" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Commons/Modify_xls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#153#162#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PageElement/LoginPage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12">
-          <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-          <folding>
-            <element signature="e#168#177#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PageElement/MenuListPage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="23" column="44" lean-forward="true" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
-          <folding>
-            <element signature="e#162#171#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PageElement/ApplyPage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="284">
@@ -636,82 +589,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Commons/PyMongo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="149" column="61" selection-start-line="149" selection-start-column="61" selection-end-line="149" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/public/publicTool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="23" column="16" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="16" />
-          <folding>
-            <element signature="e#49#92#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Python3.6/Lib/unittest/case.py" />
-    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyRiskTolerance.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="21" column="27" lean-forward="true" selection-start-line="15" selection-start-column="38" selection-end-line="21" selection-end-column="27" />
-          <folding>
-            <element signature="e#46#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyRequired.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-38">
-          <caret line="19" column="46" lean-forward="true" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
-          <folding>
-            <element signature="e#46#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyInvestmentTarget.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyDerivativeProduct.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="123" column="56" lean-forward="true" selection-start-line="123" selection-start-column="56" selection-end-line="123" selection-end-column="75" />
-          <folding>
-            <element signature="e#46#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Commons/BasePage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="117" column="27" selection-start-line="117" selection-start-column="27" selection-end-line="117" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/addApply/addApplyTool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1121">
-          <caret line="62" column="65" selection-start-line="62" selection-start-column="49" selection-end-line="62" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyAllNotEmpty.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
-          <folding>
-            <element signature="e#152#165#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -727,13 +609,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/activity/test_createLead.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="12" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PageElement/ActivityPage.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -758,13 +633,6 @@
     <entry file="file://$PROJECT_DIR$/Logs/run_log20190718_1620.log" />
     <entry file="file://$PROJECT_DIR$/Logs/run_log20190718_1637.log" />
     <entry file="file://$PROJECT_DIR$/Logs/run_log20190718_1638.log" />
-    <entry file="file://$PROJECT_DIR$/用例.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1581">
-          <caret line="93" selection-start-line="93" selection-end-line="93" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test_case/activity/test_createActivity.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -772,13 +640,6 @@
           <folding>
             <element signature="e#155#168#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Commons/Logging.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-24">
-          <caret line="27" column="44" lean-forward="true" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -813,73 +674,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess05.py">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
+    <entry file="file://$PROJECT_DIR$/Interface/apply_create.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+        <state relative-caret-position="209">
+          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+          <folding>
+            <element signature="e#46#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/conftest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="8" lean-forward="true" selection-end-line="8" />
           <folding>
             <element signature="e#47#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess08.py">
+    <entry file="file://$PROJECT_DIR$/用例.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+        <state relative-caret-position="171">
+          <caret line="48" column="128" selection-start-line="48" selection-start-column="128" selection-end-line="48" selection-end-column="128" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess05.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
           <folding>
-            <element signature="e#47#62#0" expanded="true" />
+            <element signature="e#47#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess10.py">
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess06.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
-          <folding>
-            <element signature="e#48#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess13.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="23" column="39" lean-forward="true" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
-          <folding>
-            <element signature="e#48#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess14.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="14" column="11" lean-forward="true" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
-          <folding>
-            <element signature="e#49#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess11.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="23" column="37" lean-forward="true" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
-          <folding>
-            <element signature="e#48#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess09.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
+        <state relative-caret-position="437">
+          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
           <folding>
             <element signature="e#48#63#0" expanded="true" />
           </folding>
@@ -888,7 +724,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess07.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
+        <state relative-caret-position="437">
           <caret line="23" column="40" lean-forward="true" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
           <folding>
             <element signature="e#48#63#0" expanded="true" />
@@ -896,60 +732,164 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess06.py">
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess08.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+        <state relative-caret-position="418">
+          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+          <folding>
+            <element signature="e#47#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess09.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
           <folding>
             <element signature="e#48#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess12.py">
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess10.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
+        <state relative-caret-position="437">
+          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
           <folding>
             <element signature="e#48#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/ReviewProcessTool.py">
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess11.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="31" column="28" selection-start-line="28" selection-start-column="18" selection-end-line="31" selection-end-column="28" />
+        <state relative-caret-position="437">
+          <caret line="23" column="37" lean-forward="true" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
           <folding>
-            <element signature="e#47#61#0" expanded="true" />
+            <element signature="e#48#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/conftest.py">
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess13.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" lean-forward="true" selection-end-line="8" />
+        <state relative-caret-position="155">
+          <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
           <folding>
-            <element signature="e#47#60#0" expanded="true" />
+            <element signature="e#48#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Interface/apply_create.py">
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess14.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+        <state relative-caret-position="684">
+          <caret line="36" column="46" lean-forward="true" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
           <folding>
-            <element signature="e#46#60#0" expanded="true" />
+            <element signature="e#49#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Logs/submit.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Commons/Logging.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="58" column="17" lean-forward="true" selection-start-line="58" selection-start-column="17" selection-end-line="58" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/public/publicTool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="32" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="32" />
+          <folding>
+            <element signature="e#49#92#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Commons/PyMongo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="12" column="34" lean-forward="true" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/addApply/addApplyTool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="220" column="72" selection-start-line="220" selection-start-column="8" selection-end-line="220" selection-end-column="72" />
+          <folding>
+            <element signature="e#46#82#0" expanded="true" />
+            <element signature="e#1593#6431#0" />
+            <element signature="e#6590#7770#0" />
+            <element signature="e#11888#12550#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyAllNotEmpty.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="74" column="77" lean-forward="true" selection-start-line="74" selection-start-column="77" selection-end-line="74" selection-end-column="77" />
+          <folding>
+            <element signature="e#152#165#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyDerivativeProduct.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="239" column="37" lean-forward="true" selection-start-line="239" selection-start-column="37" selection-end-line="239" selection-end-column="37" />
+          <folding>
+            <element signature="e#46#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyInvestmentTarget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="631">
+          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+          <folding>
+            <element signature="e#46#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyRequired.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="47" column="21" lean-forward="true" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="21" />
+          <folding>
+            <element signature="e#46#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/addApply/test_addApplyRiskTolerance.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="156" column="40" lean-forward="true" selection-start-line="156" selection-start-column="40" selection-end-line="156" selection-end-column="40" />
+          <folding>
+            <element signature="e#46#59#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess01.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+        <state relative-caret-position="-741">
+          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
           <folding>
             <element signature="e#47#60#0" expanded="true" />
           </folding>
@@ -958,48 +898,85 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess02.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+        <state relative-caret-position="327">
+          <caret line="22" column="58" lean-forward="true" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
           <folding>
             <element signature="e#48#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess03.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="26" column="19" lean-forward="true" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
-          <folding>
-            <element signature="e#47#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess04.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
+        <state relative-caret-position="247">
+          <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
           <folding>
             <element signature="e#47#62#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_test.py">
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess03.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="41" lean-forward="true" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
+        <state relative-caret-position="589">
+          <caret line="41" column="52" lean-forward="true" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
           <folding>
-            <element signature="e#48#61#0" expanded="true" />
+            <element signature="e#47#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/activity/test_createLead.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess12.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/ReviewProcessTool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="36" column="46" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="46" />
+          <folding>
+            <element signature="e#47#61#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Logs/run_log.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="22" column="89" lean-forward="true" selection-start-line="22" selection-start-column="89" selection-end-line="22" selection-end-column="89" />
+        <state relative-caret-position="-2584">
+          <caret line="11" column="58" lean-forward="true" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Logs/ReviewProcess.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Logs/del_Monogo_database.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Logs/addApply.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="73" selection-start-line="12" selection-start-column="73" selection-end-line="12" selection-end-column="73" />
+          <folding>
+            <element signature="e#48#61#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
