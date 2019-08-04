@@ -52,3 +52,10 @@ class publicTool(BasePage.BasePage):
 
         menuListpage = MenuListPage.MenuListPage(self.driver, self.url, "Eddid")
         menuListpage.click_menulist(ul_text, li_text)
+
+
+    # 警告提示框
+    def alertNotification(self):
+        applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
+        applypage.alertNotification()
+

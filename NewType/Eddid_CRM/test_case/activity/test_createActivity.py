@@ -14,7 +14,7 @@ from PageElement import ActivityPage
 from test_case.test_Login import *
 from test_case.public.publicTool import publicTool
 
-
+# 创建讲座
 class Test_createActivity:
 
     log = Logging.Logs()
