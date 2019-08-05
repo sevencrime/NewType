@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3224326-0b90-4fa8-b674-09662adfb143" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/../../NewType Interface/eddid-bos/Apply/create.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../NewType Interface/eddid-bos/Apply/create.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../NewType Interface/eddid-bos/lead/assetManagement.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../NewType Interface/eddid-bos/lead/assetManagement.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -24,6 +25,9 @@
       <change beforePath="$PROJECT_DIR$/test_case/addApply/test_addApplyRequired.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/test_addApplyRequired.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_case/addApply/test_addApplyRiskTolerance.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/addApply/test_addApplyRiskTolerance.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/用例.py" beforeDir="false" afterPath="$PROJECT_DIR$/用例.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,6 +104,18 @@
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Logs/run_log.log">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="68" column="62" lean-forward="true" selection-start-line="68" selection-start-column="62" selection-end-line="68" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> Stashed changes
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_case/ReviewProcess/test_reviewProcess12.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -408,8 +424,12 @@
       <workItem from="1563327328998" duration="19837000" />
       <workItem from="1563417440035" duration="13845000" />
       <workItem from="1563803777793" duration="5736000" />
+<<<<<<< Updated upstream
       <workItem from="1564237219034" duration="3577000" />
       <workItem from="1564649642933" duration="14799000" />
+=======
+      <workItem from="1564237219034" duration="4453000" />
+>>>>>>> Stashed changes
     </task>
     <task id="LOCAL-00001" summary="pycharm优化导入">
       <created>1563359002995</created>
@@ -432,7 +452,14 @@
       <option name="project" value="LOCAL" />
       <updated>1563896699553</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="创建数据在用例里面创建">
+      <created>1564241167309</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1564241167309</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -468,7 +495,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="60905000" />
+=======
+    <option name="totallyTimeSpent" value="46982000" />
+>>>>>>> Stashed changes
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -480,8 +511,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< Updated upstream
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
+=======
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+>>>>>>> Stashed changes
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2228145" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -553,7 +588,8 @@
     <MESSAGE value="pycharm优化导入" />
     <MESSAGE value="解决log重复打印" />
     <MESSAGE value="增加fixture,未测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加fixture,未测试" />
+    <MESSAGE value="创建数据在用例里面创建" />
+    <option name="LAST_COMMIT_MESSAGE" value="创建数据在用例里面创建" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Eddid_CRM$Eddid_CRM.coverage" NAME="run_test Coverage Results" MODIFIED="1563271504202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -952,6 +988,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Logs/run_log.log">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="-2584">
           <caret line="11" column="58" lean-forward="true" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
         </state>
@@ -977,6 +1014,10 @@
           <folding>
             <element signature="e#48#61#0" expanded="true" />
           </folding>
+=======
+        <state relative-caret-position="60">
+          <caret line="68" column="62" lean-forward="true" selection-start-line="68" selection-start-column="62" selection-end-line="68" selection-end-column="62" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>

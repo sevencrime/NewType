@@ -10,8 +10,8 @@ from test_case.addApply.addApplyTool import addApplyTool
 
 
 class Test_addApplyRequired(addApplyTool):
-
     # 开户方式必填框校验
+
     """
     # 用例: 手机应用程式身份认证--校验银行名称和银行账户号码是否必填
     """

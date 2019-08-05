@@ -462,7 +462,13 @@ class addApplyTool(unittest.TestCase):
                         if num == 0:
                             # 风险承受能力选择为"高"
                             self.applySublime()
+
+                        # 勾选期货账户时, 风险提示允许为 "中" 风险
+                        if num == 1 and func.__name__.find("futuresRiskTolerance") != -1:
+                            self.applySublime()
+
                         else:
+                            assert "若阁下选择低或中风险，将不能买卖期货、杠杆式外汇、结构性产品及衍生产品" in publicTool.box_alert(())
                             self.applySublime(Jump=False)
 
                     except AttributeError:

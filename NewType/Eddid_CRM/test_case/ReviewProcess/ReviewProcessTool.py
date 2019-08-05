@@ -115,6 +115,7 @@ class ReviewProcessTool(unittest.TestCase):
 		# 判断状态校验功能是否正常,选择编号
 		self.mainpage.click_checkbox(email=email)	
 		self.mainpage.click_submitreview()
+		assert "是否确定提交审核？" in publicTool.box_alert()
 		self.applypage.click_popWindow("确定")
 		publicTool.wait_LoadingModal(self)
 

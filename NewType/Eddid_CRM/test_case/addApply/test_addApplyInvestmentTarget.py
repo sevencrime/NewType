@@ -24,7 +24,7 @@ class Test_addApplyInvestmentTarget(addApplyTool):
     #     self.applySublime()
 
     """
-    # 用例: 账户类别分别选择金业,校验投资目标为利息/股息收入是否校验
+    # 用例: 账户类别分别选择期货,校验投资目标为利息/股息收入是否校验
     """
     @addApplyTool.InvestmentTarget
     def test_apply_futuresInvestmentTarget(self):

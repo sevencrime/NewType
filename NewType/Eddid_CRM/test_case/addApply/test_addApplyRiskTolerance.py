@@ -142,7 +142,7 @@ class Test_addApplyRiskTolerance(addApplyTool):
 
     """
     # 用例: 账户类别分别选择香港及环球期货账户(保证金),校验风险提示.
-    #       风险提示选择 "低"
+    #       风险提示选择 "中"
     """
     @addApplyTool.RiskTolerance(num=1)
     def test_apply_futuresRiskToleranceMiddle(self):
@@ -155,7 +155,7 @@ class Test_addApplyRiskTolerance(addApplyTool):
 
     """
     # 用例: 账户类别分别选择香港及环球期货账户(保证金),校验风险提示.
-    #       风险提示选择 "低"
+    #       风险提示选择 "高"
     """
     @addApplyTool.RiskTolerance(num=0)
     def test_apply_futuresRiskToleranceHigh(self):

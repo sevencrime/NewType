@@ -45,7 +45,9 @@ class publicTool(BasePage.BasePage):
         # 买卖杠杆式外汇、黄金、结构性产品及衍生产品并不适合投资目标仅为「利息/股息收入」人士。
         # 校验弹框 alert
         applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
-        applypage.box_alert()
+        boxtext = applypage.box_alert()
+
+        return boxtext
 
 
     def click_menulist(self, ul_text, li_text):
