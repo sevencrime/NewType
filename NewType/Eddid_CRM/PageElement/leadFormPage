@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import random
+import datetime
+
+
+class leadFormPage():
+
+    lf_lastname = (By.XPATH, '//input[@placeholder="請輸入姓氏"]')
+    lf_Firstname = (By.XPATH, '//input[@placeholder="請輸入名字"]')
+    lf_phone = (By.XPATH, '//input[@placeholder="請輸入電話"]')
+    lf_email = (By.XPATH, '//input[@placeholder="請輸入電郵"]')
+    lf_people = (By.XPATH, '//input[@placeholder="請選擇人數"]')
+

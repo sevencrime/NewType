@@ -40,8 +40,7 @@ class ApplyPage(BasePage.BasePage):
 
     def get_select(self, text=False, randox=None):
         if not text:
-            select_loc = (
-                By.XPATH, "//div[contains(@style,'position: absolute;')]//li")
+            select_loc = (By.XPATH, "//div[contains(@style,'position: absolute;')]//li")
 
             selectlist = self.find_elements(*select_loc)
             if randox == None:
