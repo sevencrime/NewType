@@ -121,7 +121,11 @@ class Database:
 								print(collection,"表关联的字段为 ",key,":",r[key])
 								print("正在查询关联表 %s 的数据" %self.table[key])
 
-								self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpool{database}'.format(database=self.database))
+								if self.database == "test":
+									self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpoolfeature')
+								elif self.database == "uat":
+									self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpool{database}'.format(database=self.database))
+
 
 
 						except Exception as e:
@@ -137,7 +141,10 @@ class Database:
 								print(collection,"表关联的字段为 ",key,":",r[key])
 								print("正在查询关联表 %s 的数据" %self.table[key])
 
-								self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpool{database}'.format(database=self.database))
+								if self.database == "test":
+									self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpoolfeature')
+								elif self.database == "uat":
+									self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpool{database}'.format(database=self.database))
 
 
 						except Exception as e:
@@ -173,7 +180,7 @@ if __name__ == '__main__':
 	host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
 	# host = 'localhost:27017'
 	database = 'test'	#查询的数据库
-	Database(host, database).del_linked("client_info", {'phone':'13059412505'})	# 传入需要查询的表和查询条件
+	Database(host, database).del_linked("apply_info", {"phone":"13709691525"})	# 传入需要查询的表和查询条件
 
 	# Database(host, database).del_linked("apply_info", {'email':{"$regex" : ".*onedi.*"}})
 
