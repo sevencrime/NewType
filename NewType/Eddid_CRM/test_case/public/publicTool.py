@@ -59,5 +59,7 @@ class publicTool(BasePage.BasePage):
     # 警告提示框
     def alertNotification(self):
         applypage = ApplyPage.ApplyPage(self.driver, self.url, "Eddid")
-        applypage.alertNotification()
+        notificationtext = applypage.alertNotification()
+
+        return notificationtext
 
