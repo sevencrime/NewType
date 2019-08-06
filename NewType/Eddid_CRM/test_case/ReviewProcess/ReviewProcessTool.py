@@ -18,7 +18,7 @@ from Commons import Logging, GlobalMap
 class ReviewProcessTool(unittest.TestCase):
 
 	gm = GlobalMap.GlobalMap()
-	log = Logging.Logs("ReviewProcess")
+	log = Logging.Logs()
 
 	# @pytest.fixture()
 	# def applyCreateApi(self):
@@ -113,9 +113,10 @@ class ReviewProcessTool(unittest.TestCase):
 		publicTool.wait_LoadingModal(self)
 
 		# 判断状态校验功能是否正常,选择编号
+		self.log.info(email, "22222222222222222222222222222222222")
 		self.mainpage.click_checkbox(email=email)	
 		self.mainpage.click_submitreview()
-		assert "是否确定提交审核？" in publicTool.box_alert()
+		assert publicTool.box_alert(self).strip() in ["是否确定提交审核？"]
 		self.applypage.click_popWindow("确定")
 		publicTool.wait_LoadingModal(self)
 

@@ -294,6 +294,7 @@ class AutoTestMail():
                                 # 邮件类型不是定时邮件的,单独存放
                                 self.addition.append(mail_type)
 
+
     def send_mail(self):
 
         isRepeat = False  # 用于判断定时邮件是否添加进表格

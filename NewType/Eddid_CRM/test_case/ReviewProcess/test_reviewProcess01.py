@@ -87,7 +87,7 @@ if __name__ == "__main__":
 	# suite.addTests(unittest.TestLoader().loadTestsFromTestCase(reviewProcess1))
 	# runner = unittest.TextTestRunner(verbosity=2)
 	# runner.run(suite)
-	pytest.main(["-s","test_reviewProcess01.py"])
+	pytest.main(["-s", "--pdb", "test_reviewProcess01.py"])
 
 
 

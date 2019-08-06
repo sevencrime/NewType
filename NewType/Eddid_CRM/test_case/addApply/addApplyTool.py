@@ -9,7 +9,7 @@ from PageElement import ApplyPage, MainPage
 class addApplyTool(unittest.TestCase):
 
     globals()["email"] = ""
-    log = Logging.Logs("addApply")
+    log = Logging.Logs()
 
     def setUp(self):
         globals()["email"] = ""
@@ -281,7 +281,7 @@ class addApplyTool(unittest.TestCase):
                         buyProduct = self.applypage.buyProduct(num=kwargs['num'], linknum=kwargs['linknum'])
                         if kwargs['alert']:
                             alert_context = self.applypage.box_alert()
-                            assert "「衍生权证、牛熊证及结构性产品」与主要账户持有人选择不一致" in alert_context 
+                            assert alert_context.strip() in ["「衍生权证、牛熊证及结构性产品」与主要账户持有人选择不一致"]
                             return alert_context
                             
                 except Exception as e:
@@ -468,7 +468,7 @@ class addApplyTool(unittest.TestCase):
                             self.applySublime()
 
                         else:
-                            assert "若阁下选择低或中风险，将不能买卖期货、杠杆式外汇、结构性产品及衍生产品" in publicTool.box_alert(())
+                            assert publicTool.box_alert().strip() in ["若阁下选择低或中风险，将不能买卖期货、杠杆式外汇、结构性产品及衍生产品"]
                             self.applySublime(Jump=False)
 
                     except AttributeError:
@@ -502,7 +502,7 @@ class addApplyTool(unittest.TestCase):
                 try:
                     # 校验是否弹出提示框(判断是否可以点击确定按钮)
                     alert_context = applypage.box_alert()
-                    assert "利息/股息收入" in alert_context
+                    assert alert_context.strip() in ["利息/股息收入"]
 
                 except AssertionError:
                     print("投资目标弹出提示框内容有误, 请确认!!!")

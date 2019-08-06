@@ -16,9 +16,8 @@ class publicTool(BasePage.BasePage):
     # 等待CSS.Loading-modal加载完成,防止报错:"Element is not clickable at point (347, 104).
     #   Other element would receive the click: <div class="Loading-modal"></div>"
     def wait_LoadingModal(self):
-        LoadingModal_loc = (By.CSS_SELECTOR, ".Loading-modal")
-        WebDriverWait(self.driver, 20).until_not(
-            EC.presence_of_element_located(LoadingModal_loc))
+        login_page = LoginPage.LoginPage(self.driver, self.url, "Eddid")
+        login_page.wait_LoadingModal()
 
 
     def LoginCRM(self, user='admin', psw='abcd1234'):

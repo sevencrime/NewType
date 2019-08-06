@@ -5,8 +5,6 @@
 # @Link    : ${link}
 # @Version : $Id$
 
-
-
 import pytest
 
 from Commons import Logging

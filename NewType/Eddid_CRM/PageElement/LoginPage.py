@@ -11,9 +11,9 @@ import sys
 
 from Commons import BasePage
 
-sys.path.append(os.path.abspath(os.path.dirname(os.getcwd())))
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 class LoginPage(BasePage.BasePage):
 
@@ -23,11 +23,11 @@ class LoginPage(BasePage.BasePage):
     password_loc = (By.XPATH, "//input[@placeholder='密码']")
     btn_login_loc = (By.XPATH, "//button")
     userid_loc = (By.CSS_SELECTOR, ".el-dropdown-link.el-dropdown-selfdefine ")
-    # LoadingModal_loc = (By.CSS_SELECTOR, ".Loading-modal")
+    LoadingModal_loc = (By.CSS_SELECTOR, ".Loading-modal")
 
-    # def wait_LoadingModal(self):
-    #     WebDriverWait(self.driver, 20).until_not(
-    #         EC.presence_of_element_located(self.LoadingModal_loc))
+    def wait_LoadingModal(self):
+        WebDriverWait(self.driver, 20).until_not(
+            EC.presence_of_element_located(self.LoadingModal_loc))
 
     def input_username(self, username):
         # self.log.info(sys._getframe().f_code.co_name)
