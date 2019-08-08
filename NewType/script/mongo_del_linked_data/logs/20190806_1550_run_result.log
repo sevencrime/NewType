@@ -1,0 +1,9 @@
+2019-08-06 15:50:37,847 del_mongo.py INFO [line:31] 连接数据库uat
+2019-08-06 15:50:43,239 del_mongo.py INFO [line:66] apply_info 表符合查询条件{'phone': '13709691525'} 的数据有0 条
+2019-08-06 15:50:43,381 del_mongo.py INFO [line:37] close Client
+2019-08-06 15:50:47,913 del_mongo.py INFO [line:31] 连接数据库uat
+2019-08-06 15:50:53,026 del_mongo.py INFO [line:66] apply_info 表符合查询条件{'phone': 'wade.wei@newtype.io'} 的数据有0 条
+2019-08-06 15:50:53,170 del_mongo.py INFO [line:37] close Client
+2019-08-06 15:50:57,482 del_mongo.py INFO [line:31] 连接数据库test
+2019-08-06 15:51:03,520 del_mongo.py INFO [line:66] client_info 表符合查询条件{'phone': 'wade.wei@newtype.io'} 的数据有0 条
+2019-08-06 15:51:03,658 del_mongo.py INFO [line:37] close Client
