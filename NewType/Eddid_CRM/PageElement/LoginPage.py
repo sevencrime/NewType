@@ -14,6 +14,8 @@ from Commons import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.common.exceptions import *
+
 
 class LoginPage(BasePage.BasePage):
 
@@ -26,8 +28,12 @@ class LoginPage(BasePage.BasePage):
     LoadingModal_loc = (By.CSS_SELECTOR, ".Loading-modal")
 
     def wait_LoadingModal(self):
-        WebDriverWait(self.driver, 20).until_not(
-            EC.presence_of_element_located(self.LoadingModal_loc))
+        try:
+            WebDriverWait(self.driver, 30).until_not(
+                EC.presence_of_element_located(self.LoadingModal_loc))
+        except TimeoutException:
+            print("失败, 请求超时")
+
 
     def input_username(self, username):
         # self.log.info(sys._getframe().f_code.co_name)
