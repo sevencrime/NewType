@@ -16,6 +16,7 @@ class Database:
 	collectionsId = set()		#存放已经遍历过的数据库表的id
 	expectedRemoveTotal = []		#预期删除总数
 	actualRemoveTotal = []		#实际删除总数
+	# 关联字段对于表名
 	table = {
 		'applyId' : 'apply' ,
 		'accountId' : 'account',
@@ -113,6 +114,7 @@ class Database:
 									print(e," table[%s]没有与之对应的数据库表" %key)
 
 					elif key == 'idpUserId':
+						# continue
 						try:
 							if r[key] not in self.collectionsId and self.table[key] not in collections:
 								self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
@@ -125,7 +127,8 @@ class Database:
 									self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpoolfeature')
 								elif self.database == "uat":
 									self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpool{database}'.format(database=self.database))
-
+								elif self.database == "aos-uat":
+									self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpool{database}'.format(database='uat'))
 
 
 						except Exception as e:
@@ -133,6 +136,7 @@ class Database:
 							print(e," table[%s]没有与之对应的数据库表,请查看字段所关联的表table" %key)
 
 					elif key == 'subject':
+						# continue
 						try:
 							if r[key] not in self.collectionsId and self.table[key] not in collections :
 								self.log.info("%s 表关联的字段为 %s : %s" %(collection,key,r[key]))
@@ -145,6 +149,8 @@ class Database:
 									self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpoolfeature')
 								elif self.database == "uat":
 									self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpool{database}'.format(database=self.database))
+								elif self.database == "aos-uat":
+									self.del_linked(self.table[key], {'subject':r[key]}, database='eddidclientpool{database}'.format(database='uat'))
 
 
 						except Exception as e:
@@ -162,6 +168,7 @@ class Database:
 							# print(collection, query, database, self.database)
 							if database == None:
 								self.db = self.client[self.database]
+							###################################################
 
 							# 删除操作,请先查询后,确定数据以后再执行删除操作
 							# result = self.db[collection].delete_one(query)
@@ -172,6 +179,7 @@ class Database:
 							# self.log.info(result)
 							# print(result)
 
+							####################################################
 
 							self.log.info("***********************************\n")
 
@@ -180,10 +188,11 @@ if __name__ == '__main__':
 	host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
 	# host = 'localhost:27017'	
 	database = 'uat'	#查询的数据库
-	Database(host, database).del_linked("client_info", {"phone":"15815873756"})	# 传入需要查询的表和查询条件
+	Database(host, database).del_linked("apply_info", {'phone':"15089514626"})	# 传入需要查询的表和查询条件
+	Database(host, database="aos-uat").del_linked("accounts", {'phone':"15089514626"})	# 传入需要查询的表和查询条件
 
-	# Database(host, database).del_linked("apply_info", {'email':{"$regex" : ".*onedi.*"}})
-
+	# Database(host, database).del_linked("apply_info", {'email':{"$regex" : ".*onediww.*"}})
+	# Database(host, database).del_linked("apply_info", {'email':{"$regex" : "^onedi@qq.com$/i"}})
 	
 
 
