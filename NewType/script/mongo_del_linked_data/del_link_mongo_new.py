@@ -8,10 +8,6 @@
 
 import pymongo
 
-from Commons import Logging
-from Commons.Logging import Logs
-
-
 class mongoTool:
 
     def del_linked(self, phone, env="uat"):
