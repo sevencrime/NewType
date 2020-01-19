@@ -8,7 +8,7 @@
 
 import pymongo
 
-def del_link_mongo_new(self, phone, env="uat"):
+def del_link_mongo_new(self, phone, env="uat", collection=None):
 
     # 传入phone
     # 查询idpusers, 获取idp
@@ -23,17 +23,19 @@ def del_link_mongo_new(self, phone, env="uat"):
     _aosUsers = set()
 
     host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
-    aoshost = 'mongodb://aos-v2-user:8y1PKcJRWDzcqzSJ@dds-wz9fb08463a61eb41356-pub.mongodb.rds.aliyuncs.com:3717,dds-wz9fb08463a61eb42750-pub.mongodb.rds.aliyuncs.com:3717/aos-v2-uat?authSource=aos-v2-uat&replicaSet=mgset-15579011'
     client = pymongo.MongoClient(host)
-    aosClient = pymongo.MongoClient(aoshost)
 
     if env == "test":
         idp = "eddidclientpool"
         crm = "test"
+        aoshost_test = 'mongodb://aos-v2-user:8y1PKcJRWDzcqzSJ@dds-wz9fb08463a61eb41356-pub.mongodb.rds.aliyuncs.com:3717,dds-wz9fb08463a61eb42750-pub.mongodb.rds.aliyuncs.com:3717/aos-v2-test?authSource=aos-v2-test&replicaSet=mgset-15579011'
+        aosClient = pymongo.MongoClient(aoshost_test)
         aos = "aos-v2-test"
     elif env == "uat":
         idp = "eddidclientpooluat"
         crm = "uat"
+        aoshost_uat = 'mongodb://aos-v2-user:8y1PKcJRWDzcqzSJ@dds-wz9fb08463a61eb41356-pub.mongodb.rds.aliyuncs.com:3717,dds-wz9fb08463a61eb42750-pub.mongodb.rds.aliyuncs.com:3717/aos-v2-uat?authSource=aos-v2-uat&replicaSet=mgset-15579011'
+        aosClient = pymongo.MongoClient(aoshost_uat)
         aos = "aos-v2-uat"
 
     # 查询idpusers表和uuids表
@@ -80,18 +82,26 @@ def del_link_mongo_new(self, phone, env="uat"):
     print("查询的数据为 : \n", tables)
 
     print("开始执行删除操作: \n")
-    for _key, _value in tables.items():
 
-        if _key == "users" or _key == "usersdriver":
-            for _id in _value:
+    if collection:
+        for _id in tables[collection]:
+            if collection == "users" or collection == "usersdriver":
+                result = client[idp][collection].delete_one({"_id" : _id})
+            elif _key == "aosUsers" :
+                result = aosClient[aos]['users'].delete_one({"_id" : _id})
+            else:
+                result = client[crm][_key].delete_one({"_id" : _id})
+
+
+    for _key, _value in tables.items():
+        for _id in _value:
+            if _key == "users" or _key == "usersdriver":
                 result = client[idp][_key].delete_one({"_id" : _id})
                 print("{} 表删除数据 : {}".format(_key, _id))
-        elif _key == "aosUsers" :
-            for _id in _value:
+            elif _key == "aosUsers" :
                 result = aosClient[aos]['users'].delete_one({"_id" : _id})
                 print("{} 表删除数据 : {}".format(_key, _id))
-        else:
-            for _id in _value:
+            else:
                 result = client[crm][_key].delete_one({"_id" : _id})
                 print("{} 表删除数据 : {}".format(_key, _id))
 
@@ -101,7 +111,7 @@ def del_link_mongo_new(self, phone, env="uat"):
 
 
 if __name__ == '__main__':
-    host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net/?authSource=admin'
-    aosUAThost="mongodb://aos-v2-user:8y1PKcJRWDzcqzSJ@dds-wz9fb08463a61eb41356-pub.mongodb.rds.aliyuncs.com:3717,dds-wz9fb08463a61eb42750-pub.mongodb.rds.aliyuncs.com:3717/aos-v2-uat?authSource=aos-v2-uat&replicaSet=mgset-15579011"
+    # host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net/?authSource=admin'
+    # aosUAThost="mongodb://aos-v2-user:8y1PKcJRWDzcqzSJ@dds-wz9fb08463a61eb41356-pub.mongodb.rds.aliyuncs.com:3717,dds-wz9fb08463a61eb42750-pub.mongodb.rds.aliyuncs.com:3717/aos-v2-uat?authSource=aos-v2-uat&replicaSet=mgset-15579011"
 
     del_link_mongo_new("13528802757")
