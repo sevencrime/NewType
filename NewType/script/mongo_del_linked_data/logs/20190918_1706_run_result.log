@@ -1,0 +1,3 @@
+2019-09-18 17:06:01,389 del_mongo.py INFO [line:32] 连接数据库uat
+2019-09-18 17:06:04,000 del_mongo.py INFO [line:67] client_info 表符合查询条件{'email': 'onedi@qq.com'} 的数据有0 条
+2019-09-18 17:06:04,388 del_mongo.py INFO [line:38] close Client

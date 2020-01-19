@@ -1,0 +1,9 @@
+2019-09-18 17:07:06,334 del_mongo.py INFO [line:32] 连接数据库test
+2019-09-18 17:07:08,916 del_mongo.py INFO [line:67] client_info 表符合查询条件{'email': 'onedi@qq.com'} 的数据有0 条
+2019-09-18 17:07:09,294 del_mongo.py INFO [line:38] close Client
+2019-09-18 17:07:13,526 del_mongo.py INFO [line:32] 连接数据库test
+2019-09-18 17:07:16,271 del_mongo.py INFO [line:67] apply_info 表符合查询条件{'email': 'onedi@qq.com'} 的数据有0 条
+2019-09-18 17:07:16,649 del_mongo.py INFO [line:38] close Client
+2019-09-18 17:07:19,301 del_mongo.py INFO [line:32] 连接数据库aos
+2019-09-18 17:07:21,984 del_mongo.py INFO [line:67] apply_info 表符合查询条件{'email': 'onedi@qq.com'} 的数据有0 条
+2019-09-18 17:07:22,374 del_mongo.py INFO [line:38] close Client

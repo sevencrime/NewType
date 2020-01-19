@@ -1,0 +1,6 @@
+2019-09-20 15:46:08,024 del_mongo.py INFO [line:32] 连接数据库uat
+2019-09-20 15:46:18,019 del_mongo.py INFO [line:67] client_info 表符合查询条件{'email': {'$regex': '^onedi@qq.com$/i'}} 的数据有0 条
+2019-09-20 15:46:19,517 del_mongo.py INFO [line:38] close Client
+2019-09-20 15:46:24,697 del_mongo.py INFO [line:32] 连接数据库uat
+2019-09-20 15:46:30,165 del_mongo.py INFO [line:67] apply_info 表符合查询条件{'email': {'$regex': '^onedi@qq.com$/i'}} 的数据有0 条
+2019-09-20 15:46:30,577 del_mongo.py INFO [line:38] close Client
