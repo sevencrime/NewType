@@ -7,8 +7,9 @@
 
 
 import pymongo
+import argparse
 
-def del_link_mongo_new(self, phone, env="uat", collection=None):
+def del_link_mongo_new(phone, collection=None, env="uat"):
 
     # 传入phone
     # 查询idpusers, 获取idp
@@ -110,8 +111,16 @@ def del_link_mongo_new(self, phone, env="uat", collection=None):
     aosClient.close()
 
 
-if __name__ == '__main__':
-    # host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net/?authSource=admin'
-    # aosUAThost="mongodb://aos-v2-user:8y1PKcJRWDzcqzSJ@dds-wz9fb08463a61eb41356-pub.mongodb.rds.aliyuncs.com:3717,dds-wz9fb08463a61eb42750-pub.mongodb.rds.aliyuncs.com:3717/aos-v2-uat?authSource=aos-v2-uat&replicaSet=mgset-15579011"
+parser = argparse.ArgumentParser(description='Test for argparse')
+parser.add_argument('--phone', '-p', help='phone 属性，必要参数, 查询的电话号码')
+parser.add_argument('--collection', '-c', help='collection 属性，非必要参数，删除单个表的表名, 有默认值', default=None)
+parser.add_argument('--env', '-e', help='env 属性，非必要参数, 查询的环境, 有默认值', default="uat")
+args = parser.parse_args()
 
-    del_link_mongo_new("13528802757")
+
+if __name__ == '__main__':
+    # del_link_mongo_new("13528802757")
+    try:
+        del_link_mongo_new(args.phone, args.collection, args.env)
+    except Exception as e:
+        print(e)
