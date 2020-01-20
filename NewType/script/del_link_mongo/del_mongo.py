@@ -9,10 +9,11 @@
 import pymongo
 import argparse
 
-def del_link_mongo_new(phone, collection=None, env="uat"):
+def del_link_mongo_new(phone, collection=None, env="uat", remove=True):
 
-    # 传入phone
-    # 查询idpusers, 获取idp
+    if phone == "" or phone == None:
+        print("手机号不能为空")
+        return True
 
     tables = {}
     _users = set()
@@ -53,12 +54,14 @@ def del_link_mongo_new(phone, collection=None, env="uat"):
         _apply_info.add(applyinfos['_id'])
         # 查询apply表
         for applyd in client[crm]['apply'].find({'_id':applyinfos['applyId']}):
+            print("idp为 : {}".format(applyd['idpUserId']))
             _apply.add(applyd['_id'])
             _apply_info = _apply_info | set(applyd['applyInfoIds'])
             # 查询account表
-            for acc in client[crm]["account"].find({"idpUserId": applyd['idpUserId']}):
-                _account.add(acc["_id"])
-                _client_info = _client_info | set(acc['clientId'])
+            # for acc in client[crm]["account"].find({"idpUserId": applyd['idpUserId']}):
+            #     _account.add(acc["_id"])
+            #     import pdb; pdb.set_trace()
+            #     _client_info = _client_info | set(acc['clientId'])
 
     # 查询client_info表和account表
     for clientinfos in client[crm]["client_info"].find({"phone":phone}):
@@ -81,29 +84,35 @@ def del_link_mongo_new(phone, collection=None, env="uat"):
 
     print("查询的数据为 : \n", tables)
 
-    print("开始执行删除操作: \n")
+    if remove:
+        print("开始执行删除操作: \n")
 
-    if collection:
-        for _id in tables[collection]:
-            if collection == "users" or collection == "usersdriver":
-                result = client[idp][collection].delete_one({"_id" : _id})
-            elif _key == "aosUsers" :
-                result = aosClient[aos]['users'].delete_one({"_id" : _id})
-            else:
-                result = client[crm][_key].delete_one({"_id" : _id})
+        if collection:
+            for _id in tables[collection]:
+                if collection == "users" or collection == "usersdriver":
+                    result = client[idp][collection].delete_one({"_id" : _id})
+                    print("{} 表删除数据 : {}".format(collection, _id))
+                elif collection == "aosUsers" :
+                    result = aosClient[aos]['users'].delete_one({"_id" : _id})
+                    print("{} 表删除数据 : {}".format(collection, _id))
+                else:
+                    result = client[crm][collection].delete_one({"_id" : _id})
+                    print("{} 表删除数据 : {}".format(collection, _id))
+
+            return True
 
 
-    for _key, _value in tables.items():
-        for _id in _value:
-            if _key == "users" or _key == "usersdriver":
-                result = client[idp][_key].delete_one({"_id" : _id})
-                print("{} 表删除数据 : {}".format(_key, _id))
-            elif _key == "aosUsers" :
-                result = aosClient[aos]['users'].delete_one({"_id" : _id})
-                print("{} 表删除数据 : {}".format(_key, _id))
-            else:
-                result = client[crm][_key].delete_one({"_id" : _id})
-                print("{} 表删除数据 : {}".format(_key, _id))
+        for _key, _value in tables.items():
+            for _id in _value:
+                if _key == "users" or _key == "usersdriver":
+                    result = client[idp][_key].delete_one({"_id" : _id})
+                    print("{} 表删除数据 : {}".format(_key, _id))
+                elif _key == "aosUsers" or _key == "aosusers":
+                    result = aosClient[aos]['users'].delete_one({"_id" : _id})
+                    print("{} 表删除数据 : {}".format(_key, _id))
+                else:
+                    result = client[crm][_key].delete_one({"_id" : _id})
+                    print("{} 表删除数据 : {}".format(_key, _id))
 
 
     client.close()
@@ -114,12 +123,13 @@ parser = argparse.ArgumentParser(description='Test for argparse')
 parser.add_argument('--phone', '-p', help='phone 属性，必要参数, 查询的电话号码')
 parser.add_argument('--collection', '-c', help='collection 属性，非必要参数，删除单个表的表名, 有默认值', default=None)
 parser.add_argument('--env', '-e', help='env 属性，非必要参数, 查询的环境, 有默认值', default="uat")
+parser.add_argument('--remove', '-r', help='remove 属性，非必要参数, 决定是否需要删除, 有默认值', default=True)
 args = parser.parse_args()
 
 
 if __name__ == '__main__':
     # del_link_mongo_new("13528802757")
     try:
-        del_link_mongo_new(args.phone, args.collection, args.env)
+        del_link_mongo_new(args.phone, args.collection, args.env, (False if args.remove == 'False' or args.remove == 'false' else True))
     except Exception as e:
         print(e)
