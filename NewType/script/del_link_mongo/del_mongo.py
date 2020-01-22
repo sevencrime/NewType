@@ -24,7 +24,8 @@ def del_link_mongo_new(phone, collection=None, env="uat", remove=True):
     _account = set()
     _aosUsers = set()
 
-    host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
+    # host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net'
+    host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net/?authSource=admin&readPreference=primary&replicaSet=dev-clientDB-shard-0&ext.ssl.allowInvalidHostnames=true'
     aoshost = 'mongodb://aos-v2-user:8y1PKcJRWDzcqzSJ@dds-wz9fb08463a61eb41356-pub.mongodb.rds.aliyuncs.com:3717,dds-wz9fb08463a61eb42750-pub.mongodb.rds.aliyuncs.com:3717/aos-v2-{env}?authSource=aos-v2-{env}&replicaSet=mgset-15579011'.format(env=env)
     client = pymongo.MongoClient(host)
     aosClient = pymongo.MongoClient(aoshost)
@@ -57,11 +58,6 @@ def del_link_mongo_new(phone, collection=None, env="uat", remove=True):
             print("idp为 : {}".format(applyd['idpUserId']))
             _apply.add(applyd['_id'])
             _apply_info = _apply_info | set(applyd['applyInfoIds'])
-            # 查询account表
-            # for acc in client[crm]["account"].find({"idpUserId": applyd['idpUserId']}):
-            #     _account.add(acc["_id"])
-            #     import pdb; pdb.set_trace()
-            #     _client_info = _client_info | set(acc['clientId'])
 
     # 查询client_info表和account表
     for clientinfos in client[crm]["client_info"].find({"phone":phone}):
@@ -119,7 +115,7 @@ def del_link_mongo_new(phone, collection=None, env="uat", remove=True):
     aosClient.close()
 
 
-parser = argparse.ArgumentParser(description='Test for argparse')
+parser = argparse.ArgumentParser(description='删除mongo关联表, 需指定phone参数, H5的表为: aosUsers, idp表的名字为users')
 parser.add_argument('--phone', '-p', help='phone 属性，必要参数, 查询的电话号码')
 parser.add_argument('--collection', '-c', help='collection 属性，非必要参数，删除单个表的表名, 有默认值', default=None)
 parser.add_argument('--env', '-e', help='env 属性，非必要参数, 查询的环境, 有默认值', default="uat")
