@@ -31,7 +31,7 @@ def del_link_mongo_new(phone, collection=None, env="uat", remove=True):
     aosClient = pymongo.MongoClient(aoshost)
 
 
-    if env == "test" or env == "feature" or env == "develop":
+    if env == "test":
         idp = "eddidclientpool"
         crm = "test"
         aos = "aos-v2-test"
@@ -56,6 +56,7 @@ def del_link_mongo_new(phone, collection=None, env="uat", remove=True):
         # 查询apply表
         for applyd in client[crm]['apply'].find({'_id':applyinfos['applyId']}):
             print("idp为 : {}".format(applyd['idpUserId']))
+            print("apply表的数据为 : ", applyd)
             _apply.add(applyd['_id'])
             _apply_info = _apply_info | set(applyd['applyInfoIds'])
 
@@ -67,6 +68,7 @@ def del_link_mongo_new(phone, collection=None, env="uat", remove=True):
                 _account.add(acc["_id"])
 
     for aosdata in aosClient[aos]['users'].find({"phone" : phone}):
+        print("aos表的数据为 : {} \n", aosdata)
         _aosUsers.add(aosdata['_id'])
 
 
