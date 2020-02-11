@@ -31,7 +31,7 @@ def del_link_mongo_new(phone, collection=None, env="uat", remove=True):
     aosClient = pymongo.MongoClient(aoshost)
 
 
-    if env == "test":
+    if env == "test" or env == "feature" or env == "develop":
         idp = "eddidclientpool"
         crm = "test"
         aos = "aos-v2-test"
