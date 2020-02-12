@@ -9,7 +9,7 @@
 import pymongo
 import argparse
 
-def del_link_mongo_new(phone, collection=None, env="uat", remove=True):
+def del_link_mongo_new(phone, collection=None, viewdata=False, env="uat", remove=True):
 
     if phone == "" or phone == None:
         print("手机号不能为空")
@@ -56,7 +56,6 @@ def del_link_mongo_new(phone, collection=None, env="uat", remove=True):
         # 查询apply表
         for applyd in client[crm]['apply'].find({'_id':applyinfos['applyId']}):
             print("idp为 : {}".format(applyd['idpUserId']))
-            print("apply表的数据为 : ", applyd)
             _apply.add(applyd['_id'])
             _apply_info = _apply_info | set(applyd['applyInfoIds'])
 
@@ -88,13 +87,13 @@ def del_link_mongo_new(phone, collection=None, env="uat", remove=True):
         if collection:
             for _id in tables[collection]:
                 if collection == "users" or collection == "usersdriver":
-                    result = client[idp][collection].delete_one({"_id" : _id})
+                    result = client[idp][collection].find_one_and_delete({"_id" : _id})
                     print("{} 表删除数据 : {}".format(collection, _id))
                 elif collection == "aosUsers" :
-                    result = aosClient[aos]['users'].delete_one({"_id" : _id})
+                    result = aosClient[aos]['users'].find_one_and_delete({"_id" : _id})
                     print("{} 表删除数据 : {}".format(collection, _id))
                 else:
-                    result = client[crm][collection].delete_one({"_id" : _id})
+                    result = client[crm][collection].find_one_and_delete({"_id" : _id})
                     print("{} 表删除数据 : {}".format(collection, _id))
 
             return True
@@ -103,13 +102,25 @@ def del_link_mongo_new(phone, collection=None, env="uat", remove=True):
         for _key, _value in tables.items():
             for _id in _value:
                 if _key == "users" or _key == "usersdriver":
-                    result = client[idp][_key].delete_one({"_id" : _id})
+                    if viewdata:
+                        print("{} 表的数据为 : {}".format(_key, client[idp][_key].find_one_and_delete({"_id" : _id})))
+                        continue
+
+                    result = client[idp][_key].find_one_and_delete({"_id" : _id})
                     print("{} 表删除数据 : {}".format(_key, _id))
                 elif _key == "aosUsers" or _key == "aosusers":
-                    result = aosClient[aos]['users'].delete_one({"_id" : _id})
+                    if viewdata:
+                        print("{} 表的数据为 : {}".format(_key, client[idp][_key].find_one_and_delete({"_id" : _id})))
+                        continue
+
+                    result = aosClient[aos]['users'].find_one_and_delete({"_id" : _id})
                     print("{} 表删除数据 : {}".format(_key, _id))
                 else:
-                    result = client[crm][_key].delete_one({"_id" : _id})
+                    if viewdata:
+                        print("{} 表的数据为 : {}".format(_key, client[idp][_key].find_one_and_delete({"_id" : _id})))
+                        continue
+
+                    result = client[crm][_key].find_one_and_delete({"_id" : _id})
                     print("{} 表删除数据 : {}".format(_key, _id))
 
 
@@ -120,6 +131,7 @@ def del_link_mongo_new(phone, collection=None, env="uat", remove=True):
 parser = argparse.ArgumentParser(description='删除mongo关联表, 需指定phone参数, H5的表为: aosUsers, idp表的名字为users')
 parser.add_argument('--phone', '-p', help='phone 属性，必要参数, 查询的电话号码')
 parser.add_argument('--collection', '-c', help='collection 属性，非必要参数，删除单个表的表名, 有默认值', default=None)
+parser.add_argument('--viewdata', '-v', help='viewdata 属性，非必要参数，是否只查询数据而不删除, 有默认值', default=False)
 parser.add_argument('--env', '-e', help='env 属性，非必要参数, 查询的环境, 有默认值', default="uat")
 parser.add_argument('--remove', '-r', help='remove 属性，非必要参数, 决定是否需要删除, 有默认值', default=True)
 args = parser.parse_args()
@@ -128,6 +140,6 @@ args = parser.parse_args()
 if __name__ == '__main__':
     # del_link_mongo_new("13528802757")
     try:
-        del_link_mongo_new(args.phone, args.collection, args.env, (False if args.remove == 'False' or args.remove == 'false' else True))
+        del_link_mongo_new(args.phone, args.collection, args.findCollection, args.env, (False if args.remove == 'False' or args.remove == 'false' else True))
     except Exception as e:
         print(e)
