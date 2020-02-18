@@ -98,7 +98,7 @@ def del_link_mongo_new(phone, collections=None, viewdata=False, env="uat", updat
 
 
     tables['users'] = _users
-    tables['usersdriver'] = _usersdriver
+    tables['userdevices'] = _usersdriver
     tables['apply'] = _apply
     tables['apply_info'] = _apply_info
     tables['client_info'] = _client_info
@@ -113,7 +113,6 @@ def del_link_mongo_new(phone, collections=None, viewdata=False, env="uat", updat
             for _id in tables[collection]:
                 if collection == "users" or collection == "usersdriver":
                     if update:
-                        import pdb; pdb.set_trace()
                         result = client[idp][collection].find_one_and_update({"_id" : _id}, update[collection], return_document=ReturnDocument.AFTER)
                         print("\n {} 表修改后的数据为 : {}".format(collection, result))
                         continue
@@ -122,7 +121,6 @@ def del_link_mongo_new(phone, collections=None, viewdata=False, env="uat", updat
                     print("{} 表删除数据 : {}".format(collection, _id))
                 elif collection == "aosUsers" :
                     if update:
-                        import pdb; pdb.set_trace()
                         result = aosClient[aos]['users'].find_one_and_update({"_id" : _id}, update[collection], return_document=ReturnDocument.AFTER)
                         print("\n {} 表修改后的数据为 : {}".format(collection, result))
                         continue
@@ -131,7 +129,6 @@ def del_link_mongo_new(phone, collections=None, viewdata=False, env="uat", updat
                     print("{} 表删除数据 : {}".format(collection, _id))
                 else:
                     if update:
-                        import pdb; pdb.set_trace()
                         result = client[crm][collection].find_one_and_update({"_id" : _id}, update[collection], return_document=ReturnDocument.AFTER)
                         print("\n {} 表修改后的数据为 : {}".format(collection, result))
                         continue
@@ -143,7 +140,7 @@ def del_link_mongo_new(phone, collections=None, viewdata=False, env="uat", updat
 
     for _key, _value in tables.items():
         for _id in _value:
-            if _key == "users" or _key == "usersdriver":
+            if _key == "users" or _key == "userdevices":
                 if viewdata:
                     print("\n {} 表的数据为 : {}".format(_key, [_d for _d in client[idp][_key].find({"_id" : _id})]))
                     continue
@@ -188,3 +185,9 @@ if __name__ == '__main__':
         print(e)
 
 
+'''
+注册后, 修改users和aosUser的phone 和 email
+python del_mongo.py -c "['users', 'aosUsers']" -u "{ 'users': {'$set' : {'phone_number' : '8615033331111', 'preferred_username' : '15033331111', 'email' : '15033331111@123.com'} }, 'aosUsers' : {'$set' : {'phone' : '15033331111', 'email' : '15033331111@123.com'} } }" - p 15089514626
+
+开通交易账号后, 修改phone, email, idNumber
+python del_mongo.py -c "['users', 'aosUsers', 'apply_info', 'client_info']" -u "{ 'users': {'$set' : {'phone_number' : '8615033331111', 'preferred_username' : '15033331111', 'email' : '15033331111@123.com'} }, 'aosUsers' : {'$set' : {'phone' : '15033331111', 'email' : '15033331111@123.com', 'idNumber' : '441502199502112334'} }, 'apply_info' : {'$set' : {'phone' : '15033331111', 'email' : '15033331111@123.com', 'idNumber' : '441502199502112334'} }, 'client_info' : {'$set' : {'phone' : '15033331111', 'email' : '15033331111@123.com', 'idNumber' : '441502199502112334'} }  }" -p 15089514626
