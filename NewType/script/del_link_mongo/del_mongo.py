@@ -13,7 +13,7 @@ import ast
 import time
 
 
-def del_link_mongo_new(phone, collections=None, viewdata=False, env="uat", update=None):
+def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", update=None):
 
     # 手机号不能为空
     if phone == "" or phone == None:
@@ -57,15 +57,15 @@ def del_link_mongo_new(phone, collections=None, viewdata=False, env="uat", updat
     # for idpUser in client[idp]['users'].find({"phone_number" : "86{}".format(phone)}):
         print("idp为 : {}".format(idpUser['subject']))
         _users.add(idpUser['_id'])
-        print("第一个点 ", time.time() - idptime)
+        # print("第一个点 ", time.time() - idptime)
         for usersdriver in client[idp]['userdevices'].find({"subject" : idpUser['subject']}):
             _usersdriver.add(usersdriver['_id'])
 
-        print("第二个点 ", time.time() - idptime)
+        # print("第二个点 ", time.time() - idptime)
         for applyId in client[crm]['apply'].find({"idpUserId": idpUser['subject']}):
             _apply.add(applyId["_id"])
 
-        print("第三个点 ", time.time() - idptime)
+        # print("第三个点 ", time.time() - idptime)
 
     print("查询idp所用的时间的为 : ", time.time() - idptime)
 
@@ -141,21 +141,21 @@ def del_link_mongo_new(phone, collections=None, viewdata=False, env="uat", updat
     for _key, _value in tables.items():
         for _id in _value:
             if _key == "users" or _key == "userdevices":
-                if viewdata:
+                if finddata:
                     print("\n {} 表的数据为 : {}".format(_key, [_d for _d in client[idp][_key].find({"_id" : _id})]))
                     continue
 
                 result = client[idp][_key].remove({"_id" : _id})
                 print("{} 表删除数据 : {}".format(_key, _id))
             elif _key == "aosUsers" or _key == "aosusers":
-                if viewdata:
+                if finddata:
                     print("\n {} 表的数据为 : {}".format(_key, [_d for _d in aosClient[aos]['users'].find({"_id" : _id})]))
                     continue
 
                 result = aosClient[aos]['users'].remove({"_id" : _id})
                 print("{} 表删除数据 : {}".format(_key, _id))
             else:
-                if viewdata:
+                if finddata:
                     print("\n {} 表的数据为 : {}".format(_key, [_d for _d in client[crm][_key].find({"_id" : _id})]))
                     continue
 
@@ -169,9 +169,9 @@ def del_link_mongo_new(phone, collections=None, viewdata=False, env="uat", updat
 
 parser = argparse.ArgumentParser(description='删除mongo关联表, 需指定phone参数, H5的表为: aosUsers, idp表的名字为users')
 parser.add_argument('--phone', '-p', help='phone 属性，必要参数, 查询的电话号码')
-parser.add_argument('--collections', '-c', help='collection 属性，list类型, 非必要参数，删除单个表的表名, 有默认值', default=None, type=ast.literal_eval)
-parser.add_argument('--viewdata', '-v', help='viewdata 属性，非必要参数，是否只查询数据而不删除, 有默认值', default=False)
-parser.add_argument('--env', '-e', help='env 属性，非必要参数, 查询的环境, 有默认值', default="uat")
+parser.add_argument('--collections', '-c', help='collection 属性，list类型, 非必要参数，删除单个表的表名, 默认值为False', default=None, type=ast.literal_eval)
+parser.add_argument('--finddata', '-f', help='finddata 属性，非必要参数，是否只查询数据而不删除, 有默认值', action="store_true")
+parser.add_argument('--env', '-e', help='env 属性，非必要参数, 查询的环境, 有默认值=uat', default="uat")
 parser.add_argument('--update', '-u', help='update 属性，dict类型, 非必要参数, 修改数据, 需和-c一起使用, 有默认值', default=None, type=ast.literal_eval)
 args = parser.parse_args()
 
@@ -179,8 +179,8 @@ args = parser.parse_args()
 if __name__ == '__main__':
     # del_link_mongo_new("13528802757")
     try:
-        # del_link_mongo_new(args.phone, args.collection, args.viewdata, args.env, (False if args.remove == 'False' or args.remove == 'false' else True))
-        del_link_mongo_new(args.phone, args.collections, args.viewdata, args.env, args.update)
+        # del_link_mongo_new(args.phone, args.collection, args.finddata, args.env, (False if args.remove == 'False' or args.remove == 'false' else True))
+        del_link_mongo_new(args.phone, args.collections, args.finddata, args.env, args.update)
     except Exception as e:
         print(e)
 
@@ -191,3 +191,4 @@ python del_mongo.py -c "['users', 'aosUsers']" -u "{ 'users': {'$set' : {'phone_
 
 开通交易账号后, 修改phone, email, idNumber
 python del_mongo.py -c "['users', 'aosUsers', 'apply_info', 'client_info']" -u "{ 'users': {'$set' : {'phone_number' : '8615033331111', 'preferred_username' : '15033331111', 'email' : '15033331111@123.com'} }, 'aosUsers' : {'$set' : {'phone' : '15033331111', 'email' : '15033331111@123.com', 'idNumber' : '441502199502112334'} }, 'apply_info' : {'$set' : {'phone' : '15033331111', 'email' : '15033331111@123.com', 'idNumber' : '441502199502112334'} }, 'client_info' : {'$set' : {'phone' : '15033331111', 'email' : '15033331111@123.com', 'idNumber' : '441502199502112334'} }  }" -p 15089514626
+'''
