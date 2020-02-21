@@ -170,7 +170,7 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
 parser = argparse.ArgumentParser(description='删除mongo关联表, 需指定phone参数, H5的表为: aosUsers, idp表的名字为users')
 parser.add_argument('--phone', '-p', help='phone 属性，必要参数, 查询的电话号码')
 parser.add_argument('--collections', '-c', help='collection 属性，list类型, 非必要参数，删除单个表的表名, 默认值为False', default=None, type=ast.literal_eval)
-parser.add_argument('--finddata', '-f', help='finddata 属性，非必要参数，是否只查询数据而不删除, 有默认值', action="store_true")
+parser.add_argument('--finddata', '-f', help='finddata 属性，非必要参数，是否只查询数据而不删除, -f 默认为True', action="store_true")
 parser.add_argument('--env', '-e', help='env 属性，非必要参数, 查询的环境, 有默认值=uat', default="uat")
 parser.add_argument('--update', '-u', help='update 属性，dict类型, 非必要参数, 修改数据, 需和-c一起使用, 有默认值', default=None, type=ast.literal_eval)
 args = parser.parse_args()
