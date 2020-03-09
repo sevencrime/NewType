@@ -1,0 +1,2 @@
+pymongo[tls,srv]
+dnspython
