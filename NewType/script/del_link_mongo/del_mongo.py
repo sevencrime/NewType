@@ -11,6 +11,24 @@ from pymongo.collection import ReturnDocument
 import argparse
 import ast
 import time
+import json
+from bson import json_util
+from bson.objectid import ObjectId
+import datetime
+
+
+def to_json(data):
+    return json.dumps(data, sort_keys=True, indent=4, separators=(', ', ': '), cls=JSONEncoder)
+
+class JSONEncoder(json.JSONEncoder):
+    """处理ObjectId & datetime类型无法转为json"""
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        elif isinstance(o, datetime.datetime):
+            return datetime.datetime.strftime(o, '%Y-%m-%d %H:%M:%S')
+
+        return json.JSONEncoder.default(self, o)
 
 
 def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", update=None):
@@ -97,15 +115,16 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
     print("查询aos所用的时间为 : ", time.time() - aostime)
 
 
-    tables['users'] = _users
-    tables['userdevices'] = _usersdriver
-    tables['apply'] = _apply
-    tables['apply_info'] = _apply_info
-    tables['client_info'] = _client_info
-    tables['account'] = _account
-    tables['aosUsers'] = _aosUsers
+    tables['users'] = list(_users)
+    tables['userdevices'] = list(_usersdriver)
+    tables['apply'] = list(_apply)
+    tables['apply_info'] = list(_apply_info)
+    tables['client_info'] = list(_client_info)
+    tables['account'] = list(_account)
+    tables['aosUsers'] = list(_aosUsers)
 
-    print("\n查询的所有数据的_id为 : \n", tables)
+    # print("\n查询的所有数据的_id为 : \n", tables)
+    print("\n查询的所有数据的_id为 : \n", to_json(tables))
 
 
     if collections:
@@ -142,21 +161,24 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
         for _id in _value:
             if _key == "users" or _key == "userdevices":
                 if finddata:
-                    print("\n {} 表的数据为 : {}".format(_key, [_d for _d in client[idp][_key].find({"_id" : _id})]))
+                    for _d in client[idp][_key].find({"_id" : _id}):
+                        print("\n {} 表的数据为 \n: {}".format(_key, to_json(_d)))
                     continue
 
                 result = client[idp][_key].remove({"_id" : _id})
                 print("{} 表删除数据 : {}".format(_key, _id))
             elif _key == "aosUsers" or _key == "aosusers":
                 if finddata:
-                    print("\n {} 表的数据为 : {}".format(_key, [_d for _d in aosClient[aos]['users'].find({"_id" : _id})]))
+                    for _d in aosClient[aos]['users'].find({"_id" : _id}):
+                        print("\n {} 表的数据为 \n: {}".format(_key, to_json(_d)))
                     continue
 
                 result = aosClient[aos]['users'].remove({"_id" : _id})
                 print("{} 表删除数据 : {}".format(_key, _id))
             else:
                 if finddata:
-                    print("\n {} 表的数据为 : {}".format(_key, [_d for _d in client[crm][_key].find({"_id" : _id})]))
+                    for _d in client[crm][_key].find({"_id" : _id}):
+                        print("\n {} 表的数据为 \n: {}".format(_key, to_json(_d)))
                     continue
 
                 result = client[crm][_key].remove({"_id" : _id})
