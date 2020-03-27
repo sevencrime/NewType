@@ -18,7 +18,7 @@ import datetime
 
 
 def to_json(data):
-    return json.dumps(data, sort_keys=True, indent=4, separators=(', ', ': '), cls=JSONEncoder)
+    return json.dumps(data, sort_keys=True, indent=4, separators=(', ', ': '), cls=JSONEncoder, ensure_ascii=False)
 
 class JSONEncoder(json.JSONEncoder):
     """处理ObjectId & datetime类型无法转为json"""
@@ -130,7 +130,7 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
     if collections:
         for collection in collections:
             for _id in tables[collection]:
-                if collection == "users" or collection == "usersdriver":
+                if collection == "users" or collection == "userdevices":
                     if update:
                         result = client[idp][collection].find_one_and_update({"_id" : _id}, update[collection], return_document=ReturnDocument.AFTER)
                         print("\n {} 表修改后的数据为 : {}".format(collection, result))
@@ -191,7 +191,7 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
 
 parser = argparse.ArgumentParser(description='删除mongo关联表, 需指定phone参数, H5的表为: aosUsers, idp表的名字为users')
 parser.add_argument('--phone', '-p', help='phone 属性，必要参数, 查询的电话号码')
-parser.add_argument('--collections', '-c', help='collection 属性，list类型, 非必要参数，删除单个表的表名, 默认值为False', default=None, type=ast.literal_eval)
+parser.add_argument('--collections', '-c', help='collection 属性，list类型, 非必要参数，删除单个表的表名, 默认值为False, eg: {}'.format("['collection']"), default=None, type=ast.literal_eval)
 parser.add_argument('--finddata', '-f', help='finddata 属性，非必要参数，是否只查询数据而不删除, -f 默认为True', action="store_true")
 parser.add_argument('--env', '-e', help='env 属性，非必要参数, 查询的环境, 有默认值=uat', default="uat")
 parser.add_argument('--update', '-u', help='update 属性，dict类型, 非必要参数, 修改数据, 需和-c一起使用, 有默认值', default=None, type=ast.literal_eval)
