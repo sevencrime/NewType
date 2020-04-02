@@ -47,6 +47,7 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
     _client_info = set()
     _account = set()
     _aosUsers = set()
+    _aoslivings = set()
 
     # 连接数据库
     host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net/?authSource=admin&readPreference=primary&replicaSet=dev-clientDB-shard-0&ext.ssl.allowInvalidHostnames=true'
@@ -70,7 +71,7 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
         aos = "aos-v2-uat"
 
     idptime = time.time()
-    # 查询idpusers表和uuids表
+    # 查询idpusers表和userdriver表
     for idpUser in client[idp]['users'].find({"phone_number":{"$regex":".+{}".format(phone)}}):
     # for idpUser in client[idp]['users'].find({"phone_number" : "86{}".format(phone)}):
         print("idp为 : {}".format(idpUser['subject']))
@@ -109,9 +110,13 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
     print("查询client所用的时间为 : ", time.time() - clienttime)
 
     aostime = time.time()
+    # 查询aos库的表
     for aosdata in aosClient[aos]['users'].find({"phone" : phone}):
         # print("aos表的数据为 : {} \n", aosdata)
         _aosUsers.add(aosdata['_id'])
+        for living in aosClient[aos]['livings'].find({"idpId" : aosdata['idpId']}):
+            _aoslivings.add(living['_id'])
+
     print("查询aos所用的时间为 : ", time.time() - aostime)
 
 
@@ -122,6 +127,7 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
     tables['client_info'] = list(_client_info)
     tables['account'] = list(_account)
     tables['aosUsers'] = list(_aosUsers)
+    tables['aoslivings'] = list(_aoslivings)
 
     # print("\n查询的所有数据的_id为 : \n", tables)
     print("\n查询的所有数据的_id为 : \n", to_json(tables))
@@ -138,7 +144,7 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
 
                     result = client[idp][collection].remove({"_id" : _id})
                     print("{} 表删除数据 : {}".format(collection, _id))
-                elif collection == "aosUsers" :
+                elif collection == "aosUsers":
                     if update:
                         result = aosClient[aos]['users'].find_one_and_update({"_id" : _id}, update[collection], return_document=ReturnDocument.AFTER)
                         print("\n {} 表修改后的数据为 : {}".format(collection, result))
@@ -167,13 +173,21 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
 
                 result = client[idp][_key].remove({"_id" : _id})
                 print("{} 表删除数据 : {}".format(_key, _id))
-            elif _key == "aosUsers" or _key == "aosusers":
+            elif _key == "aosUsers" :
                 if finddata:
                     for _d in aosClient[aos]['users'].find({"_id" : _id}):
                         print("\n {} 表的数据为 \n: {}".format(_key, to_json(_d)))
                     continue
 
                 result = aosClient[aos]['users'].remove({"_id" : _id})
+                print("{} 表删除数据 : {}".format(_key, _id))
+            elif _key == "aoslivings":
+                if finddata:
+                    for _d in aosClient[aos]['livings'].find({"_id" : _id}):
+                        print("\n {} 表的数据为 \n: {}".format(_key, to_json(_d)))
+                    continue
+
+                result = aosClient[aos]['livings'].remove({"_id" : _id})
                 print("{} 表删除数据 : {}".format(_key, _id))
             else:
                 if finddata:
