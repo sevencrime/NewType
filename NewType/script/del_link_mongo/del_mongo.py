@@ -31,11 +31,32 @@ class JSONEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, o)
 
 
-def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", update=None):
+def del_link_mongo_new(phone=None, email=None, idNumber=None, collections=None, finddata=False, env="uat", update=None):
 
-    # 手机号不能为空
-    if phone == "" or phone == None:
-        print("手机号不能为空")
+    idpfind = {}
+    applyfind = {}
+
+    # 判断任一一个不为空
+    if not phone and not email and not idNumber:
+        print("手机号, 邮箱, 身份证必须填一个")
+        return True
+    else:
+        if phone:
+            idpfind.update({"phone_number":{"$regex":".+{}".format(phone)}})
+            applyfind.update({"phone":phone})
+
+        if email:
+            idpfind.update({"email": email})
+            applyfind.update({"email": email})
+
+        if idNumber:
+            applyfind.update({"idNumber":idNumber})
+            if not idpfind:
+                idpfind.update({"idNumber":idNumber})
+
+    # idpfind 胡总 applyfind不能为空
+    if not idpfind or not applyfind:
+        print("查询条件不能为空")
         return True
 
     # 存放 各个表的 _id 集合
@@ -51,7 +72,8 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
 
     # 连接数据库
     host = 'mongodb+srv://eddiddevadmin:atfxdev2018@dev-clientdb-nckz7.mongodb.net/?authSource=admin&readPreference=primary&replicaSet=dev-clientDB-shard-0&ext.ssl.allowInvalidHostnames=true'
-    aoshost = 'mongodb://aos-v2-user:8y1PKcJRWDzcqzSJ@dds-wz9fb08463a61eb41356-pub.mongodb.rds.aliyuncs.com:3717,dds-wz9fb08463a61eb42750-pub.mongodb.rds.aliyuncs.com:3717/aos-v2-{env}?authSource=aos-v2-{env}&replicaSet=mgset-15579011'.format(env=env)
+    # aoshost = 'mongodb://aos-v2-user:8y1PKcJRWDzcqzSJ@dds-wz9fb08463a61eb41356-pub.mongodb.rds.aliyuncs.com:3717,dds-wz9fb08463a61eb42750-pub.mongodb.rds.aliyuncs.com:3717/aos-v2-{env}?authSource=aos-v2-{env}&replicaSet=mgset-15579011'.format(env=env)
+    aoshost = 'mongodb://aos-v2-user:ZSB5RiQLEw6fenSc@dds-wz9bd1678ca7e0e41718-pub.mongodb.rds.aliyuncs.com:3717,dds-wz9bd1678ca7e0e42962-pub.mongodb.rds.aliyuncs.com:3717/?replicaSet=mgset-25330453&authSource=aos-v2-{env}'.format(env=env)
     start1 = time.time()
     client = pymongo.MongoClient(host)
     print("连接host所用的时间为 : ", time.time() - start1)
@@ -72,7 +94,7 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
 
     idptime = time.time()
     # 查询idpusers表和userdriver表
-    for idpUser in client[idp]['users'].find({"phone_number":{"$regex":".+{}".format(phone)}}):
+    for idpUser in client[idp]['users'].find(idpfind):
     # for idpUser in client[idp]['users'].find({"phone_number" : "86{}".format(phone)}):
         print("idp为 : {}".format(idpUser['subject']))
         _users.add(idpUser['_id'])
@@ -90,7 +112,7 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
 
     applytime = time.time()
     # 查询apply_info和apply表
-    for applyinfos in client[crm]['apply_info'].find({"phone":phone}):
+    for applyinfos in client[crm]['apply_info'].find(applyfind):
         _apply_info.add(applyinfos['_id'])
         # 查询apply表
         for applyd in client[crm]['apply'].find({'_id':applyinfos['applyId']}):
@@ -101,7 +123,7 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
 
     clienttime = time.time()
     # 查询client_info表和account表
-    for clientinfos in client[crm]["client_info"].find({"phone":phone}):
+    for clientinfos in client[crm]["client_info"].find(applyfind):
         _client_info.add(clientinfos["_id"])
         for accountid in clientinfos['accountId']:
             for acc in client[crm]["account"].find({'_id':accountid}):
@@ -111,7 +133,7 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
 
     aostime = time.time()
     # 查询aos库的表
-    for aosdata in aosClient[aos]['users'].find({"phone" : phone}):
+    for aosdata in aosClient[aos]['users'].find(applyfind):
         # print("aos表的数据为 : {} \n", aosdata)
         _aosUsers.add(aosdata['_id'])
         for living in aosClient[aos]['livings'].find({"idpId" : aosdata['idpId']}):
@@ -205,6 +227,8 @@ def del_link_mongo_new(phone, collections=None, finddata=False, env="uat", updat
 
 parser = argparse.ArgumentParser(description='删除mongo关联表, 需指定phone参数, H5的表为: aosUsers, idp表的名字为users')
 parser.add_argument('--phone', '-p', help='phone 属性，必要参数, 查询的电话号码')
+parser.add_argument('--email', '-email', help='phone 属性，必要参数, 查询的电话号码')
+parser.add_argument('--idNumber', '-idNumber', help='phone 属性，必要参数, 查询的电话号码')
 parser.add_argument('--collections', '-c', help='collection 属性，list类型, 非必要参数，删除单个表的表名, 默认值为False, eg: {}'.format("['collection']"), default=None, type=ast.literal_eval)
 parser.add_argument('--finddata', '-f', help='finddata 属性，非必要参数，是否只查询数据而不删除, -f 默认为True', action="store_true")
 parser.add_argument('--env', '-e', help='env 属性，非必要参数, 查询的环境, 有默认值=uat', default="uat")
@@ -216,7 +240,7 @@ if __name__ == '__main__':
     # del_link_mongo_new("13528802757")
     try:
         # del_link_mongo_new(args.phone, args.collection, args.finddata, args.env, (False if args.remove == 'False' or args.remove == 'false' else True))
-        del_link_mongo_new(args.phone, args.collections, args.finddata, args.env, args.update)
+        del_link_mongo_new(args.phone, args.email, args.idNumber, args.collections, args.finddata, args.env, args.update)
     except Exception as e:
         print(e)
 
